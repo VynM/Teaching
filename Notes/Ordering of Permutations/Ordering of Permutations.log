@@ -1,0 +1,725 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.2.27)  2 SEP 2018 08:09
+entering extended mode
+**"./Ordering of Permutations.tex"
+("Ordering of Permutations.tex"
+LaTeX2e <2017-04-15>
+Babel <3.18> and hyphenation patterns for 76 language(s) loaded.
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("D:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01 AMS text
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks16
+\ex@=\dimen111
+))
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen112
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count90
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count91
+\leftroot@=\count92
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count93
+\DOTSCASE@=\count94
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen113
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count95
+\c@MaxMatrixCols=\count96
+\dotsspace@=\muskip10
+\c@parentequation=\count97
+\dspbrk@lvl=\count98
+\tag@help=\toks17
+\row@=\count99
+\column@=\count100
+\maxfields@=\count101
+\andhelp@=\toks18
+\eqnshift@=\dimen114
+\alignsep@=\dimen115
+\tagshift@=\dimen116
+\tagwidth@=\dimen117
+\totwidth@=\dimen118
+\lineht@=\dimen119
+\@envbody=\toks19
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks21
+\thm@bodyfont=\toks22
+\thm@headfont=\toks23
+\thm@notefont=\toks24
+\thm@headpunct=\toks25
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
+\dth@everypar=\toks26
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen120
+\Gin@req@width=\dimen121
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\mathtools\mathtools.sty"
+Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\tools\calc.sty"
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count102
+\calc@Bcount=\count103
+\calc@Adimen=\dimen122
+\calc@Bdimen=\dimen123
+\calc@Askip=\skip49
+\calc@Bskip=\skip50
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count104
+\calc@Cskip=\skip51
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\mathtools\mhsetup.sty"
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count105
+\l_MT_multwidth_dim=\dimen124
+\origjot=\skip52
+\l_MT_shortvdotswithinadjustabove_dim=\dimen125
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen126
+\l_MT_above_intertext_sep=\dimen127
+\l_MT_below_intertext_sep=\dimen128
+\l_MT_above_shortintertext_sep=\dimen129
+\l_MT_below_shortintertext_sep=\dimen130
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty"
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip53
+\enit@outerparindent=\dimen131
+\enit@toks=\toks27
+\enit@inbox=\box28
+\enitdp@description=\count106
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\sourceserifpro\sourceserifpro.sty"
+Package: sourceserifpro 2016/04/08 v1.2 Adobe's Source Serif Pro typeface
+
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+("D:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+("D:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex"
+\XKV@toks=\toks28
+\XKV@tempa@toks=\toks29
+)
+\XKV@depth=\count107
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\ot1enc.def"
+File: ot1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding OT1 on input line 48.
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\ly1\ly1enc.def"
+File: ly1enc.def 2009/07/22 v0.7 TeX 'n ANSI encoding (DPC/KB)
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+)
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 105.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd"
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+))
+("D:\Program Files\MiKTeX 2.9\tex\latex\mweights\mweights.sty"
+Package: mweights 2017/03/30 (Bob Tennent) Support package for multiple-weight 
+font packages. 
+LaTeX Info: Redefining \bfseries on input line 22.
+LaTeX Info: Redefining \mdseries on input line 30.
+LaTeX Info: Redefining \rmfamily on input line 38.
+LaTeX Info: Redefining \sffamily on input line 66.
+LaTeX Info: Redefining \ttfamily on input line 94.
+))
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\newpxmath.sty"
+Package: newpxmath 2017/05/31 v1.32
+
+`newpxmath' v1.32, 2017/05/31 Math macros based on pxfonts (msharpe)
+("D:\Program Files\MiKTeX 2.9\tex\generic\binhex\binhex.tex")
+\px@Isdigit=\count108
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 67.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/SourceSerifPro-LF/m/n on input line
+ 67.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/SourceSerifPro-LF/m/n on input lin
+e 67.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/SourceSerifPro-LF/m/n --> OT1/SourceSerifPro-LF/b/n
+ on input line 68.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 71.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 71.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/cmss/m/n on input line 71.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 72.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/SourceSerifPro-LF/m/it on input li
+ne 72.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/SourceSerifPro-LF/m/it on input l
+ine 72.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 73.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 73.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 73.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 75.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/SourceSerifPro-LF/b/n on input lin
+e 75.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/SourceSerifPro-LF/b/n on input lin
+e 75.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/SourceSerifPro-LF/m/it --> OT1/SourceSerifPro-LF/b/
+it on input line 76.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 78.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  T1/cmtt/m/n --> T1/cmtt/b/n on input line 79.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 90.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/npxmi/m/it on input line 90.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/npxmi/m/it on input line 90.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/npxmi/m/it --> OML/npxmi/b/it on input line 91.
+\symlettersA=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
+(Font)                  U/npxmia/m/it --> U/npxmia/b/it on input line 98.
+LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 100.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 108.
+LaTeX Font Info:    Encoding `OMS' has changed to `LMS' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 108.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> LMS/npxsy/m/n on input line 108.
+LaTeX Font Info:    Encoding `OMS' has changed to `LMS' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 108.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> LMS/npxsy/m/n on input line 108.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  LMS/npxsy/m/n --> LMS/npxsy/b/n on input line 109.
+\symAMSm=\mathgroup7
+LaTeX Font Info:    Overwriting symbol font `AMSm' in version `bold'
+(Font)                  U/npxsym/m/n --> U/npxsym/b/n on input line 127.
+\symsymbolsC=\mathgroup8
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
+(Font)                  U/npxsyc/m/n --> U/npxsyc/b/n on input line 149.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 169.
+LaTeX Font Info:    Encoding `OMX' has changed to `LMX' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 1
+69.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> LMX/npxexx/m/n on input line 169.
+LaTeX Font Info:    Encoding `OMX' has changed to `LMX' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 169
+.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> LMX/npxexx/m/n on input line 169.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  LMX/npxexx/m/n --> LMX/npxexx/b/n on input line 170.
+\symlargesymbolsPXA=\mathgroup9
+LaTeX Font Info:    Overwriting symbol font `largesymbolsPXA' in version `bold'
+
+(Font)                  U/npxexa/m/n --> U/npxexa/b/n on input line 177.
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 267.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 268.
+LaTeX Font Info:    Redeclaring math delimiter \lmoustache on input line 269.
+LaTeX Font Info:    Redeclaring math delimiter \rmoustache on input line 270.
+LaTeX Font Info:    Redeclaring math delimiter \lfloor on input line 276.
+LaTeX Font Info:    Redeclaring math delimiter \rfloor on input line 277.
+LaTeX Font Info:    Redeclaring math delimiter \lceil on input line 278.
+LaTeX Font Info:    Redeclaring math delimiter \rceil on input line 279.
+LaTeX Font Info:    Redeclaring math delimiter \lbrace on input line 280.
+LaTeX Font Info:    Redeclaring math delimiter \rbrace on input line 281.
+LaTeX Font Info:    Redeclaring math delimiter \langle on input line 282.
+LaTeX Font Info:    Redeclaring math delimiter \rangle on input line 284.
+LaTeX Font Info:    Redeclaring math symbol \mid on input line 286.
+LaTeX Font Info:    Redeclaring math delimiter \arrowvert on input line 288.
+LaTeX Font Info:    Redeclaring math delimiter \vert on input line 289.
+LaTeX Font Info:    Redeclaring math symbol \parallel on input line 290.
+LaTeX Font Info:    Redeclaring math delimiter \Arrowvert on input line 291.
+LaTeX Font Info:    Redeclaring math delimiter \Vert on input line 292.
+LaTeX Font Info:    Redeclaring math delimiter \updownarrow on input line 294.
+LaTeX Font Info:    Redeclaring math delimiter \Updownarrow on input line 295.
+LaTeX Font Info:    Redeclaring math delimiter \lvert on input line 300.
+LaTeX Font Info:    Redeclaring math delimiter \rvert on input line 301.
+LaTeX Font Info:    Redeclaring math delimiter \lVert on input line 302.
+LaTeX Font Info:    Redeclaring math delimiter \rVert on input line 303.
+LaTeX Info: Redefining \not on input line 1759.
+LaTeX Info: Redefining \textsquare on input line 1780.
+LaTeX Info: Redefining \openbox on input line 1782.
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\xcolor\svgnam.def"
+File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
+))
+("D:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrlayer-scrpage.sty"
+Package: scrlayer-scrpage 2017/09/07 v3.24 KOMA-Script package (end user interf
+ace for scrlayer)
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrlayer.sty"
+Package: scrlayer 2017/09/07 v3.24 KOMA-Script package (defining layers and pag
+e styles)
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrkbase.sty"
+Package: scrkbase 2017/09/07 v3.24 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrbase.sty"
+Package: scrbase 2017/09/07 v3.24 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\koma-script\scrlfile.sty"
+Package: scrlfile 2017/09/07 v3.24 KOMA-Script package (loading files)
+)))
+\footheight=\skip54
+Package scrlayer Info: patching LaTeX kernel macro \pagestyle on input line 199
+7.
+))
+Package scrlayer-scrpage Info: auto-selection of `pagestyleset=standard'.
+\c@Example=\count109
+
+("Ordering of Permutations.aux")
+\openout1 = `"Ordering of Permutations.aux"'.
+
+LaTeX Font Info:    Checking defaults for OML/npxmi/m/it on input line 27.
+LaTeX Font Info:    Try loading font information for OML+npxmi on input line 27
+.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\omlnpxmi.fd"
+File: omlnpxmi.fd 2013/03/21 Fontinst v1.933 font definitions for OML/npxmi.
+)
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/npxexa/m/n on input line 27.
+LaTeX Font Info:    Try loading font information for U+npxexa on input line 27.
+
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\unpxexa.fd"
+File: unpxexa.fd 2013/03/24 Fontinst v1.933 font definitions for U/npxexa.
+)
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 27.
+LaTeX Font Info:    Try loading font information for LY1+ptm on input line 27.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\ly1\ly1ptm.fd"
+File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
+)
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for LMS/npxsy/m/n on input line 27.
+LaTeX Font Info:    Try loading font information for LMS+npxsy on input line 27
+.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\lmsnpxsy.fd"
+File: lmsnpxsy.fd 2016/08/13 Fontinst v1.933 font definitions for LMS/npxsy.
+)
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for LMX/npxexx/m/n on input line 27.
+LaTeX Font Info:    Try loading font information for LMX+npxexx on input line 2
+7.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\lmxnpxexx.fd"
+File: lmxnpxexx.fd 2016/08/13 Fontinst v1.933 font definitions for LMX/npxexx.
+)
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Try loading font information for T1+SourceSerifPro-LF on in
+put line 27.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\sourceserifpro\t1sourceserifpro-lf.fd"
+File: T1SourceSerifPro-LF.fd 2015/01/11 (autoinst) Font definitions for T1/Sour
+ceSerifPro-LF.
+)
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/n' will be
+(Font)              scaled to size 10.0pt on input line 27.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(28.45274pt, 376.71451pt, 28.45274pt)
+* v-part:(T,H,B)=(56.9055pt, 470.03954pt, 51.21495pt)
+* \paperwidth=433.62pt
+* \paperheight=578.15999pt
+* \textwidth=376.71451pt
+* \textheight=470.03954pt
+* \oddsidemargin=-43.81725pt
+* \evensidemargin=-43.81725pt
+* \topmargin=-52.36449pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+("D:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count110
+\scratchdimen=\dimen132
+\scratchbox=\box29
+\nofMPsegments=\count111
+\nofMParguments=\count112
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count113
+\MPscratchDim=\dimen133
+\MPnumerator=\count114
+\makeMPintoPDFobject=\count115
+\everyMPtoPDFconversion=\toks31
+) ("D:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("D:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+("D:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("D:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+Package scrlayer Info: Setting magic \footheight to \baselineskip while
+(scrlayer)             \begin{document} on input line 27.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/n' will be
+(Font)              scaled to size 17.28pt on input line 28.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/n' will be
+(Font)              scaled to size 12.0pt on input line 28.
+LaTeX Font Info:    Try loading font information for OT1+SourceSerifPro-LF on i
+nput line 28.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\sourceserifpro\ot1sourceserifpro-lf.fd"
+File: OT1SourceSerifPro-LF.fd 2015/01/11 (autoinst) Font definitions for OT1/So
+urceSerifPro-LF.
+)
+LaTeX Font Info:    Font shape `OT1/SourceSerifPro-LF/m/n' will be
+(Font)              scaled to size 12.0pt on input line 28.
+LaTeX Font Info:    Font shape `OT1/SourceSerifPro-LF/m/n' will be
+(Font)              scaled to size 8.8pt on input line 28.
+LaTeX Font Info:    Font shape `OT1/SourceSerifPro-LF/m/n' will be
+(Font)              scaled to size 6.6pt on input line 28.
+LaTeX Font Info:    Try loading font information for U+msa on input line 28.
+ ("D:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 28.
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+npxmia on input line 28.
+
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\unpxmia.fd"
+File: unpxmia.fd 2013/03/24 Fontinst v1.933 font definitions for U/npxmia.
+)
+LaTeX Font Info:    Try loading font information for U+npxsym on input line 28.
+
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\unpxsym.fd"
+File: unpxsym.fd 2015/03/21 Fontinst v1.933 font definitions for U/npxsym.
+)
+LaTeX Font Info:    Try loading font information for U+npxsyc on input line 28.
+
+
+("D:\Program Files\MiKTeX 2.9\tex\latex\newpx\unpxsyc.fd"
+File: unpxsyc.fd 2013/03/24 Fontinst v1.933 font definitions for U/npxsyc.
+)
+
+LaTeX Warning: No \author given.
+
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/n' will be
+(Font)              scaled to size 14.4pt on input line 30.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/b/n' will be
+(Font)              scaled to size 14.4pt on input line 30.
+LaTeX Font Info:    Font shape `OT1/SourceSerifPro-LF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 31.
+LaTeX Font Info:    Font shape `OT1/SourceSerifPro-LF/m/n' will be
+(Font)              scaled to size 7.3pt on input line 31.
+LaTeX Font Info:    Font shape `OT1/SourceSerifPro-LF/m/n' will be
+(Font)              scaled to size 5.5pt on input line 31.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/n' will be
+(Font)              scaled to size 7.3pt on input line 31.
+
+LaTeX Font Warning: Font shape `T1/SourceSerifPro-LF/l/it' undefined
+(Font)              using `T1/SourceSerifPro-LF/l/n' instead on input line 38.
+
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 39.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/it' will be
+(Font)              scaled to size 7.3pt on input line 39.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/it' will be
+(Font)              scaled to size 10.0pt on input line 47.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/it' will be
+(Font)              scaled to size 5.5pt on input line 49.
+
+LaTeX Font Warning: Font shape `T1/SourceSerifPro-LF/l/sl' undefined
+(Font)              using `T1/SourceSerifPro-LF/l/n' instead on input line 54.
+
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/sl' will be
+(Font)              scaled to size 10.0pt on input line 54.
+[1
+
+{C:/Users/Vinay Madhusudanan/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+]
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/b/n' will be
+(Font)              scaled to size 12.0pt on input line 57.
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/n' will be
+(Font)              scaled to size 5.5pt on input line 66.
+
+Overfull \hbox (3.93015pt too wide) in paragraph at lines 97--99
+\T1/SourceSerifPro-LF/l/sl/10 Thus, the $\OT1/SourceSerifPro-LF/m/n/10 18$$[]$\
+T1/SourceSerifPro-LF/l/sl/10 permutation of the marks $\OML/npxmi/m/it/10 a; b;
+ c; d$ \T1/SourceSerifPro-LF/l/sl/10 in lex-i-co-graph-i-cal or-der is $[]$. 
+ []
+
+
+LaTeX Font Warning: Font shape `T1/SourceSerifPro-LF/l/sc' undefined
+(Font)              using `T1/SourceSerifPro-LF/l/n' instead on input line 118.
+
+
+[2]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 121.
+
+ ("D:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+Overfull \hbox (3.90381pt too wide) in paragraph at lines 169--171
+\T1/SourceSerifPro-LF/l/sl/10 Thus, the $\OT1/SourceSerifPro-LF/m/n/10 50$$[]$\
+T1/SourceSerifPro-LF/l/sl/10 permutation of $\OT1/SourceSerifPro-LF/m/n/10 0\OM
+L/npxmi/m/it/10 ; \OT1/SourceSerifPro-LF/m/n/10 1\OML/npxmi/m/it/10 ; \OT1/Sour
+ceSerifPro-LF/m/n/10 2\OML/npxmi/m/it/10 ; \OT1/SourceSerifPro-LF/m/n/10 3\OML/
+npxmi/m/it/10 ; \OT1/SourceSerifPro-LF/m/n/10 4$ \T1/SourceSerifPro-LF/l/sl/10 
+in re-verse lex-i-co-graph-i-cal or-der is $[]$. 
+ []
+
+LaTeX Font Info:    Font shape `T1/SourceSerifPro-LF/l/sc' will be
+(Font)              scaled to size 10.0pt on input line 173.
+[3]
+Overfull \hbox (8.0138pt too wide) in paragraph at lines 190--192
+\T1/SourceSerifPro-LF/l/sc/10 Thus, the $\OT1/SourceSerifPro-LF/m/n/10 100$$[]$
+\T1/SourceSerifPro-LF/l/sc/10 permutation of $\OT1/SourceSerifPro-LF/m/n/10 1\O
+ML/npxmi/m/it/10 ; \OT1/SourceSerifPro-LF/m/n/10 2\OML/npxmi/m/it/10 ; \OT1/Sou
+rceSerifPro-LF/m/n/10 3\OML/npxmi/m/it/10 ; \OT1/SourceSerifPro-LF/m/n/10 4\OML
+/npxmi/m/it/10 ; \OT1/SourceSerifPro-LF/m/n/10 5$ \T1/SourceSerifPro-LF/l/sc/10
+ in re-verse lex-i-co-graph-i-cal or-der is $[]$. 
+ []
+
+[4] [5] [6] [7] ("Ordering of Permutations.aux")
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.5pt have occurred.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 7997 strings out of 493301
+ 145030 string characters out of 3138702
+ 250636 words of memory out of 3000000
+ 11357 multiletter control sequences out of 15000+200000
+ 325420 words of font info for 158 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 50i,22n,96p,1065b,633s stack positions out of 5000i,500n,10000p,200000b,50000s
+{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}{D:/Pro
+gram Files/MiKTeX 2.9/fonts/enc/dvips/newpx/tgpdiff.enc}{D:/Program Files/MiKTe
+X 2.9/fonts/enc/dvips/sourceserifpro/a_fv7osb.enc}{D:/Program Files/MiKTeX 2.9/
+fonts/enc/dvips/base/8r.enc}{D:/Program Files/MiKTeX 2.9/fonts/enc/dvips/source
+serifpro/a_a5mxzo.enc}<D:/Program Files/MiKTeX 2.9/fonts/type1/adobe/sourceseri
+fpro/SourceSerifPro-Bold.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/adobe/sou
+rceserifpro/SourceSerifPro-Light.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/a
+dobe/sourceserifpro/SourceSerifPro-Regular.pfb><D:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/newpx/pxsys.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public
+/pxfonts/rpxmi.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sft
+t1000.pfb><D:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txexs.pfb><D:/P
+rogram Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb><D:/Program Files/
+MiKTeX 2.9/fonts/type1/public/newpx/zplx-regular.pfb>
+Output written on "Ordering of Permutations.pdf" (7 pages, 120727 bytes).
+PDF statistics:
+ 67 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

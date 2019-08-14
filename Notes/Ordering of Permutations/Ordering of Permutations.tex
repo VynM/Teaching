@@ -1,0 +1,331 @@
+\documentclass[svgnames]{article}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\usepackage[default,light,bold]{sourceserifpro}
+\usepackage[T1]{fontenc}
+\usepackage{newpxmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+
+\newtheorem{Example}{Example}
+
+\title{Ordering of Permutations}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Lexicographical Order}
+To find the $k$\th permutation of $n$ marks (letter, symbols), say $a_1, a_2, \ldots, a_n$, when the permutations are sorted lexicographically, proceed as given below:
+\begin{enumerate}
+\item Write $k - 1$ in the form
+\begin{equation*}
+k - 1 = c_{n-1}(n - 1)! + c_{n-2}(n-2)! + \cdots + c_1 1!	
+\end{equation*}
+where each integer $c_i$ has the maximum possible value, $0 \le c_i \le i$. In other words, we divide $k - 1$ by $(n - 1)!$, and take $c_{n-1}$ as the quotient; then divide the remainder by $(n - 2)!$ and take $c_{n-2}$ as the quotient; and so on. This gives us a sequence $c_{n-1} c_{n-2} \cdots c_1$.
+\begin{Example}
+To compute the $35$\th permutation of the five marks $1, 2, 3, 4, 5$, we note that $k = 35$ and $n = 5$. Now
+\begin{equation*}
+35 - 1 = 34 = \underline 1 \times 4! + \underline 1 \times 3! + \underline 2 \times 2! + \underline 0 \times 1!
+\end{equation*}
+so that the sequence is $\boxed{1120}$.
+\end{Example}
+
+\item Next, the sequence $c_{n-1} \cdots c_1$ is treated as a sequence of array indices (the range being $0$ to $n - 1$). Then the $k$\th permutation is constructed in the following manner. Start with the array of marks $1, 2, \ldots, n$, and pick the element indexed by $c_{n-1}$ as the first element of the permutation. Remove this element from the array to get a new array, and also remove $c_{n-1}$ from the sequence of indices to get the new sequence $c_{n-2} \cdots c_1$. Now continue until the sequence of indices is exhausted. At this point, exactly one mark will remain in the array, and write this down as the last element of the permutation.
+\begin{Example}
+Continuing from the previous example, to compute the $35$\th \\ permutation of the five marks $1, 2, 3, 4, 5$, we have already obtained the sequence $1120$. Now, consider the array of marks $12345$.\\
+The first index is $1$ (the first element of $1120$), and the element of the array indexed by this is $2$. Thus, the permutation is $2\_\_\_\_$.\\
+The new array is $1345$, and the new sequence of indices is $120$. Now, the element indexed by the first index $1$ is $3$. Thus the permutation is $23\_\_\_$.\\
+The new array is $145$, and the indices are $20$. The element indexed by $2$ is $5$, so the permutation is $235\_\_$.\\
+The array is now $14$, and the only index remaining is $0$. The corresponding element is $1$, and the permutation is $2351\_$.\\
+The only remaining element $4$ is the last element of the permutation, so the complete permutation is $\boxed{23514}$.
+\end{Example}
+\end{enumerate}
+
+\subsection*{Solved Problems}
+\begin{enumerate}
+\item Find the $23$\textsuperscript{rd} permutation of the four marks $1, 2, 3, 4$ in lexicographical order.
+\begin{equation*}
+23 - 1 = 22 = \underline{3} \times 3!  + \underline{2} \times 2! + \underline{0} \times 1! \to 320
+\end{equation*}
+\begin{equation*}
+\left.
+\begin{array}{r|l|c}
+\text{Index} & \text{Marks} & \text{Mark}\\
+\hline
+\underline{3}20 & 123\underline{4} & \to 4\\
+\hline
+\underline{2}0 & 12\underline{3} & \to 3\\
+\hline
+\underline{0} & \underline{1}2 & \to 1\\
+\hline
+& \underline{2} & \to 2
+\end{array}
+\right\downarrow
+\end{equation*}
+Thus, the $23$\textsuperscript{rd} permutation of $1, 2, 3, 4$ in lexicographical order is $\boxed{4312}$.
+
+\item Find the $18$\th permutation of the marks $a, b, c, d$ in lexicographical order.
+\begin{equation*}
+18 - 1 = 17 = \underline{2} \times 3! + \underline{2} \times 2! + \underline{1} \times 1! \to 221.
+\end{equation*}
+
+\begin{equation*}
+\left.
+\begin{array}{r|l|c}
+\underline{2}21	&	ab\underline{c}d	&	\to c\\
+\hline
+\underline{2}1	&	ab\underline{d}		&	\to d\\
+\hline
+\underline{1}	&	a\underline{b}		&	\to b\\
+\hline
+				&	\underline{a}		&	\to a
+\end{array}
+\right\downarrow
+\end{equation*}
+Thus, the $18$\th permutation of the marks $a, b, c, d$ in lexicographical order is $\boxed{cdba}$.
+
+\item Find the $50$\th permutation of the marks $0, 1, 2, 3, 4$ in lexicographical order.
+\begin{equation*}
+50 - 1 = 49 = \underline 2 \times 4! + \underline 0 \times 3! + \underline 0 \times 3! + \underline 1 \times 1! \to 2001
+\end{equation*}
+\begin{equation*}
+\left.
+\begin{array}{r|l|c}
+\underline 2001	&	01\underline 234	&	\to 2\\
+\hline
+\underline 001	&	\underline0134	&	\to 0\\
+\hline
+\underline 01	&	\underline134	&	\to 1\\
+\hline
+\underline 1	&	3\underline 4	&	\to 4\\
+\hline
+		&	\underline 3	&	\to 3
+\end{array}
+\right\downarrow
+\end{equation*}
+Thus, the $50$\th permutation of $0, 1, 2, 3, 4$ in lexicographical order is $\boxed{20143}$.
+
+\item Find the $268$\th permutation of \texttt{LISTEN} in lexicographical order.
+\begin{equation*}
+268 - 1 = 267 = \underline 2 \times 5! + \underline 1 \times 4! + \underline 0 \times 3! + \underline 1 \times 2! + \underline 1 \times 1! \to 21011
+\end{equation*}
+
+\begin{equation*}
+\left.
+\begin{array}{r|l|c}
+\underline 21011	&	\texttt{LI\underline STEN}	& \to \texttt{S}\\
+\hline
+\underline 1011	&	\texttt{L\underline ITEN}	&	\to \texttt{I}\\
+\hline
+\underline 011	&	\texttt{\underline LTEN}	&	\to \texttt{L}\\
+\hline
+\underline 11	&	\texttt{T\underline EN}	&	\to \texttt{E}\\
+\hline
+\underline 1	&	\texttt{T\underline N}	&	\to \texttt{N}\\
+\hline
+	&	\texttt{\underline T}	&	\to \texttt{T}
+\end{array}
+\right\downarrow
+\end{equation*}
+Thus, the $268$\th permutation of \texttt{LISTEN} in lexicographical order is \boxed{\texttt{SILENT}}.
+\end{enumerate}
+
+\section{Reverse Lexicographical Order}
+To obtain the $k$\th permutation of $n$ marks $a_1, a_2, \ldots, a_n$ in reverse lexicographical order, first reverse the order of marks to get $a_n, a_{n-1}, \ldots, a_1$, compute the $k$\th permutation of these marks in \emph{lexicographical order}, and then reverse the resulting permutation.
+
+\subsection*{Solved Problems}
+\begin{enumerate}
+\item Find the $50$\th permutation of the five marks $0, 1, 2, 3, 4$ in reverse lexicographical order.
+\begin{equation*}
+50 - 1 = 49 = \underline 2 \times 4! + \underline 0 \times 3! + \underline 0 \times 3! + \underline 1 \times 1! \to 2001
+\end{equation*}
+\begin{equation*}
+\left.
+\begin{array}{r|l|c}
+\underline 2001	&	43\underline 210	&	\to 2\\
+\hline
+\underline 001	&	\underline 4310	&	\to 4\\
+\hline
+\underline 01	&	\underline 310	&	\to 3\\
+\hline
+\underline 1	&	1\underline 0	&	\to 0\\
+\hline
+&	\underline 1	&	\to 1
+\end{array}
+\right\uparrow
+\end{equation*}
+Thus, the $50$\th permutation of $0, 1, 2, 3, 4$ in reverse lexicographical order is $\boxed{10342}$.
+
+\item Find the $100$\th permutation of the marks $1, 2, 3, 4, 5$ in reverse lexicographical order.
+\begin{equation*}
+100 - 1 = 99 = \underline 4 \times 4! + \underline 0 \times 3! + \underline 2 \times 1! + \underline 1 \times 1! \to 4011
+\end{equation*}
+\begin{equation*}
+\left.
+\begin{array}{r|l|c}
+\underline 4011	&	5432\underline 1	&	\to 1\\
+\hline
+\underline 011	&	\underline 5432	&	\to 5\\
+\hline
+\underline 11	&	4\underline 32	&	\to 3\\
+\hline
+\underline 1	&	4\underline 2	&	\to 2\\
+\hline
+&	4	&	\to 4
+\end{array}
+\right\uparrow
+\end{equation*}
+Thus, the $100$\th permutation of $1, 2, 3, 4, 5$ in reverse lexicographical order is $\boxed{42351}$.
+\end{enumerate}
+
+\section{Fike's Order}
+To obtain the $k$\th permutation of $n$ marks $a_1, a_2, \ldots, a_n$ in Fike's order, proceed as follows.
+\begin{enumerate}
+\item First, we must generate \emph{Fike's sequence}, using which the permutation is to be computed. To find the sequence, first write $k - 1$ in the form
+\begin{equation*}
+k - 1 = c_1  \times n(n-1) \cdots 3 + c_2  \times n(n-1) \cdots 4 + \cdots + c_{n-2} \times n + c_{n-1} \times 1.
+\end{equation*}
+That is, the place values are $\frac {n!} {2!}$, $\frac {n!} {3!}$, \ldots, $\frac {n!} {n!} = 1$. Now, \textbf{subtract this sequence} $c_1 c_2 \cdots c_{n-1}$ from the sequence $1 2 \cdots (n - 1)$ to get the sequence $d_1 d_2 \cdots d_{n-1}$. That is, $d_i = i - c_i$, $i = 1, \ldots, n - 1$. This is Fike's sequence.
+
+\begin{Example}
+To compute the $65$\th permutation of the five marks $1, 2, 3, 4, 5$ in Fike's order, we note that $k = 65$ and $n = 5$. First, compute the place values $\dfrac{n!}{2!}$, \ldots, $\dfrac{n!}{n!}$. For $n = 5$, these are $60$, $20$, $5$, $1$. Then,
+\begin{equation*}
+65 - 1 = 64 = \underline 1 \times 60 + \underline 0 \times 20 + \underline 0 \times 5 + \underline 4 \times 1 \to 1004.
+\end{equation*}
+Now, Fike's sequence is\\
+\begin{tabular}{l}
+$1234 - {}$\\
+$1004 = {}$\\
+\hline
+$0230$.
+\end{tabular}
+\end{Example}
+
+\item Using the Fike's sequence, the permutation is generated from the initial permutation $12 \cdots n$ by a sequence of interchanges, in the following manner. For the sequence $d_1 d_2 \cdots d_{n-1}$, first the element of the permutation index $1$ is interchanged with the element at index $d_1$. Similarly, at each stage, the element at index $i$ is interchanged with the element at index $d_i$, until the sequence is exhausted. The resulting permutation is the $k$\th permutation in Fike's order.
+\begin{Example}
+For the sequence $0230$ obtained in the previous example, we start with the original arrangement of the marks: $12345$. Now, the element at index $1$ is $2$, and the element at index $d_1 = 0$ is $1$. Therefore, interchanging $2$ and $1$, we get $21345$. Next, the element at index $2$ is $3$, and the element at index $d_2 = 2$ is $3$ (the same). ``Interchanging'' these, we get $21345$ (i.e., the permutation remains the same). The element at index $3$ is $4$, and that at index $d_3 = 3$ is again the same, so once more, the permutation is $21345$. Lastly, the element at index $4$ is $5$, and that at index $d_4 = 0$ is $2$. Interchanging these, we get $51342$. Thus, the $65$\th permutation of $1, 2, 3, 4, 5$ in Fike's order is $\boxed{51342}$. We can write this succinctly as given below. First, Fike's sequence is written as a column. Then we write the original permutation in the first row, and underline the element at index $1$, which is to be interchanged with the element at index $d_1$.
+\begin{flalign*}
+&\begin{array}{lc}
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}{1}\underline{2}345\\
+2 & \phantom{\boxed{12345}}\\
+3 & \\
+0 &
+\end{array}&
+\end{flalign*}
+The interchange is performed and the result is written in the next row, and this process is repeated until the sequence is exhausted.
+\begin{flalign*}
+&\begin{array}{lcl}
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}1\underline{2}345 & \to\\
+\textcolor{blue!50!black}2 & 21\textcolor{blue!50!black}{\underline 3}45 & \to \\
+\textcolor{blue!50!black}3 & 213\textcolor{blue!50!black}{\underline 4}5 & \to\\
+\textcolor{blue!50!black}0 & \textcolor{blue!50!black}2134\underline 5 & \to\\
+& \boxed{51342} &
+\end{array}&
+\end{flalign*}
+\end{Example}
+\end{enumerate}
+
+\subsection*{Solved Problems}
+\begin{enumerate}
+\item Obtain the $40$\th permutation of the five marks $0, 1, 2, 3, 4$ in Fike's order.
+Since $n = 5$, the place values are $60$, $20$, $5$, $1$.
+\begin{equation*}
+40 - 1 = 39 = \underline 0 \times 60 + \underline 1 \times 20 + \underline 3 \times 5 + \underline 4 \times 1 \to 0134
+\end{equation*}
+Then Fike's sequence is
+\begin{equation*}
+\begin{array}{l}
+1234 - {}\\
+0134 = {}\\
+\hline
+1100.
+\end{array}
+\end{equation*}
+The permutation is then obtained as follows.
+\begin{equation*}
+\begin{array}{rcr}
+\textcolor{blue!50!black}{1} & 0 \textcolor{blue!50!black}{\underline 1}234 & \to\\
+\textcolor{blue!50!black}{1} & 0 \textcolor{blue!50!black}{1}\underline 234 & \to\\
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}{0}21\underline 34 & \to \\
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}{3}210\underline 4 & \to \\
+ & \boxed{42103} &
+\end{array}
+\end{equation*}
+
+\item Obtain the $50$\th permutation of the five marks $1, 2, 3, 4$ in Fike's order.
+Since $n = 5$, the place values are $60$, $20$, $5$, $1$.
+\begin{equation*}
+50 - 1 = 49 = \underline 0 \times 60 + \underline 2 \times 20 + \underline 1 \times 5 + \underline 4 \times 1 \to 0214
+\end{equation*}
+Then Fike's sequence is
+\begin{equation*}
+\begin{array}{l}
+1234 - {}\\
+0214 = {}\\
+\hline
+1020.
+\end{array}
+\end{equation*}
+The permutation is then obtained as follows.
+\begin{equation*}
+\begin{array}{rcr}
+\textcolor{blue!50!black}{1} & 1 \textcolor{blue!50!black}{\underline 2}345 & \to\\
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}{1}2\underline 345 & \to\\
+\textcolor{blue!50!black}{2} & 32\textcolor{blue!50!black}{1}\underline 45 & \to\\
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}{3}241\underline 5 & \to\\
+ & \boxed{52413} &
+\end{array}
+\end{equation*}
+
+\item Obtain the $111$\th permutation of the five marks $1, 2, 3, 4, 5$ in Fike's order.
+\begin{equation*}
+111 - 1 = 110 = \underline 1 \times 60 + \underline 2 \times 20 + \underline 2 \times 5 + \underline 0 \times 1 \to 1220
+\end{equation*}
+Then Fike's sequence is
+\begin{equation*}
+\begin{array}{l}
+1234 - {}\\
+1220 = {}\\
+\hline
+0014.
+\end{array}
+\end{equation*}
+The permutation is then obtained as follows.
+\begin{equation*}
+\begin{array}{rcr}
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}{1}\underline 2345 & \to\\
+\textcolor{blue!50!black}{0} & \textcolor{blue!50!black}{2}1\underline 345 & \to\\
+\textcolor{blue!50!black}{1} & 3\textcolor{blue!50!black}{1}2\underline 45 & \to\\
+\textcolor{blue!50!black}{4} & 3421\textcolor{blue!50!black}{\underline 5} & \to\\
+ & \boxed{34215} &
+\end{array}
+\end{equation*}
+\end{enumerate}
+
+\section*{Remarks}
+\begin{enumerate}
+\item The sequence used in the case of each of these three orderings is completely determined by the values of $n$, the total number of marks, and $k$, the number of the permutation to be found. It does not depend on the \emph{values} of the marks at all. Indeed, the marks have no value, even when they are $1, 2, 3, 4, 5$, for example. The marks could also be $a, b, c, d, e$. They merely represent objects being permuted. In particular, the marks being $1, 2, 3, 4, 5$, or $0, 1, 2, 3, 4$ makes no difference to the sequence (of indices) found.
+\item In the case of lexicographical (or reverse lexicographical) order, the sequence used is of the form $c_{n-1}c_{n-2} \cdots c_1$, where no $c_i$ exceeds $i$. Thus, for example if $n = 5$, $1322$ is \textbf{not} a valid sequence, since $c_1 = 2 > 1$. Also note that the number of terms in the sequence is always $n - 1$. If the first term of the sequence is $0$, then this \emph{cannot} be dropped, as the sequence is not a simple number, but rather a collection of indices in a particular order.
+\item In the case of Fike's order, the first sequence obtained (the one that is used for computing Fike's sequence) must have $i$\th term not exceeding $i$, for any $i$. For instance, when $n = 5$, $1232$ is a valid sequence, but not $1322$, since the second term is $3 > 2$. Note that we subtract the sequence from $1234$ \emph{term-wise}. Once again, this is a sequence and not an actual number, so that there is no carrying involved in the subtraction. This is always true because any valid sequence will be term-wise smaller than or equal to the sequence $1234\cdots(n-1)$.
+\end{enumerate}
+
+\section*{Exercises}
+\begin{enumerate}
+\item Find the $119$\th permutation of $1, 2, 3, 4, 5$ in lexicographical, reverse lexicographical, and Fike's orders.
+\item Find the $123$\textsubscript{rd} permutation of $1, 2, 3, 4, 5, 6$ in lexicographical, reverse lexicographical, and Fike's orders.
+\item Find the $k$\th permutation of $1, 2, \ldots, n$ in lexicographical and reverse lexicographical orders, where $k = m! + 1$ for some $m < n$.
+\end{enumerate}
+\end{document}

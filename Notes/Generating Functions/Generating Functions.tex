@@ -1,0 +1,190 @@
+\documentclass[11pt,a5paper]{amsart}
+\usepackage[left=1cm, right=1cm, top=1.3cm, bottom=1.3cm]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage{mathpple}
+\usepackage{Alegreya}
+
+\usepackage{amsmath, amsfonts, amssymb}
+%\usepackage[all]{xy}
+\usepackage{physics}
+\usepackage{caption}
+\usepackage[most]{tcolorbox}
+\usepackage[inline]{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor = [RGB]{32, 128, 208}, urlcolor = red, linktocpage = true}
+
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{label=\thesection.\arabic*,before=\raggedright}
+
+
+\linespread{1.2}
+                
+\newcommand{\cat}{\mathcal}
+\DeclareMathOperator{\size}{size}
+
+\definecolor{thmframe}{rgb}{0.7,0.75, 0.95}
+\definecolor{thmback}{rgb}{0.75,0.81, 1}
+\definecolor{defframe}{rgb}{0.75,0.95,0.7}
+\definecolor{defback}{rgb}{0.81,1,0.75}
+\definecolor{exampleframe}{rgb}{0.95,0.75,0.7}
+\definecolor{exampleback}{rgb}{1,0.81,0.75}
+
+\tcbset{enhanced, width=0.97\linewidth, colback=white!99!black, sharp corners, center, boxrule=0.5pt}
+\newtcolorbox[auto counter, number within=section]{Theorem}[1][]{colframe=thmframe, colback=thmback, title=Theorem~\thetcbcounter, fonttitle=\bfseries, coltitle=black!98!green, drop fuzzy shadow = thmback!70!white, #1}
+\newtcolorbox[auto counter, number within=section]{Definition}[1][]{colframe=defframe, colback=defback, title=Definition~\thetcbcounter, fonttitle=\bfseries, coltitle=black!98!green, drop fuzzy shadow = defback!70!white, #1}
+\newtcolorbox[auto counter, number within=section]{Example}[1][]{colframe=exampleframe, colback=exampleback, title=Example~\thetcbcounter, fonttitle=\bfseries, coltitle=black!98!red, drop fuzzy shadow = exampleback!70!white, #1}
+
+\newtcolorbox{Remark}[1][]{boxrule=0.4pt, colframe=white!90!black, fontupper=\scriptsize, drop fuzzy shadow = white!97!black #1}
+
+\title{Generating Functions}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Combinatorial Families}\label{sec:combFam}
+A \emph{combinatorial family} (or \emph{family of combinatorial objects}) is a collection $\cat A$ of objects together with a function $\size \colon \cat A \to \mathbb N_0$ (where $\mathbb N_0$ denotes the set of non-negative integers). In other words, a combinatorial family is just a collection of objects in which each object has some ``size'' associated with it, this being zero or a positive integer.
+
+\begin{Example}[label=ex:binStr]
+Let $\cat B$ be the family of all (finite) binary strings, and for any string $\beta$ in this family, let $\size(\beta)$ be the length of the string $\beta$.
+\begin{equation*}
+\cat B = \qty{\epsilon, 0, 1, 00, 01, 10, 11, 000, 001, 010, 011, 100, 101, 110, 111, \ldots}
+\end{equation*}
+(where $\epsilon$ denotes the empty string).
+\end{Example}
+
+\begin{Example}[label=ex:powSet]
+Let $S$ be a finite set, and let $\cat P$ be the collection of all subsets of $S$. Then $\cat P$ forms a combinatorial family with the size of each object $X$ (a subset of $S$) being its cardinality $|X|$ (the number of elements in the subset $X$).
+\end{Example}
+
+Given a combinatorial family $\cat A$, we denote by $\cat A_n$ the \textbf{collection of all objects of $\cat A$ with size $n$}(for any non-negative integer $n$). The \emph{number of objects} in $\cat A_n$ is denoted by $a_n$.
+
+In Example~\ref{ex:binStr}, $\cat B_n$ is the set of all binary strings of length $n$, and $b_n$ (the number of binary strings of length $n$) is $2^n$. For instance,
+$\cat B_0 = \qty{\epsilon}$, $\cat B_1 = \qty{0, 1}$, $\cat B_2 = \qty{00, 01, 10, 11}$.
+
+In Example~\ref{ex:powSet}, let $m$ be the cardinality of the finite set $S$. Since $\cat P$ is the family formed by the \emph{set of all subsets of $S$ with the cardinality of a subset as its size}, it is obvious that $\cat P_n$ is the collection of \emph{all subsets of $S$ that have cardinality $n$}. As there are $\binom m n$ ways of selecting $n$ elements out of $m$ (i.e., of forming a subset of $S$ with exactly $n$ elements), we see that $p_n = \binom m n$.
+
+\subsection{Basic Operations on Combinatorial Families}
+Given two combinatorial families $\cat A$ and $\cat B$, there are two simple ways to construct a new family using these. A combinatorial family being nothing more than a collection of objects with well-defined sizes, constructing a new family boils down to constructing new objects from given objects. An obvious way to do this is to take two objects and simply put them together (or juxtapose them). Another (perhaps less obvious) way to do this is two take two objects and keep only one of them, discarding the other.
+\begin{Definition}[label=def:prodFam]
+The \emph{product} of two families $\cat A$ and $\cat B$ is the family $\cat C = \cat A \cat B$ consisting of all possible pairs $(\alpha, \beta)$, where $\alpha$ is an object of $\cat A$ and $\beta$ an object of $\cat B$. The size function of $\cat C$ is defined as $\size(\alpha, \beta) = \size(\alpha) + \size(\beta)$ (where $\size(\alpha)$ and $\size(\beta)$ are the sizes of the objects $\alpha$ of $\cat A$ and $\beta$ of $\cat B$ respectively).
+\end{Definition}
+It should be clear that this definition is analogous to the notion of Cartesian product of two sets. Also note that we can define the product of more than two families by repeated application of this product.
+\begin{Definition}[label=def:disjUnionFam]
+The \emph{disjoint union} of two families $\cat A$ and $\cat B$ is the family $\cat C = \cat A + \cat B$ in which each object $\gamma$ is either an object $\alpha$ of $\cat A$ or an object $\beta$ of $\cat B$. The size function of $\cat C$ is defined as
+\begin{equation*}
+\size(\gamma) = \begin{cases}
+\size(\alpha), & \gamma = \alpha\\
+\size(\beta), & \gamma = \beta.
+\end{cases}
+\end{equation*}
+\end{Definition}
+
+\begin{Remark}
+In this definition, even when two objects of $\cat A$ and $\cat B$ are the same, they are distinct objects of $\cat A + \cat B$. So this operation is analogous not to the union of sets, but rather the \emph{disjoint union} of sets.
+\end{Remark}
+
+\begin{Example}[label=ex:powSetOps]
+If $S$ and $T$ are two finite sets with no common elements, we can define the combinatorial families $\cat P$ and $\cat Q$ formed by the respective collections of all subsets of each set, as given in Example~\ref{ex:powSet}.
+\begin{enumerate}
+\item What will the product $\cat P \cat Q$ of these two families represent? Each object of $\cat P \cat Q$ is a pair of the form $(X, Y)$, where $X$ is an object of $\cat P$, i.e., $X \subseteq S$, and similarly, $Y \subseteq T$. We may think of this pair of objects as just being the subset $X \cup Y$ of $S \cup T$. This is valid because $\size(X, Y) = \size(X) + \size(Y) = |X| + |Y|$.
+\item What about the disjoint union $\cat P + \cat Q$? This is simply the collection of all subsets of $S$ and $T$ (note: \textbf{not} subsets of $S \cup T$).
+\end{enumerate}
+\end{Example}
+
+\subsection*{Exercises}
+\begin{exercises}
+\item In Example~\ref{ex:powSet}, if $S$ has $m$ elements, how many objects does the family $\cat P$ have? Do you get the same answer if you compute it as $\sum p_n$?
+\item In Example~\ref{ex:powSetOps}, if $S$ has $s$ elements and $T$ has $t$ elements, how many objects do the following families contain?
+	\begin{enumerate}[label=(\roman*)]
+	\item $\cat P$ and $\cat Q$
+	\item $\cat P \cat Q$
+	\item $\cat P + \cat Q$
+	\end{enumerate}
+\item\label{exer:evenOddBStr} Let $\cat E$ be the family consisting of all binary strings containing an even number of $1$s, and $\cat O$ the family of binary strings containing an odd number of $1$s. In each case, define the size of a string to be its length. Determine $e_n$ and $o_n$ for all $n$.
+\item\label{exer:B=E+O} For the families $\cat E$ and $\cat O$ defined in Exercise~\ref{exer:evenOddBStr}, let $\cat B = \cat E  + \cat O$. Compute $b_n$ for all $n$. What is a simple description of the family $\cat B$?
+\item\label{exer:oddBStr} Let $\cat T$ be the family containing only one object -- the binary string $1$ with $\size(1) = 1$. Similarly, let $\cat F$ be the family containing only the binary string $0$ of length $1$. Show that the family $\cat E \cat T + \cat O \cat F$ is equivalent to the family $\cat O$ (where $\cat E$ and $\cat O$ are as defined in Exercise~\ref{exer:evenOddBStr}).
+\item\label{exer:seqFamOps} Given two families $\cat A$ and $\cat B$, let $C = \cat A + \cat B$ and $D = \cat A \cat B$. Find the values of $c_n$ and $d_n$ (in terms of $a_n$ and $b_n$).
+\end{exercises}
+
+\section{The Generating Function of a Combinatorial Family}\label{sec:genFun}
+In the previous section, we saw two different ways to build new combinatorial families in terms of known ones using the product and disjoint union operations. We also saw how it is possible for such a new family constructed using these operations to be equivalent to one of the operands itself (Exercise~\ref{exer:oddBStr}). Now we shall define a powerful tool that helps us count various collections of objects in combinatorial families.
+
+\begin{Definition}[label=def:genFun]
+The \emph{generating function} $g(x)$ of a combinatorial family $\cat A$ is the function defined by the power series
+\begin{equation*}
+g(x) = a_0 + a_1 x + a_2 x^2 + \cdots = \sum_{n = 0}^{\infty} a_n x^n
+\end{equation*}
+where $a_n = |\cat A_n|$, the number of objects of $\cat A$ with size $n$.
+\end{Definition}
+
+\begin{Example}
+The generating function of the family $\cat B$ of binary strings defined in Example~\ref{ex:binStr} is
+\begin{equation*}
+g(x) = \sum_{n = 0}^{\infty} 2^n x^n = \sum_{n = 0}^\infty (2x)^n = \dfrac 1 {1 - 2x}.
+\end{equation*}
+\end{Example}
+
+\begin{Example}[label=ex:powSetGF]
+The generating function of the family $\cat P$ of subsets of a finite set $S$ of cardinality $m$ (Example~\ref{ex:powSet}) is
+\begin{equation*}
+g(x) = \sum_{n = 0}^m \binom m n x^n = (1 + x)^m.
+\end{equation*}
+Note that we have not changed the limits of the summation here to make it finite. The binomial coefficient $\binom m n$ is zero if $n > m$.
+\end{Example}
+
+As with any other constructive definition in mathematics, this one too can be used in two ways. If we know the values of all $a_n$s for a family $\cat A$, then we can plug these into the definition to get the generating function $g(x)$. This may not seem useful, as we are usually interested in $a_n$ itself, not $g(x)$. However, given a family $\cat A$ with unknown $a_n$s, if we somehow manage to find its generating function $g(x)$, then we can look at the coefficient of $x^n$ in the series expansion of $g(x)$ and this coefficient is exactly $a_n$. But how could we find the generating function when the $a_n$s are themselves unknown? That is where the \emph{operations} on families play a role. If we manage to figure out how to compute the generating functions of families resulting from these operations, in terms of the generating functions of the operands, clearly we could build up combinatorial families of interest from	 ones with known generating functions!
+
+Let $\cat A$ and $\cat B$ be two combinatorial families, and consider their \hyperref[def:disjUnionFam]{disjoint union} $\cat C = \cat A + \cat B$. Any object of $\cat C$ having size $n$ is either an object of $\cat A$ or an object of $\cat B$ having size $n$ (with no such object being common to both $\cat A$ and $\cat B$). Thus, $c_n = a_n + b_n$ (see Exercise~\ref{exer:seqFamOps}).
+
+Now, what happens in the \hyperref[def:prodFam]{product} $\cat D = \cat A \cat B$? Recall that for every pair of objects $\alpha$ of $\cat A$ and $\beta$ of $\cat B$, we get an object $(\alpha, \beta)$ of $\cat A \cat B$ having size $\size(\alpha) + \size(\beta)$. If this object is to have size exactly $n$, then it must be that in the family $\cat A$, $\size(\alpha) = k$ and in the family $\cat B$, $\size(\beta) = n - k$ (for some $k$, $0 \le k \le n$). Thus, \emph{every} object of $\cat A$ having size $k$ can be paired with \emph{every} object of $\cat B$ having size $n - k$ to give an object of $\cat A \cat B$ having size $n$. The number of such pairings is clearly $a_k b_{n - k}$, for each $k$ (since $a_k$ and $b_{n - k}$ are the respective numbers of objects of $\cat A$ having size $k$ and objects of $\cat B$ having size $n - k$). The number of objects of $\cat D = \cat A \cat B$ having size exactly $n$ is therefore $d_n = \sum\limits_{k = 0}^n a_k b_{n - k}$. This tells us how we could compute the generating functions of families obtained by the disjoint union and product operations.
+\begin{Theorem}[label=thm:genFunOps]
+Let $\cat A$ and $\cat B$ be two combinatorial families with generating functions $g_A(x)$ and $g_B(x)$ respectively.
+\begin{enumerate}[label=(\roman*)]
+	\item\label{it:genFunOpsThm1} The generating function of the disjoint union $\cat A + \cat B$ is given by
+	\begin{equation*}
+	g_{A + B}(x) = g_A(x) + g_B(x).
+	\end{equation*}
+	\item\label{it:genFunOpsThm2} The generating function of the product $\cat A \cat B$ is given by
+	\begin{equation*}
+	g_{AB}(x) = g_A(x)g_B(x).
+	\end{equation*}
+\end{enumerate}
+\end{Theorem}
+To see why \ref{it:genFunOpsThm2} is true, observe that
+\begin{align*}
+\pqty{\sum_{n = 0}^\infty a_n x^n} \pqty{\sum_{n = 0}^\infty b_n x^n} = {}& \pqty{a_0 + a_1 x + a_2 x^2 + \cdots} \pqty{b_0 + b_1 x + b_2 x^2 + \cdots} \\
+	= {}& a_0 b_0 + (a_0 b_1 + a_1 b_0) x + (a_0 b_2 + a_1 b_1 + a_2 b_0) x^2 + {} \\
+	& (a_0 b_3 + a_1 b_2 + a_2 b_1 + a_3 b_0) x^3 + \cdots \\
+	= {}& \sum_{n = 0}^\infty \pqty{\sum_{k = 0}^n a_k b_{n-k}} x^n.
+\end{align*}
+We shall now apply these results to our earlier examples. As a first example, let us see whether Theorem~\ref{thm:genFunOps} really works. 
+\begin{Example}
+If $S$ and $T$ are two disjoint finite sets with cardinalities $s$ and $t$ respectively, and $\cat P$ and $\cat Q$ the families defined by their power sets (Example~\ref{ex:powSetOps}), then the product family $R = \cat P \cat Q$ is (equivalent to) the family of all subsets of the set $S \cup T$ (whose cardinality is $s + t$). The generating functions of $\cat P$, $\cat Q$, and $\cat R$ are
+\begin{align*}
+g_P(x) & = (1 + x)^s\\
+g_Q(x) & = (1 + x)^t\\
+g_R(x) & = (1 + x)^{s + t}
+\end{align*}
+respectively (Example~\ref{ex:powSetGF}). So $g_R(x) = g_P(x) g_Q(x)$ as expected.
+\end{Example}
+Recall from Exercises~\ref{exer:B=E+O} and \ref{exer:oddBStr} that if $\cat B$, $\cat E$, and $\cat O$ respectively denote the families of all binary strings, the strings with an even number of $1$s, and the strings with an odd number of $1$s, then $\cat B = \cat E + \cat O$ and $\cat O = \cat E \cat T + \cat O \cat F$ (where $\cat T$ is the family containing only the string $1$, and $\cat F$ is the family containing only the string $0$). The former equation is justified by observing that every string with an odd number of $1$s (an object of $\cat O$) is obtained by either appending $1$ (the object of $\cat T$) to a string in $\cat E$ or appending $0$ (the object of $\cat F$) to a string in $\cat O$.
+\begin{Example}
+Let $g(x)$ and $h(x)$ be the generating functions of $\cat E$, and $\cat O$ respectively. Note that the generating functions of both the families $\cat T$ and $\cat F$ are $g_T(x) = g_F(x) = x$. Since $\cat E + \cat O = \cat B$ and $\cat O = \cat E \cat T + \cat O \cat F$, application of Theorem~\ref{thm:genFunOps} gives us
+\begin{align*}
+& g(x) + h(x) = \dfrac 1 {1 - 2x}\quad \text{(generating function of $\cat B$)}\\
+& h(x) = g(x) x + h(x) x = (g(x) + h(x))x = \dfrac x {1 - 2x}
+\end{align*}
+and therefore
+\begin{equation*}
+g(x) = \frac{1 - x}{1 - 2x} = 1 + \frac x {1 - 2x}.
+\end{equation*}
+Now to find $e_n$ and $o_n$, we expand $g(x)$ and $h(x)$ in powers of $x$ to get
+\begin{align*}
+g(x) & = 1 + \sum_{n = 1}^{\infty} 2^{n - 1} x^n & h(x) = \sum_{n = 1}^\infty 2^{n - 1} x^n.
+\end{align*}
+Thus, $e_0 = 1$, $o_0 = 0$ and $e_n = o_n = 2^{n - 1}$ for $n > 0$.
+\end{Example}
+\end{document}
