@@ -1,0 +1,85 @@
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\thesection.\arabic*.}
+
+\usepackage[default,bold]{sourceserifpro}
+\usepackage[T1]{fontenc}
+\usepackage{eulervm}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+
+\title[]{Probability and Statistics -- Problem Set 2}
+
+\begin{document}
+\maketitle
+
+
+\section{Very Easy}
+\begin{enumerate}
+\item If $P(A) = \frac 1 3$, $P(B) = \frac 2 3$, and $P(AB) = \frac 1 6$, compute
+\begin{enumerate}
+	\item $P(A \cup B)$
+	\item $P(\overline A \cup \overline B)$
+	\item $P(\overline A \cup B)$.
+\end{enumerate}
+
+\item An integer between $1$ and $n$ (inclusive) is selected at random. Let $A$ be the event that it is even, and let $B$ be the event that it is \textbf{not} divisible by $3$. In each of the following cases, check whether $A$ and $B$ are independent. Guess the answer intuitively before checking it computationally.
+\begin{enumerate}
+	\item $n = 12$.
+	\item $n = 13$.
+	\item $n = 14$.
+	\item $n = 15$.
+	\item $n = 16$.
+\end{enumerate}
+\end{enumerate} %Very Easy
+
+\section{Easy}
+\begin{enumerate}
+\item $A$ and $B$ are independent events such that $P(A \cup B) = \frac 5 6$ and $P(AB) = \frac 1 4$. Find $P(A)$ and $P(B)$.
+
+\item Let $p$ and $q$ be distinct prime numbers, and $n$ a positive integer multiple of $pq$. An integer between $1$ and $n$ (inclusive) is selected at random. Let $A$ be the event that \textbf{it is divisible by $p$}, and let $B$ be the event that \textbf{it is not divisible by $q$}. Are $A$ and $B$ independent?
+
+\item If $P(A) = \frac 1 3$ and $P(B) = \frac 1 4$, show that
+\begin{enumerate}
+	\item $P(AB) \le \frac 1 4$.
+	\item $\frac 1 3 \le P(A \cup B) \le \frac 7 {12}$
+\end{enumerate}
+\end{enumerate} %Easy
+
+\section{Normal Difficulty}
+\begin{enumerate}
+\item If $A$ and $B$ are two events in a sample space, show that $A$ and $B$ are independent if and only if $A$ and $\overline B$ are independent.
+
+\item Let $p_1, \ldots, p_k$ be $k$ distinct primes, and $n = p_1^{r_1} \times \cdots \times p_k^{r_k}$, where $r_1, \ldots, r_k$ are positive integers. An integer between $1$ and $n$ (inclusive) is selected at random. Let $A_i$ be the event that \textbf{it is not divisible by $p_i$}, $i = 1, \ldots, k$. Find $P(A_1 A_2 \cdots A_k)$, and show that $A_1, \ldots, A_k$ are independent.
+
+\item In a family of $n$ children, let $A$ be the event that there is at least one girl and one boy. Let $B$ be the even that there is at most one girl. Assuming that each child has equal probability of being a boy or a girl, what is the value of $n$ such that $A$ and $B$ are independent?
+
+\item A patient is suspected to have one of three diseases, $A$, $B$, $C$. The population percentages suffering from these diseases are in the ratio $2:1:1$ (and no person has more than one of the three). There is a single test for these three diseases, which turns out to be positive in $25\%$ of the cases of $A$, in $50\%$ of the cases of $B$, and $90\%$ of the cases of $C$. The test is administered to the patient three times. Given that two of them were positive, compute the probability of the patient having each of these diseases.
+
+\item Urn $A$ contains $5$ red and $3$ blue marbles. Urn $B$ contains $4$ red and $6$ blue marbles. One marble chosen at random is transferred from $A$ to $B$. Then, one is chosen at random from $B$ and transferred to $A$. Finally, one marble is drawn at random from $A$.
+\begin{enumerate}
+	\item What is the probability that the marble drawn from $A$ in the third step is red?
+	\item Given that this marble is red, what is the probability that the marble taken from $A$ in the first step is also red?
+\end{enumerate}
+\end{enumerate} %Normal
+
+\section{Seemingly Difficult}
+\begin{enumerate}
+\item An integer between $1$ and $n$ (inclusive) is selected at random. Let $A$ be the event that it is even, and let $B$ be the event that it is \textbf{not} divisible by $3$. For which values of $n$ will $A$ and $B$ be independent?
+
+\item A certain family of bacteria is such that every ten minutes, each bacterium either divides into two, with probability $\frac 2 3$, or dies. If initially there is a single bacterium of this family, what is the probability that its lineage never dies out?
+\end{enumerate} %Difficult
+\end{document}
