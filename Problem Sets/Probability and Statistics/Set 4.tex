@@ -1,0 +1,70 @@
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx, tikz}
+\usepackage{mathtools, physics}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[default,bold]{sourceserifpro}
+\usepackage[T1]{fontenc}
+\usepackage{eulervm}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+
+\title[]{Probability and Statistics -- Problem Set 4}
+
+\DeclareMathOperator{\Prob}{P}
+\DeclareMathOperator{\EV}{\mathbb E}
+\DeclareMathOperator{\Var}{\mathbb V}
+
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item $(X, Y)$ is a two dimensional random variable with joint pdf $f(x, y) = x + y$, $0 < x < 1$, $0 < y < 1$. Compute the following.
+\begin{enumerate}
+	\item $\Prob[2X + 2Y < 1]$.
+	\item $\Prob[2X + 2Y < 3]$.
+	\item $\Prob[X \ge \frac 1 2]$.
+	\item $\Prob[X \ge \frac 1 2, Y \ge \frac 1 2]$.
+	\item $\Prob[Y \ge \frac 1 2 \mid X \ge \frac 1 2]$.
+	\item $\Prob[X + Y > 1 \mid X \ge \frac 1 2]$.
+\end{enumerate}
+
+\item From a box containing $r$ red, $g$ green, and $b$ blue marbles, $n$ marbles are drawn successively \textbf{with replacement}. Let $X$ and $Y$ respectively be the number of blue marbles and number of green marbles obtained in these $n$ draws.
+\begin{enumerate}
+	\item Determine the joint pmf of $(X, Y)$ and compute the marginal pmfs.
+	\item Are $X$ and $Y$ independent?
+	\item For the particular case $r = 3$, $g = b = 2$, tabulate the joint pmf values and compute the coefficient of correlation between $X$ and $Y$.
+\end{enumerate}
+
+\item Compute the marginal pdfs of $X$ and $Y$ and show that they are independent, given their joint pdf $(X, Y)$.
+\begin{enumerate}
+	\item $f(x, y) = 3 - 6x - y + 2xy$, $0 < x < \frac 1 2$, $0 < y < 2$.
+	\item $f(x, y) = e^{-2x - \frac y 2}$, $x, y > 0$.
+\end{enumerate}
+
+\item For each random variable $(X, Y)$ with joint pdf $f(x, y)$ as given below, compute the coefficient of correlation $\rho$.
+\begin{enumerate}
+	\item $f(x, y) = x + y$, $0 < x, y < 1$.
+	\item $f(x, y) = 3x + 3y$, $0 < y < x < 1$.
+	\item $f(x, y) = 2x - xy$, $0 < x < 1$, $0 < y < 2$.
+	\item $f(x, y) = \dfrac 1 \pi$, $x^2 + y^2 \le 1$ [Uniform distribution in the unit disc centred at the origin].
+	\item $f(x, y) = \dfrac 2 \pi$, $y \ge 0$, $x^2 + y^2 \le 1$.
+	\item $f(x, y) = \dfrac 4 \pi$, $x,y \ge 0$, $x^2 + y^2 \le 1$.
+	\item $f(x, y) = \dfrac 1 4$, $(x, y) \in R$, where $R$ is the square with vertices $(1, 1)$, $(-1, 1)$, $(-1, -1)$, $(1, -1)$.
+	\item $f(x, y) = \dfrac 1 2$, $(x, y) \in R$, where $R$ is the square with vertices $(1, 0)$, $(0, 1)$, $(-1, 0)$, $(0, -1)$.
+\end{enumerate}
+Are $X$ and $Y$ independent in all the cases where $\rho = 0$?
+\end{enumerate}
+\end{document}
