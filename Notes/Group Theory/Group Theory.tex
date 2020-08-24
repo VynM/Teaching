@@ -154,12 +154,12 @@ Implicit in the statement that $*$ is a binary operation on $G$, is the fact tha
 \item If $\mathbb R_{>0}$ denotes the set of all positive real numbers, $(\mathbb R_{>0}, \times)$ is also a group. (Verify this carefully).
 \item Note that if $G = \mathbb R_{<0}$ (the set of negative reals), then $(\mathbb R_{<0}, \times)$ is \textbf{not} a group. Which axiom fails? Multiplication is associative, so Axiom 1 holds. The multiplicative identity is $1$, which is not present in $G$. We can remedy this by redefining $G$ to be $G = \mathbb R_{<0} \cup \{1\}$. Associativity still holds, and now $G$ has an identity element as well. Axiom 3 holds as well, since the multiplicative inverse of any negative real number $x$ is the negative real number $1/x$. Thus, all axioms hold. However, the operation $\times$ is not a binary operation on $G$ at all! For example, $-1$ and $-2$ are elements of $G$, but their product $(-1)(-2) = +2$ is not an element of $G$.
 \item Let $G = \{1\}$, $H = \{1, -1\}$, and $K = \{1, i, -1, -i\}$, where $i = \sqrt{-1}$. Then $(G, \times)$, $(H, \times)$ and $(K, \times)$ are groups of orders $1$, $2$, and $4$ respectively.
-\item A square matrix $A$ is \emph{non-singular} (or \emph{invertible}) if its determinant is non-zero: $\det A \ne 0$. The set of all $n \times n$ non-singular real matrices forms a group under matrix multiplication, denoted $GL_n(\mathbb R)$. Matrix multiplication is associative, the identity matrix is the identity element for this multiplication, and every non-singular matrix $A$ has an inverse $A^{-1}$ (which is also non-singular). Note that $GL_n(\mathbb R)$ is certainly closed under multiplication, since $\det(AB) = (\det A)(\det B) \ne 0$ whenever $\det A, \det B \ne 0$. For $n > 1$, $GL_n(\mathbb R)$ is an example of a group where the operation is not \emph{commutative} -- if $A$ and $B$ are two $n \times n$ matrices $AB$ is generally not equal to $BA$. Example: $A = \begin{bmatrix} 1 & 1\\ 0 & 1\end{bmatrix}$, $B\begin{bmatrix}1 & 0\\ 1 & 1\end{bmatrix}$.
+\item A square matrix $A$ is \emph{non-singular} (or \emph{invertible}) if its determinant is non-zero: $\det A \ne 0$. The set of all $n \times n$ non-singular real matrices forms a group under matrix multiplication, denoted $GL_n(\mathbb R)$. Matrix multiplication is associative, the identity matrix is the identity element for this multiplication, and every non-singular matrix $A$ has an inverse $A^{-1}$ (which is also non-singular). Note that $GL_n(\mathbb R)$ is certainly closed under multiplication, since $\det(AB) = (\det A)(\det B) \ne 0$ whenever $\det A, \det B \ne 0$. For $n > 1$, $GL_n(\mathbb R)$ is an example of a group where the operation is not \emph{commutative} -- if $A$ and $B$ are two $n \times n$ matrices $AB$ is generally not equal to $BA$. Example: $A = \begin{bmatrix} 1 & 1\\ 0 & 1\end{bmatrix}$, $B = \begin{bmatrix}1 & 0\\ 1 & 1\end{bmatrix}$.
 \item Let $X$ be any non-empty set, and let $S(X)$ denote the set of all bijections from $X$ to itself. That is,
 \begin{equation*}
 S(X) = \{\, f\colon X \to X \mid f\ \text{is $1$-$1$ and onto} \,\}
 \end{equation*}
-Then $S(X)$ forms a group under composition of functions. For function composition is associative, the identity function (that maps every element $x \in X$ to $x$ itself) is the identity element, and every bijective function $f \colon X \to X$ has an inverse $f^{-1} \colon X \to X$ that is also a bijective. If $X$ has three or more elements (possibly an infinite number of elements) then $S(X)$ is not commutative.
+Then $S(X)$ forms a group under composition of functions. For function composition is associative, the identity function (that maps every element $x \in X$ to $x$ itself) is the identity element, and every bijective function $f \colon X \to X$ has an inverse $f^{-1} \colon X \to X$ that is also bijective. If $X$ has three or more elements (possibly an infinite number of elements) then $S(X)$ is not commutative.
 \item\label{it:Sn} If $X = \{1, 2, \ldots, n\}$, then $S(X)$ is written as $S_n$, and is called the \emph{symmetric group}. What is $\ord(S_n)$?
 \end{enumerate}
 \end{Example}
@@ -217,7 +217,6 @@ Associativity allows us to write an expression of the form $x_1 \cdot x_2 \cdots
 x^n = \underbrace{x \cdot x \cdots x}_{n\ \text{times}}.
 \end{equation*}
 Then define $x^{-n} = (x^{-1})^n$ and $x^0 = e$.
-
 \end{Definition}
 \begin{Exercise}
 Let $x \in G$, and let $m$ and $n$ be integers. With the notation given in Definition~\ref{def:Power}, prove the following.
@@ -261,7 +260,7 @@ Let $G$ be a group.
 \end{Exercise}
 
 \section{Subgroups}\label{sec:Subgroups}
-In Example~\ref{ex:Groups}, we saw that $\mathbb Z$, $\mathbb Q$, $\mathbb R$, and $\mathbb C$ all forms groups under addition. Observe that $\mathbb Z \subseteq \mathbb Q \subseteq \mathbb R \subseteq C$. Similarly, $\mathbb Q - \{0\}$, $\mathbb R_{>0}$, and $\mathbb R - \{0\}$ are all groups under multiplication. The former two are subsets of the latter. These are all examples of subgroups.
+In Example~\ref{ex:Groups}, we saw that $\mathbb Z$, $\mathbb Q$, $\mathbb R$, and $\mathbb C$ all forms groups under addition. Observe that $\mathbb Z \subseteq \mathbb Q \subseteq \mathbb R \subseteq \mathbb C$. Similarly, $\mathbb Q - \{0\}$, $\mathbb R_{>0}$, and $\mathbb R - \{0\}$ are all groups under multiplication. The former two are subsets of the latter. These are all examples of subgroups.
 \begin{Definition}\label{def:Subgroup}
 A \emph{subgroup} of a group $(G, *)$ is a subset $H \subseteq G$ such that $(H, *)$ is also a group. Then we write $H \le G$.
 \end{Definition}
