@@ -294,10 +294,10 @@ Conversely, suppose it is given that $H \ne \varnothing$ and $\forall x, y \in H
 \end{proof}
 
 \begin{Example}
-Let $G$ be the group of non-zero complex numbers under multiplication, and let $\omega = e^{\frac{2\pi i}{3}}$, the primitive complex cube root of unity. Then $H = \{1, \omega, \omega^2\}$ is a subgroup of $G$. Clearly, $H$ is non-empty. Now, any element of $H$ is of the form $\omega^r$ for some integer $r$. Thus, if $\omega^r$ and $\omega^s$ are any two elements of $H$, then $\omega^r \cdot (\omega^s)^{-1}  = \omega^{r - s}$ is also an element of $H$. Then by Theorem~\ref{thm:Subgroups}, $H \le G$.
+Let $G$ be the group of non-zero complex numbers under multiplication, and let $\omega = e^{\frac{2\pi i}{3}}$, the primitive complex cube root of unity. Then $H = \{1, \omega, \omega^2\}$ is a subgroup of $G$. Clearly, $H$ is non-empty. Now, the elements of $H$ are all the integer powers of $\omega$ -- i.e., all the complex numbers of the form $\omega^r$ for some integer $r$. Thus, if $\omega^r$ and $\omega^s$ are any two elements of $H$, then $\omega^r \cdot (\omega^s)^{-1}  = \omega^{r - s}$ is also an element of $H$. Then by Theorem~\ref{thm:Subgroups}, $H \le G$.
 \end{Example}
 
-Can two or more subgroups be combined together to construct other subgroups? The follow results show that they can, in certain ways.
+Can two or more subgroups be combined together to construct other subgroups? The following results show that they can, in certain ways.
 \begin{Theorem}\label{thm:SubgroupsIntUni}
 Let $H$ and $K$ be any two subgroups of a group $G$. Then
 \begin{enumerate}
@@ -470,13 +470,13 @@ Distinct left cosets of $H$ are disjoint.
 \begin{proof}
 Suppose $xH \cap yH \ne \varnothing$. Then $\exists z \in xH \cap yH$, so that $z = xh_1 = yh_2$, $\exists h_1, h_2 \in H$.
 
-Then $y = xh_1 h_2^{-1}$. Now, for any $yh \in H$, $yh = x \underbracket{h_1h_2^{-1}h}_{\in H} \implies yh \in xH$. Thus, $yH \subseteq xH$. Similarly, $xH \subseteq yH$, and therefore, $xH = yH$.
+Then $y = xh_1 h_2^{-1}$. Now, for any $yh \in yH$, $yh = x \underbracket{h_1h_2^{-1}h}_{\in H} \implies yh \in xH$. Thus, $yH \subseteq xH$. Similarly, $xH \subseteq yH$, and therefore, $xH = yH$.
 \end{proof}
 
 Finally, we show that all left cosets of $H$ have the same number of elements. To test whether this is true, we simply need to use the cancellation law (Coset: ``I got the results of the test back! I \emph{definitely} have left cancellation'').
 
 \begin{Lemma}\label{lem:CosetsCardinality}
-Any two left cosets have the same cardinality.
+Any two left cosets of $H$ have the same cardinality.
 \end{Lemma}
 \begin{proof}
 Let $xH$ be any left coset of $H$. We show that $|xH| = |H|$, by proving the existence of a bijection between $H$ and $xH$. Define $f \colon H \to xH$, $\forall h \in H$, $f(h) = xh$. This mapping is injective since $f(h_1) = f(h_2) \implies xh_1 = xh_2 \implies h_1 = h_2$, by left cancellation. It is surjective since every element of $xH$ is of the form $xh$, $\exists h \in H$, but $xh = f(h)$. Thus, $f$ is a bijection and $|xH| = |H|$. This also proves that all the left cosets are in bijection with one another and therefore have the same cardinality.
@@ -490,10 +490,10 @@ G &= \bigcup_{i = 1}^k x_i H \implies \\
 \ord(G) &= \left| \bigcup_{i = 1}^k x_i H \right| \\
 	&= \sum_{i = 1}^k |x_i H| \quad \text{[Lemma~\ref{lem:CosetsDisjoint}]} \\
 	& = \sum_{i = 1}^k |H| \quad \text{[Lemma~\ref{lem:CosetsCardinality}]} \\
-	& k \times \ord(H).
+	& = k \times \ord(H).
 \end{align*}
+Thus, $\ord(H) \mid \ord(G)$.
 \end{proof}
-Thus, $\ord(H) \mid \ord(H)$.
 
 \begin{Remark*}\phantomsection\label{def:SubgroupIndex}
 The integer $\frac{\ord(G)}{\ord(H)}$ is the number of left cosets of $H$ in $G$, and is called the \emph{index of the subgroup $H$ in $G$}, denoted $|G : H|$. Note that all the results above could equivalently be written in terms of \emph{right cosets}. Thus, the number of right cosets of $H$ in $G$ is also $|G : H|$.
@@ -514,7 +514,7 @@ Let $G$ be a group of order $p$, where $p$ is a prime number. Since $p \ge 2$, $
 \end{proof}
 
 \section{Normal Subgroups}\label{sec:NormSubs}
-Given a group $G$, the \emph{conjugate} of an element $g \in G$ by an element $x \in G$ is the element $xgx^{-1}$. Note that unless $xgx^{-1}$ is different from $g$ unless $x$ commutes with $g$. If $S \subseteq G$ and $x$ is any element of $G$, then we define
+Given a group $G$, the \emph{conjugate} of an element $g \in G$ by an element $x \in G$ is the element $xgx^{-1}$. Note that $xgx^{-1}$ is different from $g$ unless $x$ commutes with $g$. If $S \subseteq G$ and $x$ is any element of $G$, then we define
 \begin{equation*}
 xSx^{-1} = \{\, xSx^{-1} \mid n \in H \,\}
 \end{equation*}
