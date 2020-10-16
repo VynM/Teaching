@@ -27,7 +27,7 @@
 \usepackage{hyperref}
 \hypersetup{colorlinks, linkcolor = [RGB]{32, 96, 192}, urlcolor = red, linktocpage = true}
 \usepackage{bookmark}
-\bookmarksetup{color = [RGB]{128, 66, 128}}
+\bookmarksetup{color = [RGB]{32, 96, 192}}
 \usepackage[capitalise]{cleveref}
 
 \usepackage[intoc]{nomencl}
@@ -56,7 +56,7 @@
 \newtheorem*{Note*}{Note}
 
 
-\definecolor{alertcolor}{rgb}{0.95, 0.7, 0}
+\definecolor{alertcolor}{rgb}{0.8, 0.5, 0}
 \newcommand{\newterm}[1]{{\color{alertcolor} #1}}
 
 \DeclareMathOperator{\ord}{o}
@@ -218,6 +218,14 @@ the set of all $n$-tuples of $F$-elements. Then $(F^n, +, \cdot)$ is a vector sp
 \begin{Example}\label{ex:MatSpace}
 For any field $F$ and positive integers $m$ and $n$, define $F^{m \times n}$ to be the set of all $m \times n$ matrices with entries from $F$, and let $+$ denote matrix addition and $\cdot$ denote multiplication of a matrix by an element of $F$. Then $(F^{m \times n}, +, \cdot)$ is a vector space over $F$. In particular, $F^{m \times 1}$ and $F^{1 \times n}$ are the vector spaces consisting of all column vectors of length $m$, and all row vectors of length $n$, respectively.
 \end{Example}
+
+\begin{Example}\label{ex:RRFunSpace}
+Let $V$ be the set of all functions from $\mathbb R$ to $\mathbb R$ (so any \emph{element} of $V$ is a function $f \colon \mathbb R \to \mathbb R$). Define a binary operator $+$ on $V$ as follows: for any two functions $f, g \in V$, let $h = f + g$ be the function such that $h(x) = f(x) + g(x)$ for all $x \in \mathbb R$. Define $\cdot \colon \mathbb R \times V \to V$ as: for any $\alpha \in \mathbb R$ and $f \in V$, let $h = \alpha f$ be the function such that $h(x) = \alpha f(x)$. Then $V$ is a vector space over $\mathbb R$.
+\end{Example}
+
+\begin{Exercise}\label{exer:FunSpace}
+Generalise \cref{ex:RRFunSpace} by taking $V = \newterm{F^S}$ to be the set of all functions from $S$ to $F$, where $S$ is any fixed, non-empty set, and $F$ is any field, and showing that this forms a vector space. In the particular case where $S = \{1, \ldots, n\}$, justify the idea that $F^S$ is essentially the same as the \hyperref[ex:nTupleSpace]{$n$-tuple space} $F^n$.
+\end{Exercise}
 
 \begin{Example}[\newterm{Column Space}]\label{ex:ColSpace}
 Let $F$ be a field, and let $A$ be a given $m \times n$ matrix with entries from $F$. Let $x_1, \ldots, x_n$ be the $n$ different columns of $A$. Define
