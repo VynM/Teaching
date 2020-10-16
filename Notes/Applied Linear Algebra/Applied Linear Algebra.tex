@@ -1,0 +1,253 @@
+\documentclass[svgnames]{article}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{natbib}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage[all, cmtip, 2cell]{xy}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage{physics}
+
+\usepackage{tikz}
+
+\usepackage{mathtools}
+\usepackage{xspace}
+
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\usepackage{tocloft}
+\renewcommand{\cftdot}{}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor = [RGB]{32, 96, 192}, urlcolor = red, linktocpage = true}
+\usepackage{bookmark}
+\bookmarksetup{color = [RGB]{128, 66, 128}}
+\usepackage[capitalise]{cleveref}
+
+\usepackage[intoc]{nomencl}
+\makenomenclature
+
+\usepackage[toc, page]{appendix}
+
+\usepackage{newpxmath}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem*{Definition*}{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem*{Example*}{Example}
+\newtheorem{Exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{Remark*}{Remark}
+\newtheorem*{Solution*}{Solution}
+\newtheorem*{Note*}{Note}
+
+
+\definecolor{alertcolor}{rgb}{0.95, 0.7, 0}
+\newcommand{\newterm}[1]{{\color{alertcolor} #1}}
+
+\DeclareMathOperator{\ord}{o}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\DeclareMathOperator{\lcm}{lcm}
+
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\id}{\mathrm{id}}
+\renewcommand{\th}{\textsuperscript{th}\xspace}
+
+
+\begin{document}
+
+\title{\textbf{Applied Linear Algebra}}
+
+\date{}
+\maketitle
+
+\begingroup
+\let\clearpage\relax
+\tableofcontents
+\endgroup
+
+\clearpage
+
+\renewcommand{\nomname}{List of Symbols}
+\nomenclature[01]{$\forall$}{For all/any}
+\nomenclature[02]{$\exists$}{For some / There exists}
+\nomenclature[03]{$a \in S$}{$a$ belongs to / is an element of set $S$}
+\nomenclature[04]{$\cup$, $\cap$}{Union and intersection (respectively) of sets}
+\nomenclature[05]{$\varnothing$}{Empty set $\{\}$}
+\nomenclature[06]{$\mathbb N$, $\mathbb Z$, $\mathbb Q$, $\mathbb R$, $\mathbb C$}{Sets of natural numbers, integers, rational numbers, real numbers, complex numbers (respectively)}
+\nomenclature[07]{$\mathbb N_0$}{Set of non-negative integers $\{0, 1, 2, \ldots\}$}
+%\nomenclature[08]{$\mathbb R_{>0}$}{Set of positive real numbers}
+\nomenclature[09]{$A \subseteq B$}{$A$ is a subset of set $B$}
+\nomenclature[10]{$\lvert S \rvert$}{Cardinality (number of elements) of set $S$}
+\nomenclature[11]{\hyperref[ex:nTupleSpace]{$F^n$}}{The vector space of $n$-tuples of $F$-elements, where $F$ is a field and $n \in \mathbb N$}
+\nomenclature[12]{\hyperref[ex:MatSpace]{$F^{m \times n}$}}{The vector space of $m \times n$ matrices over $F$, where $F$ is a field and $m, n \in \mathbb N$}
+\nomenclature[13]{\hyperref[ex:ColSpace]{$\mathcal C(A)$}, \hyperref[exer:RowSpace]{$\mathcal R(A)$}}{The column space and row space of a matrix $A$}
+\printnomenclature[10em]
+
+\clearpage
+
+\section{Introduction}\label{sec:Intro}
+Linear algebra is built around the notion of linearity, and the operation of forming linear combinations. To formally state what these terms mean, we need to define \newterm{vector spaces}. To do this in the most general manner possible, we define a vector space \newterm{axiomatically} -- i.e., by specifying properties that any vector space should satisfy, rather than by specifying what structure a vector should have. So we define vectors neither as quantities with direction and magnitude (which, as it turns out, are defined not in vector spaces but in inner product spaces and normed linear spaces), nor as $n$-tuples of real numbers, but instead as elements of a vector space as defined by the axioms.
+
+This reversal in the order of definitions by means of abstraction is a staple of higher mathematics, as it results in greater generality. All the familiar examples of vectors become special cases of our more general definition. But we also obtain new examples of vector spaces (e.g., spaces of functions) that would not have fit into the earlier definitions.
+
+\section{Vector Spaces}\label{sec:VecSpac}
+\begin{Definition}
+An \newterm{Abelian group} (or \newterm{commutative group}) is an ordered pair $(A, *)$, where $A$ is a set and $* \colon A \times A \to A$ is a binary operation on $A$ satisfying the following conditions:
+\begin{enumerate}
+\item\label{it:AGAssoc} {Associativity}: $\forall a, b, c \in A$, $a*(b*c) = (a*b)*c$.
+\item\label{it:AGId} {Existence of identity}: $\exists e \in A$, $\forall a \in A$, $a * e = e * a = a$. The element $e$ is called the \newterm{identity element} of the group.
+\item\label{it:AGInv} {Existence of inverses}: $\forall a \in A$, $\exists b \in A$, $a * b = b * a = e$ (where $e$ is the identity element given in \ref{it:AGId}. The element $b$ is then called an \newterm{inverse} of $a$.
+\item\label{it:AGComm} {Commutativity}: $\forall a, b \in A$, $a * b = b * a$.
+\end{enumerate}
+\end{Definition}
+Conditions \ref{it:AGAssoc}--\ref{it:AGComm} are called the axioms of Abelian groups. The first three axioms alone define a \newterm{group} and it is the fourth axiom of commutativity that makes the group Abelian.
+
+Axiom~\ref{it:AGId} states that every element in the group has \emph{an} inverse. But we can prove that such an inverse must be unique. Thus, every element $a \in A$ has a \emph{unique} inverse, which we shall denote as $a^{-1}$.
+
+\begin{Example}\label{ex:AbGrpZQRC+}
+The sets of integers, rationals, reals, and complex numbers all form Abelian groups under their usual addition: $(\mathbb Z, +)$, $(\mathbb Q, +$), $(\mathbb R, +)$, $(\mathbb C, +)$. In each case, the identity element is $0$, and the inverse of $x$ is its negative, $-x$.
+\end{Example}
+
+\begin{Example}\label{ex:AbGrpQ*R*C*}
+The sets of \emph{non-zero} rationals, reals, and complex numbers form Abelian groups under multiplication: $(\mathbb Q - \{0\}, \times)$, $(\mathbb R - \{0\}, \times)$, $(\mathbb C - \{0\}, \times)$. Note that the non-zero integers do \emph{not} form a group under multiplication (Why?).
+\end{Example}
+
+\begin{Example}\label{ex:AbGrpZn}
+Let $\mathbb Z_n = \{0, 1, \ldots, n - 1\}$, and let $+_n$. That is, $a +_n b$ is the remainder obtained when the integer sum $a + b$ is divided by $n$. Then $(\mathbb Z_n, +_n)$ is an Abelian group with exactly $n$ elements.
+\end{Example}
+
+\begin{Definition}
+A \newterm{field} is a triple $(F, +, \cdot)$, where $+ \colon F \times F \to F$ and $\cdot \colon F \times F \to F$ are binary operations on $F$ satisfying the following conditions:
+\begin{enumerate}
+\item $(F, +)$ is an Abelian group.
+\item $(F - \{0\}, \cdot)$ is an Abelian group, where $0$ denotes the identity of the Abelian group $(F, +)$.
+\item Distributivity of $\cdot$ over $+$: $\forall a, b, c \in F$, $a \cdot (b + c) = a \cdot b + a \cdot c$.
+\end{enumerate}
+\end{Definition}
+The operations $+$ and $\cdot$ are respectively called the \newterm{addition} and \newterm{multiplication} of the field $F$. Thus, the first axiom of fields given above states that the elements of the field form an Abelian group under addition. We denote its identity element (called the \newterm{additive identity} or \newterm{zero} of the field) by $0$, and the inverse of any element $a$ by $-a$ (called the \newterm{additive inverse} of $a$). The second axiom states that the non-zero field elements form an Abelian group under multiplication. We  denote the \newterm{multiplicative identity}\footnote{
+	Exercise: According to the second axiom, $1 \cdot a = a$ for all $a \ne 0$. Show that $1 \cdot 0 = 0$ as well, and that $0 \cdot a = 0$ for all $a \in F$.}
+by $1$ and the \newterm{multiplicative inverse} of an element $a \ne 0$ by $a^{-1}$ or $\frac 1 a$. If $a$ and $b \ne 0$ are two elements of $F$, then we will write $a/b$ or $\frac a b$ to mean $a \cdot b^{-1} = b^{-1}a$. We usually drop the operator $\cdot$ and simply write $ab$ to mean $a \cdot b$.
+
+The axioms of a field are defined in such a way that they give rise to most of the familiar laws of arithmetic, such as the cancellation laws: $\forall a, b, c \in F$, $a + b = a + c \implies b = c$ and if $a \ne 0$, then $ab = ac  \implies b = c$.
+
+\begin{Example}\label{ex:FldQRC}
+$(\mathbb Q, +, \cdot)$, $(\mathbb R, +, \cdot)$, and $(\mathbb C, +, \cdot)$, are fields. Examples~\ref{ex:AbGrpZQRC+} and \ref{ex:AbGrpQ*R*C*} state that in each of these cases, the set forms an Abelian group under addition and its non-zero elements form an Abelian group under multiplication. Finally, we know that in each case, multiplication distributes over addition. Thus, all the field axioms are satisfied in each case. All three are examples of fields with infinitely many elements.
+\end{Example}
+\begin{Example}
+Let $\mathbb Z_n$ and $+_n$ be as defined in \cref{ex:AbGrpZn}, and let $\times_n$ be multiplication modulo $n$, defined similarly to $+_n$. We can show that $(\mathbb Z_n, +_n, \times _n)$ is a field if and only if $n$ is a prime number {(Exercise)}. Thus, there exists a finite field with $n$ element for every prime number $n$.
+\end{Example}
+
+\begin{Definition}
+A \newterm{vector space over a field} $F$ is a a triple $(V, +, \cdot)$, where $+ \colon V \times V \to V$ is a binary operation on $V$, called \newterm{vector addition}, $\cdot \colon F \times V \to V$ is a binary operation called \newterm{scalar multiplication}, satisfying the following conditions:
+\begin{enumerate}
+\item\label{it:VS1} $(V, +)$ is an Abelian group.
+\item\label{it:VS2} $\forall v \in V$, $1 \cdot v = v$, where $1$ is the multiplicative identity of $F$.
+\item\label{it:VS3} Scalar multiplication distributes over addition of field elements and vector addition: $\forall \alpha, \beta \in F$, $u, v \in V$,
+	\begin{align*}
+	(\alpha + \beta) \cdot v & = \alpha \cdot v + \beta \cdot v\\
+	\alpha \cdot (u + v) & = \alpha \cdot u + \alpha \cdot v
+	\end{align*}
+\item\label{it:VS4} Scalar multiplication associates with the field multiplication: $\forall \alpha, \beta \in F$, $v \in V$,
+	\begin{equation*}
+	\alpha \cdot (\beta \cdot v) = (\alpha\beta) \cdot v.
+	\end{equation*}
+\end{enumerate}
+\end{Definition}
+
+The elements of $V$ are called \newterm{vectors}, and those of $F$ are called \newterm{scalars}. The identity element of vector addition is denoted by $0_V$, or $0$, and is called the \newterm{zero vector} -- the context usually makes it clear whether by $0$ we mean the zero vector or the scalar zero.
+
+\begin{Theorem}
+Let $V$ be a vector space over a field $F$. Then
+\begin{enumerate}
+\item $\forall v \in V$, $0 \cdot v = 0_V$ and $(-1) \cdot v = -v$.
+\item $\forall \alpha \in F$, $\alpha \cdot 0_V = 0_V$
+\item $\forall \alpha \in F$, $v \in V$, if $\alpha \cdot v = 0_V$ and $\alpha \ne 0$, then $v = 0_V$.
+\end{enumerate}
+\end{Theorem}
+\begin{proof} Let $v \in V$, $\alpha \in F$.
+\begin{enumerate}
+\item 
+We have
+\begin{align*}
+0 \cdot v + 0 \cdot v & = (0 + 0) \cdot v \quad \text{by distributivity} \\
+& = 0 \cdot v \\
+& = 0 \cdot v + 0_V \quad \text{by identity law in $(V, +)$.}
+\end{align*}
+Then by cancellation in the Abelian group $(V, +)$, $0 \cdot v = 0_V$.
+
+\noindent Now,
+\begin{align*}
+v + (-1) \cdot v & = (1 + -1) \cdot v \quad \text{by distributivity, since $1 \cdot v = v$} \\
+& = 0 \cdot v \\
+& = 0_V.
+\end{align*}
+Thus, $(-1) \cdot v$ is the additive inverse of $v$, which is $-v$.
+
+\item Similarly, $\alpha \cdot 0_V = \alpha \cdot 0_V + \alpha \cdot 0_V \implies \alpha \cdot 0_V = 0_V$.
+
+\item If $\alpha \ne 0$, then $\alpha \cdot v = 0_V \implies$\\
+	$\alpha^{-1} \cdot 0_V = \alpha^{-1} \cdot (\alpha \cdot v) = (\alpha^{-1} \alpha) \cdot v = 1 \cdot v = v \implies$\\
+	$0_V = v$.
+\end{enumerate}
+\end{proof}
+
+\begin{Example}[\newterm{$n$-Tuple Space}]\label{ex:nTupleSpace}
+For any field $F$ and any fixed positive integer $n$, define
+\begin{equation*}
+F^n = \qty{\, (x_1, x_2, \ldots, x_n) \mid x_1, x_2, \ldots, x_n \in F \,},
+\end{equation*}
+the set of all $n$-tuples of $F$-elements. Then $(F^n, +, \cdot)$ is a vector space over $F$ itself, where $+$ denotes componentwise addition of $n$-tuples, and $\cdot$ denotes componentwise multiplication of an $n$-tuple by a field element (verify this). Explicitly, if $x = (x_1, \ldots, x_n)$, and $y = (y_1, \ldots, y_n)$, then we define $x + y$ to be the $n$-tuple whose $i$\th component is $x_i + y_i$, and for any $\alpha \in F$, we define $\alpha \cdot x$ to be the $n$-tuple whose $i$\th component is $\alpha x_i$, for each $i = 1, \ldots, n$. As a convention, if we say ``the vector space $F^n$'', we will mean the vector space of $n$-tuples of $F$-elements, over the field $F$, as defined here. Particular cases of interest are $\mathbb R^n$ and $\mathbb C^n$.
+\end{Example}
+
+\begin{Example}\label{ex:MatSpace}
+For any field $F$ and positive integers $m$ and $n$, define $F^{m \times n}$ to be the set of all $m \times n$ matrices with entries from $F$, and let $+$ denote matrix addition and $\cdot$ denote multiplication of a matrix by an element of $F$. Then $(F^{m \times n}, +, \cdot)$ is a vector space over $F$. In particular, $F^{m \times 1}$ and $F^{1 \times n}$ are the vector spaces consisting of all column vectors of length $m$, and all row vectors of length $n$, respectively.
+\end{Example}
+
+\begin{Example}[\newterm{Column Space}]\label{ex:ColSpace}
+Let $F$ be a field, and let $A$ be a given $m \times n$ matrix with entries from $F$. Let $x_1, \ldots, x_n$ be the $n$ different columns of $A$. Define
+\begin{equation*}
+	\mathcal C(A) = \qty{\, \alpha_1 x_1 + \cdots + \alpha_n x_n \mid \alpha_i \in F, i = 1, \ldots, n \,}.
+\end{equation*}
+$\mathcal C(A)$ forms a vector space over $F$ under the usual addition and scalar multiplication of column vectors (verify). This vector space is called the \newterm{column space} of the matrix $A$.
+\end{Example}
+\begin{Exercise}\label{exer:RowSpace}
+Define the \newterm{row space} $\mathcal R(A)$ of the matrix $A$ in a similar manner and verify that it is a vector space.
+\end{Exercise}
+
+\begin{Exercise}
+Consider a system of linear equations
+\begin{align}
+\begin{array}{@{}*{7}{c@{}}}
+	a_{11} x_1 & {}+{} & a_{12} x_2 & {}+ \cdots +{} & a_{1n} x_n & {}={} & b_1\\
+	a_{21} x_1 & {}+{} & a_{22} x_2 & {}+ \cdots +{} & a_{2n} x_n & {}={} & b_2\\
+	\vdots     &       & \vdots     &                & \vdots     &       & \vdots\\
+	a_{m1} x_1 & {}+{} & a_{m2} x_2 & {}+ \cdots +{} & a_{mn} x_n & {}={} & b_m
+\end{array} \label{eq:GenLinSys}
+\end{align}
+consisting of $m$ equations in $n$ unknowns $x_1, \ldots, x_n$. This can be written equivalently as a matrix equation $Ax = b$, where $A$, the \newterm{coefficient matrix}, is the matrix whose $(i,j)$-entry is the coefficient $a_{ij}$ in the system \eqref{eq:GenLinSys}; $x$, the \newterm{vector of unknowns}, is the column vector whose $j$\th entry is the unknown $x_j$; and $b$, the \newterm{right hand side vector} is the column vector whose $i$\th entry is the constant $b_i$ in the $i$\th equation; for $i = 1, \ldots, m$ and $j = 1, \ldots, n$.
+\begin{enumerate}
+\item Describe the matrix product $Ax$ in terms of the column vectors of $A$ and components of $x$.
+\item In terms of the column space $\mathcal{C}(A)$ and vector $b$, when does the system \eqref{eq:GenLinSys} have a solution?
+\end{enumerate}
+\end{Exercise}
+
+%\begin{appendices}
+%
+%\end{appendices}
+\end{document}
