@@ -25,7 +25,8 @@
 \renewcommand{\cftdot}{}
 
 \usepackage{hyperref}
-\hypersetup{colorlinks, linkcolor = [RGB]{32, 96, 192}, urlcolor = red, linktocpage = true}
+\definecolor{linkcolor}{RGB}{32, 96, 192}
+\hypersetup{colorlinks, linkcolor = linkcolor, urlcolor = linkcolor, linktocpage = true}
 \usepackage{bookmark}
 \bookmarksetup{color = [RGB]{32, 96, 192}}
 \usepackage[capitalise]{cleveref}
@@ -101,12 +102,12 @@
 
 \clearpage
 
-\section{Introduction}\label{sec:Intro}
+\section{Introduction}\label{sec:Introduction}
 Linear algebra is built around the notion of linearity, and the operation of forming linear combinations. To formally state what these terms mean, we need to define \newterm{vector spaces}. To do this in the most general manner possible, we define a vector space \newterm{axiomatically} -- i.e., by specifying properties that any vector space should satisfy, rather than by specifying what structure a vector should have. So we define vectors neither as quantities with direction and magnitude (which, as it turns out, are defined not in vector spaces but in inner product spaces and normed linear spaces), nor as $n$-tuples of real numbers, but instead as elements of a vector space as defined by the axioms.
 
 This reversal in the order of definitions by means of abstraction is a staple of higher mathematics, as it results in greater generality. All the familiar examples of vectors become special cases of our more general definition. But we also obtain new examples of vector spaces (e.g., spaces of functions) that would not have fit into the earlier definitions.
 
-\section{Vector Spaces}\label{sec:VecSpac}
+\section{Vector Spaces}\label{sec:VecSpaces}
 \begin{Definition}
 An \newterm{Abelian group} (or \newterm{commutative group}) is an ordered pair $(A, *)$, where $A$ is a set and $* \colon A \times A \to A$ is a binary operation on $A$ satisfying the following conditions:
 \begin{enumerate}
@@ -153,7 +154,7 @@ $(\mathbb Q, +, \cdot)$, $(\mathbb R, +, \cdot)$, and $(\mathbb C, +, \cdot)$, a
 Let $\mathbb Z_n$ and $+_n$ be as defined in \cref{ex:AbGrpZn}, and let $\times_n$ be multiplication modulo $n$, defined similarly to $+_n$. We can show that $(\mathbb Z_n, +_n, \times _n)$ is a field if and only if $n$ is a prime number {(Exercise)}. Thus, there exists a finite field with $n$ element for every prime number $n$.
 \end{Example}
 
-\begin{Definition}
+\begin{Definition}\label{def:VecSpace}
 A \newterm{vector space over a field} $F$ is a a triple $(V, +, \cdot)$, where $+ \colon V \times V \to V$ is a binary operation on $V$, called \newterm{vector addition}, $\cdot \colon F \times V \to V$ is a binary operation called \newterm{scalar multiplication}, satisfying the following conditions:
 \begin{enumerate}
 \item\label{it:VS1} $(V, +)$ is an Abelian group.
@@ -254,6 +255,103 @@ consisting of $m$ equations in $n$ unknowns $x_1, \ldots, x_n$. This can be writ
 \item In terms of the column space $\mathcal{C}(A)$ and vector $b$, when does the system \eqref{eq:GenLinSys} have a solution?
 \end{enumerate}
 \end{Exercise}
+
+\subsection{Linear Combinations}\label{subsec:LinComb}
+As stated in the introduction, linear algebra revolves around the operation of taking linear combinations. Having defined vector spaces formally, we are now in a position to formally define linear combinations as well.
+\begin{Definition}
+Let $V$ be a vector space over a field $F$, and let $v_1, \ldots, v_n \in V$. Then a \newterm{linear combination} of the vectors $v_1, \ldots, v_n$ is any vector of the form $\alpha_1 v_1 + \cdots + \alpha_n v_n$, where $\alpha_1, \ldots, \alpha_n \in F$.
+
+If $w$ is a given vector of $V$, and if there exist scalars $\alpha_1, \ldots, \alpha_n \in F$ such that $w = \alpha_1 v_1 + \cdots + \alpha_n v_n$, then we say that $w$ is a linear combination of $v_1, \ldots, v_n$.
+\end{Definition}
+
+\begin{Remark*}
+Our definition of $+$ is as a binary operation on $V$, and therefore we can only add \emph{two} given vectors. However, an expression of the form $v_1 + \cdots + v_n$ is well defined, since it merely denotes repeated binary addition of vectors, and thanks to associativity, the order in which the additions are evaluated (i.e., parenthesization) does not affect the value of the sum. Note, however, than an \emph{infinite} sum $v_1 + v_2 + \cdots$ is not defined, unless almost all\footnote{
+	The term \newterm{almost all} is used formally here, to mean ``all but finitely many''.
+} summands are zero, in which case we define the value of this infinite sum to be equal to the sum of the non-zero summands. Therefore, even if we consider an infinite set of vectors, we can only form linear combinations of finitely many of them, and in such cases we should be careful to mention that we are taking a \emph{finite} linear combination.
+\end{Remark*}
+
+\section{Subspaces}\label{sec:Subspaces}
+A \newterm{subspace} of a vector space $V$ is a subset $W \subseteq V$ such that $W$ itself is a vector space under the vector addition and scalar multiplication operations that it inherits\footnote{
+	If $(V, +, \cdot)$ is a vector space over a field $F$, and $W \subseteq V$, then $W$ is a subspace of $V$ if the restrictions of $+$ and $\cdot$ to $W$ are binary operations with images contained in $W$, and if $W$ forms a vector space over $F$ under these operations.
+} from $V$.
+
+\begin{Example}\label{ex:xy<=R3}
+Take $V = \mathbb R^3$, the real \hyperref[ex:nTupleSpace]{$3$-tuple space}, and let
+\begin{equation*}
+	W = \qty{\, (x, y, 0) \mid x, y \in \mathbb R \,}
+\end{equation*}
+which is obviously a subset of $V$. Since $(x_1, y_1, 0) + (x_2, y_2, 0) = (x_1 + x_2, y_1 + y_2, 0) \in W$, the addition in $V$ is a binary operator on $W$ as well. Similarly, the scalar multiplication of $V$, when restricted to $W$, also works as a scalar multiplication on $W$, since $\alpha(x, y, 0) = (\alpha x, \alpha y, 0) \in W$. It is then clear that the \hyperref[def:VecSpace]{vector space axioms} hold for $W$ with these operations, and hence $W$ is also a vector space over $\mathbb R$. Therefore, $W$ is a subspace of $V$.
+\end{Example}
+
+When checking whether the vector space axioms hold for a subset $W$ of a vector space $V$, we do not need to verify commutativity of $+$, distributivity of $\cdot$ over $+$, associativity of scalar multiplication with the field multiplication, or the invariance of vectors under scalar multiplication by $1$. Since all elements of $W$ are elements of $V$, these conditions must automatically by satisfied by them. Instead, we need to check whether
+\begin{enumerate}
+\item $W$ is closed under $+$ and $\cdot$ (for this is necessary for the restrictions of these operations to $W$ to work as vector addition and scalar multiplication of $W$ itself), and
+\item $(W, +)$ is a group -- which is equivalent to checking if $0_V \in W$, and $\forall w \in W$, $-w \in W$.
+\end{enumerate}
+The implication of these conditions is that \emph{a non-empty subset of a vector space is a subspace precisely when it is closed under linear combinations}. In fact, we can simplify that statement even further, as the following theorem shows.
+
+\begin{Theorem}\label{thm:Subspace}
+A subset $W$ of a vector space $V$ over a field $F$ is a subspace of $V$ if and only if $W \ne \varnothing$ and $\forall \alpha \in F$, $\forall u, v \in W$, $\alpha u + v \in W$.
+\end{Theorem}
+\begin{proof}
+If $W$ is a subspace, then $0_V \in W$, and hence $W \ne \varnothing$, and for any $\alpha \in F$, $u, v \in W$, we have $\alpha u \in W$ (by closure of $W$ under $\cdot$) and then $\alpha u + v \in W$ (by closure of $W$ under vector addition).
+
+Now to prove the converse, suppose that $W$ is a non-empty subset of $V$ such that $\forall \alpha \in F$, $u, v \in W$, $\alpha u + v \in W$. We must prove that $W$ is closed under $+$ and $\cdot$, that $0_V \in W$, and that $\forall v \in W$, $-v \in W$.
+
+Since $W \ne \varnothing$, $\exists v \in W$. Now, $-1 \in F$ and $v, v \in W$, and hence $(-1)v + v = -v + v = 0_V \in W$. For closure under $+$, observe that if $u, v \in W$, then $1 \in F \implies 1u + v = u + v \in W$. For closure under $\cdot$, observe that if $\alpha \in F$ and $v \in W$, then $v, 0_V \in W \implies \alpha v + 0_v = \alpha v \in W$. Finally, if $v \in V$, then by closure under $\cdot$ we have $(-1)v = -v \in W$.
+\end{proof}
+
+This theorem simplifies the task of proving that certain subsets of a vector space are subspaces. For instance, we can use it to prove that the intersection of two subspaces is again a subspace.
+\begin{Exercise}
+Let $W_1$ and $W_2$ be subspaces of a vector space $V$. Prove that their intersection $W_1 \cap W_2$ is a subspace of $V$.
+\end{Exercise}
+This immediately implies (by mathematical induction) that the intersection of a finite number of subspaces is also a subspace. But even more generally, the intersection of \emph{any} collection of subspaces is a subspace.
+
+\begin{Theorem}\label{thm:SubspInt}
+Let $V$ be a vector space, and let $\qty{\, W_i \mid i \in I \,}$ be a collection of subspaces of $V$, indexed\footnote{
+	A finite collection of objects (e.g., an infinite collection of some subsets) can be easily represented as a list, say $A_1, A_2, \ldots, A_n$. But to denote a possibly infinite collection of objects, we need to specify an \newterm{indexing set} $I$, and then denote each element in the collection by $A_i$ for some $i \in I$. The whole collection is then $\qty{\, A_i \mid i \in I \,}$. Now $I$ could be finite, countably infinite, or uncountable infinite. For example, if $I = \qty{1, \ldots, n}$, then we get the finite collection $\qty{A_1, \ldots, A_n}$. On other hand, it's possible that $I = \mathbb N$. Then the collection is countably infinite. Or, say, $I = \mathbb R$, so that the collection is uncountably infinite.
+}
+by a set $I$, and let
+\begin{equation*}
+	W = \bigcap_{i \in I} W_i.
+\end{equation*}
+Then $W$ is a subspace of $V$.
+\end{Theorem}
+\begin{proof}
+Since $0 \in W_i$ for all $i \in I$, we have $0 \in W$, so that $W \ne \varnothing$. Let $\alpha \in F$, and $u, v \in W$.
+Then for each $i \in I$, $u, v \in W_i$, which is a subspace, and hence by Theorem~\ref{thm:Subspace}, $\alpha u + v \in W_i$. Therefore, $\alpha u + v \in W$, the intersection of all the $W_i$s. Again by Theorem~\ref{thm:Subspace}, these two observations imply that $W$ is a subspace.
+\end{proof}
+
+\noindent But in general, the \emph{union} of two subspaces is \textbf{not} a subspace, except in a trivial way.
+
+\begin{Theorem}
+If $W_1$ and $W_2$ are subspaces of a vector space $V$, then $W_1 \cup W_2$ is not a subspace of $V$ unless $W_1 \subseteq W_2$ or $W_2 \subseteq W_1$.
+\end{Theorem}
+\begin{proof}
+If $W_1 \subseteq W_2$, then $W_1 \cup W_2 = W_2$, which is given to be a subspace. The other case is similar.
+
+Therefore, suppose that neither of the subspaces $W_1$ and $W_2$ is contained in the other. We will show that $W_1 \cup W_2$ is not a subspace, by showing that it is not closed under vector addition.
+
+Since $W_1 \not\subseteq W_2$, $\exists w_1 \in W_1$, such that $w_1 \notin W_2$. Similarly, $\exists w_2 \in W_2$, $w_2 \notin W_1$.
+
+Let $w = w_1 + w_2$. We claim that $w \notin W_1$ and $w \notin W_2$. For if $w \in W_1$, then $w_2 = w - w_1 \in W_1$ as well (since $w_1, w \in W_1$, a subspace), which contradicts the definition of $w_2$. Similarly, if $w \in W_2$, then we get the contradiction that $w_1 \in W_2$.
+
+Thus, $w_1, w_2 \in W_1 \cup W_2$, but $w = w_1 + w_2 \notin W_1 \cup W_2$, implying that $W_1 \cup W_2$ is not a subspace.
+\end{proof}
+
+In some sense, then, the set-theoretic operation of union is not a suitable operation for use in vector space (except, of course, when dealing with subsets rather than subspaces). That is, we cannot use it for generating new, possibly larger subspaces from given ones\footnote{
+	We can similarly define the sum of subsets that are not necessary subspaces, but such a sum is not guaranteed to be a subspace.
+}. We now define an operation that \emph{does} accomplish this.
+\begin{Definition}\label{def:SumSubsp}
+If $W_1, \ldots, W_k$ are subspaces of a vector space $V$, then the \newterm{sum} of $W_1, \ldots, W_k$ is the subspace $W = W_1 + \cdots + W_k$, defined by
+\begin{equation*}
+	W = \qty{\, w_1 + \cdots + w_k \mid w_i \in W_i, i = 1, \ldots, k \,}.
+\end{equation*}
+\end{Definition}
+The definition \emph{states} that this sum is a subspace, but this is a claim that needs to be verified. We will see later, after defining the \hyperref[def:Span]{span} of a subset, that the sum of subspaces is exactly the span of their union, and is therefore a subspace. Observe that $W_1 + \ldots + W_k$ contains each subspace $W_i$, $i = 1, \ldots, k$.
+\begin{Example}
+Let $V = \mathbb R^3$, and define $X = \qty{\, (x, 0, 0) \mid x \in \mathbb R \,}$, $Y = \qty{\, (0, y, 0) \mid y \in \mathbb R \,}$, $Z = \qty{\, (0, 0, z) \mid z \in \mathbb R \,}$ and $W = \qty{\, (x, y, 0) \mid x, y \in \mathbb R \,}$. It is easily verified that $X$, $Y$, $Z$, and $W$ are subspaces, and that $W = X + Y$, and $V = X + Y + Z = W + Z$. Also note that $V = X + W + Z = Y + W + Z$. But $X + W = Y + W = W$.
+\end{Example}
 
 %\begin{appendices}
 %
