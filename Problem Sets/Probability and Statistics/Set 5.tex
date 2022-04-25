@@ -1,0 +1,104 @@
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx, tikz}
+\usepackage{mathtools, physics}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[default,bold]{sourceserifpro}
+\usepackage[T1]{fontenc}
+\usepackage{eulervm}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+
+\title[]{Probability and Statistics -- Problem Set 5}
+
+\DeclareMathOperator{\Prob}{P}
+\DeclareMathOperator{\EV}{\mathbb E}
+\DeclareMathOperator{\Var}{\mathbb V}
+
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item Suppose that the number of items produced in a factory during one week is a random variable with mean $500$ and variance $100$.
+\begin{enumerate}
+	\item What can be said about the probability that this week's production will be at least $1000$?
+	\item What can be said about the probability that this week's production will be between $400$ and $600$?
+\end{enumerate}
+
+\item If the time required to complete a task is a random variable with mean $20$ minutes and standard deviation $3$ minutes, find the smallest time frame such that the probability that the task will be completed within the time frame is at least $0.75$.
+
+\item The number of visitors to a webpage per minute follows a Poisson distribution. If the average number of visitors per minute is $4$, what is the probability that the webpage receives
+\begin{enumerate}[label=(\roman*)]
+	\item exactly four visitors in one minute?
+	\item at least two visitors in one minute?
+\end{enumerate}
+
+\item If $X$ is a Poisson variate such that $3 P[X = 2] = 2P[X = 1]$, then what is $E[X]$?
+
+\item  It is observed in a communication channel that $90\%$ of the messages sent are received without any error. Find the probability that among $18$ messages sent through the channel
+\begin{enumerate}[label=(\roman*)]
+	\item at least $16$ are received without any error
+	\item at most $14$ are received without any error.
+\end{enumerate}
+
+\item If $X \sim B(6, p)$, and $P[X = 2] = 9P[X = 4]$, then find $P[X \le 3]$.
+
+\item In a certain factory producing blades, there is a small probability of $\frac{1}{500}$ for any blade to be defective. The blades are supplied in packets of $10$. Calculate the approximate number of packets containing
+\begin{enumerate}[label=(\roman*)]
+	\item no defective
+	\item one defective
+	\item two defective
+	\item at least two defective
+\end{enumerate}
+blades in a consignment of $10000$ packets.
+
+\item One per thousand of a population is subject to certain kinds of accidents each year. Given that an insurance company has insured $5,000$ persons from the population, find the probability that at most $2$ of them will incur this accident.
+
+\item An airline company, having observed that $5\%$ of the persons making reservations on a flight do not show up for the flight, sells $100$ seats on a plane that has $95$ seats. What is the probability that there will be a seat available for every person who shows up for the flight?
+
+\item If $X$ is a binomial variate with mean $3$, such that $P[X = 3] = 2P[X = 2]$, find $V[X]$.
+
+\item $X$ is a Poisson variate and the probability that $X$ is even is twice the probability that it is odd. Determine $P[X = 0]$.
+
+\item  If $X$ is exponentially distributed with $E(X) = 2$, then find the value of $a$ such that $P(X \le a) = P(X \ge a)$.\\
+{\small\color{blue!40!black}
+		Note: This point $a$ is the \emph{median} of $X$.
+}
+ 
+\item Suppose that the duration in minutes of a phone call follows an exponential distribution with mean $5$ minutes.
+\begin{enumerate}
+\item  Find the probability that the duration of a particular call
+\begin{enumerate}
+	\item will exceed $5$ minutes
+	\item will be between $5$ and $6$ minutes
+	\item will be less than $3$ minutes
+	\item will be less than $6$ minutes, given that it was greater than $3$ minutes.
+\end{enumerate}
+\item Suppose exactly $100$ such phone calls are received every day. Find the probability that on a given day
+\begin{enumerate}
+	\item every phone call lasted longer than $8$ minutes
+	\item at least $4$ phone calls lasted longer than $8$ minutes.
+\end{enumerate}
+\item Find the probability that in one week, there are at least $3$ days on each which there were at least $4$ phone calls that lasted longer than $8$ minutes.
+\end{enumerate}
+
+\item A random variable $X$ follows an exponential distribution with parameter $\alpha = 3$. Compute
+\begin{enumerate}
+	\item $P(2X > 1)$.
+	\item $P(X > s + t \mid X > t)$, where $s, t > 0$.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
