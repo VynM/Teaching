@@ -1,0 +1,56 @@
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx, tikz}
+\usepackage{mathtools, physics}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[default,bold]{sourceserifpro}
+\usepackage[T1]{fontenc}
+\usepackage{eulervm}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+
+\title[]{Probability and Statistics -- Problem Set 6}
+
+\DeclareMathOperator{\Prob}{P}
+\DeclareMathOperator{\EV}{\mathbb E}
+\DeclareMathOperator{\Var}{\mathbb V}
+
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item If $Z \sim N(0,1)$, compute
+\begin{enumerate}
+	\item $P[Z < 1]$
+	\item $P[Z < 2.4]$
+	\item $P[1 < Z < 2.4]$
+	\item $P[Z < -1]$
+	\item $P[-2.4 < Z < 1]$.
+\end{enumerate}
+
+\item If $X \sim N(175, 25)$, compute
+\begin{enumerate}
+	\item $P[X < 200]$
+	\item $P[X < 235]$
+	\item $P[200 < X < 235]$
+	\item $P[X < 150]$
+	\item $P[115 < X < 200]$.
+\end{enumerate}
+
+\item In a normal distribution, $31\%$ of the observations are under $45$ and $8\%$ are over $64$. Find the mean and standard deviation.
+
+\item Suppose that the life lengths of two electronic devices $D_1$ and $D_2$ have distributions $N(40, 36)$ and $N(45, 9)$ respectively. If the device is to be used for a $48$ hour period, which device is to be preferred?
+\end{enumerate}
+\end{document}
