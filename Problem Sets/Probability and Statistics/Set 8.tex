@@ -1,0 +1,56 @@
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx, tikz}
+\usepackage{mathtools, physics}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[default,bold]{sourceserifpro}
+\usepackage[T1]{fontenc}
+\usepackage{eulervm}
+
+\usepackage{xcolor}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+
+\title[]{Probability and Statistics -- Problem Set 6}
+
+\DeclareMathOperator{\Prob}{P}
+\DeclareMathOperator{\EV}{\mathbb E}
+\DeclareMathOperator{\Var}{\mathbb V}
+
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*, itemsep=2mm]
+
+\item $(X, Y)$ is a two dimensional random variable having joint pdf $f(x, y) = 3xe^{-(x+3y)}$, $x,y > 0$. If $Z = X$ and $W = 2X + Y$, determine the distribution $(Z, W)$.
+
+\item Let $(X, Y)$ be uniformly distributed in the unit square $0 \le x, y \le 1$. Find the pdf of $Z = X + Y$.
+
+\item If $X \sim \mathcal E(2)$ and $Y \sim \mathcal E(1)$ are independent, find the pdf of:
+\begin{enumerate}
+	\item $Z = X + Y$.
+	\item $Z = X/Y$.
+\end{enumerate}
+
+\item If $(X, Y)$ has the joint pdf $f(x, y) = 10xy^2$, $0 < x < y < 1$, determine the pdf of $Z = X/Y$.
+
+\item Find the pdf of $Z = X/Y$, if $(X, Y)$ has joint pdf $f(x, y) = 8xy$, $0 < x < y < 1$.
+
+\item $(X, Y)$ is uniformly distributed over the unit disc $x^2 + y^2 \ge 1$. Find the pdf of $R = \sqrt{X^2 + Y^2}$.
+
+\item Let $X$ be a random variable with pdf $f(x) = \dfrac 5 {x^2}$, $x > 5$. If $X_1$ and $X_2$ are two independent random variables following this distribution, find the pdf of $Y = X_1/X_2$.
+
+\item Let $W \sim N(0, 1)$ and $V \sim \chi^2_n$. Compute the distribution of $T = \dfrac{W}{\sqrt{V/n}}$.
+
+\item If $(X_1, X_2)$ has the joint pdf $f(x_1, x_2) = 2e^{-(x_1 + x_2)}$, $x_1 > x_2 > 0$, find the joint pdf of $Y_1 = X_1 - X_2$, $Y_2 = 2X_2$.
+
+\end{enumerate}
+
+\end{document}
