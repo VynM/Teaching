@@ -1,0 +1,88 @@
+% !TEX program = xelatex
+
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault, lining, scale=0.9]{FiraSans}
+\usepackage{kmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+\linespread{1.2}
+
+\title{MAT 2155: Problem Set 2}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item Number of rearrangements of the word \texttt{SESQUIPEDALIAN}.
+
+\item Number of anagrams of the word \texttt{INDEPENDENCE} which
+\begin{enumerate}[label=(\roman*)]
+	\item start with the letter \texttt{C}.
+	\item all the vowels occur together.
+	\item no two vowels occur together.
+	\item begin in \texttt{I} and end in \texttt{E}.
+\end{enumerate}
+
+\item Number of positive integers less than $1000$ that have distinct digits.
+
+\item Number of ways of choosing $4$ cards from a pack of $52$ playing cards
+\begin{enumerate}[label=(\roman*)]
+	\item with no restrictions.
+	\item with all four cards from the same suit.
+	\item with all four cards from different suits.
+	\item such that all four cards are face cards.
+	\item such that $2$ are red and $2$ are black.
+	\item such that all four cards are of the same colour.
+\end{enumerate}
+
+\item There are $9$ different books on a bookshelf, $4$ red and $5$ green. In how many different ways can the books be arranged if
+\begin{enumerate}[label=(\roman*)]
+	\item there are no restrictions?
+	\item the red books must be together, and the green books must be together?
+	\item the red books must be together?
+	\item no two books of the same colour must be together?
+\end{enumerate}
+
+\item A shop sells six different flavours of ice cream. In how many ways can a customer choose $4$ ice cream cones
+\begin{enumerate}[label=(\roman*)]
+	\item all of different flavours?
+	\item not necessarily of different flavours?
+	\item of $2$ or $3$ different flavours?
+	\item exactly $3$ different flavours?
+\end{enumerate}
+
+\item Number of ways of buying a total of $7$ fruits from a shop selling apples, oranges, and strawberries, if you must buy at least one fruit of each type.
+
+\item Number of ways of selecting $10$ marbles from a pile of red, blue, and green marbles if there must be
+\begin{enumerate}[label=(\roman*)]
+	\item at least $5$ red marbles.
+	\item at most $5$ red marbles.
+\end{enumerate}
+
+\item Number of integer solutions of the equation $x_1 + x_2 + x_3 + x_4 = 18$ with
+\begin{enumerate}[label=(\roman*)]
+	\item $x_i \ge 0$, $i = 1, 2, 3, 4$.
+	\item $x_i \ge 1$, $i = 1, 2, 3, 4$.
+	\item $x_i \ge i$, $i = 1, 2, 3, 4$.
+\end{enumerate}
+
+\item Number of binary sequences of length $10$ consisting of a run of $1$s followed by a run of $0$s followed by a run of $1$s followed by another run of $0$s.
+
+\item Number of ways to distribute $15$ identical objects into $4$ different boxes such that the number of objects in the fourth box is a multiple of $3$.
+\end{enumerate}
+\end{document}

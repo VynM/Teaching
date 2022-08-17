@@ -1,0 +1,87 @@
+% !TEX program = xelatex
+
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault, lining, scale=0.9]{FiraSans}
+\usepackage{kmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+\linespread{1.2}
+
+\title{MAT 2155: Problem Set 1}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item Number of ways of selecting one left and one right shoe from six pairs of shoes, without obtaining a pair.
+
+\item Number of ways of picking two books, not both in the same language, from a collection of five different English books, six different German books, and seven different French books.
+
+\item Number of positive integers less than $1$ million formed using
+\begin{enumerate}[label=(\roman*)]
+	\item $7$s, $8$s, and $9$s only.
+	\item $0$s, $8$s, and $9$s only.
+\end{enumerate}
+
+\item Sum of all $4$-digit numbers that can be obtained using the digits
+\begin{enumerate}[label=(\roman*)]
+	\item $1$, $2$, $3$, $4$ once each.
+	\item $0$, $1$, $2$, $3$ once each.
+	\item $1$, $2$, $3$, $4$.
+	\item $0$, $1$, $2$, $3$.
+\end{enumerate}
+
+\item Number of $3$-letter sequences using the letters \emph{a, b, c, d, e, f}
+\begin{enumerate}[label=(\roman*)]
+	\item with repetition allowed.
+	\item without repetition.
+	\item without repetition, and containing the letter \emph{e}.
+	\item with repetition, and containing \emph{e}.
+\end{enumerate}
+
+\item Five people A, B, C, D, E intend to speak at a meeting. In how many ways can they do so
+\begin{enumerate}[label=(\roman*)]
+	\item without B speaking before A?
+	\item if A must speak immediately before B?
+\end{enumerate}
+
+\item Number of ways of selecting three integers from $3n$ consecutive integers so that their sum is a multiple of $3$.
+
+\item Number of times the digit $5$ is written when listing all numbers from $1$ to $100,000$.
+
+\item Number of times $25$ is written when listing all numbers from $1$ to $100,000$.
+
+\item Number of four-digit numbers divisible be $4$ that can be formed using the digits
+\begin{enumerate}[label=(\roman*)]
+	\item $1$, $2$, $3$, $4$, $5$ with possible repetition.
+	\item $1$, $2$, $3$, $4$, $5$ without repetition.
+	\item $0$, $1$, $2$, $3$, $4$ with possible repetition.
+	\item $0$, $1$, $2$, $3$, $4$ without repetition.	
+\end{enumerate}
+
+\item Number of ways of wearing five rings on four finger (not including the thumb) of your right hand.
+
+\item Six distinct symbols are transmitted through a communication channel. A total of twelve blanks are to be inserted between the symbols with at least two blanks between every pair of symbols. In how many ways can we arrange the symbols and blanks?
+
+\item Number of ways of placing two black queens on an $8 \times 8$ chessboard so that they are not attacking each other.
+
+\item How many points of intersection are formed by $n$ lines drawn in a plane if no two are parallel and no three concurrent? Into how many regions is the plane divided?
+
+\item If a convex decagon is such that no three of its diagonals meet at the same point inside it, then how many segments are the diagonals divided into by their intersections?
+\end{enumerate}
+\end{document}
