@@ -1,0 +1,340 @@
+\title{\textbf{Computational Mathematics}}
+
+\date{}
+\maketitle
+
+\begingroup
+\let\clearpage\relax
+\tableofcontents
+\endgroup
+
+\clearpage
+
+\renewcommand{\nomname}{List of Symbols}
+\nomenclature[01]{$\forall$}{For all/any}
+\nomenclature[02]{$\exists$}{For some / There exists}
+\nomenclature[03]{$a \in S$}{$a$ belongs to / is an element of set $S$}
+\nomenclature[04]{$\cup$, $\cap$}{Union and intersection (respectively) of sets}
+\nomenclature[05]{$\varnothing$}{Empty set $\{\}$}
+\nomenclature[06]{$\mathbb N$, $\mathbb Z$, $\mathbb Q$, $\mathbb R$, $\mathbb C$}{Sets of natural numbers, integers, rational numbers, real numbers, complex numbers (respectively)}
+\nomenclature[07]{$\mathbb N_0$}{Set of non-negative integers $\{0, 1, 2, \ldots\}$}
+%\nomenclature[08]{$\mathbb R_{>0}$}{Set of positive real numbers}
+\nomenclature[08]{$A \subseteq B$}{$A$ is a subset of set $B$}
+\nomenclature[09]{$\lvert S \rvert$}{Cardinality of set $S$}
+\printnomenclature[10em]
+
+\clearpage
+
+\section{Elementary Set Theory}\label{sec:SetTheory}
+
+A \newterm{set} is (informally) an unordered collection of \newterm{elements}. More formally, any set is defined by the \newterm{membership relation} $\in$ (read ``belongs to'', ``is an element of'', ``is a member of'', or ``is in''), where $s \in S$ if and only if $s$ is an element of the set $S$. If $x$ is not a member of $S$, then we write $x \notin S$. We may define a set either as a list of all its members enclosed by curly braces -- $\{$ and $\}$ -- or in the form $Y = \qty{\, x \in X \mid P(x) \,}$, where $X$ is a previously defined set, and $P(x)$ is a \newterm{predicate} (a function with a true/false value depending on the value of $x$) -- then $Y$ is the set consisting of all members of $X$ that satisfy the predicate $P(x)$ (i.e., those $x \in X$ for which $P(x)$ is true). The latter form of defining a set is called the \newterm{set-builder} notation. For example
+\begin{equation*}
+S = \qty{1, \text{`a'}, 2.5, +, 9, -3}
+\end{equation*}
+defines $S$ to be the set consisting of the six elements $1$, `a', $2.5$, $+$, $9$, and $-3$, and
+\begin{equation*}
+T = \qty{\, s \in S \mid s\ \text{is a number} \,}
+\end{equation*}
+defines $T$ to be the set consisting of the four elements $1$, $2.5$, $9$, and $-3$. The symbol {$|$} is read as ``such that'' (and can be replaced by a $:$ as well).
+
+The \newterm{universal set} (usually denoted by $U$) is the set consisting of all elements currently under consideration. We may write $\qty{\, x \mid P(x) \,}$ to mean $\qty{\, x \in U \mid P(x) \,}$.
+
+The \newterm{empty set} (or \newterm{null set}) is the set $\varnothing$ that has no elements. That is, for every element $a$ of the universal set, $a \notin \varnothing$.
+
+\begin{Note*}
+A variant of the set-builder notation replaces the element on the left side of $\mid$ by an expression involving one or more elements, with the specifications of memberships of these elements appearing on the right side of $\mid$, along with other predicates, if any. For example
+\begin{equation*}
+S = \qty{\, 2n \mid n \in \mathbb Z \,}
+\end{equation*}
+defines $S$ to be the set of all elements obtained by doubling an integer -- in other words, $S$ is the set of even integers.
+\end{Note*}
+
+\subsection{Relations Among Sets}\label{subsec:SetRels}
+
+A set $A$ is a \newterm{subset} of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is an element of $B$. That is, for any element $a$ (of the universal set), $a \in A \implies a \in B$. Then $B$ is a \newterm{superset} of $A$, denoted by $B \supseteq A$. We may also say that $B$ \newterm{contains} $A$, or that $A$ is contained in $B$.
+
+Two sets $A$ and $B$ are \newterm{equal}, written $A = B$, if each contains the other -- i.e., $A \subseteq B$ and $B \subseteq A$. This is equivalent to the statement that $A$ and $B$ have exactly the same elements. Otherwise, $A$ is not equal to $B$ (written $A \ne B$). $A$ is a \newterm{proper} subset of $A$ (or is properly contained in $B$) if $A \subseteq B$ and $A \ne B$. Then we write $A \subsetneq B$. Similarly, $B$ is a proper superset of $A$, denoted by $B \supsetneq A$, if $B \supseteq A$ and $B \ne A$.
+
+\begin{Note*}
+It is also common to use $\subset$ and $\supset$ instead of $\subseteq$ and $\supseteq$, respectively. They are usually \emph{not} alternatives to $\subsetneq$ and $\supsetneq$, except when explicitly stated to be so.
+\end{Note*}
+
+The set of all subsets of a set $A$ is called the \newterm{power set} of $A$, is denoted by $2^A$ or $\mathcal P(A)$. That is,
+\begin{equation*}
+2^A = \qty{\, S \mid S \subseteq A \,}.
+\end{equation*}
+
+\begin{Exercise}
+Let $A$, $B$, and $C$ be arbitrary sets.
+\begin{enumerate}
+\item Show that $A \subseteq A$.
+\item Show that if $A \subseteq B$ and $B \subseteq C$, then $A \subseteq C$.
+\item Show that the $\supseteq$ also satisfies these properties.
+\item Show that $\varnothing \subseteq A$.
+\item Show that if $A$ is a set consisting of $n$ elements, for some non-negative integer $n$, then $2^A$ contains $2^n$ elements.
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Basic Operations of Sets}\label{subsec:BasicSetOps}
+
+The \newterm{union} of two sets $A$ and $B$ is the set $A \cup B$ consisting of all elements that belong to $A$ or $B$:
+\begin{equation*}
+A \cup B = \qty{\, x \mid x \in A\ \text{or}\ x \in B\,}.
+\end{equation*}
+The \newterm{intersection} of two sets $A$ and $B$ is the set $A \cap B$ consisting of all elements that belong to $A$ and $B$:
+\begin{equation*}
+A \cap B = \qty{\, x \mid x \in A\ \text{and}\ x \in B\,}.
+\end{equation*}
+The \newterm{complement} of a set $A$ is the set $\overline A$ of all elements (of the universal set) that do not belong to $A$:
+\begin{equation*}
+\overline A = \qty{\, x \mid x \notin A \,}.
+\end{equation*}
+We may also denote the complement of $A$ by $A'$, $A^{\mathrm c}$, or $U \setminus A$.
+
+\begin{Exercise}
+Let $A$, $B$, and $C$ be arbitrary sets.
+\begin{enumerate}
+\item Show that $A \cap B \subseteq A \subseteq A \cup B$.
+
+\item Show that $\cup$ is
+\begin{enumerate}[label=(\roman*)]
+\item \newterm{associative}: $(A \cup B) \cup C = A \cup (B \cup C)$,
+\item \newterm{commutative}: $A \cup B = B \cup A$, and
+\item \newterm{idempotent}: $A \cup A = A$.
+\end{enumerate}
+
+\item Prove that $\cap$ is also associative, commutative, and idempotent.
+
+\item Prove that $\cup$ \newterm{distributes} over $\cap$ and vice-versa:
+\begin{align*}
+A \cup (B \cap C) & = (A \cup B) \cap (A \cup C) \\
+A \cap (B \cup C) & = (A \cap B) \cup (A \cap C).
+\end{align*}
+
+\item Prove that $\cup$ and $\cap$ satisfy the law of \newterm{absorption}:
+\begin{equation*}
+A \cup (A \cap B) = A \cap (A \cup B) = A.
+\end{equation*}
+
+\item Show that the following are equivalent:
+\begin{enumerate}
+\item $A \subseteq B$.
+\item $A \cup B = B$.
+\item $A \cap B = A$.
+\end{enumerate}
+
+\item Prove that $\cup$, $\cap$ and $\overline{~}$ satisfy De Morgan's laws. That is:
+\begin{align*}
+\overline {\pqty{A \cup B}} & = \overline A \cap \overline B \\
+\overline {\pqty{A \cap B}} & = \overline A \cup \overline B.
+\end{align*}
+
+\item Show that $A \cap \overline A = \varnothing$.
+\end{enumerate}
+
+\end{Exercise}
+
+Two sets $A$ and $B$ are \newterm{disjoint} if their intersection is empty -- i.e., $A \cap B = \varnothing$. Note that $A$ and $\overline A$ are always disjoint. Also note that $\varnothing$ is disjoint with all sets, and is the unique set that is disjoint with itself.
+
+Since $\cup$ and $\cap$ are associative, expressions of the form $A_1 \cup A_2 \cup \cdots \cup A_n$ and $A_1 \cap A_2 \cap \cdots \cap A_n$ are well-defined and unambiguous. These are called the \newterm{$n$-ary} (or finite) union and intersection, and denote them as $\bigcup_{i=1}^n A_i$ and $\bigcap_{i=1}^n A_i$, respectively. But it is possible to define unions and intersections of collections of sets even more generally. For this, we will discuss the concept of an indexing set.
+
+\subsection{Index Sets}\label{subsec:IndexSets}
+
+A set $I$ is an \newterm{index set} (or \newterm{indexing set}) of a set $S$ if we can write $S$ as
+\begin{equation*}
+S = \{ s_i \mid i \in I\}.
+\end{equation*}
+That is, each element of $s_i \in S$ corresponds to a unique element $i \in I$. Then $S$ is \newterm{indexed by} $I$, and it is common to write $S = \{ s_i \}_{i \in I}$.
+
+Let $\mathcal A = \{ A_i \}_{i \in I}$ be a collection of sets (for some index set $I$). Thus, for each $i \in I$, $A_i$ itself is a set in the collection $\mathcal A$. Then we can define the union and intersection of the sets in $\mathcal A$, as given below.
+\begin{align*}
+\bigcup_{i \in I} A_i & = \qty{\, a \mid a \in A_i,\, \exists i \in I \,} \\
+\bigcap_{i \in I} A_i & = \qty{\, a \mid a \in A_i,\, \forall i \in I \,}
+\end{align*}
+We refer to these operations as \newterm{arbitrary} unions and intersections. In the particular case where $I$ is a set containing finitely many elements, these reduce to the finite union and intersection defined earlier.
+
+\subsection{Some More Set Operations}\label{subsec:MoreSetOps}
+
+We say that $(a, b)$ (or $\langle a, b \rangle$) is an \newterm{ordered pair} where the first element is $a$ and the second element is $b$. Formally, we may define the ordered pair in terms of sets as $(a, b) = \qty{a, \qty{a, b}}$. Note that this is only one possible ``encoding'' of the concept of an ordered pair, and in practice, we do not think of $(a, b)$ as the (unordered) set $\qty{a, \qty{a, b}}$.
+
+The \newterm{Cartesian product} of two sets $A$ and $B$, denoted by $A \times B$, is the set of all ordered pairs of elements with the first element from $A$ and the second from $B$. That is,
+\begin{equation*}
+A \times B = \qty{\, (a, b) \mid a \in A,\, b \in B \,}.
+\end{equation*}
+
+The \newterm{disjoint union} (or \newterm{coproduct}) of two sets $A$ and $B$, denoted by $A \sqcup B$, consists of all the ordered pairs of the form $(x, i)$ where $i = 1$ when $x \in A$ and $i = 2$ when $x \in B$. That is,
+\begin{equation*}
+A \sqcup B = \qty{\, (a, 1) \mid a \in A \,} \cup \qty{\, (b, 2) \mid b \in B \,}.
+\end{equation*}
+The disjoint union is also denoted by $A \coprod B$, $A \mathbin{\mathaccent\cdot\cup} B$, or $A \uplus B$.
+
+\begin{Note*}
+The second element in each ordered pair (i.e., $1$ or $2$) only serves to distinguish the elements that are originally from $A$, from those that are originally from $B$. Thus, for example, if $x$ is an element common to both $A$ and $B$, then $A \sqcup B$ contains two ``copies'' of $x$, namely $(x, 1)$ and $(x, 2)$. When $A$ and $B$ are disjoint, $A \sqcup B$ is equivalent to $A \cup B$ (where the meaning of ``equivalent'' will be formalised later).
+\end{Note*}
+
+We can also define Cartesian products and disjoint unions of a collection of sets. Let $\mathcal A = \{A_i\}_{i \in I}$ be a collection of sets indexed by $I$. Then the Cartesian product of the collection $\mathcal A$ is
+\begin{equation*}
+\prod_{i \in I} = \qty{\, (a_i)_{i \in I} \mid a_i \in A_i,~ i \in I \,}
+\end{equation*}
+where $(a_i)_{i \in I}$ is a sequence of elements indexed by $I$, with $a_i \in A_i$ for each $i \in I$. The disjoint union of the collection $\mathcal A$ is
+\begin{equation*}
+\bigsqcup_{i \in I} = \bigcup_{i \in I} \qty{\, (a_i, i) \mid a_i \in A_i,~ i \in I \,} = \bigcup_{i \in I} A_i \times \{i\}.
+\end{equation*}
+
+\begin{Note*}
+We will formally define sequences later, in \cref{subsec:Functions}.
+\end{Note*}
+
+The \newterm{difference} of two sets $A$ and $B$ is the set $A \setminus B$ consisting all elements of $A$ that are not elements of $B$. That is,
+\begin{equation*}
+A \setminus B = \{ a \in A \mid a \notin B \}.
+\end{equation*}
+The difference of $A$ and $B$ is also denoted by $A - B$. Note that $A \setminus B = A \setminus (A \cap B)$.
+
+The \newterm{symmetric difference} of two sets $A$ and $B$ is the set $A \symdiff B$ consisting of all the elements that are present in exactly one of $A$ and $B$. That is,
+\begin{equation*}
+A \symdiff B = (A \setminus B) \cup (B \setminus A).
+\end{equation*}
+The symmetric difference of $A$ and $B$ is also denoted as $A \ominus B$.
+
+\begin{Exercise}
+Let $A$ and $B$ be arbitrary sets.
+\begin{enumerate}
+\item Show that $(A \cup B) \setminus B = A \setminus B$.
+\item Show that $A \symdiff B = (A \cup B) \setminus (A \cap B)$.
+\item Show that $(2^A, \symdiff)$ is an Abelian group. That is:
+    \begin{enumerate}[label=(\roman*)]
+    \item $\symdiff$ is associative.
+    \item $\symdiff$ is commutative.
+    \item $\exists E \in 2^A$, $\forall S \in 2^A$, $S \symdiff E = S$.
+    \item $\forall S \in 2^A$, $\exists T \in 2^A$, $S \symdiff T = E$.
+    \end{enumerate}
+    What is the order of any non-identity element of this group?
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Relations}\label{subsec:Relations}
+A \newterm{relation} $R$ from a set $A$ to a set $B$, denoted $R \colon A \to B$, is a subset of $A \times B$, i.e, $R \subseteq A \times B$. If $(a, b) \in R$, then we write $aRb$, and if $(a, b) \notin R$, then we write $a \cancel{R} b$. The set $A$ is the \newterm{domain} and $B$ the \newterm{codomain} of $R$. Note that $\varnothing$ is also a relation, called the \newterm{empty} or \newterm{void} relation, from $A$ to $B$.
+
+\begin{Note*}
+A relation from a set $A$ to a set $B$ is a \newterm{binary relation}. More generally, if $A_1, \ldots, A_n$ are $n$ sets, then a subset of $A_1 \times \cdots \times A_n$ is an \newterm{$n$-ary relation}.
+\end{Note*}
+
+A relation $R \colon A \to B$ is said to be
+\begin{enumerate}
+\item \newterm{left-total} if for each $a \in A$, $aRb$ for some $b \in B$.
+\item \newterm{right-total} if for each $b \in B$, $aRb$ for some $a \in A$.
+\item \newterm{left-unique} if for each $b \in B$, if $a, a' \in A$ are such that $aRb$ and $a'Rb$, then $a = a'$.
+\item \newterm{right-unique} if for each $a \in A$, if $b, b' \in B$ are such that $aRb$ and $aRb'$, then $b = b'$.
+\end{enumerate}
+
+A relation from $A$ to itself is said to be a \newterm{relation on} (or \newterm{over}) $A$ (also called a \newterm{homogeneous} relation on $A$). Such relations can have a number of properties. In the following, let $\sim$ be a relation on a set $A$.
+\begin{enumerate}
+\item \newterm{Reflexivity}: For all $a \in A$, $a \sim a$.
+\item \newterm{Symmetry}: For all $a, b \in A$, if $a \sim b$, then $b \sim a$.
+\item \newterm{Anti-symmetry}: For all $a, b \in A$, if $a \sim b$ and $b \sim a$, then $a = b$.
+\item \newterm{Transitivity}: For all $a, b, c \in A$, if $a \sim b$ and $b \sim c$, then $a \sim c$.
+\item \newterm{Irreflexivity}: For all $a \in A$, $a \not\sim a$.
+\item \newterm{Asymmetry}: For all $a \in A$, if $a \sim b$, then $b \not\sim a$.
+\end{enumerate}
+
+\begin{Example}
+The following list gives examples of familiar relations satisfying one or more of the above properties:
+\begin{enumerate}
+\item The relations $=$ (on any set of elements where equality is defined), $\le$ and $\ge$ (on any set of real numbers), $\mid$ (\emph{divides}, see \cref{exer:DividesRel}), $\subseteq$ and $\supseteq$ (on any collection of sets), $\cong$ and $\sim$ (on any set of triangles), and $\parallel$ (on any set of lines) are reflexive.
+\item The relations $=$, $\ne$, $\cong$, $\sim$, $\parallel$, $\perp$ are symmetric.
+\item The relations $\mid$ (on any set of non-negative integers), $\le$, $\ge$, $\subseteq$, $\supseteq$ are anti-symmetric.
+\item The relations $=$, $\le$, $\ge$, $<$, $>$, $\mid$, $\subseteq$, $\supseteq$, $\subsetneq$, $\supseteq$, $\cong$, $\sim$, $\parallel$ are transitive.
+\item The relations $\ne$ and $\perp$ are irreflexive.
+\item The relations $<$, $>$, $\subsetneq$, $\supsetneq$ are asymmetric.
+\end{enumerate}
+\end{Example}
+
+\begin{Exercise}~
+\begin{enumerate}
+\item Let $\sim$ be the relation of the set $A = \{a, b\}$ defined by $a \sim a$, $a \sim b$. Is $\sim$ transitive?
+\item Show that every asymmetric relation is irreflexive.
+\item Prove or disprove: Any transitive, irreflexive relation is asymmetric.
+\item Prove or disprove: Any symmetric, transitive relation is reflexive.
+\end{enumerate}
+\end{Exercise}
+
+\subsubsection{Equivalence Relations and Partitions}
+
+A reflexive, symmetric, and transitive relation is called an \newterm{equivalence} relation. For example, $=$, $\cong$, $\sim$, and $\parallel$ are equivalence relations. If $\sim$ is an equivalence relation on a set $A$, and $a \in A$, then the \newterm{equivalence class} of $a$, denoted as $[a]$ or $\overline a$ is the set of all elements of $A$ that $a$ is related to by $\sim$. That is,
+\begin{equation*}
+[a] = \qty{\, b \in A \mid a \sim b \,}.
+\end{equation*}
+
+\begin{Example}
+Let $A = \{1, 2, 3, 4, 5\}$, and define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a - b$ is even. Then, for example, the equivalence class of $1$ is $[1] = \{1, 3, 5\}$, and the equivalence class of $2$ is $[2] = \{2, 4, 6\}$. Note that $[1] = [3] = [5]$ and $[2] = [4] = [6]$. Also observe that $[1]$ and $[2]$ are disjoint, and $[1] \cup [2] = A$.
+\end{Example}
+
+An equivalence relation on a set is essentially the same as a partition of the set, as you will show in \cref{exer:EqRel->Partition,exer:Partition->EqRel}. A \newterm{partition of a set} $S$ is a collection of non-empty and pairwise disjoint subsets of $S$ whose union is equal to $S$. That is, a partition of $S$ is a collection $\{P_i\}_{i \in I}$ of sets $P_i \subseteq S$, $i \in I$, such that
+\begin{enumerate}
+\item $P_i \ne \varnothing$, for each $i \in I$,
+\item $P_i \cap P_j = \varnothing$, for all $i, j \in I$, $i \ne j$, and
+\item $\bigcup_{i \in I} P_i = S$.
+\end{enumerate}
+The subsets $P_i$, $i \in I$, are called the \newterm{parts} of the partition $P$.
+
+\begin{Example}
+Let $S = \{1, 2, 3, 4, 5\}$. Then $P = \{\{1, 3, 5\}, \{2, 4, 6\}\}$ and $Q = \{\{1, 4\}, \{2\}, \{3, 5\}\}\}$ are two different partitions of $S$.
+\end{Example}
+
+\begin{Exercise}\label{exer:EqRel->Partition}
+Let $\sim$ be an equivalence relation on a set $A$. Show that the following hold:
+\begin{enumerate}
+\item For all $a \in A$, $a \in [a]$, and hence, each equivalence class is non-empty and $A = \bigcup_{a \in A} [a]$.
+\item For all $a, b \in A$, if $a \ne b$, then $[a] \cap [b] = \varnothing$ (i.e., any two equivalence classes are either disjoint or identical).
+\item The set of all equivalence classes of $\sim$ is a partition of $A$.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Exercise}\label{exer:Partition->EqRel}
+Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a$ and $b$ belong to the same part of the partition $P$ (i.e., $a, b \in P_i$, $\exists i \in I$). Show that the following hold:
+\begin{enumerate}
+\item The relation $\sim$ is an equivalence relation on $A$.
+\item The equivalence classes of $\sim$ are exactly the parts of the partition of $P$.
+\end{enumerate}
+\end{Exercise}
+
+\subsubsection{Partial Order Relations}
+
+A reflexive, anti-symmetric, and transitive relation is called a \newterm{partial order} relation (or simply a partial order). For example, $\le$ and $\ge$ on any set of real numbers, $\mid$ on any set of non-negative integers, and $\subseteq$ and $\supseteq$ on any set of sets are partial order relations. A set $A$ together with a partial order $\preccurlyeq$ on it forms a \newterm{partially ordered set} or \newterm{poset} $(A, \preccurlyeq)$.
+
+\begin{Note*}
+The term \emph{partial} refers to the fact that two particular elements in a partially ordered set may be \newterm{incomparable} -- i.e., neither may be related to the other in the partial order. For instance, consider the subsets of $S = \{x, y, z\}$, which are partially ordered by the subset relation $\subseteq$ -- i.e., consider the poset $(2^S, \subseteq)$. Then $A = \{x, y\}$ and $B =\{y, z\}$ are incomparable, as neither is $A$ a subset of $B$, nor is $B$ a subset of $A$. On the other hand, $A$ and $C = \{x\}$ are \newterm{comparable} (as $C \subseteq A$), and $A$ and $S$ itself are also comparable (as $A \subseteq S$). A poset in which every pair of elements is comparable (i.e., in which there are no incomparable pairs of elements) is called a \newterm{total order}.
+\end{Note*}
+
+\begin{Exercise}\label{exer:DividesRel}
+Let $\mid$ denote the \newterm{divides} relation on any set of integers. That is, for any two integers $m$ and $n$, define $m \mid n$ if and only if $n = km$ for some integer $k$.
+\begin{enumerate}
+\item Prove that $(\mathbb N, \mid)$ is a poset. Is $(\mathbb N_0, \mid)$ also a poset?
+\item Is $(\mathbb Z, \mid)$ a poset?
+\item Let $n \in \mathbb N$, and let $P$ be the set of all positive divisors of $n$. Then show that $(P, \mid)$ is a poset. What are all the natural numbers $n$ such that $(P, \mid)$ is a total order?
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Functions}\label{subsec:Functions}
+
+A \newterm{function} is a left-total, right-unique binary relation. In other words, a function $f \colon A \to B$ is a relation from $A$ to $B$ such that each element of $A$ is related to exactly one element of $B$ under $f$. If $a \in A$ is related to $b \in B$ in $f$, then we say that $f$ \newterm{maps} $a$ to $b$, and write $b = f(a)$, or $a \mapsto b$. A function is also called a \newterm{mapping}. Recall that $A$ is the domain of $f$ and $B$ the codomain. We may also write $\dom f$ and $\cod f$ to denote the domain and codomain of $f$, respectively. The \newterm{image} of $f$, denoted as $\im f$ or $f(A)$, is the set of all elements $b$ of the codomain such that $b = f(a)$ for some $a \in A$. We can write this in the following two ways:
+\begin{align*}
+\im f & = \qty{\, b \in B \mid b = f(a),~ \exists a \in A \,} \\
+\im f & = \qty{\, f(a) \mid a \in A \,}.
+\end{align*}
+The \newterm{preimage} of any element of the codomain is the set of all elements of the domain that map to it. That is, for $b \in B$, the preimage of $b$, denoted $f^{-1}(b)$, is defined as
+\begin{equation*}
+f^{-1}(b) = \qty{\, a \in A \mid f(a) = b \,}.
+\end{equation*}
+Note that the image of the function is a subset of the codomain, while the preimage of an element is the subset of the domain.
+
+\begin{Note*}
+Intuitively, we think of a function as a rule that assigns, to each element of the domain, a unique element of the codomain. For instance, it is common in calculus to define a function using a formula -- e.g., $f \colon \mathbb R \to \mathbb R$, $f(x) = x^2 - 1$. However, the formula or the expression itself is not the function. The function $g \colon \mathbb Z \to \mathbb Q$, defined by the formula $g(x) = x^2 - 1$, is different from the previously defined function $f$, although they are both defined using the same formula. Moreover, it may not be possible to define a function using any closed-form formula.
+\end{Note*}
+
+A function is \newterm{injective} (or \newterm{$1$-$1$}) if it is left-unique. That is, $f \colon A \to B$ is injective if, for any $a_1, a_2 \in A$, $f(a_1) = f(a_2)$ implies that $a_1 = a_2$. A \newterm{surjective} (or \newterm{onto}) function is one in which every element of the codomain has a non-empty preimage. That is, $f \colon A \to B$ is surjective if, for each $b \in B$, $b = f(a)$ for some $a \in A$. Note that $f$ is surjective if and only if $\im f = \cod f$.
+
+%\begin{appendices}
+%
+%\end{appendices}

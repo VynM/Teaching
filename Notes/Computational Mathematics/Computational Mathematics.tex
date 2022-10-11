@@ -1,0 +1,79 @@
+\documentclass[svgnames, a4paper, 12pt]{article}
+\usepackage[top = 30mm, bottom = 18mm, left=20mm, right = 20mm]{geometry}
+
+\usepackage{natbib}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage[all, cmtip, 2cell]{xy}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage{physics}
+
+\usepackage{tikz}
+
+\usepackage{mathtools}
+\usepackage{xspace, cancel}
+
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\usepackage{tocloft}
+\renewcommand{\cftdot}{}
+
+\usepackage{hyperref}
+\definecolor{linkcolor}{RGB}{32, 96, 192}
+\hypersetup{colorlinks, linkcolor = linkcolor, urlcolor = linkcolor, linktocpage = true}
+\usepackage{bookmark}
+\bookmarksetup{color = [RGB]{32, 96, 192}}
+\usepackage[capitalise]{cleveref}
+
+\usepackage[intoc]{nomencl}
+\makenomenclature
+
+\usepackage[toc, page]{appendix}
+
+\usepackage{newpxmath}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem*{Definition*}{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem*{Example*}{Example}
+\newtheorem{Exercise}{Exercise}[section]
+
+
+\theoremstyle{remark}
+\newtheorem*{Remark*}{Remark}
+\newtheorem*{Solution*}{Solution}
+\newtheorem*{Note*}{Note}
+
+\crefname{Exercise}{Exercise}{Exercises}
+
+\definecolor{alertcolor}{rgb}{0.8, 0.5, 0}
+\newcommand{\newterm}[1]{{\color{alertcolor} #1}}
+
+\DeclareMathOperator{\ord}{o}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\DeclareMathOperator{\lcm}{lcm}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\symdiff}{\mathbin{\triangle}}
+\renewcommand{\th}{\textsuperscript{th}\xspace}
+
+
+\begin{document}
+\include{Content}
+\end{document}
