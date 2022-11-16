@@ -1,0 +1,98 @@
+% !TEX program = xelatex
+
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault, lining, scale=0.9]{FiraSans}
+\usepackage{kmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+\linespread{1.2}
+
+\title{MAC 1103: Generating Functions}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item The coefficient of $x^6$ in the expansion of
+\begin{enumerate}[label=(\roman*)]
+	\item $(1 + x)^8$.
+	\item $(1 - x)^{-8}$.
+	\item $(1 + x^2)^4$.
+	\item $(1 - x^2)^{-4}$.
+	\item $(1 + x + x^2)^4$.
+	\item $(1 + x^2)(1 + x + x^2 + \cdots)$.
+\end{enumerate}
+
+\item Using generating functions, find the number of ways of selecting $6$ objects from
+\begin{enumerate}[label=(\roman*)]
+	\item $8$ distinct objects.
+	\item $8$ types of object, with any number of objects of each type.
+	\item $4$ types of objects, such that zero or two objects are chosen from each type.
+	\item $4$ types of objects, such that an even number of objects is chosen from each type.
+	\item $4$ types of objects, such that not more than two objects are chosen from each type.
+	\item $2$ types of objects, such that zero or two objects of the first type are chosen, and an even number of objects is chosen from the second type.
+\end{enumerate}
+
+\item Using generating functions, find the number of integer solutions of the equation
+\begin{enumerate}[label=(\roman*)]
+	\item $x_1 + \cdots + x_8 = 6$, $x_i \in \{0, 1\}$, $i = 1, \ldots, 8$.
+	\item $x_1 + \cdots + x_8 = 6$, $x_i \ge 0$, $i = 1, \ldots, 8$.
+	\item $x_1 + \cdots + x_4 = 6$, $x_i \in \{0, 2\}$, $i = 1, \ldots, 4$.
+	\item $x_1 + \cdots + x_4 = 6$, $x_i \ge 0$, $x_i$ is even, $i = 1, \ldots, 4$.
+	\item $x_1 + \cdots + x_4 = 6$, $0 \le x_i \le 2$, $i = 1, \ldots, 4$.
+	\item $x + y = 6$, $x \in \{0, 2\}$, $y \ge 0$, $y$ is even.
+\end{enumerate}
+
+\item Number of ways of distributing $30$ identical objects into $3$ distinct boxes such that no box is empty.
+
+\item Number of ways of distributing $30$ identical marbles into $6$ boxes with at most $10$ marbles in the first box.
+
+\item Number of ways of selecting $12$ flowers for a bouquet from roses, lilacs, tulips, and lilies, with between $2$ and $5$ of each kind.
+
+\item Number of ways to select $10$ marbles from a large pile of red, white, and blue marbles if
+\begin{enumerate}[label=(\roman*)]
+	\item the selection as at least $2$ marbles of each colour.
+	\item the selection as at most $2$ red marbles.
+	\item the selection has an even number of blue marbles.
+\end{enumerate}
+
+\item Number of ways to place an order of $12$ chocolate sundaes if there are $5$ types of sundaes, and at most $4$ sundaes of one type are allowed.
+
+\item Number of ways to get a sum of $25$ when $10$ distinct dice are rolled.
+
+\item Number of ways to select $300$ chocolate candies from $7$ types of candy if each type comes in boxes of $20$, and at least $1$ but not more than $5$ boxes of each type are chosen.
+
+\item Number of ways of distributing $30$ distinct objects into $3$ boxes such that no box is empty.
+
+\item Using generating functions, find the number of $r$-permutations of objects chosen from unlimited supplies of $n$ types of objects.
+
+\item Number of $r$-digit quaternary sequences (with digits $0$, $1$, $2$, $3$) having an even number of $0$s and an odd number of $1$s.
+
+\item Write the exponential generating function for the number of arrangements of $k$ objects chosen from $n$ types with at most $4$ objects of each type.
+
+\item Number of $n$-digit ternary sequences with
+\begin{enumerate}[label=(\roman*)]
+	\item an even number of $0$s.
+	\item an even number of $0$s and an even number of $1$s.
+	\item $0$ and $1$ occurring a positive even number of times.
+	\item at least one $0$ and at least one $1$.
+	\item the total number of $0$s and $1$s being even.
+	\item no digit occurs exactly twice.
+\end{enumerate}
+\end{enumerate}
+\end{document}

@@ -161,6 +161,7 @@ The \newterm{Cartesian product} of two sets $A$ and $B$, denoted by $A \times B$
 \begin{equation*}
 A \times B = \qty{\, (a, b) \mid a \in A,\, b \in B \,}.
 \end{equation*}
+The Cartesian product of $A$ with itself is often written as $A^2$. Similarly, the Cartesian product $A \times \cdots A$ with $n$ terms (defined as an iterated Cartesian product of two sets at a time) is denoted by $A^n$. 
 
 The \newterm{disjoint union} (or \newterm{coproduct}) of two sets $A$ and $B$, denoted by $A \sqcup B$, consists of all the ordered pairs of the form $(x, i)$ where $i = 1$ when $x \in A$ and $i = 2$ when $x \in B$. That is,
 \begin{equation*}
@@ -333,7 +334,99 @@ Note that the image of the function is a subset of the codomain, while the preim
 Intuitively, we think of a function as a rule that assigns, to each element of the domain, a unique element of the codomain. For instance, it is common in calculus to define a function using a formula -- e.g., $f \colon \mathbb R \to \mathbb R$, $f(x) = x^2 - 1$. However, the formula or the expression itself is not the function. The function $g \colon \mathbb Z \to \mathbb Q$, defined by the formula $g(x) = x^2 - 1$, is different from the previously defined function $f$, although they are both defined using the same formula. Moreover, it may not be possible to define a function using any closed-form formula.
 \end{Note*}
 
-A function is \newterm{injective} (or \newterm{$1$-$1$}) if it is left-unique. That is, $f \colon A \to B$ is injective if, for any $a_1, a_2 \in A$, $f(a_1) = f(a_2)$ implies that $a_1 = a_2$. A \newterm{surjective} (or \newterm{onto}) function is one in which every element of the codomain has a non-empty preimage. That is, $f \colon A \to B$ is surjective if, for each $b \in B$, $b = f(a)$ for some $a \in A$. Note that $f$ is surjective if and only if $\im f = \cod f$.
+A function is \newterm{injective} (or \newterm{$1$-$1$}) if it is left-unique. That is, $f \colon A \to B$ is injective if, for any $a_1, a_2 \in A$, $f(a_1) = f(a_2)$ implies that $a_1 = a_2$. An injective function is also called an \newterm{injection}. A \newterm{surjective} (or \newterm{onto}) function is one in which every element of the codomain has a non-empty preimage. That is, $f \colon A \to B$ is surjective if, for each $b \in B$, $b = f(a)$ for some $a \in A$. Note that $f$ is surjective if and only if $\im f = \cod f$. A surjective function is also called a \newterm{surjection}. A function that is both injective and surjective is \newterm{bijective}. A bijective function is also called a \newterm{bijection} or a \newterm{one-to-one correspondence}.
+
+\begin{Example}
+Let $A = \{1, 2, 3, 4, 5\}$ and $B = \{a, b, c\}$.
+\begin{enumerate}
+\item Define a function $f \colon A \to B$, $f(1) = f(2) = a$, $f(3) = b$, $f(4) = f(5) = c$. Then $f$ is a surjection ($a$ has preimage $\{1, 2\}$, $b$ has preimage $\{3\}$, and $c$ has preimage $\{4, 5\})$. It is clearly not an injection, since, for example, $f(1) = f(2)$.
+
+\item Define $g \colon B \to A$, $g(a) = 1$, $g(b) = 5$, $g(c) = 4$. Then $g$ is an injection from $B$ to $A$, as $g(a) \ne g(b), g(c)$ and $g(b) \ne g(c)$. The image of $g$ is $\im g = \{1, 4, 5\} \ne A = \cod g$, and hence $g$ is not a surjection.
+
+\item Define a $h \colon B \to B$, $h(a) = b$, $h(b) = c$, $h(c) = a$. Note that $h$ is a bijection from $B$ to itself.
+\end{enumerate}
+\end{Example}
+
+\begin{Example}
+Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection (e.g., $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e., the smallest integer greater than or equal to $x$ -- e.g., $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection (e.g., $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e., the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
+\end{Example}
+
+\begin{Example}
+Define $f \colon \mathbb R \to \mathbb (0,1)$ (the set of all real numbers strictly between $0$ and $1$) as
+\begin{equation*}
+f(x) = \dfrac{1}{1 + e^x}.
+\end{equation*}
+Firstly, note that this is indeed a well-defined function from $\mathbb R$ to $(0, 1)$, since $e^x \ge 0$ for all $x \in \mathbb R$. Now, if $f(x) = f(y)$, then observe that $e^x = e^y$, or $e^{x - y} = 1$, which implies that $x = y$. Hence, $f$ is injective. Next, let $y$ be any element of the codomain, $(0, 1)$. Then observe that $\frac 1 y > 1$, and hence $\frac 1 y - 1$ is a positive real number. Take $x = \log\pqty{\frac 1 y - 1}$, so that $\frac 1 {1 + e^x} = y$, i.e., $f(x) = y$. Thus, for every $y \in (0, 1)$, there exists $x \in \mathbb R$ such that $f(x) = y$, which shows that $f$ is surjective. Therefore, $f$ is a bijection from $\mathbb R$ to $(0, 1)$.
+\end{Example}
+
+\begin{Example}
+Let $A = \{a_1, a_2, \ldots, a_n\}$, and let $P = 2^A$, the power set of $A$. Let $X$ be the set of all binary strings of length $n$ -- i.e., the set of all sequences of the form $x_1 x_2 \cdots x_n$, where $x_i \in \{0, 1\}$, $i = 1, \ldots, n$. Define a function $\chi \colon P \to X$ as follows: For each $S \in P$, $\chi(S) = b_1 b_2 \cdots b_n$ such that $b_i = 1$ if $a_i \in S$ and $b_i = 0$ if $a_i \notin S$. Then $\chi$ is a bijection, as shown below.
+
+First, suppose that for $S, T \in P$, $\chi(S) = \chi(T) = b_1 b_2 \cdots b_n$ (say). Then, for each $i = 1, \ldots, n$, $a_i \in S$ if and only if $b_i = 1$, which is equivalent to $a_i \in T$. Thus, $S = T$. This shows that $\chi$ is injective.
+
+Next, let $b_1 b_2 \cdots b_n \in X$. Define $S \subseteq A$ as
+\begin{equation*}
+S = \qty{\, a_i \in A \mid b_i = 1 \,}.
+\end{equation*}
+Then clearly, $\chi(S) = b_1 b_2 \cdots b_n$. Hence, $\chi$ is surjective.
+\end{Example}
+
+\subsection{Function Composition}\label{subsec:FuncComp}
+
+If $f \colon A \to B$ and $g \colon B \to C$ are two functions, then the composition of $f$ and $g$ is the function $h \colon A \to C$ defined by $h(a) = g(f(a))$, for all $a \in A$. We denote this function $h$ by $g \circ f$, which is read as ``$g$ circle $f$'', ``$g$ after $f$'', or ``$g$ composed with $f$''. We can also write this definition in terms of a \newterm{commutative diagram}. Consider the diagram given below.
+\begin{equation*}
+\xymatrix{
+    A \ar[r]^f \ar[rd]_h & B \ar[d]^g \\
+    & C
+}
+\end{equation*}
+We say that such a diagram \newterm{commutes} if the result of following any two directed paths from the same starting point to the same end point is the same. In the above diagram, $A, f, B, g, C$ and $A, h, C$ are two directed paths from $A$ to $C$ (and these are the only two directed paths with the same starting points and the same end points). Thus, the diagram commutes if and only if applying $g$ after $f$ equals $h$.
+
+\begin{Theorem}\label{thm:FuncCompAssoc}
+Composition of functions is an associative operation.
+\end{Theorem}
+
+\begin{proof}
+To prove that two functions are equal, we need to show that they both map each element of the domain to the same element of the codomain. Consider three functions $f \colon A \to B$, $g \colon B \to C$, and $h \colon C \to D$. Let $a \in A$. We will show that $h \circ (g \circ f)$ and $(h \circ g) \circ f$ map $a$ to the same element of $C$.
+\begin{align*}
+(h \circ (g \circ f))(a) & = h((g \circ f)(a)) \\
+    & = h(g(f(a))) \\
+    & = (h \circ g)(f(a)) \\
+    & = ((h \circ g) \circ f)(a).
+\end{align*}
+Hence, $h \circ (g \circ f) = (h \circ g) \circ f$.
+\end{proof}
+
+\begin{Exercise}
+Show that the following diagram commutes:
+\begin{equation*}
+\xymatrix{
+A \ar[r] \ar[d] & B \ar[dl] \ar[d]\\
+C \ar[r] & D
+}
+\end{equation*}
+\end{Exercise}
+
+The \newterm{identity function} on a set $A$, denoted as $\id_A$, is the function from $A$ to itself that maps every element of $A$ to itself. That is, $\id_A \colon A \to A$ is defined as $\id_A(a) = a$, for all $a \in A$. Note that $\id_A$ is a bijection from $A$ to itself. The identity function is so named because it is the identity element (or neutral element) for the operation of function composition. That is, if $f \colon A \to B$ is any function, then $f \circ \id_A = f$, and $\id_B \circ f = f$. Alternatively, we can say that the diagram given below commutes.
+\begin{equation*}
+\xymatrix{
+A \ar[d]_{f} \ar[r]^{\id_A} \ar[dr]|-f & A \ar[d]^{f}\\
+B \ar[r]_{\id_B} & B
+}
+\end{equation*}
+
+\begin{Exercise}
+Let $A$ be a set.
+\begin{enumerate}
+\item Show that $\id_A \circ \id_A = \id_A$.
+\item Show that if $i \colon A \to A$ is any function satisfying the same property as the identity function, i.e., for every set $B$ and every function $f \colon A \to B$, $f \circ i = f$, and for every set $C$ and every function $g \colon C \to A$, $i \circ g = g$,  then $i = \id_A$.
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Isomorphisms of Sets}\label{subsec:SetIsos}
+
+
+
 
 %\begin{appendices}
 %
