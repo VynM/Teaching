@@ -15,7 +15,7 @@
 \usepackage{xcolor}
 \usepackage{scrlayer-scrpage}
 \ohead{\color{blue!35!black} \scshape VM}
-\cfoot*{\pagemark}
+\cfoot*{\scriptsize\pagemark}
 
 \renewcommand{\th}{\textsuperscript{th}}
 
@@ -39,7 +39,7 @@
 
 \item If the time required to complete a task is a random variable with mean $20$ minutes and standard deviation $3$ minutes, find the smallest time frame such that the probability that the task will be completed within the time frame is at least $0.75$.
 
-\item If $X \sim B(6, p)$, and $P[X = 2] = 9P[X = 4]$, then find $P[X \le 3]$.
+\item If $X \sim B(6, p)$, and $\Prob[X = 2] = 9 \Prob[X = 4]$, then find $\Prob[X \le 3]$.
 
 \item An urn contains $4$ red, $4$ green, and $2$ blue marbles. One marble is drawn at random from the urn, observed, and placed back. Find the probability that in $8$ such draws
 \begin{enumerate}
@@ -55,7 +55,7 @@
 	\item at least two visitors in one minute?
 \end{enumerate}
 
-\item If $X$ is a Poisson variate such that $3 P[X = 2] = 2P[X = 1]$, then what is $E[X]$?
+\item If $X$ is a Poisson variate such that $3 \Prob[X = 2] = 2\Prob[X = 1]$, then what is $E[X]$?
 
 \item  It is observed in a communication channel that $90\%$ of the messages sent are received without any error. Find the probability that among $18$ messages sent through the channel
 \begin{enumerate}[label=(\roman*)]
@@ -76,11 +76,11 @@ blades in a consignment of $10000$ packets.
 
 \item An airline company, having observed that $5\%$ of the persons making reservations on a flight do not show up for the flight, sells $100$ seats on a plane that has $95$ seats. What is the probability that there will be a seat available for every person who shows up for the flight?
 
-\item If $X$ is a binomial variate with mean $3$, such that $P[X = 3] = 2P[X = 2]$, find $V[X]$.
+\item If $X$ is a binomial variate with mean $3$, such that $\Prob[X = 3] = 2\Prob[X = 2]$, find $V[X]$.
 
-\item $X$ is a Poisson variate and the probability that $X$ is even is twice the probability that it is odd. Determine $P[X = 0]$.
+\item $X$ is a Poisson variate and the probability that $X$ is even is twice the probability that it is odd. Determine $\Prob[X = 0]$.
 
-\item  If $X$ is exponentially distributed with $E(X) = 2$, then find the value of $a$ such that $P(X \le a) = P(X \ge a)$.\\
+\item  If $X$ is exponentially distributed with $E[X] = 2$, then find the value of $a$ such that $\Prob[X \le a] = \Prob[X \ge a]$.\\
 {\small\color{blue!40!black}
 		Note: This point $a$ is the \emph{median} of $X$.
 }
@@ -104,9 +104,11 @@ blades in a consignment of $10000$ packets.
 
 \item A random variable $X$ follows an exponential distribution with parameter $\alpha = 3$. Compute
 \begin{enumerate}
-	\item $P(2X > 1)$.
-	\item $P(X > s + t \mid X > t)$, where $s, t > 0$.
+	\item $\Prob[2X > 1]$.
+	\item $\Prob[X > s + t \mid X > t]$, where $s, t > 0$.
 \end{enumerate}
+
+\item The daily consumption of milk in a city, in excess of 20,000 gallons, is distributed as a Gamma variate with parameters $\alpha = \frac 1 {10000}$ and $r = 2$. The city has a daily stock of $30000$ gallons. What is the probability that the stock is insufficient on a particular day?
 
 \item If $K \sim U[0, 5]$, then what is the probability that the roots of the equation $4x^2 + 4Kx + K + 2 = 0$ are real?
 
@@ -116,6 +118,15 @@ blades in a consignment of $10000$ packets.
 	\item at least $2$ misprints?
 \end{enumerate}
 
+\item Suppose that the chances of a traffic accident in a street of a city in a day is $0.001$. In how many days in a year can we expect
+\begin{enumerate}
+    \item no accidents?
+    \item at least one accident, if there are $100$ such streets in a city?
+\end{enumerate}
+If there are $5$ such cities in a state, what is the probability that at least one city will have at least one accident in a day?
+
 \item Buses start from a certain station at intervals of $45$ minutes. What is the probability that a person reaching the station at a random point in time will have to wait for at least $30$ minutes?
+
+\item In a bombing action, there is a $50\%$ chance that a bomb will hit a target. Two direct hits are needed to destroy the target completely. Estimate the minimum number of bombs to be dropped to give $90\%$ or better chance of completely destroying the target.
 \end{enumerate}
 \end{document}

@@ -15,7 +15,7 @@
 \usepackage{xcolor}
 \usepackage{scrlayer-scrpage}
 \ohead{\color{blue!35!black} \scshape VM}
-\cfoot*{\pagemark}
+\cfoot*{\scriptsize\pagemark}
 
 \renewcommand{\th}{\textsuperscript{th}}
 
@@ -52,6 +52,15 @@
 	\item For the particular case $r = 3$, $g = b = 2$, tabulate the joint pmf values and compute the coefficient of correlation between $X$ and $Y$.
 \end{enumerate}
 
+\item The joint pdf of $(X, Y)$ is $f(x, y) = 2 e^{-x - 2y}$, $x, y > 0$. Compute
+\begin{enumerate}
+\item $\Prob[X > 1, Y < 1]$.
+\item $\Prob[X < Y]$.
+\item $\Prob[X < a]$.
+\end{enumerate}
+
+\item Compute the joint pdf of the random variable $(X, Y)$ that is uniformly distributed over the region bounded by the curves $y = x^2$ and $y = x$. Also find the marginal pdfs of $X$ and $Y$.
+
 \item If $f(x, y) = 2(x + y - 2xy)$, $0 \le x, y \le 1$, show that $Y \sim U[0, 1]$.
 
 \item Compute the marginal pdfs of $X$ and $Y$ and show that they are independent, given their joint pdf $(X, Y)$.
@@ -64,6 +73,7 @@
 \begin{enumerate}
 	\item $f(x, y) = x + y$, $0 < x, y < 1$.
 	\item $f(x, y) = 3x + 3y$, $0 < y < x < 1$.
+    \item $f(x, y) = 8xy$, $0 < x < y < 1$.
 	\item $f(x, y) = 2x - xy$, $0 < x < 1$, $0 < y < 2$.
 	\item $f(x, y) = \dfrac 1 \pi$, $x^2 + y^2 \le 1$ [Uniform distribution in the unit disc centred at the origin].
 	\item $f(x, y) = \dfrac 2 \pi$, $y \ge 0$, $x^2 + y^2 \le 1$.
