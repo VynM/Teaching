@@ -1,0 +1,66 @@
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx, tikz}
+\usepackage{mathtools, physics}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[default,bold]{sourceserifpro}
+\usepackage[T1]{fontenc}
+\usepackage{eulervm}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\scriptsize\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+
+\title[]{Probability and Statistics -- Problem Set 10}
+
+\DeclareMathOperator{\Prob}{P}
+\DeclareMathOperator{\EV}{\mathbb E}
+\DeclareMathOperator{\Var}{\mathbb V}
+
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*, itemsep=2mm]
+\item If $X_1, \ldots, X_n$ is an independent sample of size $n$ from a population defined by the pmf $f(x) = \theta^x (1 - \theta)^{1 - x}$, $x = 0, 1$, where $0 < \theta < 1$, find the maximum likelihood estimator for $\theta$.
+
+\item Find the maximum likelihood estimator for $\theta$ in each of the following cases:
+\begin{enumerate}
+\item $f(x; \theta) = \theta x^{\theta - 1}$, $0 < x < 1$, where $\theta > 0$.
+\item $f(x; \theta) = \theta e^{-\theta x}$, $x > 0$, where $\theta > 0$.
+\item $f(x; \theta) = e^{-(x - \theta)}$, $x \ge \theta$, where $\theta$ is any real number.
+\item $f(x; \theta) = \frac 1 2 e^{-|x - \theta|}$, where $\theta$ is any real number.
+\item $f(x; \theta) = \dfrac {2x} {\theta^2}$, $0 \le x \le \theta$, where $\theta > 0$.
+\end{enumerate}
+
+\item Find the mles of $\theta_1$ and $\theta_2$ in each of the following cases:
+\begin{enumerate}
+\item $X \sim N(\theta_1, \theta_2)$
+\item $f(x; \theta_1, \theta_2) = \dfrac{1}{\theta_2} e^{- \frac{(x - \theta_1)}{\theta_2}}$, $x > \theta_1$
+\end{enumerate}
+where $\theta_1$ is any real number and $\theta_2 > 0$.
+
+\item Find the mle of $\theta$ in each of the following cases:
+\begin{enumerate}
+\item  $X \sim B(m, \theta)$.
+\item $X \sim \mathcal P(\theta)$.
+\end{enumerate}
+
+\item Let $X \sim U[0, \theta]$, where $\theta > 0$. Compute the mle for $\theta$ and show that it is unbiased.
+
+\item Show that $\overline X$ is an unbiased and consistent estimator of population mean.
+
+\item Let $Y_n$ be an unbiased estimator of $\theta$, such that $V(Y_n) \to 0$ as $n \to \inf$. Then show that $Y_n$ is consistent.
+
+\end{enumerate}
+
+\end{document}
