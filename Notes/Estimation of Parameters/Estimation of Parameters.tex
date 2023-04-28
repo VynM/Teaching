@@ -1,0 +1,120 @@
+\documentclass[svgnames, a5paper]{article}
+\usepackage[top = 20mm, bottom = 15mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{natbib}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\setcounter{tocdepth}{3}
+\usepackage{physics}
+
+\usepackage{mathtools}
+\usepackage{xspace}
+\usepackage{enumitem}
+
+
+\usepackage{tocloft}
+\renewcommand{\cftdot}{}
+
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{colorlinks, linkcolor = [RGB]{66, 128, 128}, urlcolor = red, linktocpage = true}
+\usepackage{bookmark}
+\bookmarksetup{color = [RGB]{66, 128, 128}}
+
+\usepackage{hhline, array, multirow}
+
+\usepackage[intoc]{nomencl}
+\makenomenclature
+
+\usepackage[toc, page]{appendix}
+
+\usepackage{newpxmath}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem*{Definition*}{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem*{Example*}{Example}
+\newtheorem{Exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{Remark*}{Remark}
+\newtheorem*{Solution*}{Solution}
+\newtheorem*{Note*}{Note}
+
+\DeclareMathOperator{\ord}{o}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\DeclareMathOperator{\lcm}{lcm}
+
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\id}{\mathrm{id}}
+\renewcommand{\th}{\textsuperscript{th}\xspace}
+
+\newlist{subquests}{enumerate}{2}
+\setlist[subquests, 1]{label = (\alph*)}
+\setlist[subquests, 2]{label = \roman*.}
+
+\begin{document}
+
+\title{\textbf{Estimation of Parameters}}
+
+\date{}
+\maketitle
+
+%\begingroup
+%\let\clearpage\relax
+%\tableofcontents
+%\endgroup
+
+\section{Confidence Intervals}
+
+\begin{Definition}
+If $(X_1, \ldots, X_n)$ is a random sample of size $n$, then the \emph{sample mean} is defined as
+\begin{equation*}
+\overline X = \dfrac 1 n \sum_{i = 1}^n X_i
+\end{equation*}
+and the \emph{sample variance} is defined as
+\begin{equation*}
+S^2 = \dfrac 1 n \sum_{i = 1}^n \pqty{X_i - \overline X}^2.
+\end{equation*}
+\end{Definition}
+
+\begin{Theorem}
+Suppose that $X \sim N(\mu, \sigma^2)$. Then the following hold:
+\begin{enumerate}
+\item $\dfrac{\overline X - \mu}{\sigma / \sqrt n} \sim N(0, 1)$.
+\item $\dfrac{nS^2}{\sigma^2} \sim \chi^2_{n - 1}$.
+\item $\dfrac{\overline X - \mu}{S/\sqrt{n - 1}} \sim t_{n-1}$.
+\end{enumerate}
+\end{Theorem}
+
+Confidence intervals for the mean and variance of a normal population, under different conditions, are as described in the table given below.
+\begin{center}
+\def\arraystretch{2.3}
+\begin{tabular}{|c|c|>{\setlength{\baselineskip}{2.2\baselineskip}\centering\arraybackslash}p{0.45\textwidth}|}
+\hline
+\textbf{Parameter} & \textbf{Condition} & \textbf{Interval} \\
+\hhline{|===|}
+\multirow{2}{*}{$\mu$} & $\sigma^2$ known &
+$\pqty{ \overline x - \dfrac{a\sigma}{\sqrt n} , \overline x + \dfrac{a\sigma}{\sqrt n} }$ where $P[-a < Z < a] = p$, $Z \sim N(0, 1)$ \\
+\cline{2-3}
+ & $\sigma^2$ unknown &
+$\pqty{ \overline x - \dfrac{bS}{\sqrt {n-1}} , \overline x + \dfrac{bS}{\sqrt {n-1}} }$ where $P[-b < T < b] = p$, $T \sim t_{n-1}$ \\
+\hline
+$\sigma^2$ & $\mu$ unknown & $\pqty{ \dfrac{ns^2}{b}, \dfrac{ns^2}{a}}$ where $P[Z < a] = P[Z > b] = \frac p 2$, $Z \sim \chi^2_{n-1}$. \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
