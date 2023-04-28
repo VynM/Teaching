@@ -77,7 +77,17 @@
 %\tableofcontents
 %\endgroup
 
-\section{Confidence Intervals}
+\section{Maximum Likelihood Estimation}\label{sec:MLE}
+
+Let $X$ be a random variable having pdf or pmf $f(x; \theta)$, where $\theta$ is an unknown parameter. The \emph{likelihood function} of $\theta$, corresponding to a sample of size $n$, is
+\begin{equation*}
+L(\theta) = f(x_1; \theta) f(x_2; \theta) \cdots f(x_n; \theta).
+\end{equation*}
+The value of $\theta = T(x_1, \ldots, x_n)$ (say) for which $L(\theta)$ is maximum is the \emph{maximum likelihood estimate} of $\theta$. The corresponding statistic $\hat\theta = T(X_1, \ldots, X_n)$ is the \emph{maximum likelihood estimator} (mle) of $\theta$.
+
+Where applicable, we maximise $L(\theta)$ by solving the equation $\dfrac{d}{d\theta} L(\theta) = 0$ for $\theta$. As $L(\theta)$ is the product of $f(x_1; \theta), \ldots, f(x_n; \theta)$, it is more often convenient to maximise the \emph{log-likelihood function} $\log L(\theta) = \sum_{i=1}^{n} \log f(x_i; \theta)$ -- which yields the same estimator $\hat\theta$, since $\log$ is an increasing function.
+
+\section{Confidence Intervals}\label{sec:CI}
 
 \begin{Definition}
 If $(X_1, \ldots, X_n)$ is a random sample of size $n$, then the \emph{sample mean} is defined as
