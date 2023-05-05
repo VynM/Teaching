@@ -87,6 +87,13 @@ The value of $\theta = T(x_1, \ldots, x_n)$ (say) for which $L(\theta)$ is maxim
 
 Where applicable, we maximise $L(\theta)$ by solving the equation $\dfrac{d}{d\theta} L(\theta) = 0$ for $\theta$. As $L(\theta)$ is the product of $f(x_1; \theta), \ldots, f(x_n; \theta)$, it is more often convenient to maximise the \emph{log-likelihood function} $\log L(\theta) = \sum_{i=1}^{n} \log f(x_i; \theta)$ -- which yields the same estimator $\hat\theta$, since $\log$ is an increasing function.
 
+\begin{Example}
+Let $X$ be a random variable with pdf $f(x) = (1 + \theta) x^{\theta}$, $0 < x < 1$, where $\theta > 0$. The likelihood function, assuming a sample of size $n$, will be
+\begin{align*}
+L(\theta) = 
+\end{align*}
+\end{Example} 
+
 \section{Confidence Intervals}\label{sec:CI}
 
 \begin{Definition}
@@ -104,8 +111,9 @@ S^2 = \dfrac 1 n \sum_{i = 1}^n \pqty{X_i - \overline X}^2.
 Suppose that $X \sim N(\mu, \sigma^2)$. Then the following hold:
 \begin{enumerate}
 \item $\dfrac{\overline X - \mu}{\sigma / \sqrt n} \sim N(0, 1)$.
-\item $\dfrac{nS^2}{\sigma^2} \sim \chi^2_{n - 1}$.
 \item $\dfrac{\overline X - \mu}{S/\sqrt{n - 1}} \sim t_{n-1}$.
+\item $\dfrac 1 {\sigma^2} \displaystyle\sum_{i=1}^n (X_i - \mu)^2 \sim \chi^2_n$.
+\item $\dfrac{nS^2}{\sigma^2} \sim \chi^2_{n - 1}$.
 \end{enumerate}
 \end{Theorem}
 
@@ -122,7 +130,10 @@ $\pqty{ \overline x - \dfrac{a\sigma}{\sqrt n} , \overline x + \dfrac{a\sigma}{\
  & $\sigma^2$ unknown &
 $\pqty{ \overline x - \dfrac{bS}{\sqrt {n-1}} , \overline x + \dfrac{bS}{\sqrt {n-1}} }$ where $P[-b < T < b] = p$, $T \sim t_{n-1}$ \\
 \hline
-$\sigma^2$ & $\mu$ unknown & $\pqty{ \dfrac{ns^2}{b}, \dfrac{ns^2}{a}}$ where $P[Z < a] = P[Z > b] = \frac p 2$, $Z \sim \chi^2_{n-1}$. \\
+\multirow{2}{*}{$\sigma^2$} & $\mu$ known &
+$\pqty{\dfrac 1 b \sum\limits_{i=1}^n (x_i - \mu)^2, \dfrac 1 a \sum\limits_{i=1}^n (x_i - \mu)^2}$ where $P[Y < a] = P[Y > b] = \frac p 2$, $Y \sim \chi^2_n$ \\
+\cline{2-3}
+ & $\mu$ unknown & $\pqty{ \dfrac{ns^2}{b}, \dfrac{ns^2}{a}}$ where $P[Z < a] = P[Z > b] = \frac p 2$, $Z \sim \chi^2_{n-1}$ \\
 \hline
 \end{tabular}
 \end{center}
