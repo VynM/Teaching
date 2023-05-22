@@ -1,0 +1,54 @@
+% !TEX program = xelatex
+
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault, lining, scale=0.9]{FiraSans}
+\usepackage{kmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+\linespread{1.2}
+
+\title{MAC 1103: Integer Partitions}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item List and enumerate all compositions of $8$ into $3$ parts. Next, enumerate the partitions of $8$ into $3$ parts.
+
+\item Show that the number of partitions of $n$ in which every part is odd is equal to the number of partitions of $n$ with unequal parts.
+
+\item Show that the number of partitions of $n$ in which no integer occurs more than twice as a part is equal to the number of partitions of $n$ into parts not divisible by $3$.
+
+\item List all self-conjugate partitions of $15$.
+
+\item Show that the number of partitions of $n$ is equal to the number of partitions of $2n$ into exactly $n$ parts.
+
+\item Show that the number of partitions of $n$ with $k$ parts is equal to the number of partitions of $n$ with largest part $k$.
+
+\item Show that the number of partitions of $n$ into three parts such that the largest is not larger than the sum of the other two is equal to the number of partitions of $n$ into $2$s, $3$s, and $4$s.
+
+\item Show that the number of partitions of $2n + k$ into $n + k$ parts is independent of $k$.
+
+\item Show that the number of self-conjugate partitions of $n$ is equal to the number of partitions of $n$ into distinct odd parts.
+
+\item Show that the number of partitions of $n$ in which odd parts are not repeated equals the number of partitions of $n$ in which every part is either odd or a multiple of $4$.
+
+\item Show that the number of partitions of $n$ with $k$ parts and largest part $m$ is equal to the number of partitions of $n - k$ with $m - 1$ parts, none of which is greater than $k$.
+
+\end{enumerate}
+\end{document}
