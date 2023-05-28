@@ -45,6 +45,20 @@ The sum of the degrees of all vertices of a graph is twice its size.
 Exercise.
 \end{proof}
 
+\begin{Corollary}
+The number of vertices of odd degree in a graph is always even.
+\end{Corollary}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+A \newterm{regular graph} is a graph in which all vertices have the same degree. This common value of the degree is the \newterm{regularity} of the graph. A regular graph of regularity $k$ is a \newterm{$k$-regular} graph. A \newterm{cubic} graph is a $3$-regular graph.
+
+\begin{Exercise}
+Prove that any cubic graph has even order. For what other order(s) will this statement hold?
+\end{Exercise}
+
 \section{Cartesian Products}\label{sec:CartProds}
 
 The \newterm{Cartesian product} of two graphs $G$ and $H$ is the graph denoted by $G \times H$, whose vertex set is $V(G) \times V(H)$ (the Cartesian product of the vertex sets $V(G)$ and $V(H)$, consisting of all ordered pairs $(u, v)$ where $u$ is a vertex of $G$ and $v$ is a vertex of $H$), in which two vertices $(u_1, v_1)$ and $(u_2, v_2)$ are adjacent if and only if either $u_1 = u_2$ and $v_1 \sim v_2$ or $u_1 \sim u_2$ and $v_1 = v_2$.
@@ -53,9 +67,37 @@ The \newterm{Cartesian product} of two graphs $G$ and $H$ is the graph denoted b
 Prove that if $G$ is a graph of order $p_1$ and size $q_1$, and $H$ is a graph of order $p_2$ and size $q_2$, then $G \times H$ is a graph of order $p_1 p_2$ and size $p_1 q_2 + p_2 q_1$.
 \end{Exercise}
 
-\section{Subgraphs}\label{sec:Subgraphs}
+\begin{Exercise}
+Show that if $G$ is an $r$-regular graph and $H$ is an $s$-regular graph, then $G \times H$ is a regular graph of regularity $r + s$.
+\end{Exercise}
 
-A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e., $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$.
+\section{Subgraphs and Complements}\label{sec:Subgraphs}
+
+A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e., $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e., every edge of $G$ that joins two vertices of $H$ is present in $H$.
+
+\begin{Example}\label{ex:Subgraphs}
+\cref{fig:Subgraphs} shows a graph $G$ and three subgraphs $H_1$, $H_2$, and $H_3$ of $G$. The subgraph $H_1$ is neither a spanning subgraph (e.g. it does not contain $v_3$), nor an induced subgraph (e.g. it contains vertices $v_2$ and $v_5$ of $G$ but not the edge $v_2 v_5$). $H_2$ is a spanning subgraph and $H_3$ is an induced subgraph of $G$.
+\begin{figure}[!htbp]
+\centering
+\subcaptionbox{$G$\label{fig:SubgraphsG}}{\includegraphics{Images/Subgraphs-G.pdf}} \hfill
+\subcaptionbox{$H_1$\label{fig:SubgraphsH1}}{\includegraphics{Images/Subgraphs-H1.pdf}} \hfill
+\subcaptionbox{$H_2$\label{fig:SubgraphsH2}}{\includegraphics{Images/Subgraphs-H2.pdf}} \hfill
+\subcaptionbox{$H_3$\label{fig:SubgraphsH3}}{\includegraphics{Images/Subgraphs-H3.pdf}}
+\caption{A graph with three of its subgraphs}\label{fig:Subgraphs}
+\end{figure}
+\end{Example}
+
+A graph is \newterm{complete} if all its vertices are adjacent to one another. The complete graph of order $n$ is denoted by $K_n$. As there is an edge between every pair of distinct vertices of $K_n$, the size of $K_n$ is $\binom n 2$. The \newterm{totally disconnected graph} of order $n$, denoted by $\overline{K_n}$ is the graph of order $n$ that has no edges.
+
+The \newterm{complement} of a graph $G$ is the graph $\overline G$ with the same vertices as $G$, in which any two vertices $u$ and $v$ are adjacent if and only if they are non-adjacent in $G$. Thus, if $G$ is an $(n, m)$-graph, then $\overline G$ is an $\pqty{n, \binom n 2 - m}$-graph. Observe that $\overline K_n$ is (as the notation suggests) the complement of $K_n$.
+
+\begin{Exercise}
+If $G$ is a graph of order $n$, and $\deg_G v = k$, what is $\deg_{\overline G} v$?
+\end{Exercise}
+
+\begin{Exercise}
+Show that if $G$ and $\overline G$ are regular graphs of order $n$ with the same regularity, then the regularity is even and $n = 4t + 1$ for some integer $t$.
+\end{Exercise}
 
 \section{Walks, Paths, and Cycles}\label{sec:Walks}
 
@@ -69,22 +111,22 @@ A \newterm{closed walk} in $G$ is a walk starting and ending at the same vertex.
 Consider the graph $G$ shown below.
 
 \begin{center}
-\includegraphics{Walks.pdf}
+\includegraphics{Images/Walks.pdf}
 \end{center}
 A walk of length $5$ from $b$ to $c$ in $G$ is $b, f, e, a, e, c$.
 
 \begin{center}
-\includegraphics{Walk1.pdf}
+\includegraphics{Images/Walk1.pdf}
 \end{center}
 This walk is not a path, since the vertex $e$ is repeated. An example of a path from $b$ to $c$ in the same graph $G$ is $b, f, e, c$. The length of this path is $3$.
 
 \begin{center}
-\includegraphics{Path1.pdf}
+\includegraphics{Images/Path1.pdf}
 \end{center}
 A cycle of length $4$ in $G$ is $b, f, e, c, b$.
 
 \begin{center}
-\includegraphics{Cycle1.pdf}
+\includegraphics{Images/Cycle1.pdf}
 \end{center}
 \end{Example}
 
@@ -152,7 +194,7 @@ Finally, suppose that $G \cong H$ and $H \cong K$. Then there exist isomorphisms
 A graph is \newterm{self-complementary} if it is isomorphic to its complement -- i.e., $G$ is self-complementary if $G \cong \overline G$. For example, $K_1$, $P_4$ and $C_5$ are self-complementary graphs of orders $1$, $4$, and $5$ respectively. There is one more self-complementary graph of order $5$, namely the \newterm{bull graph}, which can be constructed by adding one new vertex to $P_4$ and making it adjacent to the two non-pendant vertices of the path. This graph is shown below.
 
 \begin{center}
-\includegraphics{BullGraph.pdf}
+\includegraphics{Images/BullGraph.pdf}
 \end{center}
 
 \begin{Theorem}\label{thm:SCOrder}
@@ -177,13 +219,53 @@ Every non-trivial self-complementary graph has diameter $2$ or $3$.
 \end{Corollary}
 
 \begin{proof}
-Exercise.
+Consider a non-trivial, self-complementary graph $G$, and suppose that it has diameter strictly greater than $3$. Then, by \cref{thm:Diam>=3}, $\diam \overline G \le 3$, which implies that $\diam \overline G \ne \diam G$, a contradiction, since $G \cong \overline G$. Hence, $\diam G \le 3$. On the other hand, a non-trivial graph cannot have diameter $0$, hence $\diam G \ge 1$. But if $\diam G = 1$, then $G$ is a non-trivial complete graph, whose complement is a totally disconnected graph, which is again impossible. Hence, $\diam G = 2$ or $3$.
 \end{proof}
+
+\begin{Exercise}
+If $G$ is a regular self-complementary graph of order $n$, show that $n = 4k + 1$, for some integer $k$, and $\diam G = 2$.
+\end{Exercise}
+
+\begin{Exercise}
+Let $G$ be a self-complementary graph, and let $H$ be the graph obtained by taking the disjoint union of $H$ and $P_4$, and making every vertex of $H$ adjacent to the two non-pendant vertices of this $P_4$. Then show that $H$ is also self-complementary. What is the graph $H$ obtained in this manner if $G = K_1$?
+\end{Exercise}
+
+\begin{Exercise}
+Construct a self-complementary graph of order $9$.
+\end{Exercise}
+
+\begin{Exercise}
+Show that for each positive integer $n$ of the form $4k$ or $4k + 1$, where $k$ is an integer, there exists at least one self-complementary graph of order $n$.
+\end{Exercise}
 
 \section{Bipartite Graphs}\label{sec:Bipartite}
 
-A graph $G = (V, E)$ is \newterm{bipartite} if its vertex set $V$ can be partitioned into two subsets $V_1$ and $V_2$ such that no two vertices in $V_i$ are adjacent, for $i = 1, 2$. That is, there exist two non-empty, disjoint subsets $V_1, V_2 \subseteq V$ such that $V_1 \cup V_2 = V$, and every edge of $G$ (if any) joins a vertex in $V_1$ with a vertex in $V_2$.
+A graph $G = (V, E)$ is \newterm{bipartite} if its vertex set $V$ can be partitioned into two subsets $V_1$ and $V_2$ such that no two vertices in $V_i$ are adjacent, for $i = 1, 2$. That is, there exist two non-empty, disjoint subsets $V_1, V_2 \subseteq V$ such that $V_1 \cup V_2 = V$, and every edge of $G$ (if any) joins a vertex in $V_1$ with a vertex in $V_2$. Then we say that $(V_1, V_2)$ is a \newterm{bipartition} of $G$.
 
+The following theorem characterises bipartite graphs in terms of its cycles. A cycle is \newterm{even} if its length is even and \newterm{odd} if its length is odd.
+
+\begin{Theorem}
+A graph is bipartite if and only if it contains no odd cycles.
+\end{Theorem}
+
+\begin{proof}
+First, suppose that $G$ is a bipartite graph with bipartition $(V_1, V_2)$, and let $v_1, v_2, \ldots, v_k$ be a cycle of length $k$ in $G$. Without loss of generality, suppose that $v_1 \in V_1$. Then, since $v_2 \sim v_1$, $v_2 \in V_2$, which in turn implies that $v_3 \in V_1$, as $v_2 \sim v_3$. Proceeding similarly, we see $v_i \in V_1$ if $i$ is odd and $v_i \in V_2$ if $i$ is even. But $v_k \sim v_1$ and $v_1 \in V_1$ implies that $v_k \in V_2$. Therefore, $k$ (the length of the cycle) is even.
+
+Conversely, suppose $G$ is a graph that has no odd cycles. Without loss of generality, assume that $G$ is connected -- otherwise, apply the argument to each component. Let $v$ be any vertex of $G$. Define subsets $V_1$ and $V_2$ of $V(G)$ as follows:
+\begin{align*}
+    V_1 = \qty{\, u \in V \mid d(u, v)\ \text{is even} \,} \\
+    V_2 = \qty{\, u \in V \mid d(u, v)\ \text{is odd} \,}.
+\end{align*}
+We claim that $(V_1, V_2)$ is a bipartition of $G$.
+
+Suppose not, and let $x$ and $y$ be adjacent vertices of $G$, both belonging to $V_i$ for $i = 1$ or $2$. Let $P$ and $Q$ be shortest paths from $v$ to $x$ and $y$ respectively. Let $w$ be the last vertex common to both $P$ and $Q$ when traversing $P$ from $v$ to $x$. Then the portion of $P$ from $w$ to $x$, the edge $(x, y)$, and the portion of $Q$ from $y$ to $w$ forms a cycle in $G$, having length, say $l$, given by
+\begin{align*}
+l & = d(w, x) + d(w, y) + 1 \\
+& = [d(v, x) - d(v, w)] + [d(v, y) - d(v, w)] + 1 \\
+& = d(v, x) + d(v, y) - 2 d(v, w) + 1.
+\end{align*}
+If $x, y \in V_1$, then both $d(v, x)$ and $d(v, y)$ are even, and if $x, y \in V_2$, then both these numbers are odd. In either case, $d(v, x) + d(v, y)$ is even, and hence $l$ is odd, which is a contradiction. Hence, $(V_1, V_2)$ is a bipartition of $G$ as claimed.
+\end{proof}
 
 \section{Trees}\label{sec:Trees}
 
@@ -238,11 +320,11 @@ A \newterm{cutvertex} of a graph is a vertex whose removal increases the number 
 \begin{Example}\label{ex:Blocks}
 The graph shown below has $6$ blocks and $3$ cutvertices ($v_1$, $v_2$, $v_3$).
 \begin{center}
-\includegraphics{6BlockGraph2.pdf}
+\includegraphics{Images/6BlockGraph2.pdf}
 \end{center}
 The $6$ blocks of this graph are shown below.
 \begin{center}
-\includegraphics{6BlockGraph2-Blocks.pdf}
+\includegraphics{Images/6BlockGraph2-Blocks.pdf}
 \end{center}
 \end{Example}
 
@@ -263,6 +345,22 @@ If $G$ is a connected graph, and $v$ is any vertex of $G$, then the following ar
 \noindent \cref{it:CutverChar2} $\implies$ \cref{it:CutverChar1}. Consider the graph $G - v$. As every $u$-$w$ path passes through $v$, none of them is present in $G - v$, and therefore $G - v$ is disconnected. Hence, $v$ is a cutvertex of $G$.
 \end{proof}
 
+\section{Line Graphs}\label{sec:LineGraphs}
+
+Let $G$ be a graph with at least one edge. The \newterm{line graph} of $G$ is the graph $L(G)$ whose vertex set is the edge set of $G$, in which two vertices $e$ and $f$ are adjacent if the edges $e$ and $f$ of $G$ are adjacent.
+
+\begin{Example}\label{ex:LineGrpahs}
+\cref{fig:LineGraphs} shows a graph $G$ with eight edges and and its line graph $L(G)$.
+\begin{figure}[!htbp]
+\centering
+\subcaptionbox{$G$}{\includegraphics{Images/GNM(7,8).pdf}} \hspace{5em}
+\subcaptionbox{$L(G)$}{\includegraphics{Images/L(GNM(7,8)).pdf}}
+\caption{A graph and its line graph}\label{fig:LineGraphs}
+\end{figure}
+\end{Example}
+
+
+
 \section{Adjacency Matrices}\label{sec:AdjMat}
 
 The \newterm{adjacency matrix} of a graph $G$ of order $n$, with vertex set $V = \{v_1, \ldots, v_n\}$, is the $n \times n$ matrix $A = A(G)$ whose $(i,j)$-entry is
@@ -276,7 +374,7 @@ a_{ij} = \begin{cases}
 \begin{Example}\label{ex:GNM(6-11)AdjMat}
 The adjacency matrix of the graph
 \begin{center}
-\includegraphics{GNM(6,11).pdf}
+\includegraphics{Images/GNM(6,11).pdf}
 \end{center}
 is
 \begin{equation*}
@@ -338,6 +436,34 @@ Now suppose, for the sake of induction, that the result holds for some $m \ge 1$
 \end{equation*}
 First, note that $a_{kj} = 1$ if and only if $v_k \sim v_j$. Therefore, the above sum is equal to the sum of all $(A^m)_{ik}$ where $v_k \sim v_j$. Now, by the induction hypothesis, $(A^m)_{ik}$ is the number of walks of length $m$ from $v_i$ to $v_k$. If $v_j$ is adjacent to $v_j$, then each walk of length $m$ from $v_i$ to $v_k$, together with the edge from $v_j$ to $v_j$, forms a walk of length $m + 1$ from $v_i$ to $v_j$. Thus, for each $k$ such that $v_k \sim v_j$, $(A^m)_{ik} a_{kj} = (A^m)_{ik}$ is the number of walks of length $m + 1$ from $v_i$ to $v_j$ that pass through $k$. Summing over all $k$, this gives the total number of walks of length $m + 1$ from $v_i$ to $v_j$. Hence the result follows by induction.
 \end{proof}
+
+\section{Incidence Matrices}\label{sec:IncMat}
+
+Consider an $(n, m)$-graph $G$ having vertex set $\{v_1, \ldots, v_n\}$ and edge set $\{e_1, \ldots, e_m\}$. The \newterm{incidence matrix} of $G$ is the $n \times m$ matrix $B = B(G)$ whose $(i, j)$-entry is $1$ if the vertex $v_i$ is incident with the edge $e_i$, and $0$ otherwise.
+
+\begin{Example}\label{ex:GNM(6-8)AdjMat}
+The incidence matrix of the graph
+\begin{center}
+\includegraphics{Images/GNM(6,8).pdf}
+\end{center}
+is
+\begin{equation*}
+B = \begin{bmatrix}
+1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 \\
+0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 \\
+\end{bmatrix}.
+\end{equation*}
+\end{Example}
+
+Each column of the incidence matrix corresponds to an edge of the graph, and the only non-zero entries in the column correspond to the end-vertices of the edge -- thus, each column contains exactly two $1$s. In a simple graph, there is at most one edge between a given pair of vertices, and hence no two columns of the incidence matrix can be equal. We therefore have the following observation.
+
+\begin{Observation}
+The incidence matrix of a (simple, undirected) graph is a $0$-$1$ matrix in which every column has exactly two $1$s, and no two columns are equal.
+\end{Observation}
 
 %\begin{appendices}
 %
