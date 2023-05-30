@@ -28,6 +28,8 @@
 \nomenclature[20]{$K_n$}{Complete graph of order $n$ (size $\binom{n}{2}$)}
 \nomenclature[21]{$P_n$}{Path graph of order $n$ (size $n - 1$)}
 \nomenclature[22]{$C_n$}{Cycle graph of order $n$ (size $n$)}
+
+\nomenclature[30]{$L(G)$}{Line graph of $G$}
 \printnomenclature[10em]
 
 \clearpage
@@ -359,7 +361,17 @@ Let $G$ be a graph with at least one edge. The \newterm{line graph} of $G$ is th
 \end{figure}
 \end{Example}
 
+If $u$ and $v$ are edges joined by an edge $e$ in $G$, then in $L(G)$, the vertex $e$ will be adjacent to all the vertices corresponding to the edges of $G$ other than $e$ that are incident with $u$ and $v$ (see \cref{fig:L(G)Neighbourhood}). Thus, $\deg_{L(G)} e = \deg_G u + \deg_G v - 2$.
+\begin{figure}[!htbp]
+\centering
+\includegraphics{Images/L(G)Neighbourhood.pdf}
+\caption{Neighbourhood of a vertex in $L(G)$}
+\label{fig:L(G)Neighbourhood}
+\end{figure}
 
+\begin{Exercise}
+Show that the size of $L(G)$ is $\displaystyle\sum_{v \in V(G)} \binom{\deg_G v}{2}$.
+\end{Exercise}
 
 \section{Adjacency Matrices}\label{sec:AdjMat}
 
@@ -464,6 +476,22 @@ Each column of the incidence matrix corresponds to an edge of the graph, and the
 \begin{Observation}
 The incidence matrix of a (simple, undirected) graph is a $0$-$1$ matrix in which every column has exactly two $1$s, and no two columns are equal.
 \end{Observation}
+
+\begin{Theorem}
+If $B$ is the incidence matrix of a graph $G$, then the adjacency matrix of its line graph $L(G)$ is
+\begin{equation*}
+    A\pqty{L(G)} = B^T B - 2I
+\end{equation*}
+where $I$ is the identity matrix of order $|E(G)|$.
+\end{Theorem}
+
+\begin{proof}
+Let $G$ be an $(n, m)$-graph with edge set $E = \{e_1, \ldots, e_m\}$. The incidence matrix $B = B(G)$ is of order $n \times m$, and therefore $B^T B - 2I$ (say) is of order $m \times m$.
+
+Observe that the $(i, j)$ entry of $B^T B$ is the dot product of the $i$\nth and $j$\nth columns of $B$. As each column of $B$ has exactly two non-zero entries, both equal to $1$, the $(i, i)$ entry of $B^T B$ is $2$, and therefore the diagonal entries of $B^T B - 2I$ are all zero.
+
+For $i \ne j$, the dot product of the $i$\nth and $j$\nth columns of $B$ will be $1$ if the edges $e_i$ and $e_j$ are adjacent (i.e., have one vertex in common), and $0$ otherwise -- note that the dot product cannot be $2$, as no two distinct columns of $B$ can be equal. Thus, for $i \ne j$, the $(i, j)$-entry of $B^T B$, which is equal to the $(i, j)$ entry of $B^T B - 2I$, is $1$ if and only if the edges $e_i$ and $e_j$ are adjacent in $G$, or equivalently, the vertices $e_i$ and $e_j$ of $L(G)$ are adjacent. Thus, $B^T B - 2I$ is the adjacency matrix of $G$.
+\end{proof}
 
 %\begin{appendices}
 %
