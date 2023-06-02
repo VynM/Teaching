@@ -44,7 +44,7 @@ The sum of the degrees of all vertices of a graph is twice its size.
 \end{Lemma}
 
 \begin{proof}
-Exercise.
+Let $G$ be a graph, and consider the sum of its degrees, $\sum_{v \in V(G)} \deg v$. As each edge is incident with exactly two vertices, each edge is counted once by two terms in this summation. Thus, the sum is equal to twice the number of edges.
 \end{proof}
 
 \begin{Corollary}
@@ -52,7 +52,15 @@ The number of vertices of odd degree in a graph is always even.
 \end{Corollary}
 
 \begin{proof}
-Exercise.
+Let $G$ be a graph. We know that
+\begin{equation}
+\sum_{v \in V(G)} \deg v = 2 |E(G)|. \label{eq:deg-sum}
+\end{equation}
+Considering the vertices of odd and even degrees, we can write \eqref{eq:deg-sum} as
+\begin{equation}
+\sum_{v \in V(G) : \deg v\ \text{odd}} \deg v + \sum_{v \in V(G) : \deg v\ \text{even}} \deg v = 2 |E(G)|.
+\end{equation}
+Both the second term on the LHS and the RHS are even integers, and therefore so is the first term on the LHS. But a sum of odd integers is even only if the number of terms is even. Thus, $G$ has an even number of vertices of odd degree.
 \end{proof}
 
 A \newterm{regular graph} is a graph in which all vertices have the same degree. This common value of the degree is the \newterm{regularity} of the graph. A regular graph of regularity $k$ is a \newterm{$k$-regular} graph. A \newterm{cubic} graph is a $3$-regular graph.
@@ -312,6 +320,16 @@ The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minim
 \hint{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
 \end{Exercise}
 
+\begin{Solution*}
+Let $T$ be a tree on $n$ vertices. We prove the result by induction on $n$.
+
+If $n = 1$ or $2$, the result obviously holds. Suppose, for the sake of induction, that the result holds for all trees of order less than $n$.
+
+Consider $T$, of order $n \ge 3$. Then $T$ has at least two pendant vertices. Let $T'$ be the tree (of order less than $n$) obtained by deleting all the pendant vertices of $T$.
+
+Then the vertices of $T'$ have eccentricities exactly one less than their eccentricities in $T$, and therefore, $T$ and $T'$ have the same centre. Hence, the result follows by induction.
+\end{Solution*}
+
 \begin{Exercise}
 If $G$ and $H$ are two trees of orders $n$ and $m$ respectively, what is the size of $G \times H$?
 \end{Exercise}
@@ -436,7 +454,7 @@ Show that the $(i,j)$-entry of $A^2$ is the number of walks of length $2$ from $
 The following result (which generalises the statement in \cref{exer:A2ij}) shows that the adjacency matrix can be used to obtain certain information about walks in the graph.
 
 \begin{Theorem}
-Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v_n\}$. Then the $(i,j)$-entry of $A^m$, for any positive integer $m$, is the number of walks of length $k$ from $v_i$ to $v_j$.
+Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v_n\}$. Then the $(i,j)$-entry of $A^m$, for any positive integer $m$, is the number of walks of length $m$ from $v_i$ to $v_j$.
 \end{Theorem}
 
 \begin{proof}
@@ -492,6 +510,133 @@ Observe that the $(i, j)$ entry of $B^T B$ is the dot product of the $i$\nth and
 
 For $i \ne j$, the dot product of the $i$\nth and $j$\nth columns of $B$ will be $1$ if the edges $e_i$ and $e_j$ are adjacent (i.e., have one vertex in common), and $0$ otherwise -- note that the dot product cannot be $2$, as no two distinct columns of $B$ can be equal. Thus, for $i \ne j$, the $(i, j)$-entry of $B^T B$, which is equal to the $(i, j)$ entry of $B^T B - 2I$, is $1$ if and only if the edges $e_i$ and $e_j$ are adjacent in $G$, or equivalently, the vertices $e_i$ and $e_j$ of $L(G)$ are adjacent. Thus, $B^T B - 2I$ is the adjacency matrix of $G$.
 \end{proof}
+
+\section{Dijkstra's Algorithm}\label{sec:Dijkstra}
+
+Let $G$ be a directed graph on $n$ vertices $v_1, \ldots, v_n$, in which each (directed) edge has a positive weight attached to it (say, representing the cost of traversing that edge). Let $W$ be the \newterm{weighted adjacency matrix} of $G$, defined as follows. $W$ is an $n \times n$ matrix with rows and columns indexed by the vertices of $G$, and having $(i,j)$-entry
+\begin{equation*}
+w_{ij} = \begin{cases}
+0, & i = j\\
+\text{Weight of the edge $(v_i, v_j)$}, & v_i \sim v_j\\
+\infty, & v_i \not\sim v_j.
+\end{cases}
+\end{equation*}
+
+Dijkstra's algorithm is a procedure to determine the shortest paths (and hence distances) from a given source vertex $s$ of $G$ to all the other vertices. 
+
+\begin{algorithm}\caption{Dijkstra's algorithm}\label{alg:Dijkstra}
+\begin{algorithmic}[1]
+	\State $K \gets {s}$, $U \gets V(G) - \qty{s}$
+	\State $\bestDTo(u) \gets w_{su}$, $\forall u \in U$
+	\State $\tree(u) \gets s$, $\forall u \in U$
+	\While{$|U| > 1$}
+		\State $t \gets u \in U$ such that $\bestDTo(u)$ is minimum
+		\State $U \gets U - \qty{t}$ \Comment{Remove $t$ from $U$ and}
+		\State $K \gets K \cap \qty{t}$ \Comment{add it to $K$}
+		\For{$u \in U$}
+			\State $du_t \gets \bestDTo(t) + w_{tu}$ \Comment{Distance to $u$ through $t$}
+			\If{$du_t < \bestDTo(u)$}
+				\State $\bestDTo(u) \gets dsu_t$
+				\State $\tree(u) \gets t$
+			\EndIf
+		\EndFor
+	\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+
+The input to the algorithm is the set of vertices $V$ and the weighted adjacency matrix $W$. Initially, the algorithm takes the weights of the edges from $s$ to the other vertices as the \newterm{tentative best distances} to those vertices. It also maintains a set $K$ of vertices to which the shortest paths from $s$ have been found (so that no further improvement is possible), and a set $U$ of vertices to which shorter paths may yet be found, passing through some vertex in $K$. In each step, the vertex $t \in U$ with minimum tentative best distance is selected -- it is guaranteed that no shorter path exists from $s$ to this vertex (since any such path would have to pass through some other vertex of $U$, but the distances to such a vertex is larger than the distance to $t$). This vertex $t$ is removed from $U$ and added to $K$, and then for each vertex $u$ remaining in $U$, the distance from $s$ to $u$ \emph{through} $t$ is compared with the current best distance to $u$. If the former is found to be smaller, the best distance to $u$ is updated to that value and $t$ is marked as the vertex through which $u$ is to be reached in the shortest path -- this is indicated by $\tree(u)$ in the algorithm. This procedure is repeated until there is only vertex remaining in $U$ (i.e., until $|U| = 1$).
+
+
+\begin{Example}
+In the graph shown below, find the shortest paths from $B$ to all the other vertices.\\
+\begin{center}
+\includegraphics[scale=0.6]{Images/Dijkstra.pdf}
+\end{center}
+The weighted adjacency matrix of the graph is
+\begin{equation*}
+W = \kbordermatrix{
+	&	A & B & C & D & E\\
+	A & 0 & 7 & \infty & \infty & 6\\
+	B & \infty & 0 & 5 & 10 & \infty\\
+	C & 12 & 6 & 0 & 3 & \infty\\
+	D & 11 & \infty & 8 & 0 & \infty\\
+	E & 4 & 5 & \infty & 6 & 0
+}.
+\end{equation*}
+
+The results of applying the algorithm are tabulated below and the tree of shortest paths is also shown.
+
+\begin{center}
+\begin{tabular}{cc}
+
+	\begin{minipage}{5cm}
+	$\begin{array}{r|cccc}
+	 	 &		A	&	C	&	D	&	E\\
+	\hline
+	B(0) &	\infty_B	&	\boxed{5_B}	&	10_B	&	\infty_B\\
+	C(5) &	17_C	&	\_	&	\boxed{8_C}	&	\infty_B\\
+	D(8) &	\boxed{17_C}	&	\_	&	\_	&	\infty_B\\
+	A(17)&	\_	&	\_	&	\_	&	23_A\\
+	\hline
+	B	&	17_C	&	5_B	&	8_C	&	23_A
+	\end{array}$
+	\end{minipage}
+&
+	\begin{minipage}{5cm}
+		\centering
+	\includegraphics[scale=0.7]{Images/ShortestPaths.pdf}
+	\end{minipage}
+
+\end{tabular}
+\end{center}
+
+\end{Example}
+
+\section{Prim's Algorithm}\label{sec:Prim}
+
+Let $G$ be a weighted, undirected, connected graph with positive edge weights. A \newterm{minimal spanning tree} of $G$ is a spanning tree $T$ of $G$ such that the sum of the weights of its edges is minimum among all the spanning trees of $G$.
+
+\begin{algorithm}\caption{Prim's algorithm}\label{alg:Prim}
+\begin{algorithmic}[1]
+\Require{Weighted, undirected, connected graph $G$, source vertex $v \in V(G)$}
+	\State $V(T) \gets \{v\}$, $E(T) \gets \varnothing$
+	\While{$V(T) \ne V(G)$}
+        \State $e \gets$ minimum-weight edge with one end-vertex in $V(T)$ and one end-vertex not in $V(T)$
+        \State $E(T) \gets E(T) \cup \{e\}$
+        \State $V(T) \gets V(T) \cup \{x, y\}$ where $e = xy$
+	\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+\begin{Example}
+Apply Prim's algorithm to the graph given below to obtain a minimal spanning tree. Take $v_1$ as the initial vertex.
+\begin{center}
+\includegraphics{Images/Prim.pdf}
+\end{center}
+\vspace{1em}
+The step-by-step result of the algorithm is tabulated below.
+\begin{center}
+\def\arraystretch{1.3}
+\begin{tabular}{c|>{\centering\arraybackslash}p{0.4\textwidth}|>{\centering\arraybackslash}p{0.2\textwidth}|c}
+Step & $E(T)$ & $V(T)$ & Total weight \\
+\hline
+1 & $\varnothing$ & $v_1$ & $0$ \\
+2 & $(v_1, v_4)$ & $v_1, v_4$ & $2$ \\
+3 & $(v_1, v_4)$, $(v_4, v_3)$ & $v_1$, $v_4$, $v_3$ & $4$ \\
+4 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$ & $v_1$, $v_4$, $v_3$, $v_5$ & $7$ \\
+5 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$ & $v_1$, $v_4$, $v_3$, $v_5$, $v_6$ & $9$ \\
+6 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$, $(v_6, v_2)$ & $v_1, v_4$, $v_3$, $v_5$, $v_6$, $v_2$ & $10$ \\
+7 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$, $(v_6, v_2)$, $(v_2, v_8)$ & $v_1$, $v_4$, $v_3$, $v_5$, $v_6$, $v_2$, $v_8$ & $13$ \\
+8 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$, $(v_6, v_2)$, $(v_2, v_8)$, $(v_4, v_7)$ & $v_1$, $v_4$, $v_3$, $v_5$, $v_6$, $v_2$, $v_8$, $v_7$ & $20$ \\
+\end{tabular}
+\end{center}
+\vspace{1em}
+Therefore, the minimal spanning tree is:
+\begin{center}
+\includegraphics[scale=0.8]{Images/MST.pdf}
+\end{center}
+\end{Example}
 
 %\begin{appendices}
 %

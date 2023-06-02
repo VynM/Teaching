@@ -13,7 +13,7 @@
 \usepackage{mathtools}
 \usepackage{xspace, cancel}
 
-\usepackage{enumitem}
+\usepackage{enumitem, array}
 \setlist{noitemsep}
 
 \usepackage{scrlayer-scrpage}
@@ -31,6 +31,10 @@
 
 \usepackage[capitalise]{cleveref}
 \crefformat{enumi}{#2\textup{#1}#3}
+
+\usepackage{algorithm, algpseudocode}
+
+\usepackage{kbordermatrix}
 
 \usepackage[intoc]{nomencl}
 \makenomenclature
@@ -78,3 +82,7 @@
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\symdiff}{\mathbin{\triangle}}
 \newcommand{\nth}{\textsuperscript{th}\xspace}
+\DeclareMathOperator{\bestDTo}{bestDTo}
+\DeclareMathOperator{\tree}{tree}
+
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
