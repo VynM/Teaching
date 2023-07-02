@@ -34,7 +34,7 @@
 
 \clearpage
 
-\section{Introdcution}\label{sec:Intro}
+\section{Introduction}\label{sec:Intro}
 A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a nonempty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
 
 Two vertices $u$ and $v$ of $G$ are \newterm{adjacent}, denoted by $u \sim v$, if $(u,v) \in E$ -- we may also denote the edge $(u,v)$ as simply $uv$. Note that $uv = vu$. If there is no edge between $u$ and $v$, then they are \newterm{nonadjacent}, denoted by $u \nsim v$. The vertex $v$ and the edge $uv$ are said to be \newterm{incident} with each other. The \newterm{degree} of a vertex $v$ is the number of edges incident with it, or equivalently, the number of vertices adjacent with it, and is denoted by $\deg(v)$.
@@ -69,6 +69,14 @@ A \newterm{regular graph} is a graph in which all vertices have the same degree.
 Prove that any cubic graph has even order. For what other order(s) will this statement hold?
 \end{Exercise}
 
+\begin{Theorem}
+In any graph on two or more vertices, at least two vertices have the same degree.
+\end{Theorem}
+
+\begin{proof}
+Let $G$ be a graph of order $n \ge 2$. The minimum possible degree of a vertex of $G$ is $0$, and the maximum possible degree is $n - 1$ (as there are only $n$ vertices in $G$). Thus, in order for the $n$ vertices of $G$ to have different degrees, the $n$ different degrees must be exactly $0, 1, \ldots, n - 1$. But if some vertex of $G$ has degree $n - 1$, then it is adjacent to all other vertices, and therefore $G$ cannot have a vertex of degree $0$. Thus, at least two vertices of $G$ have the same degree.
+\end{proof}
+
 \section{Cartesian Products}\label{sec:CartProds}
 
 The \newterm{Cartesian product} of two graphs $G$ and $H$ is the graph denoted by $G \times H$, whose vertex set is $V(G) \times V(H)$ (the Cartesian product of the vertex sets $V(G)$ and $V(H)$, consisting of all ordered pairs $(u, v)$ where $u$ is a vertex of $G$ and $v$ is a vertex of $H$), in which two vertices $(u_1, v_1)$ and $(u_2, v_2)$ are adjacent if and only if either $u_1 = u_2$ and $v_1 \sim v_2$ or $u_1 \sim u_2$ and $v_1 = v_2$.
@@ -76,6 +84,17 @@ The \newterm{Cartesian product} of two graphs $G$ and $H$ is the graph denoted b
 \begin{Exercise}
 Prove that if $G$ is a graph of order $p_1$ and size $q_1$, and $H$ is a graph of order $p_2$ and size $q_2$, then $G \times H$ is a graph of order $p_1 p_2$ and size $p_1 q_2 + p_2 q_1$.
 \end{Exercise}
+
+\begin{Solution*}
+By definition, the vertex set of $G \times H$ is the Cartesian product $V(G) \times V(H)$ of the vertex sets of $G$ and $H$, and therefore contains $|V(G)| \times |V(H)|$ elements. Thus, the order of $G \times H$ is $p_1 p_2$.
+
+Now, consider any vertex $(u, v)$ of $G \times H$. Corresponding to every vertex $u'$ adjacent to $u$ in $G$, there is an edge from $(u, v)$ to $(u', v))$ in $G \times H$. Similarly, corresponding to every vertex $v'$ adjacent to $v$ in $H$, there is an edge from $(u, v)$ from $(u, v')$ in $G \times H$. Thus, the degree of $(u, v)$ in $G \times H$ is $\deg u + \deg v$. Hence, by the Handshaking Lemma, the size of $G \times H$ is half the sum of its vertex degrees, which is
+\begin{align*}
+\frac 1 2 \sum_{u \in V(G), v \in V(H)} (\deg u + \deg v) & = \frac 1 2 \sum_{u \in V(G), v \in V(H)} \deg u + \frac 1 2 \sum_{u \in V(G), v \in V(H)} \deg v \\
+& = p_2 \pqty{\frac 1 2 \sum_{u \in V(G)} \deg u} + p_1 \pqty{\frac 1 2 \sum_{v \in V(H)} \deg v} \\
+& = p_2 q_1 + p_1 q_2.
+\end{align*}
+\end{Solution*}
 
 \begin{Exercise}
 Show that if $G$ is an $r$-regular graph and $H$ is an $s$-regular graph, then $G \times H$ is a regular graph of regularity $r + s$.
@@ -358,7 +377,7 @@ If $G$ is a connected graph, and $v$ is any vertex of $G$, then the following ar
 \end{Theorem}
 
 \begin{proof}
-\cref{it:CutverChar1} $\implies $\cref{it:CutverChar3}. Since $v$ is a cutvertex, the graph $G - v$ is disconnected, i.e., it has two or more components. Let $U$ be the set of all the vertices in any one of the components, and let $W$ be the set of all the remaining vertices of $G - v$. Clearly, $\{U, W\}$ is a partition of $V(G) - v$. Now, if $u \in U$ and $w \in W$, then $u$ and $w$ are in different components of $G - v$, which implies that any path from $u$ to $w$ must pass through $v$.
+\cref{it:CutverChar1} $\implies $ \cref{it:CutverChar3}. Since $v$ is a cutvertex, the graph $G - v$ is disconnected, i.e., it has two or more components. Let $U$ be the set of all the vertices in any one of the components, and let $W$ be the set of all the remaining vertices of $G - v$. Clearly, $\{U, W\}$ is a partition of $V(G) - v$. Now, if $u \in U$ and $w \in W$, then $u$ and $w$ are in different components of $G - v$, which implies that any path from $u$ to $w$ must pass through $v$.
 
 \noindent \cref{it:CutverChar3} $\implies$ \cref{it:CutverChar2} is obvious as the latter is a special case of the former.
 
@@ -387,9 +406,27 @@ If $u$ and $v$ are edges joined by an edge $e$ in $G$, then in $L(G)$, the verte
 \label{fig:L(G)Neighbourhood}
 \end{figure}
 
-\begin{Exercise}
-Show that the size of $L(G)$ is $\displaystyle\sum_{v \in V(G)} \binom{\deg_G v}{2}$.
-\end{Exercise}
+\begin{Theorem}
+For any graph $G$ of size $m \ge 1$, its line graph $L(G)$ has order $m$ size $\displaystyle\sum_{v \in V(G)} \binom{\deg_G v}{2}$.
+\end{Theorem}
+
+\begin{proof}
+By definition, the vertices of $L(G)$ are the edges of $G$, and hence the order of $L(G)$ is the size of $G$, $m$.
+
+Now, let $e = uv$ be an edge of $G$. In $L(G)$, $e$ is a vertex, and it is adjacent to another vertex $f$ if and only if $f$ is an edge of $G$ and is adjacent to $e$, i.e. $f$ is an edge of $G$ incident with one of the end vertices of $e$, namely $u$ and $v$. Thus, the degree of the vertex $e$ of $L(G)$ is equal to the total number of edges that are incident with either $u$ or $v$ in $G$, except for the edge $e$ itself.
+
+Clearly, $u$ is incident with to $\deg_G u - 1$ edges other than $e$, and $v$ is incident with $\deg_G v - 1$ edges other than $e$. Thus, the degree of $e$ in $L(G)$ is $\deg_G u  - 1 + \deg_G v - 1$.
+
+By Handshaking Lemma, the size of $L(G)$ is half the sum of its vertex degrees, which is
+\begin{equation*}
+	\frac 1 2 \sum_{uv \in E(G)} (\deg_G u - 1 + \deg_G v - 1).
+\end{equation*}
+As the summation is over the edges of $G$, each vertex $v$ of $G$ appears exactly $\deg v$ times in the above summation, which can therefore be written as
+\begin{equation*}
+	\pushQED{\qed}
+	\frac 1 2 \sum_{v \in V(G)} (\deg_G v)(\deg_G v - 1) = \sum_{v \in V(G)} \binom{\deg_G v}{2}.\qedhere
+\end{equation*}
+\end{proof}
 
 \section{Adjacency Matrices}\label{sec:AdjMat}
 
@@ -465,6 +502,24 @@ Now suppose, for the sake of induction, that the result holds for some $m \ge 1$
 (A^{m + 1})_{ij} = \sum_{k = 1}^{n} (A^m)_{ik} a_{kj}.
 \end{equation*}
 First, note that $a_{kj} = 1$ if and only if $v_k \sim v_j$. Therefore, the above sum is equal to the sum of all $(A^m)_{ik}$ where $v_k \sim v_j$. Now, by the induction hypothesis, $(A^m)_{ik}$ is the number of walks of length $m$ from $v_i$ to $v_k$. If $v_j$ is adjacent to $v_j$, then each walk of length $m$ from $v_i$ to $v_k$, together with the edge from $v_j$ to $v_j$, forms a walk of length $m + 1$ from $v_i$ to $v_j$. Thus, for each $k$ such that $v_k \sim v_j$, $(A^m)_{ik} a_{kj} = (A^m)_{ik}$ is the number of walks of length $m + 1$ from $v_i$ to $v_j$ that pass through $k$. Summing over all $k$, this gives the total number of walks of length $m + 1$ from $v_i$ to $v_j$. Hence the result follows by induction.
+\end{proof}
+
+\begin{Theorem}
+Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v_n\}$. Then
+\begin{enumerate}[label=(\roman*)]
+\item $\tr(A^2) = 2 |E(G)|$
+\item $\tr(A^3) = 6 c_3(G)$
+\end{enumerate}
+where $c_3(G)$ denotes the number of triangles in $G$.
+\end{Theorem}
+
+\begin{proof}
+We know that $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_j$.
+\begin{enumerate}[label=(\roman*)]
+\item Hence, the $i$\nth diagonal entry of $A^2$, viz. $(A^2)_{ii}$, is the number of walks of length $2$ from $v_i$ to itself. Any walk of length $2$ from $v_i$ to itself is of the form $v_i v_j v_i$, where $v_j$ is a vertex adjacent to $v_i$. Thus, the number of such walks is equal to the number of vertices adjacent to $v_i$, i.e. $\deg v_i$. Hence, $\tr(A^2) = \sum_{i=1}^n \deg v_i = 2|E(G)|$, by Handshaking Lemma.
+
+\item Similarly, $(A^3)_{ii}$ is the number of walks of length $3$ from $v_i$ to itself. Any such walk is of the form $v_i v_j v_k v_i$, which implies that $v_i$, $v_j$, and $v_k$ form a triangle in $G$. Moreover, each such triangle corresponds to two distinct walks from $v_i$ to itself, when traversed in the two opposite directions. Thus, $(A^3)_{ii}$ is twice the number of triangles having $v_i$ as one of its vertices. Therefore, $\tr(A^3)$ is $6 c_3(G)$, since each triangle contains three vertices, each of which counts the triangle twice in the sum $\tr(A^3)$.
+\end{enumerate}
 \end{proof}
 
 \section{Incidence Matrices}\label{sec:IncMat}
@@ -619,16 +674,16 @@ The step-by-step result of the algorithm is tabulated below.
 \begin{center}
 \def\arraystretch{1.3}
 \begin{tabular}{c|>{\centering\arraybackslash}p{0.4\textwidth}|>{\centering\arraybackslash}p{0.2\textwidth}|c}
-Step & $E(T)$ & $V(T)$ & Total weight \\
+Step & Edge added & Vertex added & Total weight \\
 \hline
-1 & $\varnothing$ & $v_1$ & $0$ \\
-2 & $(v_1, v_4)$ & $v_1, v_4$ & $2$ \\
-3 & $(v_1, v_4)$, $(v_4, v_3)$ & $v_1$, $v_4$, $v_3$ & $4$ \\
-4 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$ & $v_1$, $v_4$, $v_3$, $v_5$ & $7$ \\
-5 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$ & $v_1$, $v_4$, $v_3$, $v_5$, $v_6$ & $9$ \\
-6 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$, $(v_6, v_2)$ & $v_1, v_4$, $v_3$, $v_5$, $v_6$, $v_2$ & $10$ \\
-7 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$, $(v_6, v_2)$, $(v_2, v_8)$ & $v_1$, $v_4$, $v_3$, $v_5$, $v_6$, $v_2$, $v_8$ & $13$ \\
-8 & $(v_1, v_4)$, $(v_4, v_3)$, $(v_1, v_5)$, $(v_5, v_6)$, $(v_6, v_2)$, $(v_2, v_8)$, $(v_4, v_7)$ & $v_1$, $v_4$, $v_3$, $v_5$, $v_6$, $v_2$, $v_8$, $v_7$ & $20$ \\
+1 & $-$ & $v_1$ & $0$ \\
+2 & $(v_1, v_4)$ & $v_4$ & $2$ \\
+3 & $(v_4, v_3)$ & $v_3$ & $4$ \\
+4 & $(v_1, v_5)$ & $v_5$ & $7$ \\
+5 & $(v_5, v_6)$ & $v_6$ & $9$ \\
+6 & $(v_6, v_2)$ & $v_2$ & $10$ \\
+7 & $(v_2, v_8)$ & $v_8$ & $13$ \\
+8 & $(v_4, v_7)$ & $v_7$ & $20$ \\
 \end{tabular}
 \end{center}
 \vspace{1em}

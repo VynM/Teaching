@@ -1,0 +1,63 @@
+% !TEX program = xelatex
+
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm, physics}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault, lining, scale=0.9]{FiraSans}
+\usepackage{kmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+\linespread{1.2}
+
+\title{MAC 1103: Propositional Calculus}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item Prove that $S \vee R$ follows from the premises $P  \vee Q$, $P \to R$, and $Q \to S$.
+
+\item Show that $(P \vee Q) \wedge (Q \to R) \wedge (P \to M) \wedge (\neg M) \implies R \wedge (P \vee Q)$.
+
+\item Show that the premises $P \to (Q \to S)$, $\neg R \vee P$, and $Q$ tautologically imply $R \to S$.
+
+\item Show that the following sets of premises are (each) inconsistent:
+\begin{enumerate}
+\item $P \to Q$, $Q \to R$, $R \to \neg P$.
+\item $A \vee B$, $A \to \neg C$, $C \to \neg B$, $C$.
+\item $P \to Q$, $Q \to R$, $Q \to \neg R$, $P$.
+\item $A \to (B \to C)$, $D \to (B \wedge \neg C)$, $A \wedge D$.
+\end{enumerate}
+
+\item Show that the following premises are inconsistent:
+\begin{enumerate}
+\item If Jack misses many classes due to illness, then he fails school.
+\item If Jack fails school, then he is uneducated.
+\item If Jack reads a lot of books, then he is not uneducated.
+\item Jack misses many classes due to illness and reads a lot of books.
+\end{enumerate}
+
+\item Let the propositions $P$, $Q$, and $R$ be defined as follows: \\
+$P$: $\sqrt 2$ is irrational. \\
+$Q$: $\pqty{\sqrt 2}^{\sqrt 2}$ is rational. \\
+$R$: $\pqty{ \pqty{\sqrt 2}^{\sqrt 2} }^{\sqrt 2} = 2$ is rational. \\
+$S$: There exist two irrational numbers $x$ and $y$ such that $x^y$ is rational.
+
+Prove that $S$ follows from the premises $P$, $R$, $P \wedge Q \to S$, and $P \wedge (\neg Q) \wedge R \to S$. That is, show that there exist two irrational numbers $x$ and $y$ such that $x^y$ is rational.
+
+\item 
+\end{enumerate}
+\end{document}

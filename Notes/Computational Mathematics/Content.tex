@@ -398,11 +398,11 @@ Hence, $h \circ (g \circ f) = (h \circ g) \circ f$.
 \end{proof}
 
 \begin{Exercise}
-Show that the following diagram commutes:
+Show that in the diagram below, the square commutes if both the triangles commute.
 \begin{equation*}
 \xymatrix{
-A \ar[r] \ar[d] & B \ar[dl] \ar[d]\\
-C \ar[r] & D
+A \ar[r]^f \ar[d] & B \ar[dl]|-g \ar[d]\\
+C \ar[r]_h & D
 }
 \end{equation*}
 \end{Exercise}
@@ -424,9 +424,52 @@ Let $A$ be a set.
 \end{Exercise}
 
 \subsection{Isomorphisms of Sets}\label{subsec:SetIsos}
+If $f \colon A \to B$ is a function, then a function $g \colon B \to A$ is an \newterm{inverse} of $f$ if $g \circ f = \id_A$ and $f \circ g = \id_B$. Equivalently, $g$ is an inverse of $f$ if the diagram given below commutes.
+\begin{equation*}
+\xymatrix{
+A \ar[d]_{\id_A} \ar[dr]|-f & B \ar[d]^{\id_B} \ar[l]_g\\
+A & B \ar[l]^g
+}
+\end{equation*}
 
+\begin{Exercise}\label{exer:UniqueInverse}
+Prove that any function has at most one inverse. \\[0.5em]
+\hint{Assume that a function $f \colon A \to B$ has two inverses $g$ and $h$, and evaluate $g \circ f \circ h$ in two different ways.}
+\end{Exercise}
 
+A function $f \colon A \to B$ is an \newterm{isomorphism} (of sets) if it has an inverse. Then the unique inverse (see \cref{exer:UniqueInverse}) of $f$ is denoted by $f^{-1}$. Note that $f^{-1}$ is an isomorphism from $B$ to $A$. For any two sets $A$ and $B$, we say that $A$ \newterm{is isomorphic to} $B$ if there is an isomorphism from $A$ to $B$. We write this as $A \cong B$.
 
+\begin{Exercise}
+\mbox{}
+\begin{enumerate}
+\item Show that the identity function on a set is an isomorphism from the set to itself.
+\item Prove that if $f$ and $g$ are isomorphisms, from $A$ to $B$ and from $B$ to $C$, respectively, then $g \circ f$ is an isomorphism from $A$ to $C$.
+\item Show that $\cong$ is an equivalence relation on any collection of sets.
+\end{enumerate}
+\end{Exercise}
+
+Now, we will prove that an isomorphism of sets is exactly the same thing as a bijection.
+
+\begin{Theorem}
+A function $f \colon A \to B$ is an isomorphism if and only if it is a bijection.
+\end{Theorem}
+
+\begin{proof}
+First, suppose that $f$ is a bijection. We need to show that $f$ is an isomorphism from $A$ to $B$ -- i.e., that it has an inverse. We construct the inverse as follows. Define $g \colon B \to A$ as $g(b) = a$, where $a \in A$ is such that $f(a) = b$, for each $b \in B$.
+
+To see that $g$ is well-defined, observe that as $f$ is bijective, for every $b \in B$, there exists an $a \in A$ such that $f(a) = b$, and as $f$ is injective, this element $a$ is unique (i.e., if $f(a') = b = f(a)$, then $a' = a$).
+
+To see that $g$ is the inverse of $f$, first consider any $a \in A$. If $f(a) = b$, then $g(b) = a$, by definition of $g$. That is, $g(f(a)) = a$, which shows that $g \circ f = \id_A$. Next, consider any $b \in B$. Then, by definition of $g$, $g(b) = a \in A$ such that $f(a) = b$. That is, $f(g(b)) = b$, which shows that $f \circ g = \id_B$. Thus, $g$ is the inverse of $f$, and therefore $f$ is an isomorphism.
+
+Conversely, suppose that $f \colon A \to B$ is an isomorphism. We will show that $f$ is a bijection. For any $b \in B$, if we take $a = f^{-1}(b)$, then $f(a) = b$, which shows that $f$ is surjective. To see that $f$ is injective, suppose that $a_1, a_2 \in A$ and $f(a_1) = f(a_2)$. Then $a_1 = f^{-1}(f(a_1)) = f^{-1}(f(a_2)) = a_2$. Hence, $f$ is a bijection.
+\end{proof}
+
+\subsection{Cardinality of Sets}\label{subsec:Cardinality}
+The \newterm{cardinality} of a set is the number of elements in it. As sets can have infinitely many elements, we will define cardinality more rigorously using the concept of set isomorphisms.
+
+\begin{Definition}
+Two sets $A$ and $B$ have the same \newterm{cardinality} if $A \cong B$. If $A \cong \{1, \ldots, n\}$, then $A$ is \newterm{finite} of cardinality $n$. If $A \cong \mathbb N$, then $A$ is \newterm{countably infinite}. In either case, $A$ is \newterm{countable}. Otherwise, $A$ is \newterm{uncountable} or \newterm{uncountably infinite}.
+\end{Definition}
 
 %\begin{appendices}
 %
