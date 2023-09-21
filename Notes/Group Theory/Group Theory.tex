@@ -516,7 +516,7 @@ Let $G$ be a group of order $p$, where $p$ is a prime number. Since $p \ge 2$, $
 \section{Normal Subgroups}\label{sec:NormSubs}
 Given a group $G$, the \emph{conjugate} of an element $g \in G$ by an element $x \in G$ is the element $xgx^{-1}$. Note that $xgx^{-1}$ is different from $g$ unless $x$ commutes with $g$. If $S \subseteq G$ and $x$ is any element of $G$, then we define
 \begin{equation*}
-xSx^{-1} = \{\, xSx^{-1} \mid n \in H \,\}
+xSx^{-1} = \{\, xnx^{-1} \mid n \in H \,\}
 \end{equation*}
 which is the set of all conjugates of elements of $S$ by the (fixed) element $x$.
 
@@ -542,7 +542,7 @@ For any group, the trivial subgroup and the whole group are always normal subgro
 \end{Exercise}
 
 \begin{Theorem}
-Let $N \le G$. Then $N \unlhd G$ if and only if $\forall x \in G$, $xNx^{-1} = G$.
+Let $N \le G$. Then $N \unlhd G$ if and only if $\forall x \in G$, $xNx^{-1} = N$.
 \end{Theorem}
 \begin{proof}
 If $N \unlhd G$, then for any $x \in G$, $xNx^{-1} \subseteq N$. We must prove that $N \subseteq xNx^{-1}$ as well. Let $n \in N$. Now (with $x^{-1}$ in place of $x$), $x^{-1}Nx \subseteq N \implies x^{-1}nx \in N \implies x^{-1}nx = n'$, for some $n' \in N$. Then $n = xn'x^{-1} \in xNx^{-1}$. Thus, $\forall n \in N$, $n \in xNx^{-1}$, which shows that $N \subseteq xNx^{-1}$.
