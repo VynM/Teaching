@@ -1,0 +1,52 @@
+% !TEX program = xelatex
+
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top = 20mm, bottom = 18mm, left=10mm, right = 10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*.}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault, lining, scale=0.9]{FiraSans}
+\usepackage{kmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\renewcommand{\th}{\textsuperscript{th}}
+
+\setlength{\parindent}{0pt}
+\linespread{1.2}
+
+\title{Lattice Theory Problems}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{enumerate}[leftmargin=*]
+\item If $x$ and $y$ are two elements of a lattice, show that $x \wedge y = y$ if and only if $x \vee y = x$.
+
+\item If $x$, $y$, and $z$ are elements of a lattice, show that
+\begin{align*}
+x \vee (y \wedge z) \le (x \vee y) \wedge (x \vee z) \\
+(x \wedge y) \vee (x \wedge z) \le x \wedge (y \vee z).
+\end{align*}
+
+\item Show that in an algebraic system $(L, \oplus, \otimes)$, where $\oplus$ and $\otimes$ are binary operations satisfying the absorption law, $\oplus$ and $\otimes$ are idempotent.
+
+\item Let $a$, $b$, $c$ be elements in a lattice $(L, \le)$. Show that $a \le b$ if and only if
+\begin{equation*}
+a \vee (b \wedge c) \le b \wedge (a \vee c).
+\end{equation*}
+
+\item Show that a lattice $L$ is distributive if and only if for all elements $x, y, z \in L$, $(x \vee y) \wedge z \le x \vee (y \wedge z)$.
+
+\item Show that every chain is a distributive lattice. Which chains are Boolean lattices?
+
+\item Give an example of a complemented lattice that is not distributive.
+\end{enumerate}
+\end{document}
