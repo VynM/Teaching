@@ -5,6 +5,8 @@
 
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
 
+\usepackage{physics}
+
 \usepackage{enumitem}
 \setlist[enumerate,1]{label=\arabic*.}
 
@@ -47,6 +49,22 @@ a \vee (b \wedge c) \le b \wedge (a \vee c).
 
 \item Show that every chain is a distributive lattice. Which chains are Boolean lattices?
 
+\item Let $L$ be a distributive lattice. Show that for $a, b \in L$, if there exists an element $x \in L$ such that $a \vee x = b \vee x$ and $a \wedge x = b \wedge x$, then $a = b$.
+
 \item Give an example of a complemented lattice that is not distributive.
+
+\item Does the lattice $(\mathbb N, \mid)$ (where $\mathbb N = \{1, 2, 3, \ldots\}$) contain
+\begin{enumerate}
+\item a universal lower bound?
+\item a universal upper bound?
+\end{enumerate}
+
+\item Does the lattice $(\mathbb N_0, \mid)$ (where $\mathbb N_0 = \mathbb N \cup \{0\}$) contain a universal upper bound?
+
+\item Show that every finite lattice contains a universal upper bound and a universal lower bound.
+
+\item Show that if a lattice contains both $0$ and $1$, then they are the unique complements of each other.
+
+\item Compute the CNF and DNF of the expression $E(a, b, c) = \overline{\pqty{ a \wedge \pqty{ \overline b \vee \pqty{ \overline c \wedge a } } }}$ over the $2$-valued Boolean algebra.
 \end{enumerate}
 \end{document}
