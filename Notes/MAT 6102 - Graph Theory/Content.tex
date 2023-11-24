@@ -82,6 +82,7 @@ In any graph on two or more vertices, at least two vertices have the same degree
 Let $G$ be a graph of order $n \ge 2$. The minimum possible degree of a vertex of $G$ is $0$, and the maximum possible degree is $n - 1$ (as there are only $n$ vertices in $G$). Thus, in order for the $n$ vertices of $G$ to have different degrees, the $n$ different degrees must be exactly $0, 1, \ldots, n - 1$. But if some vertex of $G$ has degree $n - 1$, then it is adjacent to all other vertices, and therefore $G$ cannot have a vertex of degree $0$. Thus, at least two vertices of $G$ have the same degree.
 \end{proof}
 
+
 \section{Subgraphs and Complements}\label{sec:Subgraphs}
 
 A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e., $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e., every edge of $G$ that joins two vertices of $H$ is present in $H$.
@@ -109,6 +110,7 @@ If $G$ is a graph of order $n$, and $\deg_G v = k$, what is $\deg_{\overline G} 
 \begin{Exercise}
 Show that if $G$ and $\overline G$ are regular graphs of order $n$ with the same regularity, then the regularity is even and $n = 4t + 1$ for some integer $t$.
 \end{Exercise}
+
 
 \section{Walks, Paths, and Cycles}\label{sec:Walks}
 
@@ -153,6 +155,7 @@ Let $P = v_0 v_1 \cdots v_k$ be a longest path in $G$. Then all the neighbours o
 Next, let $i \le k$ be maximal such that $v_i \sim v_0$. Then $v_0 \cdots v_i v_0$ is a cycle of length $i + 1$, and $i \ge \delta(G)$.
 \end{proof}
 
+
 \section{Distances}\label{sec:Distances}
 
 The \newterm{distance} between two vertices $u$ and $v$ of a graph $G$ is the length of a shortest path between $u$ and $v$ -- such a shortest path between $u$ and $v$ is a \newterm{geodesic} from $u$ to $v$. Thus, the distance between $u$ and $v$ in $G$, denoted by $d_G(u, v)$ is the length of a geodesic from $u$ to $v$ in $G$. When the graph $G$ is clear from the context, we will write $d_G(u, v)$ as $d(u, v)$.
@@ -169,6 +172,7 @@ The \newterm{diameter} of $G$ is the maximum of the eccentricities of vertices o
 \end{align*}
 
 The set of all vertices of $G$ having minimum eccentricity, i.e., the set of all $v \in V(G)$ such that $\ecc v = \rad G$, is the \newterm{centre} of $G$.
+
 
 \section{Connectedness}\label{sec:Connectedness}
 
@@ -198,6 +202,7 @@ Now, consider any two vertices $x$ and $y$ other than $u$ and $v$. In $G$, $x$ c
 If $G$ is a graph of order $n$ and minimum degree $\delta(G) \ge \frac{n-1}{2}$, show that $G$ is connected and $\diam G \le 2$.
 \end{Exercise}
 
+
 \section{Graph Isomorphism}\label{sec:Isomorphism}
 
 An \newterm{isomorphism} from a graph $G$ to a graph $H$ is a bijective\footnote{injective and surjective; i.e., $1$-$1$ and onto} function $f \colon V(G) \to V(H)$ such for all vertices $u$ and $v$ of $G$, $u \sim_G v$ if and only if $f(u) \sim_H f(v)$. In other words, a graph isomorphism is a bijection from the vertex set of the first graph to that of the second, that preserves both edges and non-edges. If there exists an isomorphism from $G$ to $H$, then $G$ and $H$ are \newterm{isomorphic}. Then we write $G \cong H$.
@@ -215,6 +220,7 @@ Next, suppose that $G \cong H$. Then there exists an isomorphism $f$ from $G$ to
 
 Finally, suppose that $G \cong H$ and $H \cong K$. Then there exist isomorphisms $f$ from $G$ to $H$ and $g$ from $H$ to $K$. We claim that $g \circ f$ is an isomorphism from $G$ to $K$. Indeed, $g \circ f$ is a function from $V(G)$ to $V(K)$, and being a composition of bijections, is itself a bijection. Now, suppose $u$ and $v$ are two vertices of $G$. Then $u \sim_G v$ if and only if $f(u) \sim_H f(v)$ (since $f$ is an isomorphism from $G$ to $H$) if and only if $g(f(u)) \sim_K g(f(v))$ (since $g$ is an isomorphism from $H$ to $K$). Thus, $g \circ f$ is an isomorphism from $G$ to $K$. Therefore, $\cong$ is transitive.
 \end{proof}
+
 
 \section{Self-Complementary Graphs}\label{sec:SC}
 
@@ -265,6 +271,7 @@ Construct a self-complementary graph of order $9$.
 Show that for each positive integer $n$ of the form $4k$ or $4k + 1$, where $k$ is an integer, there exists at least one self-complementary graph of order $n$.
 \end{Exercise}
 
+
 \section{Bipartite Graphs}\label{sec:Bipartite}
 
 A graph $G = (V, E)$ is \newterm{bipartite} if its vertex set $V$ can be partitioned into two subsets $V_1$ and $V_2$ such that no two vertices in $V_i$ are adjacent, for $i = 1, 2$. That is, there exist two non-empty, disjoint subsets $V_1, V_2 \subseteq V$ such that $V_1 \cup V_2 = V$, and every edge of $G$ (if any) joins a vertex in $V_1$ with a vertex in $V_2$. Then we say that $(V_1, V_2)$ is a \newterm{bipartition} of $G$.
@@ -296,6 +303,7 @@ If $G$ is a bipartite graph with bipartition $(V_1, V_2)$, show that
 \sum_{v \in V_1} \deg v = \sum_{v \in V_2} \deg v.
 \end{equation*}
 \end{Exercise}
+
 
 \section{Trees}\label{sec:Trees}
 
@@ -349,6 +357,7 @@ Consider $T$, of order $n \ge 3$. Then $T$ has at least two pendant vertices. Le
 
 Then the vertices of $T'$ have eccentricities exactly one less than their eccentricities in $T$, and therefore, $T$ and $T'$ have the same centre. Hence, the result follows by induction.
 \end{Solution*}
+
 
 \section{Cartesian Product of Graphs}\label{sec:CartProds}
 
@@ -481,6 +490,7 @@ where $c_4(v_i)$ denotes the number of cycles of length $4$ containing the verte
 \end{align*}
 \end{Exercise}
 
+
 \section{Incidence Matrices}\label{sec:IncMat}
 
 Consider an $(n, m)$-graph $G$ having vertex set $\{v_1, \ldots, v_n\}$ and edge set $\{e_1, \ldots, e_m\}$. The \newterm{incidence matrix} of $G$ is the $n \times m$ matrix $B = B(G)$ whose $(i, j)$-entry is $1$ if the vertex $v_i$ is incident with the edge $e_i$, and $0$ otherwise.
@@ -571,4 +581,111 @@ The adjacency matrix of the line graph of $G$ can be computed from the incidence
 	
 	For $i \ne j$, the dot product of the $i$\nth and $j$\nth columns of $B$ will be $1$ if the edges $e_i$ and $e_j$ are adjacent (i.e., have one vertex in common), and $0$ otherwise -- note that the dot product cannot be $2$, as no two distinct columns of $B$ can be equal. Thus, for $i \ne j$, the $(i, j)$-entry of $B^T B$, which is equal to the $(i, j)$ entry of $B^T B - 2I$, is $1$ if and only if the edges $e_i$ and $e_j$ are adjacent in $G$, or equivalently, the vertices $e_i$ and $e_j$ of $\LG(G)$ are adjacent. Thus, $B^T B - 2I$ is the adjacency matrix of $G$.
 \end{proof}
+
+A graph $G$ is said to be a line graph if it is the line graph of some graph $H$. Not every graph is a line graph, as shown by the following example.
+
+\begin{Example}
+Consider the graph $G = K_{1, 3}$, the star graph of order $4$. Suppose $G$ is the line graph of some graph $H$. Then $H$ has four edges, say $e_1, e_2, e_3, e_4$, which are the four vertices of $G$. Suppose $e_1$ is the central vertex of $G$. Then, as the vertices $e_2$ and $e_3$ are adjacent to $e_1$ in $G$, the edge $e_1$ of $H$ has one end-vertex in common with each of $e_2$ and $e_3$. Let $u$ be the vertex of $e_1$ common with $e_2$ and $v$ the vertex of $e_1$ common with $e_3$. Note that $u \ne v$, since $e_2$ and $e_3$ are not adjacent in $G$. Now, since $e_4$ is adjacent to $e_1$ in $G$, the edge $e_4$ of $H$ has either $u$ or $v$ as an end-vertex. Then $e_4$ is adjacent to either $e_2$ or $e_3$ in $G$, which is not possible.
+\end{Example}
+
+
+\section{Blocks and Cutvertices}\label{sec:Blocks}
+
+A vertex $v$ of a graph $G$ is a \newterm{cutvertex} if $G - v$ has more components than $G$. A connected graph is \newterm{nonseparable} or \newterm{$2$-connected} if it has no cutvertices. A maximal nonseparable subgraph of a graph $G$ is a \newterm{block} of $G$. A nonseparable is itself also called a block.
+
+\begin{Theorem}\label{thm:CutverChar}
+If $G$ is a connected graph, and $v$ is any vertex of $G$, then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item\label{it:CutverChar1} $v$ is a cutvertex of $G$.
+\item\label{it:CutverChar2} There exist vertices $u$ and $w$ of $G$, distinct from $v$, such that every $u$-$w$ path passes through $v$.
+\item\label{it:CutverChar3} There exists a partition of $V(G) - \{v\}$ into two non-empty subsets $U$ and $W$ such that for all $u \in U$ and $w \in W$, every $u$-$w$ path passes through $v$.
+\end{enumerate}
+\end{Theorem}
+
+\begin{proof}
+\cref{it:CutverChar1} $\implies $ \cref{it:CutverChar3}. Since $v$ is a cutvertex, the graph $G - v$ is disconnected, i.e., it has two or more components. Let $U$ be the set of all the vertices in any one of the components, and let $W$ be the set of all the remaining vertices of $G - v$. Clearly, $\{U, W\}$ is a partition of $V(G) - \{v\}$. Now, if $u \in U$ and $w \in W$, then $u$ and $w$ are in different components of $G - v$, which implies that any path from $u$ to $w$ must pass through $v$.
+
+\noindent \cref{it:CutverChar3} $\implies$ \cref{it:CutverChar2} is obvious as the latter is a special case of the former.
+
+\noindent \cref{it:CutverChar2} $\implies$ \cref{it:CutverChar1}. Consider the graph $G - v$. As every $u$-$w$ path passes through $v$, none of them is present in $G - v$, and therefore $G - v$ is disconnected. Hence, $v$ is a cutvertex of $G$.
+\end{proof}
+
+A \newterm{cutedge} or \newterm{bridge} of a graph $G$ is an edge $e$ of $G$ such that $G - e$ has more components than $G$. The following characterisation of bridges can be proved along similar lines to that of \cref{thm:CutverChar}.
+
+\begin{Theorem}\label{thm:BridgeChar}
+If $G$ is a connected graph, and $e$ is any edge of $G$, then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item\label{it:BridgeChar1} $e$ is a bridge of $G$.
+\item \label{it:BridgeChar2} $e$ is not on any cycle of $G$.
+\item\label{it:BridgeChar3} There exist vertices $u$ and $w$ of $G$ such that every $u$-$w$ path contains $e$.
+\item\label{it:BridgeChar4} There exists a partition of $V(G)$ into two non-empty subsets $U$ and $W$ such that for all $u \in U$ and $w \in W$, every $u$-$w$ path contains $e$. \qed
+\end{enumerate}
+\end{Theorem}
+
+\begin{Theorem}\label{thm:BlockChar}
+If $G$ is a connected graph of order at least $3$, then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item\label{it:BlockChar1} $G$ is a block.
+\item \label{it:BlockChar2} Every two vertices of $G$ lie on a common cycle.
+\item\label{it:BlockChar3} Every vertex and edge of $G$ lie on a common cycle.
+\item\label{it:BlockChar4} Every two edges of $G$ lie on a common cycle. \qed
+\end{enumerate}
+\end{Theorem}
+
+
+\section{Connectivity}\label{sec:Connectivity}
+
+A set $S$ of vertices of a connected graph $G$ is a \newterm{separating set} or \newterm{vertex cut} of $G$ if $G - S$ is disconnected or trivial (i.e. a graph of order $1$). The \newterm{vertex connectivity} (or \newterm{connectivity}) of $G$, denoted by $\kappa(G)$ (or $\kappa$) is the cardinality of a minimum separating set of $G$ -- i.e. the minimum number of vertices $G$ whose removal results in a disconnected or trivial graph. Similarly, a \newterm{disconnecting set} of a connected graph $G$ is a set $S$ of edges of $G$ such that $G - S$ is disconnected or trivial. The cardinality of a minimum disconnecting set of $G$ is the \newterm{edge connectivity} of $G$, and is denoted by $\lambda(G)$ (or $\lambda$). The vertex connectivity and edge connectivity of a disconnected graph are defined to be $0$.
+
+\begin{Theorem}\label{thm:ConnectivityBounds}
+For any graph $G$, $\kappa(G) \le \lambda(G) \le \delta(G)$.
+\end{Theorem}
+
+\begin{proof}
+If $\delta(G) = 0$, then clearly, $\lambda(G) = 0$. If $\delta(G) \ge 1$, then disconnecting all the edges incident with a vertex of degree $\delta(G)$ disconnects $G$, and hence $\lambda(G) \le \delta(G)$.
+
+If $G$ is disconnected, then $\kappa(G) = \lambda(G) = 0$. If $\lambda(G) = 1$, then $G$ has a bridge, say $e$, and hence the removal of any one end-vertex of $e$ results in a disconnected graph or $K_1$, hence $\kappa(G) = 1$.
+
+Next, suppose that $G$ has $\lambda \ge 2$ edges whose removal disconnects it. Then the removal of $\lambda - 1$ of these edges results in a graph with a bridge $e = uv$. Each of these edges has at least one end-vertex distinct from $u$ and $v$. From each edge, remove one such vertex. Then the edges are removed as well, and the resulting graph is either disconnected, in which case $\kappa < \lambda$, or else has $uv$ as a bridge. Then, removal of $u$ or $v$ gives a disconnected or trivial graph. Hence, $\kappa \le \lambda$.
+\end{proof}
+
+\begin{Theorem}
+For all integers $a$, $b$, $c$, with $0 \le a \le b \le c$, there exists a graph $G$ with $\kappa(G) = a$, $\lambda(G) = b$, and $\delta(G) = c$. \qed
+\end{Theorem}
+
+It is easy to see that $\kappa(K_n) = n -1$ and $\kappa(K_{p,q}) = \min(p, q)$. The following theorem gives the connectivity of the hypercube.
+
+\begin{Theorem}
+For any $k \ge 0$, the connectivity of the hypercube $Q_k$ is $\kappa(Q_k) = k$.
+\end{Theorem}
+
+\begin{proof}
+As $Q_k$ is $k$-regular, $\kappa(Q_k) \le k$. We claim that every vertex cut of $Q_k$ contains at least $k$ vertices. We prove this claim by induction on $k$. For $k = 0$ or $1$, it is obvious.
+
+Suppose the claim holds for $Q_{k - 1}$, and consider $G = Q_k$, $k \ge 2$. Recall that $Q_k \cong K_2 \times Q_{k - 1}$. Thus $G$ has two subgraphs $G_1$ and $G_2$, each isomorphic to $Q_{k - 1}$, joined by a perfect matching $M$ of $G$. Now, let $S$ be any vertex cut of $G$. If both $G_1 - S$ and $G_2 - S$ are connected, then $G - S$ is also connected, unless $S$ contains at least one end-vertex of every the matching $M$. Then, $|S| \ge |M| = 2^{k - 1} \ge k$, as $k \ge 2$.
+
+Next, suppose that $G_1 - S$ is disconnected. Then $|S \cup V(G_1)| \ge k - 1 = \kappa(Q_{k - 1})$ (by the induction hypothesis). If $S$ contains no vertex of $G_2$, then, as $G_2$ is connected, and every vertex of $G_1 - S$ has a neighbour in $G_2$, $G - S$ is connected, which is a contradiction. Thus, $S$ contains at least one vertex of $G_2$. Hence, $|S| \ge (k - 1) + 1 = k$, as required.
+\end{proof}
+
+\begin{Corollary}
+For any $k \ge 0$, the edge connectivity of the hypercube $Q_k$ is $\lambda(Q_k) = k$.
+\end{Corollary}
+
+\begin{proof}
+From \cref{thm:ConnectivityBounds}, $k = \kappa(Q_k) \le \lambda(Q_k) \le \delta(Q_k) = k$.
+\end{proof}
+
+\begin{Theorem}
+If $G$ is $3$-regular, then $\kappa(G) = \lambda(G)$.
+\end{Theorem}
+
+\begin{proof}
+Let $S$ be a minimum vertex cut of $G$. We know that $\lambda(G) \ge \kappa(G) = |S|$. We will show that $\lambda(G) = \kappa(G)$ by constructing a disconnecting set of size $\kappa(G) = |S|$.
+
+
+Let $H_1$ and $H_2$ be two components of $G - S$. Since $S$ is a minimum vertex cut, every vertex in $S$ has a neighbour in $H_1$ and a neighbour in $H_2$. For each vertex $v$ of $S$ that has no neighbour inside $S$, delete the edge from $v$ to that subgraph $H_1$ or $H_2$ in which it has a unique neighbour. For each vertex $u$ of $S$ that has a neighbour in $S$, delete the edge from $u$ to $H_1$. Then the resulting graph is disconnected, and hence $\lambda(G) = |S| = \kappa(G)$.
+\end{proof}
+
+
+%\section{Covering and Independence}\label{sec:CoveringIndependence}
 
