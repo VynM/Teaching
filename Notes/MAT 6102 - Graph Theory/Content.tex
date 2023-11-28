@@ -739,5 +739,53 @@ Now, let $M_1$ be a maximum set of independent edges. Form an edge cover $Y$ of 
 Next, let $N_1$ be a minimum edge cover of $G$. Then an independent set of edges is obtained by taking one edge of each component of the induced graph $\langle N_1 \rangle$. Hence, $\beta_1 \ge n - |N_1| = n - \alpha_1$, which implies that $\alpha_1 + \beta_1 \ge n$. Thus, $\alpha_1 + \beta_1 = n$.
 \end{proof}
 
+
+\section{Matching}\label{sec:Matching}
+
+A \newterm{matching} of $G$ is a set of independent edges of $G$. A vertex is \newterm{saturated} by a matching $M$ (it is \newterm{$M$-saturated}) if it is incident to some edge of $M$, and otherwise it is \newterm{unsaturated} by $M$ (it is \newterm{$M$-unsaturated}). A matching is
+\begin{enumerate}[label=(\roman*)]
+\item \newterm{maximal} if it is not properly contained in any other matching.
+\item \newterm{maximum} if it has greatest cardinality among all matchings.
+\item \newterm{perfect} if it saturates all vertices.
+\end{enumerate}
+
+A path of $G$ is \newterm{$M$-alternating} if its edges are alternately from $M$ and $E(G) \setminus M$. An \newterm{$M$-augmenting} path is an $M$-alternating path whose end-vertices are $M$-unsaturated.
+
+\begin{Note*}
+If $P$ is an $M$-augmenting path, we can obtain a matching of cardinality $|M| + 1$ by replacing the edges of $P$ in $M$ by the edges of $P$ not in $M$.
+\end{Note*}
+
+Recall that the symmetric difference of two sets $A$ and $B$ is the set $A \symdiff B = (A \setminus B) \cup (B \setminus A)$. If $M$ and $M'$ are two matchings of a graph $G$, then the \newterm{symmetric difference} of $M$ and $M'$ (also denoted $M \symdiff M'$) is the graph induced by the set $M \symdiff M'$.
+
+\begin{Lemma}\label{lem:SymmDiffMatchings}
+Every component of the symmetric difference of two matchings is a path or an even cycle.
+\end{Lemma}
+
+\begin{proof}
+Let $F = M \symdiff M'$. As $M$ and $M'$ are matchings, every vertex has at most one incident edge from each of them. Hence, $\Delta(F) \le 2$. As the edges must be alternately from $M \setminus M'$ and $M' \setminus M$, each cycle is of even length.
+\end{proof}
+
+\begin{Theorem}[Berge]
+A matching $M$ of $G$ is maximum if and only if $G$ has no $M$-augmenting path.
+\end{Theorem}
+
+\begin{proof}
+If $G$ has an $M$-augmenting path $P$, then the matching obtained from $M$ by removing the edges of $P$ that are in $M$ and adding those edges of $P$ that are not in $M$ has cardinality $|M| + 1$, which implies that $M$ cannot be a maximum matching. Thus, if $M$ is a maximum matching, $G$ has no $M$-augmenting path.
+
+Conversely, suppose that $M$ is not a maximum matching in $G$. Then $G$ has a matching $M'$, with $|M'| > |M|$. Let $F = M \symdiff M'$. Then, by \cref{lem:SymmDiffMatchings}, every component of $F$ is a path or an even cycle, and each even cycle contains an equal number of edges from $M$ and $M'$. Hence, as $|M'| > |M|$, at least one component of $F$ must be path, which is an $M$-augmenting path of $G$.
+\end{proof}
+
+\subsection*{Hall's matching condition}\label{subsec:Hall}
+Let $G$ be a bipartite graph with bipartition $(V_1, V_2)$. If $M$ is a matching of $G$ that saturates $V_1$ (i.e. saturates all vertices in $V_1$), then observe that for every subset $S \subseteq V_1$, $|N_G(S)| \ge |S|$, where $N_G(S)$ is the set of all vertices of $G$ that have at least one neighbour in $S$ -- equivalently, it is the union of the neighbourhoods of all the vertices in $S$.
+
+\begin{Definition}[Hall's Condition]\label{def:Hall}
+If $G$ is a bipartite graph, then a partite set $X$ of $G$ is said to satisfy \newterm{Hall's condition} if $|N_G(S) \ge |S|$ for all $S \subseteq X$.
+\end{Definition}
+
+\begin{Theorem}[Hall's Theorem]\label{thm:Hall}
+A bipartite graph $G$ with bipartition $(V_1, V_2)$ has a matching that saturates $V_1$ if and only if $V_1$ satisfies Hall's condition.
+\end{Theorem}
+
+
 %\section{Graph Colouring}\label{sec:Colouring}
 
