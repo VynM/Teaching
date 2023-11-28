@@ -687,5 +687,57 @@ Let $H_1$ and $H_2$ be two components of $G - S$. Since $S$ is a minimum vertex 
 \end{proof}
 
 
-%\section{Covering and Independence}\label{sec:CoveringIndependence}
+\section{Covering and Independence}\label{sec:CoveringIndependence}
+
+A vertex $v$ and an edge $e$ of a graph $G$ \newterm{cover} each other if $v$ is incident on $e$. A \newterm{vertex cover} is a set of vertices of that cover all the edges. An \newterm{edge cover} is a set of edges that cover all vertices.
+
+A vertex (or edge) cover is \newterm{minimal} if no proper subset of itself is a vertex (or edge) cover. It is \newterm{minimum} if it has the least cardinality among all vertex (or edge) covers of the graph. The cardinality of a minimum vertex cover of $G$ is the \newterm{vertex covering number} of $G$, denoted by $\alpha_0(G)$, and the cardinality of a minimum edge cover of $G$ is the \newterm{edge covering number} of $G$, denoted by $\alpha_1(G)$.
+
+A set of vertices or a set of edges of $G$ is \newterm{independent} if no two of its elements are adjacent. An independent set of vertices (or edges) is \newterm{maximal} if it is not properly contained in any independent set, and is \newterm{maximum} if it has the largest cardinality among all independent sets of vertices (or edges). The \newterm{vertex independence number} of $G$, denoted by $\beta_0(G)$, is the cardinality of a maximum independent set of vertices of $G$. The \newterm{edge independence number} of $G$, denoted by $\beta_1(G)$, is the cardinality of a maximum independent set of edges of $G$.
+
+\begin{Example}\label{ex:CoveringIndependence}
+The values of the parameters $\alpha_0$, $\beta_0$, $\alpha_1$, and $\beta_1$ for some families of graphs are listed below.
+\def\arraystretch{1.4}
+\begin{equation*}
+\begin{array}{|c|cccc|}
+\hline
+G		&	\alpha_0			&	\beta_0				&	\alpha_1			&	\beta_1 \\
+\hline
+K_n		&	n - 1				&	1					&	\ceil{\frac n 2}	&	\floor{\frac n 2} \\
+K_{p,q}	&	\min(p, q)			&	\max(p, q)			&	\max(p, q)			&	\min(p, q) \\
+C_n		&	\ceil{\frac n 2}	&	\floor{\frac n 2}	&	\floor{\frac n 2}	&	\ceil{\frac n 2} \\
+P_n		&	\floor{\frac n 2}	&	\ceil{\frac n 2}	&	\ceil{\frac n 2}	&	\floor{\frac n 2} \\
+Q_k		&	2^{k-1} = \frac n 2	&	2^{k-1} = \frac n 2	&	2^{k-1} = \frac n 2	&	2^{k-1} = \frac n 2 \\
+\hline
+\end{array}
+\end{equation*}
+\end{Example}
+
+\begin{Exercise}
+Justify the values of the parameters given in \cref{ex:CoveringIndependence}.
+\end{Exercise}
+
+\begin{Exercise}
+Prove that a set $S$ of vertices of $G$ is independent if and only if $V(G) \setminus S$ is a vertex cover of $G$.
+\end{Exercise}
+
+\subsection*{Gallai's theorem}
+Notice that for each graph $G$ in \cref{ex:CoveringIndependence}, $\alpha_0(G) + \beta_0(G) = \alpha_1(G) + \beta_1(G) = n$, the order of $G$. This is true in general for all graphs, and this fact is known as Gallai's theorem.
+
+\begin{Theorem}[Gallai]
+For any graph $G$ of order $n$,
+\begin{equation*}
+\alpha_0(G) + \beta_0(G) = \alpha_(G) + \beta_1(G) = n.
+\end{equation*}
+\end{Theorem}
+
+\begin{proof}
+Let $M_0$ be a maximum set of independent vertices of $G$. Then $\beta_0 = M_0$, and $V \setminus M_0$ is a vertex cover. Hence, $\alpha_0 \le \vqty{V \setminus M_0} = n - \beta_0$. Let $N_0$ be a minimum cover of $G$. Then $\alpha_0 = N_0$, and $V \setminus N_0$ is independent. Hence, $\beta_0 \ge \vqty{V \setminus N_0} = n - \alpha_0$. Thus, $\alpha_0 + \beta_0 = n$.
+
+Now, let $M_1$ be a maximum set of independent edges. Form an edge cover $Y$ of $G$ by adding to $M_1$ one edge incident with each vertex not covered by $M_1$. Then $|Y| = n - |M_1| = n - \beta_1$, which implies that $n - \beta_1 \ge \alpha_1$, i.e. $\alpha_1 + \beta_1 \le n$.
+
+Next, let $N_1$ be a minimum edge cover of $G$. Then an independent set of edges is obtained by taking one edge of each component of the induced graph $\langle N_1 \rangle$. Hence, $\beta_1 \ge n - |N_1| = n - \alpha_1$, which implies that $\alpha_1 + \beta_1 \ge n$. Thus, $\alpha_1 + \beta_1 = n$.
+\end{proof}
+
+%\section{Graph Colouring}\label{sec:Colouring}
 
