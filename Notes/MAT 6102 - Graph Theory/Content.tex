@@ -778,14 +778,174 @@ Conversely, suppose that $M$ is not a maximum matching in $G$. Then $G$ has a ma
 \subsection*{Hall's matching condition}\label{subsec:Hall}
 Let $G$ be a bipartite graph with bipartition $(V_1, V_2)$. If $M$ is a matching of $G$ that saturates $V_1$ (i.e. saturates all vertices in $V_1$), then observe that for every subset $S \subseteq V_1$, $|N_G(S)| \ge |S|$, where $N_G(S)$ is the set of all vertices of $G$ that have at least one neighbour in $S$ -- equivalently, it is the union of the neighbourhoods of all the vertices in $S$.
 
-\begin{Definition}[Hall's Condition]\label{def:Hall}
-If $G$ is a bipartite graph, then a partite set $X$ of $G$ is said to satisfy \newterm{Hall's condition} if $|N_G(S) \ge |S|$ for all $S \subseteq X$.
-\end{Definition}
+If $G$ is a bipartite graph, then a partite set $X$ of $G$ is said to satisfy \newterm{Hall's condition} if $|N_G(S)| \ge |S|$ for all $S \subseteq X$.
 
 \begin{Theorem}[Hall's Theorem]\label{thm:Hall}
 A bipartite graph $G$ with bipartition $(V_1, V_2)$ has a matching that saturates $V_1$ if and only if $V_1$ satisfies Hall's condition.
 \end{Theorem}
 
+\begin{proof}
+If $G$ has a matching that saturates $V_1$, then distinct vertices $u$ and $v$ in $V_1$ have distinct neighbours via the edges of the matching incident on them. Thus, for any $S \subseteq V_1$, $|N_G(S)| \ge |S|$.
 
-%\section{Graph Colouring}\label{sec:Colouring}
+For the converse, suppose that $G$ has a maximum matching $M$ that does not saturate $V_1$. We will show that $V_1$ does not satisfy Hall's condition, by constructing a set $S$ for which $|N_G(S)| < |S|$.
 
+Let $u$ be an $M$-unsaturated vertex in $V_1$. Let $S$ be the vertices in $V_1$ reachable by an $M$-alternating path, and let $T$ be the vertices in $V_2$ reachable by an $M$-alternating path. Note that $u \in S$.
+
+\noindent Claim: $M$ matches $T$ with $S \setminus \{u\}$.
+
+First, observe that any $M$-alternating path from $u$ reaches $V_2$ along edges not in $M$ and returns to $V_1$ along edges in $M$. Thus, each vertex of $S \setminus \{u\}$ is reached by an edge in $M$ from a vertex in $T$. Every vertex in $T$ must be $M$-saturated, for otherwise, $G$ would have an $M$-augmenting path, which is not possible as $M$ is a maximum matching. Therefore, any $M$-alternating path from $u$ to a vertex $y \in T$ can be extended to a vertex in $S$ via some edge of $M$. These edges define a bijection between $T$ and $S \setminus \{u\}$.
+
+Thus, $|T| = |S| - 1$, and $T \subseteq N_G(S)$. We show that $T = N(S)$. Suppose, to the contrary, that some vertex $Y \in V_2 \setminus T$ has a neighbour $x \in S$. The edge $xy$ cannot be in $M$, as $u$ is $M$-unsaturated, and the other vertices in $S$ are matched to $T$ by $M$. Hence, an $M$-alternating path from $u$ to $x$ can be extended to $y$ by the edge $xy$, which contradicts the assumption that $y \notin T$. Therefore, $y$ cannot have such a neighbour $x \in S$.
+
+Now, as $T = N_G(S)$, $|N_G(S)| = |T| = |S| - 1 < |S|$, and hence $V_1$ does not satisfy Hall's condition.
+\end{proof}
+
+\begin{Corollary}\label{cor:k-regBipartitePM}
+For each positive integer $k$, every $k$-regular bipartite graph has a perfect matching.
+\end{Corollary}
+
+\begin{proof}
+Let $G$ be a $k$-regular bipartite graph with bipartition $(V_1, V_2)$. Then $|V_1| = |V_2|$. Hence, a maximum matching is a perfect matching if and only if it saturates $V_1$. We show this by proving that $V_1$ satisfies Hall's matching condition.
+
+Consider any $S \subseteq V_1$. Then the induced subgraph $H = \langle S \cup N_G(S) \rangle$ is a bipartite subgraph in which every vertex of $S$ has degree $k$. Hence, $k|S| = \sum_{v \in N_G(S)} \deg_H v \le k|N_G(S)|$, which implies that $|N_G(S)| \ge |S|$. That is, $V_1$ satisfies Hall's condition, as required.
+\end{proof}
+
+
+\section{Graph Colouring}\label{sec:Colouring}
+
+A \newterm{$k$-colouring} of a graph $G$, where $k$ is a non-negative integer, is a function $c \colon V(G) \to S$, where $|S| = k$. The elements of $S$ are \newterm{colours}, and the set of all vertices of $G$ with one colour is a \newterm{colour class}. Henceforth, we will consider $S = \{1, 2, \ldots, k\}$. A $k$-colouring is \newterm{proper} if adjacent vertices receive distinct colours (note that if $c(v) = i$, then we say that the vertex $v$ \newterm{receives} or \newterm{is assigned} the colour $i$). $G$ is \newterm{$k$-colourable} if it has a proper $k$-colouring. The \newterm{chromatic number} of $G$, denoted by $\chi(G)$, is the least $k$ such that $G$ is $k$-colourable. If $\chi(G) = k$, then $G$ is \newterm{$k$-chromatic}, and a $k$-colouring is \newterm{optimal}.
+
+\begin{Exercise}
+Prove the following:
+\begin{enumerate}
+\item $\chi(K_n) = n$.
+
+\item $\chi(C_n) = \begin{cases}
+2, & n\ \text{is even} \\
+3, & n\ \text{is odd}.
+\end{cases}$
+
+\item $\chi(G) = 2$ if and only if $G$ is a bipartite graph with at least one edge.
+
+\item If $H$ is any subgraph of $G$, then $\chi(G) \ge \chi(H)$.
+\end{enumerate}
+\end{Exercise}
+
+A \newterm{clique} of $G$ is a maximal complete subgraph of $G$. The order of the largest clique of $G$ is the \newterm{clique number} of $G$, denoted by $\omega(G)$.
+
+\begin{Theorem}
+For any graph $G$ of order $n$,
+\begin{eqnarray}
+\max\pqty{ \omega(G),  \frac n {\beta_0(G)} } \le \chi(G) \le \Delta(G) + 1.
+\end{eqnarray}
+\end{Theorem}
+
+\begin{proof}
+Since the clique of order $\omega(G)$ is a subgraph with chromatic number $\omega(G)$, $\chi(G) \ge \omega(G)$. As the colour classes in a proper $\chi(G)$-colouring of $G$ partition $V(G)$ into $\chi(G)$ sets, each of which is independent and hence has at most $\beta_0(G)$ vertices, $n = |V(G)| \le \chi(G) \beta_0(G)$, and hence $\chi(G) \ge \frac n {\beta_0(G)}$.
+
+Now, we prove that $\chi(G) \le \Delta(G) + 1$, by induction on $n$. The claim obviously holds for $n = 1$ ($\Delta(G) = 0$, $\chi(G) = 1$).
+
+Suppose that the result is true for any graph of order $n - 1$, and consider a graph $G$ of order $n$, $n > 1$. Let $v$ be any vertex of $G$. Then $\Delta(G - v) \le \Delta(G)$, and hence, by the induction hypothesis, $G - v$ is $(\Delta(G) + 1)$-colourable. Consider such a colouring. Now, $\deg_G v \le \Delta(G)$, and therefore at least one of the $\Delta(G) + 1$ colours is not assigned to any neighbour of $v$ in the colouring of $G - v$. Assign one such colour to $v$ to extend the colouring of $G - v$ to a proper $(\Delta(G) + 1)$-colouring of $G$.
+\end{proof}
+
+\begin{Theorem}
+The chromatic number of the Cartesian product of two graphs $G$ and $H$ is $\chi(G \times H) = \max(\chi(G), \chi(H))$.
+\end{Theorem}
+
+\begin{proof}
+Since $G \times H$ has subgraphs isomorphic to $G$ and $H$, $\chi(G \times H) \ge \max(\chi(G), \chi(H))$.
+
+Let $k = \max(\chi(G), \chi(H))$, and let $c_1$ and $c_2$ be optimal colourings of $G$ and $H$ respectively, with colours $\{1, \ldots, k\}$. Define a colouring $c$ of $G \times H$ by $c(u, v) = c(u) + c(v)$ modulo $k$, for $(u, v) \in V(G \times H)$. Clearly, $c$ is a $k$-colouring of $G \times H$. To see that $c$ is proper, suppose $(u_1, v_1) \sim_{G \times H} (u_2, v_2)$. Then $c(u_1, v_1) - c(u_2, v_2) = \bqty{c(u_1) - c(u_2)} + \bqty{c(v_1) - c(v_2)}$. One of the two bracketed terms is $0$ and the other is non-zero modulo $k$.
+\end{proof}
+
+\begin{Exercise}
+\begin{enumerate}
+\item Prove that the chromatic number of any graph $G$ is the maximum of the chromatic numbers of its
+\begin{enumerate}[label = (\roman*)]
+\item components.
+\item blocks.
+\end{enumerate}
+
+\item Show that for any two graphs $G$ and $H$,
+\begin{enumerate}[label = (\roman*)]
+\item $\chi(G \cup H) = \max(\chi(G), \chi(H))$.
+\item $\chi(G + H) = \chi(G) + \chi(H)$.
+\end{enumerate}
+
+\item Let $G = K_2 + C_5$. Compute $\omega(G)$ and $\chi(G)$.
+
+\item Let $G = K_p + C_{2r + 1}$, where $r \ge 2$. Compute $\omega(G)$ and $\chi(G)$.
+
+\item Suppose that $G$ is a graph such that $\chi(G) = \omega(G) + 1$. Recursively define $H_k$ as $H_1 = G$, $H_k = H_{k - 1} + G$, $k > 1$ (i.e. $H_k$ is the join of $k$ copies of $G$). Prove that $\chi(H_k) = \omega(H_k) + k$.
+\end{enumerate}
+\end{Exercise}
+
+\subsection*{Chromatic polynomials}\label{subsec:ChromaticPolynomials}
+
+For any non-negative integer $k$, we denote the number of proper $k$-colourings of the graph $G$ by $p_\chi(G; k)$. We shall see that $p_\chi(G; k)$ can be expressed as a polynomial in $k$.
+
+\begin{Exercise}
+By combinatorial arguments, prove the following:
+\begin{enumerate}
+\item $p_\chi(K_n; k) = k(k - 1) \cdots (k - n + 1)$.
+
+\item $p_\chi(\overline{K_n}; k) = k^n$.
+
+\item $p_\chi(P_n; k) = k(k - 1)^{n - 1}$.
+
+\item $p_\chi(C_4; k) = k^4 - 4k^3 + 6k^2 - 4k + k = (k - 1)^4 + (k - 1)$. \hint{Use the principle of inclusion and exclusion.}
+\end{enumerate}
+\end{Exercise}
+
+Consider a partition of $V(G)$ into independent sets. Then any assignment of colours from $\{1, \ldots, k\}$ to $G$ that assign distinct colours for vertices in different parts of the partition, such that all vertices in the same part receive the same colour, is a proper $k$-colouring of $G$. Conversely, any proper $k$-colouring of $G$ induces such a partition of $G$ into independent sets that are precisely the colour classes. If the number of parts in the partition is $r$, then the number of different such colourings possible is $k(k - 1) \cdots (k - r + 1)$. Thus, if $\pi_r(G)$ is the number of ways to partition $V(G)$ into $r$ independent sets, then
+
+\begin{equation*}
+p_\chi(G; k) = \sum_{r = 1}^{n} \pi_r(G) k(k - 1) \cdots (k - r + 1).
+\end{equation*}
+
+Note that this is a polynomial in $k$. If $n$ is the order of $G$, then $\pi_n(G) = 1$, which implies that $p_\chi(G; k)$ is a monic polynomial in $k$ having degree $n$.
+
+The \newterm{chromatic polynomial} of $G$ with indeterminate $x$ is the unique monic polynomial in $x$ of degree $n$ whose value at $x = k$ is $p_\chi(G; k)$, for every non-negative integer $k$. We denote it by $p_\chi(G; x)$.
+
+The \newterm{contraction} of an edge $e$ of $G$ is the operation of removing $e$ and replacing its end-vertices by a new single vertex that is incident with all the edges that are adjacent to $e$ in $G$. The resulting graph is denoted by $G \cdot e$. Now, we give a recurrence relation for computing the chromatic polynomial of $G$ in terms of edge contraction and edge deletion.
+
+\begin{Theorem}\label{thm:ChromPolyRecurrence}
+If $e$ is an edge of a graph $G$, then
+\begin{equation*}
+p_\chi(G; x) = p_\chi(G - e; x) - p_\chi(G \cdot e; x).
+\end{equation*}
+\end{Theorem}
+
+\begin{proof}
+Let $e = uv$. Any proper $k$-colouring of $G - e$ assigns either the same colour or two different colours to $u$ and $v$. Any colouring of the first kind defines a proper $k$-colouring of $G \cdot e$, where the new vertex of $G \cdot e$ receives the same colour as $u$ and $v$, and any vertex receives the same colours as in $G - e$. Any colouring of $G \cdot e$ of the second kind is naturally a proper $k$-colouring of $G$, as it assigns different colours to $u$ and $v$, the end-vertices of $e$. Thus, $p_\chi(G - e; x) = p_\chi(G \cdot e; x) + p_\chi(G; x)$.
+\end{proof}
+
+\begin{Theorem}[Whitney]
+For any graph $G$ of order $n$, the chromatic polynomial $p_\chi(G; x)$ is a monic polynomial of degree $n$, with integer coefficients alternating in sign, having $-m$ as the coefficient of $x^{n - 1}$.
+\end{Theorem}
+
+\begin{proof}
+Let $m$ be the size of $G$. We prove the result by induction on $m$. If $m = 0$, $G \cong \overline{K_n}$, and hence $p_\chi(G; x) = x^n$, so the result holds.
+
+Assume, for the sake of induction, that the result holds for any graph of size $m - 1$ and let $G$ be a graph of order $n$ and size $m$, where $m \ge 1$. As $G - e$ and $G \cdot e$ are each of size $m - 1$, by the induction hypothesis,
+\begin{align*}
+p_\chi(G - e; x) 		& = x^n - (m - 1) x^{n - 1} + a_2 x^{n - 2} - \cdots + (-1)^r a_r x^{n - r} + \cdots \\
+p_\chi(G \cdot e; x)	& = x^{n - 1} - (m - 1) x^{n - 2} + b_2 x^{n - 2} - \cdots + (-1)^r b_r x^{n - r} + \cdots \\
+\end{align*}
+for some non-negative integers $a_2, a_3, \ldots$ and $b_2, b_3, \ldots$.
+
+Now, by \cref{thm:ChromPolyRecurrence}, the chromatic polynomial of $G$ is given by
+\begin{align*}
+p_\chi(G; x) & = x^n - [(m - 1) + 1] x^{n - 1} + (a_2 + m - 1) x^{n - 2} - {} \spliteq \splitalign \cdots + (-1)^r(a_r + b_r) x^{n - r} + \cdots \\
+	& = x^n - m x^{n - 1} + (a_2 + m - 1) x^{n - 2} - \cdots + (-1)^r(a_r + b_r) x^{n - r} + \cdots
+\end{align*}
+which proves the result.
+\end{proof}
+
+\begin{Exercise}
+Using \cref{thm:ChromPolyRecurrence}, prove by mathematical induction that
+\begin{enumerate}
+\item $p_\chi(C_n; x) = (x - 1)^n + (-1)^n (x - 1)$ for any $n \ge 3$.
+\item $p_\chi(T; x) = x(x - 1)^{n - 1}$ for any tree $T$ of order $n$.
+\end{enumerate}
+\end{Exercise}
