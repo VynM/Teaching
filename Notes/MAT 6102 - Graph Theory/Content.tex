@@ -662,7 +662,7 @@ For any $k \ge 0$, the connectivity of the hypercube $Q_k$ is $\kappa(Q_k) = k$.
 \begin{proof}
 As $Q_k$ is $k$-regular, $\kappa(Q_k) \le k$. We claim that every vertex cut of $Q_k$ contains at least $k$ vertices. We prove this claim by induction on $k$. For $k = 0$ or $1$, it is obvious.
 
-Suppose the claim holds for $Q_{k - 1}$, and consider $G = Q_k$, $k \ge 2$. Recall that $Q_k \cong K_2 \times Q_{k - 1}$. Thus $G$ has two subgraphs $G_1$ and $G_2$, each isomorphic to $Q_{k - 1}$, joined by a perfect matching $M$ of $G$. Now, let $S$ be any vertex cut of $G$. If both $G_1 - S$ and $G_2 - S$ are connected, then $G - S$ is also connected, unless $S$ contains at least one end-vertex of every the matching $M$. Then, $|S| \ge |M| = 2^{k - 1} \ge k$, as $k \ge 2$.
+Suppose the claim holds for $Q_{k - 1}$, and consider $G = Q_k$, $k \ge 2$. Recall that $Q_k \cong K_2 \times Q_{k - 1}$. Thus $G$ has two subgraphs $G_1$ and $G_2$, each isomorphic to $Q_{k - 1}$, joined by a perfect matching $M$ of $G$. Now, let $S$ be any vertex cut of $G$. If both $G_1 - S$ and $G_2 - S$ are connected, then $G - S$ is also connected, unless $S$ contains at least one end-vertex of every edge of the matching $M$. Then, $|S| \ge |M| = 2^{k - 1} \ge k$, as $k \ge 2$.
 
 Next, suppose that $G_1 - S$ is disconnected. Then $|S \cup V(G_1)| \ge k - 1 = \kappa(Q_{k - 1})$ (by the induction hypothesis). If $S$ contains no vertex of $G_2$, then, as $G_2$ is connected, and every vertex of $G_1 - S$ has a neighbour in $G_2$, $G - S$ is connected, which is a contradiction. Thus, $S$ contains at least one vertex of $G_2$. Hence, $|S| \ge (k - 1) + 1 = k$, as required.
 \end{proof}
