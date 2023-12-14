@@ -575,7 +575,7 @@ The adjacency matrix of the line graph of $G$ can be computed from the incidence
 \end{Theorem}
 
 \begin{proof}
-	Let $G$ be an $(n, m)$-graph with edge set $E = \{e_1, \ldots, e_m\}$. The incidence matrix $B = B(G)$ is of order $n \times m$, and therefore $B^T B - 2I$ (say) is of order $m \times m$.
+	Let $G$ be an $(n, m)$-graph with edge set $E = \{e_1, \ldots, e_m\}$. The incidence matrix $B = B(G)$ is of order $n \times m$, and therefore $B^T B - 2I$ is of order $m \times m$.
 	
 	Observe that the $(i, j)$ entry of $B^T B$ is the dot product of the $i$\nth and $j$\nth columns of $B$. As each column of $B$ has exactly two non-zero entries, both equal to $1$, the $(i, i)$ entry of $B^T B$ is $2$, and therefore the diagonal entries of $B^T B - 2I$ are all zero.
 	
@@ -732,7 +732,7 @@ For any graph $G$ of order $n$,
 \end{Theorem}
 
 \begin{proof}
-Let $M_0$ be a maximum set of independent vertices of $G$. Then $\beta_0 = M_0$, and $V \setminus M_0$ is a vertex cover. Hence, $\alpha_0 \le \vqty{V \setminus M_0} = n - \beta_0$. Let $N_0$ be a minimum cover of $G$. Then $\alpha_0 = N_0$, and $V \setminus N_0$ is independent. Hence, $\beta_0 \ge \vqty{V \setminus N_0} = n - \alpha_0$. Thus, $\alpha_0 + \beta_0 = n$.
+Let $M_0$ be a maximum set of independent vertices of $G$. Then $\beta_0 = |M_0|$, and $V \setminus M_0$ is a vertex cover. Hence, $\alpha_0 \le \vqty{V \setminus M_0} = n - \beta_0$. Let $N_0$ be a minimum cover of $G$. Then $\alpha_0 = |N_0|$, and $V \setminus N_0$ is independent. Hence, $\beta_0 \ge \vqty{V \setminus N_0} = n - \alpha_0$. Thus, $\alpha_0 + \beta_0 = n$.
 
 Now, let $M_1$ be a maximum set of independent edges. Form an edge cover $Y$ of $G$ by adding to $M_1$ one edge incident with each vertex not covered by $M_1$. Then $|Y| = n - |M_1| = n - \beta_1$, which implies that $n - \beta_1 \ge \alpha_1$, i.e. $\alpha_1 + \beta_1 \le n$.
 
