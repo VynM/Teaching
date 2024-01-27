@@ -1,0 +1,199 @@
+% !TeX root = Category Theory for Algebra II.tex
+
+\title{\textbf{Category Theory for Algebra II}}
+
+\date{\today}
+\maketitle
+
+\begingroup
+\let\clearpage\relax
+\tableofcontents
+\endgroup
+
+\clearpage
+
+\renewcommand{\nomname}{List of Symbols}
+\nomenclature{$\cat{Set}$}{Category of sets and functions}
+\nomenclature{$\cat{Rel}$}{Category of sets and reltaions}
+\nomenclature{$\cat{Grp}$}{Category of groups and group homomorphisms}
+\nomenclature{$\cat{AbGrp}$}{Category of Abelian groups and group homomorphisms}
+\nomenclature{$\cat{Mon}$}{Category of monoids and monoid homomorphisms}
+\nomenclature{$\cat{SemiGrp}$}{Category of semigroups and semigroup homomorphisms}
+\nomenclature{$\cat{Ring}$}{Category of unital rings and unital ring homomorphisms}
+\nomenclature{$\cat{Rng}$}{Category of rngs and rng homomorphisms}
+\nomenclature{$\cat{Vect}_F$}{Category of vector spaces over field $F$ and linear transformations}
+\nomenclature{$\cat{FinVect}_F$}{Category of finite dimensional vector spaces over field $F$ and linear transformations}
+\nomenclature{$R-\cat{Mod}$}{Category of left $R$-modules}
+\nomenclature{$\cat{Mod}-R$}{Category of right $R$-modules}
+\nomenclature{$\Ob(\cat C)$}{Collection of objects of category $\cat C$}
+\nomenclature{$\Mor(\cat C)$}{Collection of morphisms of category $\cat C$}
+\nomenclature{$\Hom_{\cat C}(X, Y)$}{Collection of morphisms from $X$ to $Y$ in category $\cat C$}
+\nomenclature{$\cat C\opp$}{Opposite category of category $\cat C$}
+\printnomenclature[10em]
+
+\clearpage
+
+%\section{Introduction}\label{sec:Intro}
+
+\section{Examples of Categories}\label{sec:CatExamples}
+
+Before formally defining a category, we shall look at some examples of familiar categories. A category consists of a collection of \newterm{obects} and a collection of \newterm{morphisms} satisfying certain conditions that will be discussed later.
+\begin{enumerate}
+\item The category $\cat{Set}$ has sets as objects and functions as morphisms.
+\item The collection of groups and group homomorphisms forms a category denoted by $\cat{Grp}$.
+\item The collection of vector spaces over a fixed field $F$, together with $F$-linear transformations forms the category $\cat{Vect}_F$.
+\item The collection of sets and relations forms the category $\cat{Rel}$.
+\end{enumerate}
+
+
+\section{Initial and Final Objects}\label{sec:Terminals}
+
+An \newterm{initial object} in a category $\cat C$ is an object $A$ such that for all objects $X$ of $\cat C$, there exists a unique morphism from $A$ to $X$. A \newterm{final object} in $\cat C$ is an object $A$ such that for all objects $X$ of $\cat C$, there exists a unique morphism from $X$ to $A$. A \newterm{zero object} is an object that is both initial and final.
+
+\begin{Example}
+\begin{enumerate}
+\item The empty set $\varnothing$ is the initial object and any singleton set is a final object in $\cat{Set}$.
+\item The trivial group is both the initial and final object in $\cat{Grp}$.
+\item The zero-dimensional vector space is the zero object in $\cat{Vect}_F$.
+\item The empty set is the zero object in $\cat{Rel}$.
+\end{enumerate}
+\end{Example}
+
+
+\section{Categories}\label{sec:Categories}
+
+A \newterm{category} $\cat C$ is a collection $\Ob(\cat C)$ of objects and, for every two objects $X$ and $Y$ a collection $\Hom(X, Y)$ of \newterm{morphisms} or \newterm{arrows}, together with operations
+\begin{equation*}
+    \circ \colon \Hom(Y, Z) \times \Hom(X, Y) \to \Hom(X, Z)
+\end{equation*}
+for all $X, Y, Z \in \Ob(\cat C)$, satisfying the following:
+\begin{enumerate}[label=(C\arabic*)]
+\item $\Hom(X_1, Y_1)$ and $\Hom(X_2, Y_2)$ are disjoint unless $X_1 = X_2$ and $Y_1 = Y_2$.
+\item For each $X \in \Ob(\cat C)$, there exists an \newterm{identity morphism} $\id_X$ or $1_X$ such that if $f \in \Hom(X, Y)$, there $f \circ \id_X = f$ and if $g \in \Hom(Z, X)$, then $\id_X \circ g = g$.
+\item If $F \in \Hom(X, Y)$, $g \in \Hom(Y, Z)$, and $h \in \Hom(Z, W)$, then
+\begin{equation*}
+    h \circ (g \circ f) = (h \circ g) \circ f.
+\end{equation*}
+This is the \newterm{law of associativity}.
+\end{enumerate}
+
+The collection of all morphisms of $\cat C$ is denoted by $\Mor(\cat C)$. If $f \in \Hom(X, Y)$, then we write $f \colon X \to Y$ or $\xymatrix{X \ar[r]^f & Y}$ and say that $f$ is a \newterm{morphism from $X$ to $Y$}, or that $X = \dom f$ is the \newterm{domain} and $Y = \cod f$ is the codomain of $f$.
+
+\begin{Example}\label{ex:Categories}
+\begin{enumerate}
+\item\label{it:Categories2IsoObj} $\cat C = \{X, Y\}$, $\Mor(\cat C) = \{1_X, 1_Y, f \colon X \to Y, g \colon Y \to X \}$ with $1_X$ and $1_Y$ as identity morphisms and $f \circ g = 1_Y$, $g \circ f = 1_X$. Graphically,
+\begin{equation*}
+\boxed{\xymatrix{
+X \ar @(ld, lu)^{1_X} \ar @/^/[r]^f & Y \ar @(ru, rd)^{1_Y} \ar @/^/[l]^g
+}}
+\end{equation*}
+
+\item\label{it:Categories1ObjDisc} $\cat C = \{\bullet\}$, $\Mor(\cat C) = \{1\}$.
+
+\item\label{it:CategoriesRing} $\cat{Ring}$ is the category of unital rings and unital ring homomorphisms.
+
+\item\label{it:CategoriesMon} $\cat{Mon}$ is the category of monoids and monoid homomorphisms.
+
+\item\label{it:CategoriesTop} $\cat{Top}$ is the category of topological spaces and continuous maps.
+
+\item\label{it:CategoriesAbGrp} $\cat{AbGrp}$ is the category of Abelian groups and group homomorphisms.
+\end{enumerate}
+\end{Example}
+
+\begin{Exercise}
+\begin{enumerate}
+\item In the category $\cat C$ given below, determine the compositions of all the non-identity morphisms.
+\begin{equation*}
+\boxed{\xymatrix{
+	X \ar @(l, u)^{1_X} \ar @<+0.5ex>[rr]^f \ar @<-0.5ex>[rr]_g  \ar [dr]_k && Y \ar @(u, r)^{1_Y}  \ar[ld]^h \\
+	& Z \ar @(dr, dl)^{1_Z} 
+}}
+\end{equation*}
+
+\item In the category $\cat C$ given below, determine the compositions of all the non-identity morphisms.
+\begin{equation*}
+\boxed{\xymatrix{
+	X \ar @(l, u)^{1_X} \ar @/^/[dr]^h && Y \ar @(u, r)^{1_Y} \ar[ll]_f \ar[ld]^g \\
+	& Z \ar @(dr, dl)^{1_Z} \ar @/^/[ul]^k
+}}
+\end{equation*}
+
+\item If $\cat C$ is a category with $\Ob(\cat C) = \{ \bullet \}$ and $\Mor(\cat C) = \{1, f, g\}$, such that $f \circ g = 1$. Then determine $f \circ f$, $g \circ g$, and $g \circ f$.
+
+\item Show that the following is not a valid category.
+\begin{equation*}
+\boxed{\xymatrix{
+	X \ar @(ld, lu)^{1_X} \ar  @/^1pc/[rr]^f  \ar  @/_1pc/[rr]_h && Y \ar @(ru, rd)^{1_Y}  \ar[ll]|-g
+}}
+\end{equation*}
+
+\item Let $X$ be an object of a category $\cat C$. Denote by $\cat C / X$ the category whose objects are
+\begin{equation*}
+\Ob(\cat C / X) = \qty{\, f \colon Y \to X \mid Y \in \Ob(\cat C) \,}
+\end{equation*}
+morphisms are
+\begin{equation*}
+\Hom(f, g) = \qty{\, h \colon Y \to Z \mid g \circ h = f \,}
+\end{equation*}
+for all $Y, Z \in \Ob(\cat C)$, $f \colon Y \to X$, $g \colon Z \to X$, and the composition of $m \in \Hom(f, g)$ and $n \in \Hom(g, h)$ is defined to be the morphism $n \circ m$ of $\cat C$ . Show that $\cat C / X$ is indeed a category.
+
+\item Define a category $X / \cat C$ analogous to $\cat C / X$ and show that it is a category.
+
+\item Let $\cat C$ be a category. Define a new category $\cat C\opp$ whose objects are the same as those of $\cat C$, with a morphism $f\opp \colon Y \to X$ corresponding to every morphism $f \colon X \to Y$ in $\cat C$, and composition defined by
+\begin{equation*}
+f\opp \circ g\opp = (g \circ f)\opp
+\end{equation*}
+for all $f\opp \colon Y \to X$, $g\opp \colon Z \to Y$. Show that $\cat C\opp$ is indeed a category.
+
+\item What is the category $(\cat C / X)\opp$?
+
+\item Can the following be a category? If so, how?
+\begin{equation*}
+\boxed{\xymatrix{
+	& \bullet \ar @(ru, lu)_f \ar @(ld, rd)_1 &
+}
+}
+\end{equation*}
+
+\item Can the following be a category? If so, how?
+\begin{equation*}
+\boxed{\xymatrix{
+	X \ar @(ld, lu)^{1_X} \ar  @/^1pc/[rr]^f  \ar  @/_1pc/[rr]_h && Y \ar @(ul, ur)^k \ar @(ur, dr)^{1_Y} \ar[ll]|-g
+}}
+\end{equation*}
+
+\item Can the following be a category? If so, how?
+\begin{equation*}
+\boxed{\xymatrix{
+	X \ar @(ld, lu)^{1_X} \ar  @/^1pc/[rr]^f  \ar  @/_1pc/[rr]_h && Y \ar @(ul, ur)^k \ar @(ur, dr)^{1_Y} \ar @(dr, dl)^l \ar[ll]|-g
+}}
+\end{equation*}
+\end{enumerate}
+\end{Exercise}
+
+A category is \newterm{small} if its collections of objects and morphisms are sets -- note that this is equivalent to simply saying that its collection of morphisms, as the objects are in one-to-one correspondence with the identity morphisms. A category that is not small is \newterm{large}. A category is \newterm{locally small} if $\Hom(X, Y)$ is a set for every two objects $X$ and $Y$ of the category. In this case, $\Hom(X, Y)$ is said to be a \newterm{hom-set}.
+
+In \cref{ex:Categories}, the categories given in \labelcref{it:Categories2IsoObj,it:Categories1ObjDisc} are small (and hence also locally small), whereas the ones given in \labelcref{it:CategoriesRing,it:CategoriesMon,it:CategoriesAbGrp} are large but locally small.
+
+\section{Some Classes of Morphisms}\label{sec:MorphismClasses}
+
+A morphism $f \colon X \to Y$ in a category $\cat C$ is an \newterm{isomorphism} if there exists a morphism $g \colon Y \to X$ in $\cat C$ such that $g \circ f = 1_X$ and $f \circ g = 1_Y$. Such a morphism $g$ is an \newterm{inverse} of $f$. If there exists an isomorphism $f \colon X \to Y$, then $X$ is \newterm{isomorphic} to $Y$, written $X \cong Y$.
+
+\begin{Exercise}
+\begin{enumerate}
+\item Show that each identity morphism is an isomorphism.
+\item Show that if $f$ is an isomorphism, then it has a unique inverse, and the inverse is also an isomorphism.
+\item Show that the composition of two compatible isomorphisms is also an isomorphism.
+\item Show that the isomorphism relation $\cong$ is an equivalence relation on the collection of objects of a category.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Example}
+\begin{enumerate}
+\item In $\cat{Set}$, the isomorphisms are exactly the bijective functions.
+\item In $\cat{Grp}$, $\cat{Mon}$, $\cat{Ring}$, and $\cat{AbGrp}$, the isomorphisms are the bijective homomorphisms of the respective algebraic structures.
+\item In $\cat{Vect}_F$, the isomorphisms are the bijective linear transformations.
+\item In $\cat{Top}$, the isomorphisms are the homeomorphisms. Note that a homeomorphism is not simply a bijective continuous map (i.e. a morphism in $\cat{Top}$ that is bijective as a function). Why?
+\item In the category given in \cref{ex:Categories}, \labelcref{it:Categories2IsoObj}, all the morphisms are isomorphisms.
+\end{enumerate}
+\end{Example}
