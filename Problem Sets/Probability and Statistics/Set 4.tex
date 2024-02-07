@@ -8,9 +8,9 @@
 \usepackage{enumitem}
 \setlist[enumerate,1]{label=\arabic*.}
 
+\usepackage[]{fouriernc}
 \usepackage[default,bold]{sourceserifpro}
 \usepackage[T1]{fontenc}
-\usepackage{eulervm}
 
 \usepackage{xcolor}
 \usepackage{scrlayer-scrpage}
@@ -30,7 +30,7 @@
 
 \begin{document}
 \maketitle
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}[leftmargin=*, itemsep=0.3em]
 \item $(X, Y)$ is a two dimensional random variable with joint pdf $f(x, y) = x + y$, $0 < x < 1$, $0 < y < 1$. Compute the following.
 \begin{enumerate}
 	\item $\Prob[2X + 2Y < 1]$.
