@@ -1,11 +1,10 @@
 % !TeX root = Category Theory for Algebra II.tex
 
-\usepackage{natbib}
-
 \usepackage{amsmath, amsfonts, amssymb, amsthm, bbm}
 \usepackage[all, cmtip, 2cell]{xy}
 \setcounter{tocdepth}{3}
-\usepackage{graphicx, subcaption}
+\usepackage{graphicx}
+\usepackage[subrefformat=parens,labelformat=parens]{subcaption}
 \usepackage{physics}
 
 \usepackage{tikz}
@@ -26,9 +25,10 @@
 \usepackage{tocloft}
 \renewcommand{\cftdot}{}
 
+\usepackage{xcolor}
 \usepackage{hyperref}
 \definecolor{linkcolor}{RGB}{32, 96, 192}
-\hypersetup{colorlinks, linkcolor = linkcolor, urlcolor = linkcolor, linktocpage = true}
+\hypersetup{colorlinks, linkcolor = linkcolor, urlcolor = linkcolor, citecolor = red, linktocpage = true}
 \usepackage{bookmark}
 \bookmarksetup{color = [RGB]{32, 96, 192}}
 
@@ -48,6 +48,8 @@
 \usepackage{charter}
 \usepackage[T1]{fontenc}
 
+\usepackage{MnSymbol}
+
 \newtheorem{Theorem}{Theorem}[section]
 \newtheorem{Lemma}[Theorem]{Lemma}
 \newtheorem{Corollary}[Theorem]{Corollary}
@@ -63,14 +65,16 @@
 \theoremstyle{remark}
 \newtheorem*{Remark*}{Remark}
 \newtheorem*{Solution*}{Solution}
-\newtheorem*{Note*}{Note}
 
 
 \definecolor{alertcolor}{rgb}{0.8, 0.5, 0}
 \newcommand{\newterm}[1]{{\color{alertcolor} #1}}
 
 \definecolor{hintcolor}{rgb}{0, 0, 0.5}
-\newcommand{\hint}[1]{{\tiny\color{hintcolor}\textbf{Hint:} #1}}
+\newcommand{\hint}[1]{{\noindent\tiny\color{hintcolor}\textbf{Hint:} #1}}
+
+\definecolor{notecolor}{rgb}{0, 0.5, 0.1}
+\newcommand{\note}[1]{{\noindent\footnotesize\color{notecolor}\textbf{Note.} #1}}
 
 \newcommand{\cat}[1]{\mathsf{#1}}
 \newcommand{\opp}{^\mathsf{op}}
@@ -83,5 +87,9 @@
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\cod}{cod}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\nth}{\textsuperscript{th}\xspace}

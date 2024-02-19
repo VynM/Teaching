@@ -175,9 +175,179 @@ A category is \newterm{small} if its collections of objects and morphisms are se
 
 In \cref{ex:Categories}, the categories given in \labelcref{it:Categories2IsoObj,it:Categories1ObjDisc} are small (and hence also locally small), whereas the ones given in \labelcref{it:CategoriesRing,it:CategoriesMon,it:CategoriesAbGrp} are large but locally small.
 
+\section{Diagram Chasing}\label{sec:DiagramChasing}
+
+A diagram of objects and morphisms \newterm{commutes} (or is \newterm{commutative}) if, whenever there are two directed paths with the same source and same target, the composition of the morphisms along one path equals the composition of the morphisms along the other. That is, for each pair of paths
+\begin{equation*}
+\xymatrix{
+& \bullet \ar[r]^{f_2} &  \bullet & \cdots & \bullet \ar[r]^{f_{m-1}} & \bullet \ar[rd]^{f_m} & \\
+\bullet \ar[ru]^{f_1} \ar[rd]_{g_1} &&&&&& \bullet \\
+& \bullet \ar[r]_{g_2} & \bullet & \cdots & \bullet \ar[r]_{g_{n-1}} & \bullet \ar[ru]_{g_n} &
+}
+\end{equation*}
+in the diagram, $f_m \circ f_{m-1} \circ \cdots \circ f_2 \circ f_1 = g_n \circ g_{n-1} \circ \cdots \circ g_2 \circ g_1$.
+
+\begin{Example} In the diagram below, suppose $h = g \circ f$.
+\begin{equation*}
+\xymatrix{
+X \ar[r]^f \ar[d]_h & Y \ar[d]^{1_Y} \\
+Z & Y \ar[l]^g
+}
+\end{equation*}
+In this diagram, there are two different directed paths from $X$ to $Z$, one consisting of the morphisms $f$, $1_Y$, and $g$, and the other consisting of a single morphism $h$. The composition of the morphisms along the first path is $g \circ 1_Y \circ f = g \circ f = h$, and the composition of the morphisms along the second path is simply $h$. As both of these are equal, the diagram commutes.
+\end{Example}
+
+\begin{Example}
+Consider $f \colon \mathbb C \to \mathbb C$, $f(z) = -iz$, $g \colon \mathbb C \to \mathbb R$, $g(z) = \Re(z)$, and $h \colon \mathbb C \to \mathbb R$, $h(z) = \Im(z)$, for all $z \in \mathbb C$. Then the following diagram commutes:
+\begin{equation*}
+\xymatrix{
+\mathbb C \ar[r]^f \ar[rd]_h & \mathbb C \ar[d]^g \\
+& \mathbb C
+}
+\end{equation*}
+To verify this, we could take an arbitrary element of $\mathbb C$ and ``chase'' it across the diagram to see if it maps to the same element along all paths that lead to the same target. We may represent this visually as given below.
+\begin{equation*}
+\xymatrix@C=3.2em{
+x + iy \ar@{|->}[r]^{(-i) \times \leftrightline} \ar@{|->}[rd]_{\Im} & y - ix \ar@{|->}[d]^{\Re} \\
+& y
+}
+\end{equation*}
+\end{Example}
+
+\begin{Exercise}
+Let $f \colon \mathbb C \to \mathbb C$, $f(z) = \overline z$, $g \colon \mathbb C \to \mathbb C$, $g(z) = z^2$, and $h \colon \mathbb C \to \mathbb C$, $h(z) = \Re(z)$. Which of the following is/are commutative?
+\begin{figure}[H]
+\centering
+\subcaptionbox{}{
+	$\xymatrix{
+	 	\mathbb C \ar[r]^f \ar[d]_g & \mathbb C \ar[d]^g \\
+ 	 	\mathbb C \ar[r]_f & \mathbb C 
+ 	}$
+} \qquad
+\subcaptionbox{}{
+	$\xymatrix{
+		\mathbb C \ar[r]^f \ar[d]_h & \mathbb C \ar[d]^{h} \\
+		\mathbb C \ar[r]_f & \mathbb C 
+	}$
+}
+\end{figure}
+\end{Exercise}
+
+\begin{Example}
+The law of associativity of composition can be stated in terms of a commutative diagrams as follows. For all morphisms $f$, $g$, $h$ with domains and codomains as shown in the diagram below, if each subdiagram with three vertices commutes, then the whole diagram commutes.
+\begin{equation*}
+\xymatrix{
+\bullet \ar[r]^f \ar@/^2pc/[rr] \ar@/^3pc/[rrr]^{} \ar@/_3pc/[rrr]_{}
+& \bullet \ar[r]^g \ar@/_2pc/[rr]
+& \bullet \ar[r]^h & \bullet
+}
+\end{equation*}
+
+The identity morphism of an object $X$ can be defined as the morphism such that all diagrams of the following form commute.
+\begin{equation*}
+\xymatrix@=3em{
+X \ar[r]^f \ar[rd]^{1_X} \ar[d]_g & Y \ar[d]^f \\
+Z \ar[r]_g & X
+}
+\end{equation*}
+\end{Example}
+
+Very often, the commutativity of a larger diagram can be checked by verifying the commutativity of its smaller components. Commutative diagrams of the forms given below are called \newterm{commuting triangles} and \newterm{commuting squares}, respectively.
+\begin{align*}
+\xymatrix{
+\bullet \ar[r] \ar[rd] & \bullet \ar[d]\\
+& \bullet
+}
+&&
+\xymatrix{
+\bullet \ar[r] \ar[d] & \bullet \ar[d] \\
+\bullet \ar[r] & \bullet
+}
+\end{align*}
+
+\begin{Exercise}[{\cite[Exercise 1.2]{SchalkSimmons2005}}]
+In each of the cases given below, show that if the two triangles commute, then the square commutes.
+\begin{figure}[H]
+\centering
+\subcaptionbox{\label{subfig:CommSq1}}{
+$\xymatrix@=3em{
+\bullet \ar[r] \ar[d] \ar[rd] & \bullet \ar[d] \\
+\bullet \ar[r] & \bullet
+}$
+}
+\hspace{0.3\textwidth}
+\subcaptionbox{\label{subfig:CommSq2}}{
+$\xymatrix@=3em{
+\bullet \ar[r] \ar[d] & \bullet \ar[d] \ar[ld]\\
+\bullet \ar[r] & \bullet
+}$
+}
+\end{figure}
+\end{Exercise}
+
+\begin{Solution*}
+In \subref{subfig:CommSq1}, from the commutativity of the upper triangle, the composition of the top and right sides of the square equals the diagonal, which, from the commutativity of the lower triangle, equals the composition of the left and bottom sides. This shows that the square commutes.
+
+In \subref{subfig:CommSq2}, since the lower triangle commutes, the right side equals the composition of the diagonal and the bottom side. Hence, the composition of the top and right sides equals the composition of the top side, the diagonal, and the bottom side. Similarly, from the commutativity of the upper triangle, the composition of the top side, the diagonal, and the bottom side also equals the composition of the bottom and left sides. Thus, the square commutes.
+\end{Solution*}
+
+\note{Arguments such as the above one are much easier to \emph{see} than to understand by reading, but this requires some training. The writing itself could be made considerably simpler by naming the arrows (the morphisms) in the diagram and expressing the argument in the form of equations, but the aim of these exercises is to develop the skill of ``diagram chasing''. Attempt the remaining exercises in the same manner, avoiding the urge to name arrows, as much as possible.}
+
+\begin{Exercise}[{\cite[Exercise 1.2]{SchalkSimmons2005}}]
+In the diagram given below, viewed as a tetrahedron, show that if the left, right, and bottom faces commute, then the back face also commutes.
+\begin{equation*}
+\xymatrix@=3em{
+& \bullet \ar[ld] \ar[dd] \ar[rd] & \\
+\bullet \ar[rd] \ar[rr]|\hole & & \bullet \\
+& \bullet \ar[ru] &
+}
+\end{equation*}
+\end{Exercise}
+
+\begin{Exercise}
+Show that if the inner triangle and the three trapeziums in the diagram below commute, then the outer triangle commutes.
+\begin{equation*}
+\xymatrix{
+&&& \bullet \ar[d] \ar[rrrddd] &&& \\
+&&& \bullet \ar[rd] &&& \\
+&& \bullet \ar[ur] \ar[rr] && \bullet \ar[rrd] && \\
+\bullet \ar[rrruuu] \ar[rru] \ar[rrrrrr] &&&&&& \bullet
+}
+\end{equation*}
+\end{Exercise}
+
+\begin{Exercise}[{\cite[Exercise 1.4]{SchalkSimmons2005}}]
+Show that if the inner square and the four trapeziums in the diagram below commute, then the outer square commutes.
+\begin{equation*}
+\xymatrix@=2.5em{
+\bullet \ar[ddd] \ar[rd] \ar[rrr] &&& \bullet \ar[ld] \ar[ddd] \\
+& \bullet \ar[d] \ar[r] & \bullet \ar[d] & \\
+& \bullet \ar[r] & \bullet \ar[rd] & \\
+\bullet \ar[ru] \ar[rrr] &&& \bullet
+}
+\end{equation*}
+\end{Exercise}
+
+\begin{Exercise}
+Let $G$ and $H$ be groups. If $f \colon G \to H$ is any function, defined $f \times f \colon G \times G \to H \times H$ by $f(x, y) = (f(x), f(y))$, for all $x, y \in G$. Let $\cdot$ and $*$ denote the group operations in $G$ and $H$, respectively. Then show that $f$ is a homomorphism if and only if the following diagram commutes.
+\begin{equation*}
+\xymatrix@C=5em@R=4em{
+G \times G \ar[r]^{f \times f} \ar[d]_\cdot & H \times H \ar[d]^{*} \\
+G \ar[r]_f & H
+}
+\end{equation*}
+\end{Exercise}
+
 \section{Some Classes of Morphisms}\label{sec:MorphismClasses}
 
 A morphism $f \colon X \to Y$ in a category $\cat C$ is an \newterm{isomorphism} if there exists a morphism $g \colon Y \to X$ in $\cat C$ such that $g \circ f = 1_X$ and $f \circ g = 1_Y$. Such a morphism $g$ is an \newterm{inverse} of $f$. If there exists an isomorphism $f \colon X \to Y$, then $X$ is \newterm{isomorphic} to $Y$, written $X \cong Y$.
+
+Equivalently, we can define an isomorphism as a morphism $f$ such that there exists a morphism $g$ making the following diagram commute.
+\begin{equation*}
+\xymatrix@C=2.5em{
+Y \ar[r]^g \ar@/^2.2pc/[rr]^{1_Y} & X \ar[r]^f \ar@/_2.2pc/[rr]_{1_X} & Y \ar[r]^g & X
+}
+\end{equation*}
 
 \begin{Exercise}
 \begin{enumerate}
@@ -193,7 +363,41 @@ A morphism $f \colon X \to Y$ in a category $\cat C$ is an \newterm{isomorphism}
 \item In $\cat{Set}$, the isomorphisms are exactly the bijective functions.
 \item In $\cat{Grp}$, $\cat{Mon}$, $\cat{Ring}$, and $\cat{AbGrp}$, the isomorphisms are the bijective homomorphisms of the respective algebraic structures.
 \item In $\cat{Vect}_F$, the isomorphisms are the bijective linear transformations.
-\item In $\cat{Top}$, the isomorphisms are the homeomorphisms. Note that a homeomorphism is not simply a bijective continuous map (i.e. a morphism in $\cat{Top}$ that is bijective as a function). Why?
+\item In $\cat{Top}$, the isomorphisms are the homeomorphisms. Note that a homeomorphism is not simply a bijective continuous map (i.e.\ a morphism of $\cat{Top}$ that is bijective as a function). Why?
 \item In the category given in \cref{ex:Categories}, \labelcref{it:Categories2IsoObj}, all the morphisms are isomorphisms.
 \end{enumerate}
 \end{Example}
+
+We may weaken the definition of isomorphism in two ways as follows. If $r \colon X \to Y$ and $s \colon Y \to X$ are morphisms such that $r \circ s = 1_Y$, then $r$ is a \newterm{retraction} and $s$ is a \newterm{section}.
+\begin{equation*}
+\xymatrix{
+Y \ar[r]^s \ar[rd]_{1_Y} & X \ar[d]^r \\
+& Y
+}
+\end{equation*}
+We also say that $r$ is a \newterm{left inverse} of $s$ and that $s$ is a \newterm{right inverse} of $r$. Thus, a retraction is a right-invertible morphism and a section is a left-invertible morphism.
+
+\begin{Exercise}
+Prove that a morphism is an isomorphism if and only if it is both a retraction and a section.
+
+\note{The statement that a morphism is both a retraction and a section only tells you that it has some right inverse and some left inverse -- not that the right and left inverses are the same. That is, if $f \colon X \to Y$ is both a retraction and a section, you may only assume that there exist morphisms $s \colon Y \to X$ and $r \colon Y \to X$ such that $f \circ s = 1_Y$ and $r \circ f = 1_X$.}
+
+\hint{Show that $r = s$.}
+\end{Exercise}
+
+\begin{Example}\label{ex:SetRetSec}
+In the category $\cat{Set}$, consider the sets $X = \mathbb R$ and $Y = \mathbb Z$. Define $r \colon X \to Y$ by $r(x) = \floor x$ (the greatest integer not exceeding $x$) for all $x \in X$, and $s \colon Y \to X$ by $s(y) = y$ for all $y \in Y$. Then $r \circ s = \id_Y$. Note that neither $r$, nor $s$ is an isomorphism.
+\end{Example}
+
+\begin{Exercise}
+\begin{enumerate}
+\item Show that in $\cat{Set}$, every section is an injective function and every retraction is a surjective function.
+\item Show that in $\cat{Set}$, every injective function is a section.
+\item Read about the Axiom of Choice and try to understand its equivalence to the following statement: In $\cat{Set}$, every surjective function is a retraction.
+\item Show that in $\cat{Grp}$, every section is an injective group homomorphism.
+\item In $\cat{Grp}$, consider the inclusion map $\iota \colon \mathbb Z \to \mathbb R$ defined by $\iota(n) = n$ for all $n \in \mathbb Z$ (where $\mathbb Z$ and $\mathbb R$ are the additive groups defined as usual). Show that $\iota$ is an injective homomorphism, but is not a section.
+\end{enumerate}
+\end{Exercise}
+
+\bibliographystyle{plain}
+\bibliography{References.bib}
