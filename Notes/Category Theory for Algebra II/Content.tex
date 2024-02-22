@@ -143,7 +143,7 @@ for all $Y, Z \in \Ob(\cat C)$, $f \colon Y \to X$, $g \colon Z \to X$, and the 
 \begin{equation*}
 f\opp \circ g\opp = (g \circ f)\opp
 \end{equation*}
-for all $f\opp \colon Y \to X$, $g\opp \colon Z \to Y$. Show that $\cat C\opp$ is indeed a category.
+for all $f\opp \colon Y \to X$, $g\opp \colon Z \to Y$. Show that $\cat C\opp$ is indeed a category (see \cref{sec:Duality}).
 
 \item What is the category $(\cat C / X)\opp$?
 
@@ -174,6 +174,16 @@ for all $f\opp \colon Y \to X$, $g\opp \colon Z \to Y$. Show that $\cat C\opp$ i
 A category is \newterm{small} if its collections of objects and morphisms are sets -- note that this is equivalent to simply saying that its collection of morphisms, as the objects are in one-to-one correspondence with the identity morphisms. A category that is not small is \newterm{large}. A category is \newterm{locally small} if $\Hom(X, Y)$ is a set for every two objects $X$ and $Y$ of the category. In this case, $\Hom(X, Y)$ is said to be a \newterm{hom-set}.
 
 In \cref{ex:Categories}, the categories given in \labelcref{it:Categories2IsoObj,it:Categories1ObjDisc} are small (and hence also locally small), whereas the ones given in \labelcref{it:CategoriesRing,it:CategoriesMon,it:CategoriesAbGrp} are large but locally small.
+
+\section{Duality}\label{sec:Duality}
+The \newterm{opposite category} of a category $\cat C$ is the category $\cat C\opp$ with $\Ob(\cat C\opp) = \Ob(\cat C)$ and for each pair of objects $X$ and $Y$, $\Hom_{\cat C\opp}(X, Y) = \qty{\, f\opp \mid f \in \Hom_{\cat C}(Y, X) \,}$, in which composition is defined as
+\begin{equation*}
+g\opp \circ f\opp = (f \circ g)\opp
+\end{equation*}
+for all $f\opp \in \Hom_{\cat C\opp}(X, Y)$ and $g\opp \in \Hom_{\cat C\opp}(Y, Z)$, for all objects $X$, $Y$, and $Z$.
+
+The fact that $\cat C\opp$ is a category gives rise to the principle of duality -- if a statement is true in all categories, then its \newterm{dual statement}, obtained by reversing the directions of all morphisms, must also be true in all categories. In fact, every concept defined in category theory has a dual concept. For instance, the concepts of initial and final objects are duals of each other. We will later prove that any two initial objects in a category must be isomorphic to each other. From this, it immediately follows, by the principle of duality, that any two final objects in a category must be isomorphic to each other.
+
 
 \section{Diagram Chasing}\label{sec:DiagramChasing}
 
@@ -266,7 +276,7 @@ Very often, the commutativity of a larger diagram can be checked by verifying th
 \end{align*}
 
 \begin{Exercise}[{\cite[Exercise 1.2]{SchalkSimmons2005}}]
-In each of the cases given below, show that if the two triangles commute, then the square commutes.
+In each of the diagrams given below, show that if the two triangles commute, then the square commutes.
 \begin{figure}[H]
 \centering
 \subcaptionbox{\label{subfig:CommSq1}}{
@@ -305,6 +315,27 @@ In the diagram given below, viewed as a tetrahedron, show that if the left, righ
 \end{Exercise}
 
 \begin{Exercise}
+In each of the diagrams below, show that if both the squares commute, then the outer rectangle commutes.
+\begin{figure}[H]
+\centering
+\subcaptionbox{}{$\xymatrix@=3em{
+\bullet \ar[r] \ar[d] & \bullet \ar[r] \ar[d] & \bullet \ar[d] \\
+\bullet \ar[r] & \bullet \ar[r] & \bullet
+}$}
+\hspace{0.1\textwidth}
+\subcaptionbox{}{$\xymatrix@=3em{
+\bullet \ar[r] \ar[d] & \bullet \ar[r] \ar[d] & \bullet \\
+\bullet \ar[r] & \bullet \ar[r] & \bullet \ar[u]
+}$}
+\hspace{0.1\textwidth}
+\subcaptionbox{}{$\xymatrix@=3em{
+\bullet \ar[r] \ar[d] & \bullet \ar[r] & \bullet \ar[d] \\
+\bullet \ar[r] & \bullet \ar[r] \ar[u] & \bullet
+}$}
+\end{figure}
+\end{Exercise}
+
+\begin{Exercise}
 Show that if the inner triangle and the three trapeziums in the diagram below commute, then the outer triangle commutes.
 \begin{equation*}
 \xymatrix{
@@ -334,6 +365,17 @@ Let $G$ and $H$ be groups. If $f \colon G \to H$ is any function, defined $f \ti
 \xymatrix@C=5em@R=4em{
 G \times G \ar[r]^{f \times f} \ar[d]_\cdot & H \times H \ar[d]^{*} \\
 G \ar[r]_f & H
+}
+\end{equation*}
+\end{Exercise}
+
+\begin{Exercise}
+Show that in the diagram below, if all the parallelograms commute, and any one of the two squares commutes, then all directed paths with three arrows are equal under composition.
+\begin{equation*}
+\xymatrix@=3em{
+& \bullet \ar[r] \ar[rd] & \bullet \ar[rd] & \\
+\bullet \ar[r] \ar[rd] \ar[ru] & \bullet \ar[rd] \ar[ru] & \bullet \ar[r] & \bullet \\
+& \bullet \ar[r] \ar[ru] & \bullet \ar[ru] &
 }
 \end{equation*}
 \end{Exercise}
@@ -391,6 +433,7 @@ In the category $\cat{Set}$, consider the sets $X = \mathbb R$ and $Y = \mathbb 
 
 \begin{Exercise}
 \begin{enumerate}
+\item Show that $f$ is a retraction in a category $\cat C$ if and only if $f\opp$ is a section in $\cat C\opp$.
 \item Show that in $\cat{Set}$, every section is an injective function and every retraction is a surjective function.
 \item Show that in $\cat{Set}$, every injective function is a section.
 \item Read about the Axiom of Choice and try to understand its equivalence to the following statement: In $\cat{Set}$, every surjective function is a retraction.
@@ -398,6 +441,36 @@ In the category $\cat{Set}$, consider the sets $X = \mathbb R$ and $Y = \mathbb 
 \item In $\cat{Grp}$, consider the inclusion map $\iota \colon \mathbb Z \to \mathbb R$ defined by $\iota(n) = n$ for all $n \in \mathbb Z$ (where $\mathbb Z$ and $\mathbb R$ are the additive groups defined as usual). Show that $\iota$ is an injective homomorphism, but is not a section.
 \end{enumerate}
 \end{Exercise}
+
+The definitions of sections and retractions can be further weakened in the following manner. A \newterm{monomorphism} is a morphism $m \colon X \to Y$ such that for all $Z$ and $f, g \colon Z \to X$, if $m \circ f = m \circ g$, then $f = g$. In other words, $m$ is \newterm{left-cancellable}. We also say that $m$ is \newterm{monic}. Dually, an \newterm{epimorphism} is a morphism $e \colon X \to Y$ such that for all $Z$ and $f, g \colon Y \to Z$, if $f \circ e = g \circ e$, then $f = g$. That is, $e$ is \newterm{right-cancellable}. We also say that $e$ is \newterm{epic}.
+
+\begin{Exercise}
+Show that monomorphisms and epimorphisms are indeed dual concepts.
+\end{Exercise}
+
+Observe that the defining property of a monomorphism, namely $m \circ f = m \circ g \implies f = g$, appears similar to that of an injective functions between sets, namely $m(x) = m(y) \implies x = y$ (for elements $x$ and $y$ of the domain). Indeed, monomorphisms are the categorical generalisations of injective functions. This idea is formalised in the statement of the next exercise.
+
+\begin{Exercise}
+Show that monomorphisms in the category $\cat{Set}$ are exactly injective functions.
+\end{Exercise}
+
+\begin{Solution*}
+Consider a function $m \colon X \to Y$ in $\cat{Set}$. First, suppose that $m$ is a monomorphism. That is, if $f$ and $g$ are functions from some set $Z$ to $X$ such that $m \circ f = m \circ g$, then $f = g$. We need to show that $m$ is an injection. That is, if $x$ and $y$ are two elements of $X$ such that $m(x) = m(y)$, then $x = y$. Let $Z$ be a singleton set, say $Z = \{\bullet\}$. Define functions $f, g \colon Z \to X$ by $f(\bullet) = x$ and $g(\bullet) = y$.
+\begin{center}
+\includegraphics[scale=1.2]{Mono=Injection.pdf}
+\end{center}
+Then, $m(f(\bullet)) = m(x)$, and $m(g(\bullet)) = m(y)$. Now, suppose that $m(x) = m(y)$. Then we have $m(f(\bullet)) = m(g(\bullet))$, which implies that $m \circ f = m \circ g$ (since $\bullet$ is the only element of the domain $Z$ of these two functions). But $m$ is a monomorphism, and therefore we have $f = g$, which implies $f(\bullet) = g(\bullet)$, i.e. $x = y$, as required.
+
+Next, suppose that $m$ is an injection. If $f, g \colon Z \to X$ are such that $m \circ f = m \circ g$, then for all $z \in Z$, $m(f(z)) = m(g(z))$. As $m$ is injective, this implies that $f(z) = g(z)$, for all $z \in Z$, i.e. $f = g$, showing that $m$ is a monomorphism.
+\end{Solution*}
+
+Similarly, epimorphisms are the categorical generalisations of surjective functions, as you are asked to show in the next exercise.
+
+\begin{Exercise}
+Show that epimorphisms in the category $\cat{Set}$ are exactly surjective functions.
+\end{Exercise}
+
+
 
 \bibliographystyle{plain}
 \bibliography{References.bib}
