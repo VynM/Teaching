@@ -176,7 +176,7 @@ A category is \newterm{small} if its collections of objects and morphisms are se
 In \cref{ex:Categories}, the categories given in \labelcref{it:Categories2IsoObj,it:Categories1ObjDisc} are small (and hence also locally small), whereas the ones given in \labelcref{it:CategoriesRing,it:CategoriesMon,it:CategoriesAbGrp} are large but locally small.
 
 \section{Duality}\label{sec:Duality}
-The \newterm{opposite category} of a category $\cat C$ is the category $\cat C\opp$ with $\Ob(\cat C\opp) = \Ob(\cat C)$ and for each pair of objects $X$ and $Y$, $\Hom_{\cat C\opp}(X, Y) = \qty{\, f\opp \mid f \in \Hom_{\cat C}(Y, X) \,}$, in which composition is defined as
+The \newterm{opposite category} of a category $\cat C$ is the category $\cat C\opp$ with $\Ob(\cat C\opp) = \Ob(\cat C)$ and for each pair of objects $X$ and $Y$, \spliteq$\Hom_{\cat C\opp}(X, Y) = \qty{\, f\opp \mid f \in \Hom_{\cat C}(Y, X) \,}$, in which composition is defined as
 \begin{equation*}
 g\opp \circ f\opp = (f \circ g)\opp
 \end{equation*}
@@ -470,7 +470,133 @@ Similarly, epimorphisms are the categorical generalisations of surjective functi
 Show that epimorphisms in the category $\cat{Set}$ are exactly surjective functions.
 \end{Exercise}
 
+\begin{Exercise}
+Let $f \colon X \to Y$ and $g \colon Y \to Z$ be morphisms in a category. Prove the following:
+\begin{enumerate}
+\item If $f$ and $g$ are monic, then so is $g \circ f$.
+\item If $f$ and $g$ are epic, then so is $g \circ f$.
+\item If $g \circ f$ is monic, then so is $f$.
+\item If $g \circ f$ is epic, then so is $g$.
+\end{enumerate}
+\end{Exercise}
 
+\begin{Exercise}
+Prove that every monic retraction is an isomorphism and that every epic section is an isomorphism.
+\end{Exercise}
+
+\begin{Exercise}[{\cite[Exercise 1.4]{SchalkSimmons2005}}]
+Show that in the diagram given below, if $e$ is epic, $m$, is monic, and the outer square and the four trapeziums commute, then the inner square commutes.
+\begin{equation*}
+\xymatrix@=2.5em{
+\bullet \ar[ddd] \ar[rd]^e \ar[rrr] &&& \bullet \ar[ld] \ar[ddd] \\
+& \bullet \ar[d] \ar[r] & \bullet \ar[d] & \\
+& \bullet \ar[r] & \bullet \ar[rd]_m & \\
+\bullet \ar[ru] \ar[rrr] &&& \bullet
+}
+\end{equation*}
+\end{Exercise}
+
+\begin{Exercise}
+Consider the cube given below.
+\begin{equation*}
+\xymatrix@=2.5em{
+\bullet \ar[rr] && \bullet & \\
+& \bullet \ar[lu] \ar[rr] && \bullet \ar[lu] \\
+\bullet \ar[uu] \ar[rr]|\hole && \bullet \ar[uu]|\hole^(0.3)m & \\
+& \bullet \ar[lu]_e \ar[uu] \ar[rr] && \bullet \ar[lu] \ar[uu]
+}
+\end{equation*}
+\end{Exercise}
+
+
+\section{Products and Coproducts}\label{sec:ProductsCoproducts}
+
+Familiar mathematical structures such as groups, rings, vector spaces, and topological spaces have some notion of a product structure. In all these cases, where the mathematical structures themselves are sets with some additional structure, the product is defined as Cartesian product of the underlying sets, together with some additional structure. Recall that the Cartesian product of two sets $A$ and $B$ is the set $A \times B \ \qty{\, (a, b) \mid a \in A, b \in B \,}$. Such a definition cannot be given in an arbitrary category, since an object of the category may not have any ``underlying set''. Instead, we define products (and their duals, coproducts) in a category by using \newterm{universal properties}.
+
+The \newterm{product} of two objects $X$ and $Y$ of a category $\cat C$ is an object $P$, together with morphisms $\pi_X \colon P \to X$ and $\pi_Y \colon P \to Y$, such that for every object $Z$ and morphisms $f \colon Z \to X$ And $g \colon Z \to Y$, there exists a unique morphism $h \colon Z \to P$ that makes the following diagram commute:
+\begin{equation*}
+\xymatrix@=3em@C=5em{
+& X \\
+Z \ar[ru]^f \ar[rd]_g \ar@{-->}[r]^h & P \ar[u]_{\pi_X} \ar[d]^{\pi_Y}\\
+& Y
+}
+\end{equation*}
+If such a triple $(P, \pi_A, \pi_B)$ does not exist, then $A$ and $B$ have no product in $\cat C$.
+
+\note{The product is not merely the object $P$, but the triple $(P, \pi_X, \pi_Y)$. In particular categories, these maps may be obvious, and therefore we may usually refer to only $P$ as the product. But in an arbitrary category, the actual properties of the product are carried by these two morphisms rather than by the product object itself.}
+
+\begin{Example}\label{ex:CartesianProduct}
+First, let us see how this definition specialises to the Cartesian product in the category $\cat{Set}$. For any two sets $A$ and $B$, there are projection maps $\pi_A \colon A \times B \to A$ and $\pi_B \colon A \times B \to B$ from the Cartesian product $A \times B$ to the sets $A$ and $B$ respectively, defined by $\pi_A(a, b) = a$ and $\pi_B(a, b) = b$ for all $(a, b) \in A \times B$. We shall therefore verify that the triple $(A \times B, \pi_A, \pi_B)$ satisfies the universal property of the product.
+
+Let $C$ be any set and $f \colon C \to A$ and $g \colon C \to B$ two functions from $C$ to $A$ and $B$, respectively. We must show the existence of a unique function $h \colon C \to A \times B$ such that
+\begin{equation*}
+\xymatrix@=3em@C=5em{
+& A \\
+C \ar[ru]^f \ar[rd]_g \ar@{-->}[r]^h & A \times B \ar[u]_{\pi_A} \ar[d]^{\pi_B}\\
+& B
+}
+\end{equation*}
+commutes -- i.e. such that $\pi_A \circ h = f$ and $\pi_B \circ h = g$.
+
+Define $h$ by $h(c) = (f(c), g(c))$, for all $c \in C$. Note that indeed, $h(c) \in A \times B$, since $f(c) \in A$ and $g(c) \in B$.
+
+Next, observe that $\pi_A(h(c)) = f(c)$, and $\pi_B(h(c)) = g(c)$, which shows that $\pi_A \circ h = f$ and $\pi_B \circ h = g$, as required.
+
+Finally, to see that $h$ is the unique map satisfying these conditions, suppose that $h(c) = (a, b) \in A \times B$. Then from $\pi_A \circ h = f$, we have $\pi_A(a, b) = f(c)$, i.e. $a = f(c)$, and similarly $b = g(c)$. Therefore, $h(c) = (f(c), g(c))$ necessarily.
+\end{Example}
+
+\begin{Exercise}
+Verify that the triple $(B \times A, \pi_B, \pi_A)$ (with notation as given in \cref{ex:CartesianProduct}) also satisfies the definition of the product of $A$ and $B$. Conclude that the product of two objects need not be unique. Are $A \times B$ and $B \times A$ isomorphic to each other? (Recall that an isomorphism in $\cat{Set}$ is merely a bijection).
+\end{Exercise}
+
+\begin{Example}
+Let $G$ and $H$ be two groups. The direct product of $G$ and $H$ is the group defined by the Cartesian product $G \times H$ together with componentwise operations -- i.e. the group operation is defined as $(x_1, y_1)(x_2, y_2) = (x_1 x_2, y_1, y_2)$ for all $(x_1, y_1), (x_2, y_2) \in G \times H$.
+
+As the underlying set of the direct product is the Cartesian product $G \times H$, the projection maps $\pi_G$ and $\pi_H$ from $G \times H$ to $G$ and $H$ are naturally defined. But in order for $(G \times H, \pi_G, \pi_H)$ to be the product of $G$ and $H$ in the category $\cat{Grp}$, the maps $\pi_G$ and $\pi_H$ must be morphisms in $\cat{Grp}$, i.e. they must be group homomorphisms. It is easily verfied that they are.
+
+Again, it is clear that if $K$ is any group and $p \colon K \to G$ and $q \colon K \to H$ are group homomorphisms, then there is a unique group homomorphism $m \colon K \to G \times H$ defined by $m(k) = (p(k), q(k))$ for all $k \in K$, such that $\pi_G \circ m = p$ and $\pi_H \circ m = q$.
+\end{Example}
+
+The \newterm{coproduct} of two objects $X$ and $Y$ of a category $\cat C$ is an object $S$, together with morphisms $\iota_X \colon X \to S$ and $\iota_Y \colon Y \to S$, such that for every object $Z$ and morphisms $f \colon X \to Z$ And $g \colon Y \to Z$, there exists a unique morphism $h \colon S \to Z$ that makes the following diagram commute:
+\begin{equation*}
+\xymatrix@=3em@C=5em{
+X \ar[d]_{\iota_X} \ar[rd]^{f} \\
+S \ar@{-->}[r]^h & Z\\
+Y \ar[u]^{\iota_Y} \ar[ru]_{g}
+}
+\end{equation*}
+If no such triple $(S, \iota_X, \iota_Y)$ exists, then $X$ and $Y$ have no coproduct in $\cat C$.
+
+\begin{Example}\label{ex:DisjointUnion}
+Consider two sets $A$ and $B$. Their coproduct in the category $\cat{Set}$ is the \newterm{disjoint union}
+\begin{equation*}
+A \sqcup B = A \times \{1\} \cup B \times \{2\} = \qty{\, (a, 1) \mid a \in A \,} \cup \qty{\, (b, 2) \mid b \in B \,}.
+\end{equation*}
+The injections $\iota_A \colon A \to A \cup B$ and $\iota_B \colon B \to A \cup B$ are given by $\iota_A(a) = (a, 1)$ for all $a \in A$, and $\iota_B(b) = (b, 2)$ for all $b \in B$.
+\end{Example}
+
+\note{Intuitively, the disjoint union of two sets is simply their union considering the two sets to be disjoint. That is, we relabel an element $a$ from $A$ as $(a, 1)$ to distinguish it, as an element of $A \sqcup B$, from an element coming from $B$, which would be labelled as $(b, 2)$. For example, if $A = \{x, y, z\}$ and $B = \{y, w\}$, then $A \sqcup B = \{(x, 1), (y, 1), (z, 1), (y, 2), (w, 2)\}$. Even though $y$ is common to both $A$ and $B$, in the disjoint union we have two ``copies'' of $y$, labelled as $(y, 1)$ and $(y, 2)$ to identify where each copy comes from.}
+
+\begin{Exercise}
+Verify that the disjoint union of two sets as defined in \cref{ex:DisjointUnion} is indeed their coproduct.
+\end{Exercise}
+
+\begin{Exercise}
+Let $A$ and $B$ be two Abelian groups, considered as objects in the category $\cat{AbGrp}$ of Abelian groups and group homomorphisms.
+\begin{enumerate}
+\item Verify that the product of $A$ and $B$ is their direct product $A \times B$, as defined in the category $\cat{Grp}$ itself.
+
+\item Define $\iota_A \colon A \to A \times B$ by $\iota_A(a) = (a, e_B)$ for all $a \in A$ (where $e_B$) denotes the identity element of $B$). Verify that $\iota_A$ is a group homomorphism. Similarly define $\iota_B \colon B \to A \times B$ and observe that it is a group homomorphism.
+
+\item Suppose that $C$ is an Abelian group and $f \colon A \to C$ and $g \colon B \to C$ are group homomorphisms. Show that there exists a group homomorphism $h \colon A \times B \to C$ such that $h \circ \iota_A = f$ and $h \circ \iota_B = g$.
+
+\hint{Define $h$ as $h(a,b) = f(a)g(b)$.}
+
+\item Verify that $h$ is the unique such homomorphism.
+
+\item Conclude that $A \times B$ is the coproduct of $A$ and $B$ in $\cat{AbGrp}$.
+\end{enumerate}
+\end{Exercise}
 
 \bibliographystyle{plain}
 \bibliography{References.bib}
