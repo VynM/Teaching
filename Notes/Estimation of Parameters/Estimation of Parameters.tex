@@ -88,9 +88,44 @@ The value of $\theta = T(x_1, \ldots, x_n)$ (say) for which $L(\theta)$ is maxim
 Where applicable, we maximise $L(\theta)$ by solving the equation $\dfrac{d}{d\theta} L(\theta) = 0$ for $\theta$. As $L(\theta)$ is the product of $f(x_1; \theta), \ldots, f(x_n; \theta)$, it is more often convenient to maximise the \emph{log-likelihood function} $\log L(\theta) = \sum_{i=1}^{n} \log f(x_i; \theta)$ -- which yields the same estimator $\hat\theta$, since $\log$ is an increasing function.
 
 \begin{Example}
-Let $X$ be a random variable with pdf $f(x) = (1 + \theta) x^{\theta}$, $0 < x < 1$, where $\theta > 0$. The likelihood function, assuming a sample of size $n$, will be
+Let $X \sim \mathcal E(\theta)$ (an exponential distribution with parameter $\theta$). Then the pdf of $X$ is $f(x; \theta) = \theta e^{-\theta x}$, $x \ge 0$, where $\theta > 0$. The likelihood function (assuming a sample of size $n$) will be
+\begin{equation*}
+L(\theta) = \theta^n e^{-\theta \sum_{i=1}^n x_i}
+\end{equation*}
+and therefore the log-likelihood function will be
+\begin{equation*}
+\log L(\theta) = n \log \theta - \theta \sum_{i = 1}^n x_i.
+\end{equation*}
+Differentiating this with respect to $\theta$ and equating to zero, we have
+\begin{equation*}
+\frac n \theta - \sum_{i = 1}^n x_i = 0
+\end{equation*}
+which implies that
+\begin{equation*}
+\theta = \dfrac n {\sum_{i = 1}^n x_i} = \dfrac{1}{\overline x}.
+\end{equation*}
+Thus, the MLE of $\theta$ is
+\begin{equation*}
+\hat \theta = \dfrac 1 {\overline X}.
+\end{equation*}
+\end{Example}
+
+\begin{Example}
+Let $X$ be a random variable with pdf $f(x; \theta) = (1 + \theta) x^{\theta}$, $0 < x < 1$, where $\theta > 0$. The likelihood function will be
+\begin{equation*}
+L(\theta) = (1 + \theta)^n x_1^\theta \cdots x_n^\theta
+\end{equation*}
+and hence
+\begin{equation*}
+\log L(\theta) = n \log(1 + \theta) + \theta \sum_{i = 1}^n \log x_i.
+\end{equation*}
+Equating its derivative with respect to $\theta$ to zero, we have
+\begin{equation*}
+\dfrac{n}{1 + \theta} + \sum_{i = 1}^n \log x_i = 0
+\end{equation*}
+which implies that the MLE of $\theta$ is
 \begin{align*}
-L(\theta) = 
+\hat\theta = \dfrac{n}{\sum\limits_{i = 1}^n \log \frac 1 {X_i}} - 1.
 \end{align*}
 \end{Example} 
 
