@@ -515,7 +515,7 @@ Consider the cube given below.
 
 \section{Products and Coproducts}\label{sec:ProductsCoproducts}
 
-Familiar mathematical structures such as groups, rings, vector spaces, and topological spaces have some notion of a product structure. In all these cases, where the mathematical structures themselves are sets with some additional structure, the product is defined as Cartesian product of the underlying sets, together with some additional structure. Recall that the Cartesian product of two sets $A$ and $B$ is the set $A \times B \ \qty{\, (a, b) \mid a \in A, b \in B \,}$. Such a definition cannot be given in an arbitrary category, since an object of the category may not have any ``underlying set''. Instead, we define products (and their duals, coproducts) in a category by using \newterm{universal properties}.
+Familiar mathematical structures such as groups, rings, vector spaces, and topological spaces have some notion of a product structure. In all these cases, where the mathematical structures themselves are sets with some additional structure, the product is defined as Cartesian product of the underlying sets, together with some additional structure. Recall that the Cartesian product of two sets $A$ and $B$ is the set $A \times B = \qty{\, (a, b) \mid a \in A, b \in B \,}$. Such a definition cannot be given in an arbitrary category, since an object of the category may not have any ``underlying set''. Instead, we define products (and their duals, coproducts) in a category by using \newterm{universal properties}.
 
 The \newterm{product} of two objects $X$ and $Y$ of a category $\cat C$ is an object $P$, together with morphisms $\pi_X \colon P \to X$ and $\pi_Y \colon P \to Y$, such that for every object $Z$ and morphisms $f \colon Z \to X$ And $g \colon Z \to Y$, there exists a unique morphism $h \colon Z \to P$ that makes the following diagram commute:
 \begin{equation*}
@@ -599,6 +599,82 @@ Let $A$ and $B$ be two Abelian groups, considered as objects in the category $\c
 \item Verify that $h$ is the unique such homomorphism.
 
 \item Conclude that $A \times B$ is the coproduct of $A$ and $B$ in $\cat{AbGrp}$.
+\end{enumerate}
+\end{Exercise}
+
+\section{Subcategories}
+
+As with most mathematical structures, categories also have substructures. A \newterm{subcategory} of a category $\cat C$ is a category $\cat D$ such that $\Ob(\cat D) \subseteq \Ob(\cat C)$ and $\Mor(\cat D) \subseteq \Mor(\cat C)$. The latter is equivalent to the statement that if $X$ and $Y$ are objects of $\cat D$, then $\Hom_{\cat D}(X, Y) \subseteq \Hom_{\cat C}(X, Y)$. Clearly, every category is a subcategory of itself, and the empty category, which has no objects and no morphisms, is a subcategory of every category.
+
+A subcategory $\cat D$ of a category $\cat C$ is \newterm{wide} if all objects of $\cat C$ are also present in $\cat D$. Similarly, $\cat D$ is a \newterm{full} subcategory of $\cat C$ if it is a subcategory of $\cat C$ such that for all objects $X, Y \in \Ob(\cat D)$, $\Hom_{\cat D}(X, Y) = \Hom_{\cat C}(X, Y)$.
+
+\begin{Example}
+\begin{enumerate}
+\item $\cat{Set}$ is a subcategory of $\cat{Rel}$ -- both share the same objects, and every morphism in $\cat{Set}$ (a function) is a morphism in $\cat{Rel}$ (a relation). Hence, it $\cat{Set}$ is a wide subcategory of $\cat{Rel}$, but not a full subcategory, since not every relation is a function.
+\item $\cat{AbGrp}$ is a subcategory of $\cat{Grp}$, which is itself a subcategory of $\cat{Mon}$. In each case, the subcategory is full, but not wide.
+\item $\cat{Mon}$ is a subcategory of $\cat{Semigrp}$, the category of semigroups and semigroup homomorphisms. Note that it is neither a wide subcategory (obvious), nor a full subcategory (why?).
+\item For any category $\cat C$, the collection $\cat C^\mathsf{epi}$ consisting of all objects of $\cat C$ and all (and only) the epimorphisms of $\cat C$ forms a (wide) subcategory of $\cat C$. The subcategories $\cat C^\mathsf{mono}$ and $\cat C^\mathsf{iso}$ can be defined similarly.
+\item For any category $\cat C$, the collection of all objects of $\cat C$ together with only the identity morphisms is a wide subcategory of $\cat C$.
+\item For any object $X$ of a category $\cat C$, the collection consisting of just $X$ and all morphisms from $X$ to itself is a full subcategory of $\cat C$.
+\end{enumerate}
+\end{Example}
+
+\section{Functors}
+
+Categories themselves are mathematical structures, and so we are naturally led to consider categories whose objects are themselves categories\footnote{There are set-theoretic problems in attempting to define a \emph{category of all categories}, but this is easily overcome, for instance, by only considering the category of all \emph{small} categories.}. What should be the morphisms in such a category? Just as the structure of an algebraic object (such as a group or a vector space) is considered to be determined by its operation(s), the structure of a category is determined by how its morphisms are composed. A structure-preserving map between categories should therefore preserve compositions and identity morphisms.
+
+A \newterm{(covariant) functor} from a category $\cat C$ to a category $\cat D$ is a function $F \colon \cat C \to \cat D$ satisfying the following properties:
+\begin{enumerate}[label = (\roman*)]
+\item $F$ maps each object $X$ of $\cat C$ to an object $FX$ of $\cat D$.
+\item $F$ maps each morphism $f \colon X \to Y$ in $\cat C$ to a morphism $F(f) \colon FX \to FY$ of $\cat D$.
+\item If $f \colon X \to Y$ and $g \colon Y \to Z$ are morphisms in $\cat C$, then $F(g \circ f) = F(g) \circ F(f)$.
+\item For each object $X$ of $\cat C$, $F(1_X) = 1_{FX}$.
+\end{enumerate}
+
+These properties imply that $F$ preserves commutativity of diagrams -- i.e. given a commutative diagram in $\cat C$, the diagram obtained by replacing each object $X$ in the diagram by $FX$ and each morphism $f$ in the diagram by $F(f)$ is a commutative diagram in $\cat D$.
+
+A \newterm{contravariant functor} $F$ from $\cat C$ to $\cat D$ is a covariant functor from $\cat C\opp$ to $\cat D$. To make this evident, we shall write $F \colon \cat C\opp \to D$. Thus, a contravariant functor $F \colon \cat C\opp \to D$ is a function satisfying the following properties:
+\begin{enumerate}[label = (\roman*)]
+\item $F$ maps each object $X$ of $\cat C$ to an object $FX$ of $\cat D$.
+\item $F$ maps each morphism $f \colon X \to Y$ in $\cat C$ to a morphism $F(f) \colon FY \to FX$ of $\cat D$.
+\item If $f \colon X \to Y$ and $g \colon Y \to Z$ are morphisms in $\cat C$, then $F(g \circ f) = F(f) \circ F(g)$.
+\item For each object $X$ of $\cat C$, $F(1_X) = 1_{FX}$.
+\end{enumerate}
+
+Obviously, a contravariant functor also preserves commutativity of diagrams. We shall write \emph{functor} to mean a covariant functor, and a contravariant functor will always be explicitly stated to be so.
+
+\begin{Example}
+\begin{enumerate}
+\item For any category $\cat C$, there is an \newterm{identity functor} $I \colon \cat C \to \cat C$ that maps each object to itself and each morphism to itself.
+
+\item Let $\cat C$ be $\cat{Grp}$ (or $\cat{Ring}$ or $\cat{Vect}_F$ or $\cat{Top}$, etc.). Then there is a functor $U \colon \cat C \to \cat{Set}$ that maps each object $X$ to its underlying set $UX$, and any morphism $f \colon X \to Y$ to the function $f \colon UX \to UY$. This functor is said to be a \newterm{forgetful functor}, as it ``forgets'' some of the structure but otherwise leaves the object unchanged.
+
+\item There are also forgetful functors from $\cat{AbGrp}$ to $\cat{Grp}$, from $\cat{Grp}$ to $\cat{Mon}$, and from $\cat{Mon}$ to $\cat{Semigrp}$, defined in the obvious way.
+
+\item There is a contravariant functor $(-)^*$ from $\cat{Vect}_F$ to $\cat{Vect}_F$ that maps each vector space $V$ to its dual space $V^*$, and each linear transformation $T \colon V \to W$ to its dual transformation $T^* \colon W^* \to V^*$. Recall that $T^*$ is defined by $T^*(w^*) = (v \mapsto w^*(T(v)))$.
+
+\item The \newterm{covariant power set functor} $\mathcal P \colon \cat{Set} \to \cat{Set}$ maps each set $X$ to its power set $\mathcal P(X)$, and each function $f \colon X \to Y$ to the function $\mathcal P(f) \colon \mathcal P(X) \to \mathcal P(Y)$ defined by
+\begin{equation*}
+\mathcal P(f)(A) = \qty{\, f(a) \mid a \in A \,}
+\end{equation*}
+for all $A \subseteq X$. In other words, $\mathcal P(f)(A)$ is the image of $A$ under $f$.
+
+\item The \newterm{contravariant power set functor} $\overline{\mathcal P} \colon \cat{Set}\opp \to \cat{Set}$ maps each set $X$ to its power set $\overline{\mathcal P}(X) = \mathcal P(X)$ and each function $f \colon X \to Y$ to the function $\overline{\mathcal P}(Y) \to \overline{\mathcal P}(X)$ defined by
+\begin{equation*}
+\overline{\mathcal P}(f)(B) = \qty{\, x \in X \mid f(x) \in B \,}
+\end{equation*}
+for all $B \subseteq Y$. In other words, $\overline{\mathcal P}(B)$ is the preimage of $B$ under $f$.
+
+\item There is a functor $F \colon \cat{Set} \to \cat{Vect}_F$ that maps each set $X$ to the freely generated vector space with basis $X$. Such a functor is said to be a \newterm{free functor}.
+
+\item The functor $M_n \colon \cat{CRing} \to \cat{Mon}$ maps each commutative ring $R$ To the monoid $M_n(R)$ of $n \times n$ matrices over $R$, and each function $f \colon R \to S$ to the induced function $M_n(f) \colon M_n(R) \to M_n(S)$ defined by $M_n(f)([a_{ij}]) = [f(a_{ij})]$ for all matrices $[a_{ij}] \in M_n(R)$.
+\end{enumerate}
+\end{Example}
+
+\begin{Exercise}
+\begin{enumerate}
+\item Let $F \colon \cat C \to \cat D$ be a functor and $f$ a morphism in $\cat C$. Prove that if $f$ is a section (respectively, a retraction) in $\cat C$, then $F(f)$ is a section (respectively, a retraction) in $\cat D$. Hence show that functors preserve isomorphisms.
+\item Show, by means of a counterexample, that a functor need not \newterm{reflect} isomorphisms -- i.e. if $F \colon \cat C \to \cat D$ is a functor and $f$ is a morphism in $\cat C$ such that $F(f)$ is an isomorphism in $\cat D$, then $f$ need not be an isomorphism in $\cat C$.
 \end{enumerate}
 \end{Exercise}
 
