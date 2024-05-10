@@ -667,7 +667,7 @@ for all $B \subseteq Y$. In other words, $\overline{\mathcal P}(B)$ is the preim
 
 \item There is a functor $F \colon \cat{Set} \to \cat{Vect}_F$ that maps each set $X$ to the freely generated vector space with basis $X$. Such a functor is said to be a \newterm{free functor}.
 
-\item The functor $M_n \colon \cat{CRing} \to \cat{Mon}$ maps each commutative ring $R$ To the monoid $M_n(R)$ of $n \times n$ matrices over $R$, and each function $f \colon R \to S$ to the induced function $M_n(f) \colon M_n(R) \to M_n(S)$ defined by $M_n(f)([a_{ij}]) = [f(a_{ij})]$ for all matrices $[a_{ij}] \in M_n(R)$.
+\item The functor $M_n \colon \cat{CRing} \to \cat{Mon}$ maps each commutative ring $R$ to the monoid $M_n(R)$ of $n \times n$ matrices over $R$, and each function $f \colon R \to S$ to the induced function $M_n(f) \colon M_n(R) \to M_n(S)$ defined by $M_n(f)([a_{ij}]) = [f(a_{ij})]$ for all matrices $[a_{ij}] \in M_n(R)$.
 \end{enumerate}
 \end{Example}
 
@@ -675,6 +675,74 @@ for all $B \subseteq Y$. In other words, $\overline{\mathcal P}(B)$ is the preim
 \begin{enumerate}
 \item Let $F \colon \cat C \to \cat D$ be a functor and $f$ a morphism in $\cat C$. Prove that if $f$ is a section (respectively, a retraction) in $\cat C$, then $F(f)$ is a section (respectively, a retraction) in $\cat D$. Hence show that functors preserve isomorphisms.
 \item Show, by means of a counterexample, that a functor need not \newterm{reflect} isomorphisms -- i.e. if $F \colon \cat C \to \cat D$ is a functor and $f$ is a morphism in $\cat C$ such that $F(f)$ is an isomorphism in $\cat D$, then $f$ need not be an isomorphism in $\cat C$.
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Hom Functors}
+
+There are two types of \newterm{hom functors} from any locally small category into $\cat{Set}$. For any object $X$ of a locally small category $\cat C$, the \newterm{covariant hom functor} from $\cat C$ to $\cat{Set}$ defined by $X$ is the functor $\Hom(X, -) \colon \cat C \to \cat{Set}$ that maps each object $A$ of $\cat C$ to the set $\Hom(X, A)$, and each morphism $f \colon A \to B$ in $\cat C$ to the function $(f \circ -) \colon \Hom(X, A) \to \Hom(X, B)$ given by $(f \circ -)(h) = f \circ h$, for all $h \in \Hom(X, A)$.
+\begin{equation*}
+\xymatrix{
+X \ar[r]^h \ar@{-->}[rd]_{f \circ h} & A \ar[d]^f \\
+ & B
+}
+\end{equation*}
+
+The \newterm{contravariant hom functor} from $\cat C$ to $\cat{Set}$ defined by $X$ is the functor $\Hom(-, X) \colon \cat C\opp \to \cat{Set}$ that maps each object $A$ of $\cat C$ to the set $\Hom(A, X)$, and each morphism $f \colon A \to B$ in $\cat C$ to the function $(- \circ f) \colon \Hom(B, X) \to \Hom(A, X)$ given by $(- \circ f)(h) = h \circ f$ for all $h \in \Hom(B, X)$.
+\begin{equation*}
+\xymatrix{
+A \ar[d]_f \ar@{-->}[rd]^{h \circ f} & \\
+B \ar[r]_h & X
+}
+\end{equation*}
+
+\begin{Exercise}
+Let $U \colon \cat{Ring} \to \cat{Set}$ be the forgetful functor that maps each unital ring $R$ to its underlying set $UR$. Find a family of functions $\{\phi_R\}$ satisfying the following:
+\begin{enumerate}[label = (\roman*)]
+\item For each unital ring $R$, $\phi_R \colon UR \to \Hom(\mathbb Z, R)$ is an isomorphism in $\cat{Set}$ (i.e. a bijection).
+\item For each unital ring homomorphism $f \colon R\ to S$, the diagram below commutes.
+\begin{equation*}
+\xymatrix@=3em{
+UR \ar[r]^f \ar[d]_{\phi_R} & US \ar[d]^{\phi_S} \\
+\Hom(\mathbb Z, R) \ar[r]_{f \circ -} & \Hom(\mathbb Z, S)
+}
+\end{equation*}
+\end{enumerate}
+\end{Exercise}
+
+\subsection*{Groups of Units and Group Rings}
+
+Let $R$ be a unital ring. Then an element $u \in R$ is a \newterm{unit} if there exists an element $v \in R$ such that $uv = vu = 1$. The set of all units of $R$ is denoted by $R^\times$, and it is easy to see that it forms a group -- this group is the \newterm{group of units} of $R$.
+
+\begin{Exercise}
+\begin{enumerate}
+\item Let $f \colon R \to S$ be a unital ring homomorphism from a unital ring $R$ to a unital ring $S$. Show that if $u \in R^\times$, then $f(u) \in S^\times$.
+\item Show that the mapping of rings to their groups of units is functorial -- i.e. there exists a functor $(-)^\times \colon \cat{Ring} \to \cat{Grp}$ that maps each ring $R$ to $R^\times$, and each unital ring homomorphism $f \colon R \to S$ to a group homomorphism.
+
+\hint{Define the image of $f$ under the functor as $f|_{R^\times}$. Verify that it is a group homomorphism from $R^\times$ to $S^\times$.}
+\end{enumerate}
+\end{Exercise}
+
+Let $G$ be a group. Then the \newterm{group ring} of $G$ (over $\mathbb Z$) is the unital ring $\mathbb Z[G]$ defined as
+\begin{equation*}
+\mathbb Z[G] = \qty{\, a_1 g_1 + \cdots + a_n g_n \mid a_i \in R,\, g_i \in G\, i = 1, \ldots, n, \, n \in \mathbb N_0 \,}
+\end{equation*}
+the set of all formal finite linear combinations of elements of $G$ with coefficients from $R$, with addition and multiplication defined as follows: Let $x, y \in \mathbb Z[G]$. Then there exist $a_1, \ldots, a_n$ and $b_1, \ldots, b_n$ such that $x = \sum_{i=1}^n a_i g_i$ and $y = \sum_{i=1}^n b_i g_i$, where we take $a_i = 0$ if $g_i$ is not present in $x$ but is present in $y$, and similarly $b_i = 0$ if $g_i$ is present in $x$ but not present in $y$. Define
+\begin{equation*}
+\sum_{i=1}^n a_i g_i + \sum_{j=1}^n b_i g_i = \sum_{i=1}^n (a_i + b_i) g_i.
+\end{equation*}
+Now, define the product of $\sum_{i=1}^m a_i g_i$ and $\sum_{j = 1}^n b_j h_j$ as
+\begin{equation*}
+\pqty{\sum_{i=1}^m a_i g_i}\pqty{\sum_{j = 1}^n b_j h_j} = \sum_{i=1}^m \sum_{j=1}^n a_i b_j g_i h_j.
+\end{equation*}
+
+\begin{Exercise}
+\begin{enumerate}
+\item Verify that for any group $G$, the group ring $\mathbb Z[G]$ is a unital ring with unity $1e$, where $e$ is the identity element of $G$ and $1$ is the unity of $R$.
+\item Prove that in $\mathbb Z[G]$, each element $g$ of $G$, considered as an element $1g \in \mathbb Z[G]$, is a unit.
+\item Let $f \colon G \to H$ be a group homomorphism. Then show that the mapping $\sum_{i=1}^n a_i g_i \mapsto \sum_{i=1}^n a_i f(g_i)$ defines a unital ring homomorphism from $\mathbb Z[G]$ to $\mathbb Z[H]$.
+\item Show that the mapping $\mathbb Z[-] \colon \cat{Grp} \to \cat{Ring}$ is functorial.
+\item Show that for all groups $G$ and all rings $R$, there is an isomorphism of hom sets $\Hom(\mathbb Z[G], R) \cong \Hom(G, R^\times)$.
 \end{enumerate}
 \end{Exercise}
 
