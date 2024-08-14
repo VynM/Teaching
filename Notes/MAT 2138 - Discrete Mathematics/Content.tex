@@ -1,0 +1,476 @@
+\title{\textbf{Discrete Mathematics}}
+
+\date{}
+\maketitle
+
+\begingroup
+\let\clearpage\relax
+\tableofcontents
+\endgroup
+
+\clearpage
+
+\renewcommand{\nomname}{List of Symbols}
+\nomenclature[01]{$\forall$}{For all/any}
+\nomenclature[02]{$\exists$}{For some / There exists}
+\nomenclature[03]{$a \in S$}{$a$ belongs to / is an element of set $S$}
+\nomenclature[04]{$\cup$, $\cap$}{Union and intersection (respectively) of sets}
+\nomenclature[05]{$\varnothing$}{Empty set $\{\}$}
+\nomenclature[06]{$\mathbb N$, $\mathbb Z$, $\mathbb Q$, $\mathbb R$, $\mathbb C$}{Sets of natural numbers, integers, rational numbers, real numbers, complex numbers (respectively)}
+\nomenclature[07]{$\mathbb N_0$}{Set of non-negative integers $\{0, 1, 2, \ldots\}$}
+%\nomenclature[08]{$\mathbb R_{>0}$}{Set of positive real numbers}
+\nomenclature[08]{$A \subseteq B$}{$A$ is a subset of set $B$}
+\nomenclature[09]{$\lvert S \rvert$}{Cardinality of set $S$}
+\printnomenclature[10em]
+
+\clearpage
+
+\section{Elementary Set Theory}\label{sec:SetTheory}
+
+A \newterm{set} is (informally) an unordered collection of \newterm{elements}. More formally, any set is defined by the \newterm{membership relation} $\in$ (read ``belongs to'', ``is an element of'', ``is a member of'', or ``is in''), where $s \in S$ if and only if $s$ is an element of the set $S$. If $x$ is not a member of $S$, then we write $x \notin S$. We may define a set either as a list of all its members enclosed by curly braces -- $\{$ and $\}$ -- or in the form $Y = \qty{\, x \in X \mid P(x) \,}$, where $X$ is a previously defined set, and $P(x)$ is a \newterm{predicate} (a function with a true/false value depending on the value of $x$) -- then $Y$ is the set consisting of all members of $X$ that satisfy the predicate $P(x)$ (i.e., those $x \in X$ for which $P(x)$ is true). The latter form of defining a set is called the \newterm{set-builder} notation. For example
+\begin{equation*}
+S = \qty{1, \text{`a'}, 2.5, +, 9, -3}
+\end{equation*}
+defines $S$ to be the set consisting of the six elements $1$, `a', $2.5$, $+$, $9$, and $-3$, and
+\begin{equation*}
+T = \qty{\, s \in S \mid s\ \text{is a number} \,}
+\end{equation*}
+defines $T$ to be the set consisting of the four elements $1$, $2.5$, $9$, and $-3$. The symbol {$|$} is read as ``such that'' (and can be replaced by a $:$ as well).
+
+The \newterm{universal set} (usually denoted by $U$) is the set consisting of all elements currently under consideration. We may write $\qty{\, x \mid P(x) \,}$ to mean $\qty{\, x \in U \mid P(x) \,}$.
+
+The \newterm{empty set} (or \newterm{null set}) is the set $\varnothing$ that has no elements. That is, for every element $a$ of the universal set, $a \notin \varnothing$.
+
+\begin{Note*}
+A variant of the set-builder notation replaces the element on the left side of $\mid$ by an expression involving one or more elements, with the specifications of memberships of these elements appearing on the right side of $\mid$, along with other predicates, if any. For example
+\begin{equation*}
+S = \qty{\, 2n \mid n \in \mathbb Z \,}
+\end{equation*}
+defines $S$ to be the set of all elements obtained by doubling an integer -- in other words, $S$ is the set of even integers.
+\end{Note*}
+
+\subsection{Relations Among Sets}\label{subsec:SetRels}
+
+A set $A$ is a \newterm{subset} of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is an element of $B$. That is, for any element $a$ (of the universal set), $a \in A \implies a \in B$. Then $B$ is a \newterm{superset} of $A$, denoted by $B \supseteq A$. We may also say that $B$ \newterm{contains} $A$, or that $A$ is contained in $B$.
+
+Two sets $A$ and $B$ are \newterm{equal}, written $A = B$, if each contains the other -- i.e., $A \subseteq B$ and $B \subseteq A$. This is equivalent to the statement that $A$ and $B$ have exactly the same elements. Otherwise, $A$ is not equal to $B$ (written $A \ne B$). $A$ is a \newterm{proper} subset of $A$ (or is properly contained in $B$) if $A \subseteq B$ and $A \ne B$. Then we write $A \subsetneq B$. Similarly, $B$ is a proper superset of $A$, denoted by $B \supsetneq A$, if $B \supseteq A$ and $B \ne A$.
+
+\begin{Note*}
+It is also common to use $\subset$ and $\supset$ instead of $\subseteq$ and $\supseteq$, respectively. They are usually \emph{not} alternatives to $\subsetneq$ and $\supsetneq$, except when explicitly stated to be so.
+\end{Note*}
+
+The set of all subsets of a set $A$ is called the \newterm{power set} of $A$, is denoted by $2^A$ or $\mathcal P(A)$. That is,
+\begin{equation*}
+2^A = \qty{\, S \mid S \subseteq A \,}.
+\end{equation*}
+
+\begin{Exercise}
+Let $A$, $B$, and $C$ be arbitrary sets.
+\begin{enumerate}
+\item Show that $A \subseteq A$.
+\item Show that if $A \subseteq B$ and $B \subseteq C$, then $A \subseteq C$.
+\item Show that the $\supseteq$ also satisfies these properties.
+\item Show that $\varnothing \subseteq A$.
+\item Show that if $A$ is a set consisting of $n$ elements, for some non-negative integer $n$, then $2^A$ contains $2^n$ elements.
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Basic Operations of Sets}\label{subsec:BasicSetOps}
+
+The \newterm{union} of two sets $A$ and $B$ is the set $A \cup B$ consisting of all elements that belong to $A$ or $B$:
+\begin{equation*}
+A \cup B = \qty{\, x \mid x \in A\ \text{or}\ x \in B\,}.
+\end{equation*}
+The \newterm{intersection} of two sets $A$ and $B$ is the set $A \cap B$ consisting of all elements that belong to $A$ and $B$:
+\begin{equation*}
+A \cap B = \qty{\, x \mid x \in A\ \text{and}\ x \in B\,}.
+\end{equation*}
+The \newterm{complement} of a set $A$ is the set $\overline A$ of all elements (of the universal set) that do not belong to $A$:
+\begin{equation*}
+\overline A = \qty{\, x \mid x \notin A \,}.
+\end{equation*}
+We may also denote the complement of $A$ by $A'$, $A^{\mathrm c}$, or $U \setminus A$.
+
+\begin{Exercise}
+Let $A$, $B$, and $C$ be arbitrary sets.
+\begin{enumerate}
+\item Show that $A \cap B \subseteq A \subseteq A \cup B$.
+
+\item Show that $\cup$ is
+\begin{enumerate}[label=(\roman*)]
+\item \newterm{associative}: $(A \cup B) \cup C = A \cup (B \cup C)$,
+\item \newterm{commutative}: $A \cup B = B \cup A$, and
+\item \newterm{idempotent}: $A \cup A = A$.
+\end{enumerate}
+
+\item Prove that $\cap$ is also associative, commutative, and idempotent.
+
+\item Prove that $\cup$ \newterm{distributes} over $\cap$ and vice-versa:
+\begin{align*}
+A \cup (B \cap C) & = (A \cup B) \cap (A \cup C) \\
+A \cap (B \cup C) & = (A \cap B) \cup (A \cap C).
+\end{align*}
+
+\item Prove that $\cup$ and $\cap$ satisfy the law of \newterm{absorption}:
+\begin{equation*}
+A \cup (A \cap B) = A \cap (A \cup B) = A.
+\end{equation*}
+
+\item Show that the following are equivalent:
+\begin{enumerate}
+\item $A \subseteq B$.
+\item $A \cup B = B$.
+\item $A \cap B = A$.
+\end{enumerate}
+
+\item Prove that $\cup$, $\cap$ and $\overline{~}$ satisfy De Morgan's laws. That is:
+\begin{align*}
+\overline {\pqty{A \cup B}} & = \overline A \cap \overline B \\
+\overline {\pqty{A \cap B}} & = \overline A \cup \overline B.
+\end{align*}
+
+\item Show that $A \cap \overline A = \varnothing$.
+\end{enumerate}
+
+\end{Exercise}
+
+Two sets $A$ and $B$ are \newterm{disjoint} if their intersection is empty -- i.e., $A \cap B = \varnothing$. Note that $A$ and $\overline A$ are always disjoint. Also note that $\varnothing$ is disjoint with all sets, and is the unique set that is disjoint with itself.
+
+Since $\cup$ and $\cap$ are associative, expressions of the form $A_1 \cup A_2 \cup \cdots \cup A_n$ and $A_1 \cap A_2 \cap \cdots \cap A_n$ are well-defined and unambiguous. These are called the \newterm{$n$-ary} (or finite) union and intersection, and denote them as $\bigcup_{i=1}^n A_i$ and $\bigcap_{i=1}^n A_i$, respectively. But it is possible to define unions and intersections of collections of sets even more generally. For this, we will discuss the concept of an indexing set.
+
+\subsection{Index Sets}\label{subsec:IndexSets}
+
+A set $I$ is an \newterm{index set} (or \newterm{indexing set}) of a set $S$ if we can write $S$ as
+\begin{equation*}
+S = \{ s_i \mid i \in I\}.
+\end{equation*}
+That is, each element of $s_i \in S$ corresponds to a unique element $i \in I$. Then $S$ is \newterm{indexed by} $I$, and it is common to write $S = \{ s_i \}_{i \in I}$.
+
+Let $\mathcal A = \{ A_i \}_{i \in I}$ be a collection of sets (for some index set $I$). Thus, for each $i \in I$, $A_i$ itself is a set in the collection $\mathcal A$. Then we can define the union and intersection of the sets in $\mathcal A$, as given below.
+\begin{align*}
+\bigcup_{i \in I} A_i & = \qty{\, a \mid a \in A_i,\, \exists i \in I \,} \\
+\bigcap_{i \in I} A_i & = \qty{\, a \mid a \in A_i,\, \forall i \in I \,}
+\end{align*}
+We refer to these operations as \newterm{arbitrary} unions and intersections. In the particular case where $I$ is a set containing finitely many elements, these reduce to the finite union and intersection defined earlier.
+
+\subsection{Some More Set Operations}\label{subsec:MoreSetOps}
+
+We say that $(a, b)$ (or $\langle a, b \rangle$) is an \newterm{ordered pair} where the first element is $a$ and the second element is $b$. Formally, we may define the ordered pair in terms of sets as $(a, b) = \qty{a, \qty{a, b}}$. Note that this is only one possible ``encoding'' of the concept of an ordered pair, and in practice, we do not think of $(a, b)$ as the (unordered) set $\qty{a, \qty{a, b}}$.
+
+The \newterm{Cartesian product} of two sets $A$ and $B$, denoted by $A \times B$, is the set of all ordered pairs of elements with the first element from $A$ and the second from $B$. That is,
+\begin{equation*}
+A \times B = \qty{\, (a, b) \mid a \in A,\, b \in B \,}.
+\end{equation*}
+The Cartesian product of $A$ with itself is often written as $A^2$. Similarly, the Cartesian product $A \times \cdots A$ with $n$ terms (defined as an iterated Cartesian product of two sets at a time) is denoted by $A^n$. 
+
+The \newterm{disjoint union} (or \newterm{coproduct}) of two sets $A$ and $B$, denoted by $A \sqcup B$, consists of all the ordered pairs of the form $(x, i)$ where $i = 1$ when $x \in A$ and $i = 2$ when $x \in B$. That is,
+\begin{equation*}
+A \sqcup B = \qty{\, (a, 1) \mid a \in A \,} \cup \qty{\, (b, 2) \mid b \in B \,}.
+\end{equation*}
+The disjoint union is also denoted by $A \coprod B$, $A \mathbin{\mathaccent\cdot\cup} B$, or $A \uplus B$.
+
+\begin{Note*}
+The second element in each ordered pair (i.e., $1$ or $2$) only serves to distinguish the elements that are originally from $A$, from those that are originally from $B$. Thus, for example, if $x$ is an element common to both $A$ and $B$, then $A \sqcup B$ contains two ``copies'' of $x$, namely $(x, 1)$ and $(x, 2)$. When $A$ and $B$ are disjoint, $A \sqcup B$ is equivalent to $A \cup B$ (where the meaning of ``equivalent'' will be formalised later).
+\end{Note*}
+
+We can also define Cartesian products and disjoint unions of a collection of sets. Let $\mathcal A = \{A_i\}_{i \in I}$ be a collection of sets indexed by $I$. Then the Cartesian product of the collection $\mathcal A$ is
+\begin{equation*}
+\prod_{i \in I} = \qty{\, (a_i)_{i \in I} \mid a_i \in A_i,~ i \in I \,}
+\end{equation*}
+where $(a_i)_{i \in I}$ is a sequence of elements indexed by $I$, with $a_i \in A_i$ for each $i \in I$. The disjoint union of the collection $\mathcal A$ is
+\begin{equation*}
+\bigsqcup_{i \in I} = \bigcup_{i \in I} \qty{\, (a_i, i) \mid a_i \in A_i,~ i \in I \,} = \bigcup_{i \in I} A_i \times \{i\}.
+\end{equation*}
+
+\begin{Note*}
+We will formally define sequences later, in \cref{subsec:Functions}.
+\end{Note*}
+
+The \newterm{difference} of two sets $A$ and $B$ is the set $A \setminus B$ consisting all elements of $A$ that are not elements of $B$. That is,
+\begin{equation*}
+A \setminus B = \{ a \in A \mid a \notin B \}.
+\end{equation*}
+The difference of $A$ and $B$ is also denoted by $A - B$. Note that $A \setminus B = A \setminus (A \cap B)$.
+
+The \newterm{symmetric difference} of two sets $A$ and $B$ is the set $A \symdiff B$ consisting of all the elements that are present in exactly one of $A$ and $B$. That is,
+\begin{equation*}
+A \symdiff B = (A \setminus B) \cup (B \setminus A).
+\end{equation*}
+The symmetric difference of $A$ and $B$ is also denoted as $A \ominus B$.
+
+\begin{Exercise}
+Let $A$ and $B$ be arbitrary sets.
+\begin{enumerate}
+\item Show that $(A \cup B) \setminus B = A \setminus B$.
+\item Show that $A \symdiff B = (A \cup B) \setminus (A \cap B)$.
+\item Show that $(2^A, \symdiff)$ is an Abelian group. That is:
+    \begin{enumerate}[label=(\roman*)]
+    \item $\symdiff$ is associative.
+    \item $\symdiff$ is commutative.
+    \item $\exists E \in 2^A$, $\forall S \in 2^A$, $S \symdiff E = S$.
+    \item $\forall S \in 2^A$, $\exists T \in 2^A$, $S \symdiff T = E$.
+    \end{enumerate}
+    What is the order of any non-identity element of this group?
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Relations}\label{subsec:Relations}
+A \newterm{relation} $R$ from a set $A$ to a set $B$, denoted $R \colon A \to B$, is a subset of $A \times B$, i.e, $R \subseteq A \times B$. If $(a, b) \in R$, then we write $aRb$, and if $(a, b) \notin R$, then we write $a \cancel{R} b$. The set $A$ is the \newterm{domain} and $B$ the \newterm{codomain} of $R$. Note that $\varnothing$ is also a relation, called the \newterm{empty} or \newterm{void} relation, from $A$ to $B$.
+
+\begin{Note*}
+A relation from a set $A$ to a set $B$ is a \newterm{binary relation}. More generally, if $A_1, \ldots, A_n$ are $n$ sets, then a subset of $A_1 \times \cdots \times A_n$ is an \newterm{$n$-ary relation}.
+\end{Note*}
+
+A relation $R \colon A \to B$ is said to be
+\begin{enumerate}
+\item \newterm{left-total} if for each $a \in A$, $aRb$ for some $b \in B$.
+\item \newterm{right-total} if for each $b \in B$, $aRb$ for some $a \in A$.
+\item \newterm{left-unique} if for each $b \in B$, if $a, a' \in A$ are such that $aRb$ and $a'Rb$, then $a = a'$.
+\item \newterm{right-unique} if for each $a \in A$, if $b, b' \in B$ are such that $aRb$ and $aRb'$, then $b = b'$.
+\end{enumerate}
+
+A relation from $A$ to itself is said to be a \newterm{relation on} (or \newterm{over}) $A$ (also called a \newterm{homogeneous} relation on $A$). Such relations can have a number of properties. In the following, let $\sim$ be a relation on a set $A$.
+\begin{enumerate}
+\item \newterm{Reflexivity}: For all $a \in A$, $a \sim a$.
+\item \newterm{Symmetry}: For all $a, b \in A$, if $a \sim b$, then $b \sim a$.
+\item \newterm{Anti-symmetry}: For all $a, b \in A$, if $a \sim b$ and $b \sim a$, then $a = b$.
+\item \newterm{Transitivity}: For all $a, b, c \in A$, if $a \sim b$ and $b \sim c$, then $a \sim c$.
+\item \newterm{Irreflexivity}: For all $a \in A$, $a \not\sim a$.
+\item \newterm{Asymmetry}: For all $a \in A$, if $a \sim b$, then $b \not\sim a$.
+\end{enumerate}
+
+\begin{Example}
+The following list gives examples of familiar relations satisfying one or more of the above properties:
+\begin{enumerate}
+\item The relations $=$ (on any set of elements where equality is defined), $\le$ and $\ge$ (on any set of real numbers), $\mid$ (\emph{divides}, see \cref{exer:DividesRel}), $\subseteq$ and $\supseteq$ (on any collection of sets), $\cong$ and $\sim$ (on any set of triangles), and $\parallel$ (on any set of lines) are reflexive.
+\item The relations $=$, $\ne$, $\cong$, $\sim$, $\parallel$, $\perp$ are symmetric.
+\item The relations $\mid$ (on any set of non-negative integers), $\le$, $\ge$, $\subseteq$, $\supseteq$ are anti-symmetric.
+\item The relations $=$, $\le$, $\ge$, $<$, $>$, $\mid$, $\subseteq$, $\supseteq$, $\subsetneq$, $\supseteq$, $\cong$, $\sim$, $\parallel$ are transitive.
+\item The relations $\ne$ and $\perp$ are irreflexive.
+\item The relations $<$, $>$, $\subsetneq$, $\supsetneq$ are asymmetric.
+\end{enumerate}
+\end{Example}
+
+\begin{Exercise}~
+\begin{enumerate}
+\item Let $\sim$ be the relation of the set $A = \{a, b\}$ defined by $a \sim a$, $a \sim b$. Is $\sim$ transitive?
+\item Show that every asymmetric relation is irreflexive.
+\item Prove or disprove: Any transitive, irreflexive relation is asymmetric.
+\item Prove or disprove: Any symmetric, transitive relation is reflexive.
+\end{enumerate}
+\end{Exercise}
+
+\subsubsection{Equivalence Relations and Partitions}
+
+A reflexive, symmetric, and transitive relation is called an \newterm{equivalence} relation. For example, $=$, $\cong$, $\sim$, and $\parallel$ are equivalence relations. If $\sim$ is an equivalence relation on a set $A$, and $a \in A$, then the \newterm{equivalence class} of $a$, denoted as $[a]$ or $\overline a$ is the set of all elements of $A$ that $a$ is related to by $\sim$. That is,
+\begin{equation*}
+[a] = \qty{\, b \in A \mid a \sim b \,}.
+\end{equation*}
+
+\begin{Example}
+Let $A = \{1, 2, 3, 4, 5\}$, and define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a - b$ is even. Then, for example, the equivalence class of $1$ is $[1] = \{1, 3, 5\}$, and the equivalence class of $2$ is $[2] = \{2, 4, 6\}$. Note that $[1] = [3] = [5]$ and $[2] = [4] = [6]$. Also observe that $[1]$ and $[2]$ are disjoint, and $[1] \cup [2] = A$.
+\end{Example}
+
+An equivalence relation on a set is essentially the same as a partition of the set, as you will show in \cref{exer:EqRel->Partition,exer:Partition->EqRel}. A \newterm{partition of a set} $S$ is a collection of non-empty and pairwise disjoint subsets of $S$ whose union is equal to $S$. That is, a partition of $S$ is a collection $\{P_i\}_{i \in I}$ of sets $P_i \subseteq S$, $i \in I$, such that
+\begin{enumerate}
+\item $P_i \ne \varnothing$, for each $i \in I$,
+\item $P_i \cap P_j = \varnothing$, for all $i, j \in I$, $i \ne j$, and
+\item $\bigcup_{i \in I} P_i = S$.
+\end{enumerate}
+The subsets $P_i$, $i \in I$, are called the \newterm{parts} of the partition $P$.
+
+\begin{Example}
+Let $S = \{1, 2, 3, 4, 5\}$. Then $P = \{\{1, 3, 5\}, \{2, 4, 6\}\}$ and $Q = \{\{1, 4\}, \{2\}, \{3, 5\}\}\}$ are two different partitions of $S$.
+\end{Example}
+
+\begin{Exercise}\label{exer:EqRel->Partition}
+Let $\sim$ be an equivalence relation on a set $A$. Show that the following hold:
+\begin{enumerate}
+\item For all $a \in A$, $a \in [a]$, and hence, each equivalence class is non-empty and $A = \bigcup_{a \in A} [a]$.
+\item For all $a, b \in A$, if $a \ne b$, then $[a] \cap [b] = \varnothing$ (i.e., any two equivalence classes are either disjoint or identical).
+\item The set of all equivalence classes of $\sim$ is a partition of $A$.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Exercise}\label{exer:Partition->EqRel}
+Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a$ and $b$ belong to the same part of the partition $P$ (i.e., $a, b \in P_i$, $\exists i \in I$). Show that the following hold:
+\begin{enumerate}
+\item The relation $\sim$ is an equivalence relation on $A$.
+\item The equivalence classes of $\sim$ are exactly the parts of the partition of $P$.
+\end{enumerate}
+\end{Exercise}
+
+\subsubsection{Partial Order Relations}
+
+A reflexive, anti-symmetric, and transitive relation is called a \newterm{partial order} relation (or simply a partial order). For example, $\le$ and $\ge$ on any set of real numbers, $\mid$ on any set of non-negative integers, and $\subseteq$ and $\supseteq$ on any set of sets are partial order relations. A set $A$ together with a partial order $\preccurlyeq$ on it forms a \newterm{partially ordered set} or \newterm{poset} $(A, \preccurlyeq)$.
+
+\begin{Note*}
+The term \emph{partial} refers to the fact that two particular elements in a partially ordered set may be \newterm{incomparable} -- i.e., neither may be related to the other in the partial order. For instance, consider the subsets of $S = \{x, y, z\}$, which are partially ordered by the subset relation $\subseteq$ -- i.e., consider the poset $(2^S, \subseteq)$. Then $A = \{x, y\}$ and $B =\{y, z\}$ are incomparable, as neither is $A$ a subset of $B$, nor is $B$ a subset of $A$. On the other hand, $A$ and $C = \{x\}$ are \newterm{comparable} (as $C \subseteq A$), and $A$ and $S$ itself are also comparable (as $A \subseteq S$). A poset in which every pair of elements is comparable (i.e., in which there are no incomparable pairs of elements) is called a \newterm{total order}.
+\end{Note*}
+
+\begin{Exercise}\label{exer:DividesRel}
+Let $\mid$ denote the \newterm{divides} relation on any set of integers. That is, for any two integers $m$ and $n$, define $m \mid n$ if and only if $n = km$ for some integer $k$.
+\begin{enumerate}
+\item Prove that $(\mathbb N, \mid)$ is a poset. Is $(\mathbb N_0, \mid)$ also a poset?
+\item Is $(\mathbb Z, \mid)$ a poset?
+\item Let $n \in \mathbb N$, and let $P$ be the set of all positive divisors of $n$. Then show that $(P, \mid)$ is a poset. What are all the natural numbers $n$ such that $(P, \mid)$ is a total order?
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Functions}\label{subsec:Functions}
+
+A \newterm{function} is a left-total, right-unique binary relation. In other words, a function $f \colon A \to B$ is a relation from $A$ to $B$ such that each element of $A$ is related to exactly one element of $B$ under $f$. If $a \in A$ is related to $b \in B$ in $f$, then we say that $f$ \newterm{maps} $a$ to $b$, and write $b = f(a)$, or $a \mapsto b$. A function is also called a \newterm{mapping}. Recall that $A$ is the domain of $f$ and $B$ the codomain. We may also write $\dom f$ and $\cod f$ to denote the domain and codomain of $f$, respectively. The \newterm{image} of $f$, denoted as $\im f$ or $f(A)$, is the set of all elements $b$ of the codomain such that $b = f(a)$ for some $a \in A$. We can write this in the following two ways:
+\begin{align*}
+\im f & = \qty{\, b \in B \mid b = f(a),~ \exists a \in A \,} \\
+\im f & = \qty{\, f(a) \mid a \in A \,}.
+\end{align*}
+The \newterm{preimage} of any element of the codomain is the set of all elements of the domain that map to it. That is, for $b \in B$, the preimage of $b$, denoted $f^{-1}(b)$, is defined as
+\begin{equation*}
+f^{-1}(b) = \qty{\, a \in A \mid f(a) = b \,}.
+\end{equation*}
+Note that the image of the function is a subset of the codomain, while the preimage of an element is the subset of the domain.
+
+\begin{Note*}
+Intuitively, we think of a function as a rule that assigns, to each element of the domain, a unique element of the codomain. For instance, it is common in calculus to define a function using a formula -- e.g., $f \colon \mathbb R \to \mathbb R$, $f(x) = x^2 - 1$. However, the formula or the expression itself is not the function. The function $g \colon \mathbb Z \to \mathbb Q$, defined by the formula $g(x) = x^2 - 1$, is different from the previously defined function $f$, although they are both defined using the same formula. Moreover, it may not be possible to define a function using any closed-form formula.
+\end{Note*}
+
+A function is \newterm{injective} (or \newterm{$1$-$1$}) if it is left-unique. That is, $f \colon A \to B$ is injective if, for any $a_1, a_2 \in A$, $f(a_1) = f(a_2)$ implies that $a_1 = a_2$. An injective function is also called an \newterm{injection}. A \newterm{surjective} (or \newterm{onto}) function is one in which every element of the codomain has a non-empty preimage. That is, $f \colon A \to B$ is surjective if, for each $b \in B$, $b = f(a)$ for some $a \in A$. Note that $f$ is surjective if and only if $\im f = \cod f$. A surjective function is also called a \newterm{surjection}. A function that is both injective and surjective is \newterm{bijective}. A bijective function is also called a \newterm{bijection} or a \newterm{one-to-one correspondence}.
+
+\begin{Example}
+Let $A = \{1, 2, 3, 4, 5\}$ and $B = \{a, b, c\}$.
+\begin{enumerate}
+\item Define a function $f \colon A \to B$, $f(1) = f(2) = a$, $f(3) = b$, $f(4) = f(5) = c$. Then $f$ is a surjection ($a$ has preimage $\{1, 2\}$, $b$ has preimage $\{3\}$, and $c$ has preimage $\{4, 5\})$. It is clearly not an injection, since, for example, $f(1) = f(2)$.
+
+\item Define $g \colon B \to A$, $g(a) = 1$, $g(b) = 5$, $g(c) = 4$. Then $g$ is an injection from $B$ to $A$, as $g(a) \ne g(b), g(c)$ and $g(b) \ne g(c)$. The image of $g$ is $\im g = \{1, 4, 5\} \ne A = \cod g$, and hence $g$ is not a surjection.
+
+\item Define a $h \colon B \to B$, $h(a) = b$, $h(b) = c$, $h(c) = a$. Note that $h$ is a bijection from $B$ to itself.
+\end{enumerate}
+\end{Example}
+
+\begin{Example}
+Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection (e.g., $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e., the smallest integer greater than or equal to $x$ -- e.g., $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection (e.g., $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e., the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
+\end{Example}
+
+\begin{Example}
+Define $f \colon \mathbb R \to \mathbb (0,1)$ (the set of all real numbers strictly between $0$ and $1$) as
+\begin{equation*}
+f(x) = \dfrac{1}{1 + e^x}.
+\end{equation*}
+Firstly, note that this is indeed a well-defined function from $\mathbb R$ to $(0, 1)$, since $e^x \ge 0$ for all $x \in \mathbb R$. Now, if $f(x) = f(y)$, then observe that $e^x = e^y$, or $e^{x - y} = 1$, which implies that $x = y$. Hence, $f$ is injective. Next, let $y$ be any element of the codomain, $(0, 1)$. Then observe that $\frac 1 y > 1$, and hence $\frac 1 y - 1$ is a positive real number. Take $x = \log\pqty{\frac 1 y - 1}$, so that $\frac 1 {1 + e^x} = y$, i.e., $f(x) = y$. Thus, for every $y \in (0, 1)$, there exists $x \in \mathbb R$ such that $f(x) = y$, which shows that $f$ is surjective. Therefore, $f$ is a bijection from $\mathbb R$ to $(0, 1)$.
+\end{Example}
+
+\begin{Example}
+Let $A = \{a_1, a_2, \ldots, a_n\}$, and let $P = 2^A$, the power set of $A$. Let $X$ be the set of all binary strings of length $n$ -- i.e., the set of all sequences of the form $x_1 x_2 \cdots x_n$, where $x_i \in \{0, 1\}$, $i = 1, \ldots, n$. Define a function $\chi \colon P \to X$ as follows: For each $S \in P$, $\chi(S) = b_1 b_2 \cdots b_n$ such that $b_i = 1$ if $a_i \in S$ and $b_i = 0$ if $a_i \notin S$. Then $\chi$ is a bijection, as shown below.
+
+First, suppose that for $S, T \in P$, $\chi(S) = \chi(T) = b_1 b_2 \cdots b_n$ (say). Then, for each $i = 1, \ldots, n$, $a_i \in S$ if and only if $b_i = 1$, which is equivalent to $a_i \in T$. Thus, $S = T$. This shows that $\chi$ is injective.
+
+Next, let $b_1 b_2 \cdots b_n \in X$. Define $S \subseteq A$ as
+\begin{equation*}
+S = \qty{\, a_i \in A \mid b_i = 1 \,}.
+\end{equation*}
+Then clearly, $\chi(S) = b_1 b_2 \cdots b_n$. Hence, $\chi$ is surjective.
+\end{Example}
+
+\subsection{Function Composition}\label{subsec:FuncComp}
+
+If $f \colon A \to B$ and $g \colon B \to C$ are two functions, then the composition of $f$ and $g$ is the function $h \colon A \to C$ defined by $h(a) = g(f(a))$, for all $a \in A$. We denote this function $h$ by $g \circ f$, which is read as ``$g$ circle $f$'', ``$g$ after $f$'', or ``$g$ composed with $f$''. We can also write this definition in terms of a \newterm{commutative diagram}. Consider the diagram given below.
+\begin{equation*}
+\xymatrix{
+    A \ar[r]^f \ar[rd]_h & B \ar[d]^g \\
+    & C
+}
+\end{equation*}
+We say that such a diagram \newterm{commutes} if the result of following any two directed paths from the same starting point to the same end point is the same. In the above diagram, $A, f, B, g, C$ and $A, h, C$ are two directed paths from $A$ to $C$ (and these are the only two directed paths with the same starting points and the same end points). Thus, the diagram commutes if and only if applying $g$ after $f$ equals $h$.
+
+\begin{Theorem}\label{thm:FuncCompAssoc}
+Composition of functions is an associative operation.
+\end{Theorem}
+
+\begin{proof}
+To prove that two functions are equal, we need to show that they both map each element of the domain to the same element of the codomain. Consider three functions $f \colon A \to B$, $g \colon B \to C$, and $h \colon C \to D$. Let $a \in A$. We will show that $h \circ (g \circ f)$ and $(h \circ g) \circ f$ map $a$ to the same element of $C$.
+\begin{align*}
+(h \circ (g \circ f))(a) & = h((g \circ f)(a)) \\
+    & = h(g(f(a))) \\
+    & = (h \circ g)(f(a)) \\
+    & = ((h \circ g) \circ f)(a).
+\end{align*}
+Hence, $h \circ (g \circ f) = (h \circ g) \circ f$.
+\end{proof}
+
+\begin{Exercise}
+Show that in the diagram below, the square commutes if both the triangles commute.
+\begin{equation*}
+\xymatrix{
+A \ar[r]^f \ar[d] & B \ar[dl]|-g \ar[d]\\
+C \ar[r]_h & D
+}
+\end{equation*}
+\end{Exercise}
+
+The \newterm{identity function} on a set $A$, denoted as $\id_A$, is the function from $A$ to itself that maps every element of $A$ to itself. That is, $\id_A \colon A \to A$ is defined as $\id_A(a) = a$, for all $a \in A$. Note that $\id_A$ is a bijection from $A$ to itself. The identity function is so named because it is the identity element (or neutral element) for the operation of function composition. That is, if $f \colon A \to B$ is any function, then $f \circ \id_A = f$, and $\id_B \circ f = f$. Alternatively, we can say that the diagram given below commutes.
+\begin{equation*}
+\xymatrix{
+A \ar[d]_{f} \ar[r]^{\id_A} \ar[dr]|-f & A \ar[d]^{f}\\
+B \ar[r]_{\id_B} & B
+}
+\end{equation*}
+
+\begin{Exercise}
+Let $A$ be a set.
+\begin{enumerate}
+\item Show that $\id_A \circ \id_A = \id_A$.
+\item Show that if $i \colon A \to A$ is any function satisfying the same property as the identity function, i.e., for every set $B$ and every function $f \colon A \to B$, $f \circ i = f$, and for every set $C$ and every function $g \colon C \to A$, $i \circ g = g$,  then $i = \id_A$.
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Isomorphisms of Sets}\label{subsec:SetIsos}
+If $f \colon A \to B$ is a function, then a function $g \colon B \to A$ is an \newterm{inverse} of $f$ if $g \circ f = \id_A$ and $f \circ g = \id_B$. Equivalently, $g$ is an inverse of $f$ if the diagram given below commutes.
+\begin{equation*}
+\xymatrix{
+A \ar[d]_{\id_A} \ar[dr]|-f & B \ar[d]^{\id_B} \ar[l]_g\\
+A & B \ar[l]^g
+}
+\end{equation*}
+
+\begin{Exercise}\label{exer:UniqueInverse}
+Prove that any function has at most one inverse. \\[0.5em]
+\hint{Assume that a function $f \colon A \to B$ has two inverses $g$ and $h$, and evaluate $g \circ f \circ h$ in two different ways.}
+\end{Exercise}
+
+A function $f \colon A \to B$ is an \newterm{isomorphism} (of sets) if it has an inverse. Then the unique inverse (see \cref{exer:UniqueInverse}) of $f$ is denoted by $f^{-1}$. Note that $f^{-1}$ is an isomorphism from $B$ to $A$. For any two sets $A$ and $B$, we say that $A$ \newterm{is isomorphic to} $B$ if there is an isomorphism from $A$ to $B$. We write this as $A \cong B$.
+
+\begin{Exercise}
+\mbox{}
+\begin{enumerate}
+\item Show that the identity function on a set is an isomorphism from the set to itself.
+\item Prove that if $f$ and $g$ are isomorphisms, from $A$ to $B$ and from $B$ to $C$, respectively, then $g \circ f$ is an isomorphism from $A$ to $C$.
+\item Show that $\cong$ is an equivalence relation on any collection of sets.
+\end{enumerate}
+\end{Exercise}
+
+Now, we will prove that an isomorphism of sets is exactly the same thing as a bijection.
+
+\begin{Theorem}
+A function $f \colon A \to B$ is an isomorphism if and only if it is a bijection.
+\end{Theorem}
+
+\begin{proof}
+First, suppose that $f$ is a bijection. We need to show that $f$ is an isomorphism from $A$ to $B$ -- i.e., that it has an inverse. We construct the inverse as follows. Define $g \colon B \to A$ as $g(b) = a$, where $a \in A$ is such that $f(a) = b$, for each $b \in B$.
+
+To see that $g$ is well-defined, observe that as $f$ is bijective, for every $b \in B$, there exists an $a \in A$ such that $f(a) = b$, and as $f$ is injective, this element $a$ is unique (i.e., if $f(a') = b = f(a)$, then $a' = a$).
+
+To see that $g$ is the inverse of $f$, first consider any $a \in A$. If $f(a) = b$, then $g(b) = a$, by definition of $g$. That is, $g(f(a)) = a$, which shows that $g \circ f = \id_A$. Next, consider any $b \in B$. Then, by definition of $g$, $g(b) = a \in A$ such that $f(a) = b$. That is, $f(g(b)) = b$, which shows that $f \circ g = \id_B$. Thus, $g$ is the inverse of $f$, and therefore $f$ is an isomorphism.
+
+Conversely, suppose that $f \colon A \to B$ is an isomorphism. We will show that $f$ is a bijection. For any $b \in B$, if we take $a = f^{-1}(b)$, then $f(a) = b$, which shows that $f$ is surjective. To see that $f$ is injective, suppose that $a_1, a_2 \in A$ and $f(a_1) = f(a_2)$. Then $a_1 = f^{-1}(f(a_1)) = f^{-1}(f(a_2)) = a_2$. Hence, $f$ is a bijection.
+\end{proof}
+
+\subsection{Cardinality of Sets}\label{subsec:Cardinality}
+The \newterm{cardinality} of a set is the number of elements in it. As sets can have infinitely many elements, we will define cardinality more rigorously using the concept of set isomorphisms.
+
+\begin{Definition}
+Two sets $A$ and $B$ have the same \newterm{cardinality} if $A \cong B$. If $A \cong \{1, \ldots, n\}$, then $A$ is \newterm{finite} of cardinality $n$. If $A \cong \mathbb N$, then $A$ is \newterm{countably infinite}. In either case, $A$ is \newterm{countable}. Otherwise, $A$ is \newterm{uncountable} or \newterm{uncountably infinite}.
+\end{Definition}
+
+%\begin{appendices}
+%
+%\end{appendices}
