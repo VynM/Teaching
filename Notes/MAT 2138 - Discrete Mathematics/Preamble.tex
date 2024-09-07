@@ -66,12 +66,19 @@
 \newtheorem*{Solution*}{Solution}
 \newtheorem*{Note*}{Note}
 
+\crefname{Section}{Section}{Sections}
+\crefname{Exercise}{Exercise}{Exercises}
 
 \definecolor{alertcolor}{rgb}{0.8, 0.5, 0}
 \newcommand{\newterm}[1]{{\color{alertcolor} #1}}
 
 \definecolor{hintcolor}{rgb}{0, 0, 0.5}
-\newcommand{\hint}[1]{{\tiny\color{hintcolor}\textbf{Hint:} #1}}
+\newcommand{\hint}[2]{
+\switchocg{hint:#1}{\color{hintcolor}\textbf{\small Hint.}}
+\begin{ocg}{Hint}{hint:#1}{0}
+\small \color{hintcolor} #2
+\end{ocg}
+}
 
 \DeclareMathOperator{\Nb}{N}
 \DeclareMathOperator{\lcm}{lcm}

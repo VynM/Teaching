@@ -435,8 +435,8 @@ A & B \ar[l]^g
 \end{equation*}
 
 \begin{Exercise}\label{exer:UniqueInverse}
-Prove that any function has at most one inverse. \\[0.5em]
-\hint{Assume that a function $f \colon A \to B$ has two inverses $g$ and $h$, and evaluate $g \circ f \circ h$ in two different ways.}
+Prove that any function has at most one inverse.\\
+\hint{UniqueInverse}{Assume that a function $f \colon A \to B$ has two inverses $g$ and $h$, and evaluate $g \circ f \circ h$ in two different ways.}
 \end{Exercise}
 
 A function $f \colon A \to B$ is an \newterm{isomorphism} (of sets) if it has an inverse. Then the unique inverse (see \cref{exer:UniqueInverse}) of $f$ is denoted by $f^{-1}$. Note that $f^{-1}$ is an isomorphism from $B$ to $A$. For any two sets $A$ and $B$, we say that $A$ \newterm{is isomorphic to} $B$ if there is an isomorphism from $A$ to $B$. We write this as $A \cong B$.
@@ -586,7 +586,7 @@ Thus, $f$ is not surjective. Therefore, there is no surjective injection, i.e. b
 
 A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a nonempty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
 
-Two vertices $u$ and $v$ of $G$ are \newterm{adjacent}, denoted by $u \sim v$, if $(u,v) \in E$ -- we may also denote the edge $(u,v)$ as simply $uv$. Note that $uv = vu$. If there is no edge between $u$ and $v$, then they are \newterm{nonadjacent}, denoted by $u \nsim v$. The vertex $v$ and the edge $uv$ are said to be \newterm{incident} with each other. The \newterm{degree} of a vertex $v$ is the number of edges incident with it, or equivalently, the number of vertices adjacent with it, and is denoted by $\deg(v)$.
+Two vertices $u$ and $v$ of $G$ are \newterm{adjacent}, denoted by $u \sim v$, if $uv \in E$ (note that $uv$ here denotes an unordered pair of vertices, and $uv = vu$). If there is no edge between $u$ and $v$, then they are \newterm{nonadjacent}, denoted by $u \nsim v$. The vertex $v$ and the edge $uv$ are said to be \newterm{incident} with each other. The \newterm{degree} of a vertex $v$ is the number of edges incident with it, or equivalently, the number of vertices adjacent with it, and is denoted by $\deg(v)$.
 
 \begin{Lemma}[Handshaking Lemma]
 The sum of the degrees of all vertices of a graph is twice its size.
@@ -607,15 +607,15 @@ Let $G$ be a graph. We know that
 \end{equation}
 Considering the vertices of odd and even degrees, we can write \eqref{eq:deg-sum} as
 \begin{equation}
-\sum_{v \in V(G) : \deg v\ \text{odd}} \deg v + \sum_{v \in V(G) : \deg v\ \text{even}} \deg v = 2 |E(G)|.
+\sum_{v \in V(G) ~:~ \deg v\ \text{odd}} \deg v + \sum_{v \in V(G) ~:~ \deg v\ \text{even}} \deg v = 2 |E(G)|.
 \end{equation}
-Both the second term on the LHS and the RHS are even integers, and therefore so is the first term on the LHS. But a sum of odd integers is even only if the number of terms is even. Thus, $G$ has an even number of vertices of odd degree.
+Both the RHS and the second term on the LHS are even integers, and therefore so is the first term on the LHS. But a sum of odd integers is even only if the number of terms is even. Thus, $G$ has an even number of vertices of odd degree.
 \end{proof}
 
 A \newterm{regular graph} is a graph in which all vertices have the same degree. This common value of the degree is the \newterm{regularity} of the graph. A regular graph of regularity $k$ is a \newterm{$k$-regular} graph. A \newterm{cubic} graph is a $3$-regular graph.
 
 \begin{Exercise}
-Prove that any cubic graph has even order. For what other order(s) will this statement hold?
+Prove that any cubic graph has even order. For which other regular graphs will this statement hold?
 \end{Exercise}
 
 \begin{Theorem}
@@ -728,7 +728,7 @@ Now, consider any two vertices $x$ and $y$ other than $u$ and $v$. In $G$, $x$ c
 
 \subsection{Graph Isomorphism}\label{subsec:Isomorphism}
 
-An \newterm{isomorphism} from a graph $G$ to a graph $H$ is a bijective\footnote{injective and surjective; i.e. $1$-$1$ and onto} function $f \colon V(G) \to V(H)$ such for all vertices $u$ and $v$ of $G$, $u \sim_G v$ if and only if $f(u) \sim_H f(v)$. In other words, a graph isomorphism is a bijection from the vertex set of the first graph to that of the second, that preserves both edges and non-edges. If there exists an isomorphism from $G$ to $H$, then $G$ and $H$ are \newterm{isomorphic}. Then we write $G \cong H$.
+An \newterm{isomorphism} from a graph $G$ to a graph $H$ is a bijective\footnote{injective and surjective; i.e. one-to-one and onto} function $f \colon V(G) \to V(H)$ such for all vertices $u$ and $v$ of $G$, $u \sim_G v$ if and only if $f(u) \sim_H f(v)$. In other words, a graph isomorphism is a bijection from the vertex set of the first graph to that of the second, that preserves both edges and non-edges. If there exists an isomorphism from $G$ to $H$, then $G$ and $H$ are \newterm{isomorphic}. Then we write $G \cong H$.
 
 Isomorphic graphs have exactly the same structure -- i.e. all properties of the graph that do not depend on the labelling or drawing will be shared by isomorphic graphs. For example, isomorphic graphs have the same order, size, degree sequence, diameter, and radius. Indeed, if $f$ is an isomorphism from $G$ to $H$, and $v$ is a vertex of $G$, then the neighbours of $f(v)$ in $H$ are the images of the neighbours of $v$ in $G$, and $\deg_G v = \deg_H f(v)$. Similarly, if $u$ and $v$ are two vertices of $G$, then $d_G(u, v) = d_H(f(u), f(v))$.
 
@@ -855,14 +855,14 @@ Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is acyclic. We prove
 Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected -- i.e. it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots + (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
 \end{proof}
 
-\begin{Exercise}
-A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that every non-trivial tree contains at least two pendant vertices.\\
-    \hint{Observe that a non-trivial tree cannot have a vertex of degree zero. Use Handshaking Lemma and assume every degree is at least $2$ to get a contradiction.}
+\begin{Exercise}\label{exer:TreePendantVertices}
+A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that every non-trivial tree contains at least two pendant vertices. \\
+\hint{TreePendantVertices}{Observe that a non-trivial tree cannot have a vertex of degree zero. Use Handshaking Lemma and assume every degree is at least $2$ to get a contradiction.}
 \end{Exercise}
 
 \begin{Exercise}\label{exer:TreeCentre}
 The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e. the set of all vertices $v$ of $G$ with $\ecc v = \rad v$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
-\hint{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
+\hint{TreeCentre}{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
 \end{Exercise}
 
 \begin{Solution*} \switchocg{sol:TreeCentre}{\scriptsize Show Solution}\begin{ocg}{Solution of \ref{exer:TreeCentre}}{sol:TreeCentre}{0}
@@ -877,13 +877,9 @@ Then the vertices of $T'$ have eccentricities exactly one less than their eccent
 \end{ocg}
 \end{Solution*}
 
-\begin{Exercise}
-If $G$ and $H$ are two trees of orders $n$ and $m$ respectively, what is the size of $G \times H$?
-\end{Exercise}
-
 \subsection{Adjacency Matrices}\label{subsec:AdjMat}
 
-The \newterm{adjacency matrix} of a graph $G$ of order $n$, with vertex set $V = \{v_1, \ldots, v_n\}$, is the $n \times n$ matrix $A = A(G)$ whose $(i,j)$-entry is
+The \newterm{adjacency matrix} of a graph $G$ of order $n$, with vertex set $V = \{v_1, \ldots, v_n\}$, is the $n \times n$ matrix $A = \mathcal A(G)$ whose $(i,j)$-entry is
 \begin{equation*}
 a_{ij} = \begin{cases}
 1, & v_i \sim v_j \\
@@ -913,10 +909,10 @@ A = \begin{bmatrix}
 Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself -- i.e. $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ -- i.e. $a_{ij} = a_{ji}$. Thus, we have the following observation.
 
 \begin{Observation}
-The adjacency matrix of a (simple, undirected) graph is a symmetric, zero-diagonal, $0$-$1$ matrix.
+The adjacency matrix of a (simple, undirected) graph is a symmetric, zero-diagonal, $(0, 1)$-matrix.
 \end{Observation}
 
-In the $i$\th row of the adjacency matrix, for each $j$, the $j$\th entry is $1$ if $v_j$ is adjacent to $v_i$, and $0$ otherwise. That is, the number of $1$s in the $i$\th row is the number of vertices adjacent to $v_i$, or in other words, the degree of $v_i$. Thus, the row sums of $A$ are the vertex degrees. Observe that $A \mathbbm 1$ is the vector of row sums, where $\mathbbm 1$ is the vector (of suitable size) with all entries equal to $1$. For instance, with the matrix $A$ given in \cref{ex:GNM(6-11)AdjMat},
+In the $i$\nth row of the adjacency matrix, for each $j$, the $j$\nth entry is $1$ if $v_j$ is adjacent to $v_i$, and $0$ otherwise. That is, the number of $1$s in the $i$\nth row is the number of vertices adjacent to $v_i$, or in other words, the degree of $v_i$. Thus, the row sums of $A$ are the vertex degrees. Observe that $A \mathbbm 1$ is the vector of row sums, where $\mathbbm 1$ is the vector (of suitable size) with all entries equal to $1$. For instance, with the matrix $A$ given in \cref{ex:GNM(6-11)AdjMat},
 \begin{equation*}
 A = \begin{bmatrix}
 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
@@ -936,9 +932,26 @@ A = \begin{bmatrix}
 \end{equation*}
 From the Handshaking Lemma and the preceding observation, it follows that the sum of all entries of $A$ is twice the number of edges of the graph.
 
+\begin{Exercise}
+Show that for any graph $G$ of order $n$, $\mathcal A(\overline G) = J - I - \mathcal A(G)$ where $I$ is the identity matrix and $J$ is the square all-ones matrix (i.e. a matrix with all entries $1$), both of order $n$.
+\end{Exercise}
+
+\begin{Exercise}
+Suppose $G$ is a disconnected graph with components $G_1, G_2, \ldots, G_k$, and furthermore, assume that the vertices are ordered in such a way that the first $n_1$ vertices are in $G_1$, the next $n_2$ vertices are in $G_2$, and so on, the last $n_k$ vertices are in $G_k$. Show that the adjacency matrix of $G$ is given by the partitioned matrix
+\begin{equation*}
+\mathcal A(G) = \begin{bmatrix}
+\mathcal A(G_1) & 0_{n_2} & \cdots & 0_{n_k} \\
+0_{n_1} & \mathcal A(G_2) & \cdots & 0_{n_k} \\
+\vdots & \vdots & \ddots & \vdots \\
+0_{n_1} & 0_{n_k} & \cdots & \mathcal A(G_k)
+\end{bmatrix}
+\end{equation*}
+where $0_{n_i}$ denotes the $n_i \times n_i$ zero-matrix.
+\end{Exercise}
+
 \begin{Exercise}\label{exer:A2ij}
 Show that the $(i,j)$-entry of $A^2$ is the number of walks of length $2$ from $v_i$ to $v_j$. Hence show that $\trace(A^2) = 2|E(G)|$.\\
-\hint{Recall that if $A$ is any $n \times n$ matrix, then the $(i,j)$-entry of $A^2$ is $\sum_{k=1}^{n} a_{ik}a_{kj}$. As $A$ is a $0$-$1$ matrix, each term in this summation is $1$ or $0$, with the former if and only if $a_{ik} = a_{kj} = 1$. What does this imply about the vertices $v_i$, $v_k$, and $v_j$? Then, as $k$ varies from $1$ to $n$, what does the value of the sum imply about $v_i$ and $v_j$?}
+\hint{A2ij}{Recall that if $A$ is any $n \times n$ matrix, then the $(i,j)$-entry of $A^2$ is $\sum_{k=1}^{n} a_{ik}a_{kj}$. As $A$ is a $(0, 1)$-matrix, each term in this summation is $1$ or $0$, with the former if and only if $a_{ik} = a_{kj} = 1$. What does this imply about the vertices $v_i$, $v_k$, and $v_j$? Then, as $k$ varies from $1$ to $n$, what does the value of the sum imply about $v_i$ and $v_j$?}
 \end{Exercise}
 
 The following result (which generalises the statement in \cref{exer:A2ij}) shows that the adjacency matrix can be used to obtain certain information about walks in the graph.
@@ -957,6 +970,12 @@ Now suppose, for the sake of induction, that the result holds for some $m \ge 1$
 First, note that $a_{kj} = 1$ if and only if $v_k \sim v_j$. Therefore, the above sum is equal to the sum of all $(A^m)_{ik}$ where $v_k \sim v_j$. Now, by the induction hypothesis, $(A^m)_{ik}$ is the number of walks of length $m$ from $v_i$ to $v_k$. If $v_j$ is adjacent to $v_j$, then each walk of length $m$ from $v_i$ to $v_k$, together with the edge from $v_j$ to $v_j$, forms a walk of length $m + 1$ from $v_i$ to $v_j$. Thus, for each $k$ such that $v_k \sim v_j$, $(A^m)_{ik} a_{kj} = (A^m)_{ik}$ is the number of walks of length $m + 1$ from $v_i$ to $v_j$ that pass through $k$. Summing over all $k$, this gives the total number of walks of length $m + 1$ from $v_i$ to $v_j$. Hence the result follows by induction.
 \end{proof}
 
+Alternatively, note that
+\begin{equation*}
+(A^m)_{ij} = \sum_{k_1, k_2, \ldots, k_{m-1}} a_{i k_1} a_{k_1 k_2} \cdots a_{k_{m-1} j}
+\end{equation*}
+and each term in this summation will be $1$ if and only if $a_{i k_1} = a_{k_1 k_2} = \cdots = a_{k_{m-1} j} = 1$, i.e. $v_i \sim v_{k_1} \sim v_{k_2} \sim \cdots \sim v_{k_{m-1}} \sim v_j$, which corresponds to a walk of length $m$ from $v_i$ to $v_j$. Hence $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_j$.
+
 \begin{Theorem}
 Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v_n\}$. Then
 \begin{enumerate}[label=(\roman*)]
@@ -971,9 +990,22 @@ We know that $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_
 \begin{enumerate}[label=(\roman*)]
 \item Hence, the $i$\nth diagonal entry of $A^2$, viz. $(A^2)_{ii}$, is the number of walks of length $2$ from $v_i$ to itself. Any walk of length $2$ from $v_i$ to itself is of the form $v_i v_j v_i$, where $v_j$ is a vertex adjacent to $v_i$. Thus, the number of such walks is equal to the number of vertices adjacent to $v_i$, i.e. $\deg v_i$. Hence, $\tr(A^2) = \sum_{i=1}^n \deg v_i = 2|E(G)|$, by Handshaking Lemma.
 
-\item Similarly, $(A^3)_{ii}$ is the number of walks of length $3$ from $v_i$ to itself. Any such walk is of the form $v_i v_j v_k v_i$, which implies that $v_i$, $v_j$, and $v_k$ form a triangle in $G$. Moreover, each such triangle corresponds to two distinct walks from $v_i$ to itself, when traversed in the two opposite directions. Thus, $(A^3)_{ii}$ is twice the number of triangles having $v_i$ as one of its vertices. Therefore, $\tr(A^3)$ is $6 c_3(G)$, since each triangle contains three vertices, each of which counts the triangle twice in the sum $\tr(A^3)$.
+\item Similarly, $(A^3)_{ii}$ is the number of walks of length $3$ from $v_i$ to itself. Any such walk is of the form $v_i v_j v_k v_i$, which implies that $v_i$, $v_j$, and $v_k$ form a triangle in $G$. Moreover, each such triangle corresponds to two distinct walks from $v_i$ to itself, when traversed in the two opposite directions. Thus, $(A^3)_{ii}$ is twice the number of triangles having $v_i$ as one of its vertices. Therefore, $\tr(A^3)$ is $6 c_3(G)$, since each triangle contains three vertices, each of which counts the triangle twice in the sum $\tr(A^3)$. \qedhere
 \end{enumerate}
 \end{proof}
+
+\begin{Exercise}
+Prove that the $i$\nth diagonal entry of $A^4$ is
+\begin{equation*}
+(A^4)_{ii} = 2c_4(v_i) + \sum_{j \colon v_j \sim v_i} \deg v_j + 2 \binom{\deg v_i}{2}
+\end{equation*}
+where $c_4(v_i)$ denotes the number of cycles of length $4$ containing $v_i$, and
+\begin{align*}
+c_4(G) & = \frac 1 8 \tr A^4 - \frac 1 4 \sum_{i=1}^{n} (\deg v_i)^2 + \frac{|E(G)|}{4} \\
+& = \frac 1 8 \tr A^4 - \frac 1 4 \sum_{uv \in E(G)} \pqty{\deg u + \deg v - 1} \\
+& = \frac 1 8 \tr A^4 - \frac {|E(G)|} 4 - \frac 1 2 \sum_{i=1}^n \binom {\deg v_i} 2.
+\end{align*}
+\end{Exercise}
 
 \subsection{Dijkstra's Algorithm}\label{subsec:Dijkstra}
 
