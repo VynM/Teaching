@@ -566,7 +566,8 @@ The above argument shows that no injection from $\mathbb N$ to $(0, 1)$ can be s
 Show that the cardinality of any set is different from that of its power set.
 \end{Exercise}
 
-\begin{Solution*}
+%\begin{Solution*}
+\solution{PowSetCard}{
 If $A$ is a finite set of cardinality $n$, then $|2^A| = 2^n \ne n$. Now, suppose that $A$ is an infinite set.
 
 Let $f \colon A \to 2^A$ be an injection. Note that for each $a \in A$, $f(a)$ is an element of $2^A$, i.e. $f(a)$ is a subset of $A$. Define a subset $X$ of $A$ as follows: For each $a \in A$, $a \in X$ if and only if $a \notin f(a)$.
@@ -574,19 +575,109 @@ Let $f \colon A \to 2^A$ be an injection. Note that for each $a \in A$, $f(a)$ i
 Observe that $X \notin \im f$. For, if $X = f(x)$ for some $x \in A$, then either $x \in X$, in which case $x \notin f(x)$, or $x \notin X$, in which case $x \in f(x)$. But $f(x) = X$, which is a contradiction.
 
 Thus, $f$ is not surjective. Therefore, there is no surjective injection, i.e. bijection from $A$ to $2^A$, and hence $A \not\cong 2^A$.
-\end{Solution*}
-
+}
 
 \section{Finite Automata and Regular Expressions}\label{sec:FAandRE}
 
-{\tiny Coming soon!}
+A \newterm{deterministic finite automaton} (\newterm{DFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
+\begin{itemize}
+\item $Q$ is a finite set whose elements are \newterm{states}.
+\item $\Sigma$ is a finite \newterm{input alphabet}, whose elements are \newterm{input symbols}.
+\item $\delta \colon Q \times \Sigma \to Q$ is the \newterm{transition function}.
+\item $q_0 \in Q$ is the \newterm{start state} (or \newterm{initial state}).
+\item $F \subseteq Q$ is the set of \newterm{accept states} (or \newterm{final states}).
+\end{itemize}
 
+The transition function may be specified using a \newterm{transition table}, which has rows indexed by the states and columns indexed by the input symbols, with the entry in the row of $q$ and column of $s$ being the value of $\delta(q, s)$). See \cref{ex:DFAOdd1s}.
+
+A DFA has a graphical representation as a directed graph in which each vertex is a state and each edge is a \newterm{transition}. That is, if $\delta(q_1, s) = q_2$ (where $q_1$ and $q_2$ are states and $s$ is an input symbol), then the graph has an edge labelled $s$ from the vertex $q_1$ to the vertex $q_2$. It is usual to depict the vertices by circles, with the vertex label (name of the state) written inside the circle, if necessary. The start state is indicated by an arrow without a source entering it, and accept states are indicated by using double-circles. See \cref{ex:DFAOdd1s}.
+
+\begin{Example}\label{ex:DFAOdd1s}
+Consider a DFA $M = (Q, \Sigma, \delta, A, F)$, where $Q = \{A, B, C\}$, $\Sigma = \{0, 1\}$, $F = \{B\}$, and $\delta$ is as defined by the transition table given below.
+\begin{equation*}
+\begin{array}{r|cc}
+\delta & 0 & 1 \\
+\hline
+A & A & B \\
+B & B & A
+\end{array}
+\end{equation*}
+The graphical representation of $M$ is shown below.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 5mm] (A) {A};
+	\node[state, accepting, minimum size = 5mm] (B) [right = of A] {B};
+	\path[->]
+	(A) edge [loop above]	node {\texttt 0}	()
+	(A) edge [bend left]	node {\texttt 1}	(B)
+	(B) edge [loop above]	node {\texttt 0}	()
+	(B) edge [bend left]	node {\texttt 1}	(A);
+\end{tikzpicture}
+\end{center}
+\end{Example}
+
+An \newterm{input} to a DFA $M = (Q, \Sigma, \delta, q_0, F)$ is a string over $\Sigma$ -- i.e. a finite sequence of symbols of $\Sigma$. If $w = s_1 s_2 \cdots s_k$ is an input string, and $q_1, q_2, \ldots, q_k \in Q$ such that
+\begin{equation*}
+\delta(q_0, s_1) = q_1,~ \delta(q_1, s_2) = q_2,~ \ldots,~ \delta(q_{k-1}, s_k) = q_k,
+\end{equation*}
+then \newterm{$M$ is in the state $q_k$ after reading the input $w$}. If $q_k \in F$ (i.e. $q_k$ is an accept state), then \newterm{$M$ accepts $w$}, otherwise it \newterm{rejects $w$}. For instance, the DFA $M$ given in \cref{ex:DFAOdd1s} is in the state $A$ after reading the input \texttt{0110}, and is in the state $B$ after reading \texttt{0100}. Since $A \notin \{F\}$ and $B \in \{F\}$, it rejects \texttt{0110} and accepts \texttt{0100}.
+
+Given the graphical representation of a DFA $M$, to check which state $M$ is in after reading an input $w = s_1 \cdots s_k$, simply begin at the start state of $M$ and follow the arrows labelled $s_1, \ldots, s_k$. For instance, in \cref{ex:DFAOdd1s}, the input \texttt{0110} corresponds to the sequence of states $A, A, B, A, A$, and the input \texttt{0100} corresponds to the sequence of states $A, A, B, B, B$ (note that in both cases, the first $A$ is the start state, and only the next four states are the results of transitions).
+
+A \newterm{language} over an alphabet $\Sigma$ is a set of strings over $\Sigma$. In particular, the language $\Sigma^*$ is the set of all strings over $\Sigma$. Thus, a language over $\Sigma$ is any subset of $\Sigma^*$. If $M$ is a DFA with input alphabet $\Sigma$, then $M$ \newterm{accepts the language} $L$ if $L$ is the set of all strings accepted by $M$. For example, the DFA $M$ in \cref{ex:DFAOdd1s} accepts the language of all binary strings containing an odd number of $1$s.
+
+\begin{Note*}
+Although we say simply that $M$ accepts $L$, this means not only that every string in $L$ is accepted by $M$, but also that every string \emph{not} in $L$ is \emph{rejected} by $M$.
+\end{Note*}
+
+\begin{Exercise}\label{exer:DFAEven0s}
+Construct a DFA that accepts all binary strings with an even number of $0$s.
+\end{Exercise}
+
+\solution{DFAEven0s}{
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, accepting, minimum size = 6mm] (A) {};
+	\node[state, minimum size = 6mm] (B) [right = of A] {};
+	\path[->]
+	(A) edge [loop above]	node {\texttt 1}	()
+	(A) edge [bend left]	node {\texttt 0}	(B)
+	(B) edge [loop above]	node {\texttt 1}	()
+	(B) edge [bend left]	node {\texttt 0}	(A);
+\end{tikzpicture}
+\end{center}
+}
+
+\begin{Exercise}\label{exer:DFABeginaab}
+Construct a DFA that accepts all strings over the alphabet $\{\texttt a, \texttt b\}$ that begin in \texttt{aab}.
+\end{Exercise}
+
+\solution{DFABeginaab}{
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 6mm] (q0) {};
+	\node[state, minimum size = 6mm] (A) [right = of q0] {};
+	\node[state, minimum size = 6mm] (AA) [right = of A] {};
+	\node[state, accepting, minimum size = 6mm] (AAB) [right = of AA] {};
+	\node[state, minimum size = 6mm] (T) [below = of A] {};
+	\path[->] 
+	(q0) edge [] node {\texttt a}	(A)
+	(q0) edge [] node [swap] {\texttt b} (T)
+	(A) edge []	node {\texttt a}	(AA)
+	(A) edge [] node {\texttt b} (T)
+	(AA) edge []	node {\texttt b}	(AAB)
+	(AA) edge [] node {\texttt a} (T)
+	(AAB) edge [loop above]	node {\texttt a, \texttt b}	()
+	(T)	edge [loop below] node {\texttt a, \texttt b} ();
+\end{tikzpicture}
+\end{center}
+}
 
 \section{Graph Theory}\label{sec:GraphTheory}
 
-A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a nonempty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
+A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a non-empty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
 
-Two vertices $u$ and $v$ of $G$ are \newterm{adjacent}, denoted by $u \sim v$, if $uv \in E$ (note that $uv$ here denotes an unordered pair of vertices, and $uv = vu$). If there is no edge between $u$ and $v$, then they are \newterm{nonadjacent}, denoted by $u \nsim v$. The vertex $v$ and the edge $uv$ are said to be \newterm{incident} with each other. The \newterm{degree} of a vertex $v$ is the number of edges incident with it, or equivalently, the number of vertices adjacent with it, and is denoted by $\deg(v)$.
+Two vertices $u$ and $v$ of $G$ are \newterm{adjacent}, denoted by $u \sim v$, if $uv \in E$ (note that $uv$ here denotes an unordered pair of vertices, and $uv = vu$). If there is no edge between $u$ and $v$, then they are \newterm{non-adjacent}, denoted by $u \nsim v$. The vertex $v$ and the edge $uv$ are said to be \newterm{incident} with each other. The \newterm{degree} of a vertex $v$ is the number of edges incident with it, or equivalently, the number of vertices adjacent with it, and is denoted by $\deg(v)$.
 
 \begin{Lemma}[Handshaking Lemma]
 The sum of the degrees of all vertices of a graph is twice its size.
@@ -865,17 +956,15 @@ The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minim
 \hint{TreeCentre}{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
 \end{Exercise}
 
-\begin{Solution*} \switchocg{sol:TreeCentre}{\scriptsize Show Solution}\begin{ocg}{Solution of \ref{exer:TreeCentre}}{sol:TreeCentre}{0}
-
-\noindent Let $T$ be a tree on $n$ vertices. We prove the result by induction on $n$.
+\solution{TreeCentre}{
+Let $T$ be a tree on $n$ vertices. We prove the result by induction on $n$.
 
 If $n = 1$ or $2$, the result obviously holds. Suppose, for the sake of induction, that the result holds for all trees of order less than $n$.
 
 Consider $T$, of order $n \ge 3$. Then $T$ has at least two pendant vertices. Let $T'$ be the tree (of order less than $n$) obtained by deleting all the pendant vertices of $T$.
 
 Then the vertices of $T'$ have eccentricities exactly one less than their eccentricities in $T$, and therefore, $T$ and $T'$ have the same centre. Hence, the result follows by induction.
-\end{ocg}
-\end{Solution*}
+}
 
 \subsection{Adjacency Matrices}\label{subsec:AdjMat}
 

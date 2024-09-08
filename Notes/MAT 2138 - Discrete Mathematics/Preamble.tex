@@ -9,6 +9,8 @@
 \usepackage{physics}
 
 \usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+\tikzstyle{accepting}=[double distance=1.3pt, outer sep=1pt+\pgflinewidth]
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
@@ -63,8 +65,14 @@
 
 \theoremstyle{remark}
 \newtheorem*{Remark*}{Remark}
-\newtheorem*{Solution*}{Solution}
 \newtheorem*{Note*}{Note}
+\newtheorem*{Solution*}{Solution}
+
+\newcommand{\solution}[2]{
+\noindent\textit{\switchocg{sol:#1}{Solution.}} \begin{ocg}{Solution}{sol:#1}{0}
+#2
+\end{ocg}
+}
 
 \crefname{Section}{Section}{Sections}
 \crefname{Exercise}{Exercise}{Exercises}
