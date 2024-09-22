@@ -36,6 +36,9 @@
 \usepackage{charter}
 \usepackage[T1]{fontenc}
 
+\usepackage[capitalise]{cleveref}
+\crefformat{enumi}{#2\textup{#1}#3}
+
 \newtheorem{Theorem}{Theorem}[section]
 \newtheorem{Lemma}[Theorem]{Lemma}
 \newtheorem{Corollary}[Theorem]{Corollary}
@@ -52,29 +55,16 @@
 \newtheorem*{Solution*}{Solution}
 \newtheorem*{Note*}{Note}
 
+\crefname{Section}{Section}{Sections}
+\crefname{Exercise}{Exercise}{Exercises}
 
-\newtheoremstyle{underline}% name
-{}        % Space above, empty = `usual value'
-{}              % Space below
-{}              % Body font
-{}    % Indent amount (empty = no indent, \parindent = para indent)
-{}              % Thm head font
-{:}             % Punctuation after thm head
-{1.5mm}         % Space after thm head: \newline = linebreak
-{\underline{\thmname{#1}\thmnumber{ #2}\thmnote{(#3)}}}  % Thm head spec
 
 \DeclareMathOperator{\ord}{o}
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 \DeclareMathOperator{\lcm}{lcm}
 
-\let\Im\relax
-\DeclareMathOperator{\Im}{Im}
 \newcommand{\id}{\mathrm{id}}
-\renewcommand{\th}{\textsuperscript{th}\xspace}
-
-\newlist{subquests}{enumerate}{2}
-\setlist[subquests, 1]{label = (\alph*)}
-\setlist[subquests, 2]{label = \roman*.}
+\newcommand{\nth}{\textsuperscript{th}\xspace}
 
 \setlength{\parindent}{0pt}
 
@@ -120,7 +110,7 @@
 \nomenclature[25]{$SL(G)$}{\hyperref[def:SL(G)]{Subgroup lattice} of group $G$}
 \nomenclature[26]{$NL(G)$}{\hyperref[def:NL(G)]{Normal subgroup lattice} of group $G$}
 \nomenclature[27]{$V_4$}{\hyperref[ex:V4]{Klein $4$-group}}
-\nomenclature[28]{$S_n$}{\hyperref[it:Sn]{Symmetric group} on $n$ elements -- group of all \hyperref[sec:SymGroups]{permutations} of $\{1, \ldots, n\}$}
+\nomenclature[28]{$S_n$}{\hyperref[it:GrpExSn]{Symmetric group} on $n$ elements -- group of all \hyperref[sec:SymGroups]{permutations} of $\{1, \ldots, n\}$}
 \nomenclature[29]{$\mathbb Z_n$}{\hyperref[def:Zn]{The integers modulo $n$}}
 \nomenclature[30]{$Q_8$}{\hyperref[sec:Q8]{Quaternion group}}
 
@@ -129,40 +119,43 @@
 \clearpage
 
 \section{Introduction}\label{sec:Intro}
+
 \begin{Definition}\label{def:Group}
 A \emph{group} is a set $G$ together with a binary operation $* \colon G \times G \to G$, satisfying three properties (called the \emph{group axioms}).
-\begin{enumerate}
-\item Associativity: $\forall x, y, z \in G$, $x * (y * z) = (x * y) * z$.
-\item Existence of identity: $\exists e \in G$, $\forall x \in G$, $e * x = x * e = x$. The element $e$ is said to be an \emph{identity element} of $G$.
-\item Existence of inverses: $\forall x \in G$, $\exists y \in G$, $x * y = y * x = e$ (where $e$ is the identity element defined in the previous axiom). The element $y$ is said to be an \emph{inverse} of the element $x$.
+\begin{enumerate}[label = (\roman*)]
+\item\label{it:Axiom1} Associativity: For all $x, y, z \in G$, $x * (y * z) = (x * y) * z$.
+\item\label{it:Axiom2} Existence of identity: There exists $e \in G$ such that for all $x \in G$, $e * x = x * e = x$. The element $e$ is said to be an \emph{identity element} of $G$.
+\item\label{it:Axiom3} Existence of inverses: For each $x \in G$, there exists $y \in G$, $x * y = y * x = e$ (where $e$ is the identity element defined in the previous axiom). The element $y$ is said to be an \emph{inverse} of the element $x$.
 \end{enumerate}
 Then we say that $(G, *)$ is a group, or that $G$ is a group \emph{under the operation} $*$.
 \end{Definition}
-Implicit in the statement that $*$ is a binary operation on $G$, is the fact that $G$ is \emph{closed} under $*$ -- i.e., for any two elements $x$ and $y$ of $G$, the element $x * y$ also belongs to $G$. This property is therefore called \emph{closure}.
+
+Implicit in the statement that $*$ is a binary operation on $G$, is the fact that $G$ is \emph{closed} under $*$ -- i.e.\ for any two elements $x$ and $y$ of $G$, the element $x * y$ also belongs to $G$. This property is therefore called \emph{closure}.
 
 \phantomsection\label{def:OrdGrp} If $(G, *)$ is a group, the number of elements in the set $G$ is said to be the \emph{order} of $G$, and is denoted $|G|$ or $\ord(G)$. A \emph{finite group} is a group whose order is finite, and an \emph{infinite group} is a group of infinite order.
 
 \begin{Example}\label{ex:Groups}
 \begin{enumerate}
-\item The set $\mathbb Z$ of integers forms a group under the usual addition $+$. The sum of any two integers is also an integer, thus $+$ is indeed a binary operation on $\mathbb Z$ (in other words, $\mathbb Z$ is closed under $+$). The identity element of this group is $0$, since $n + 0 = 0 + n = n$ for all $n \in \mathbb Z$. Finally, for any integer $n$, we know that $n + (-n) = (-n) + n = 0$, so that $-n$, which is also an integer, is the inverse of $n$. This a group of infinite order.
+\item\label{it:GrpExZ} The set $\mathbb Z$ of integers forms a group under the usual addition $+$. The sum of any two integers is also an integer, thus $+$ is indeed a binary operation on $\mathbb Z$ (in other words, $\mathbb Z$ is closed under $+$). The identity element of this group is $0$, since $n + 0 = 0 + n = n$ for all $n \in \mathbb Z$. Finally, for any integer $n$, we know that $n + (-n) = (-n) + n = 0$, so that $-n$, which is also an integer, is the inverse of $n$. This a group of infinite order.
 \item $(\mathbb Z, -)$ is \textbf{not} a group, since $-$ is not associative (nor is there an identity element for subtraction, since $n - e = n$ only if $e = 0$, but then $e - n = 0 - n = -n \ne n$; and without an identity element, inverses are not defined).
-\item Similarly, the rationals, reals, and complex numbers also form groups under addition: $(\mathbb Q, +)$, $(\mathbb R, +)$, $(\mathbb C, +)$. All three are infinite groups.
+\item\label{it:GrpExQRC} Similarly, the rationals, reals, and complex numbers also form groups under addition: $(\mathbb Q, +)$, $(\mathbb R, +)$, $(\mathbb C, +)$. All three are infinite groups.
 \item The set of non-negative integers $\mathbb N_0 = \{0, 1, 2, \cdots\}$ does \textbf{not} form a group under addition. (Why?)
-\item Let $G = \{0\}$, the singleton set containing only the real number $0$. Then $(G, +)$ is a group. Its order is $1$, and it is therefore the smallest group. (Why does the empty set $\varnothing$ not form a group?)
-\item The set of non-zero real numbers forms a group under multiplication: $(\mathbb R - \{0\}, \times)$. The identity element is $1$ and the inverse of $x \in \mathbb R$, $x \ne 0$, is $1/x$ (which is also a non-zero real number). If we include $0$, it is no longer a group, since $0$ has no (multiplicative) inverse.
+\item\label{it:GrpEx0} Let $G = \{0\}$, the singleton set containing only the real number $0$. Then $(G, +)$ is a group. Its order is $1$, and it is therefore the smallest group. (Why does the empty set $\varnothing$ not form a group?)
+\item\label{it:GrpExR*} The set of non-zero real numbers forms a group under multiplication: $(\mathbb R - \{0\}, \times)$. The identity element is $1$ and the inverse of $x \in \mathbb R$, $x \ne 0$, is $1/x$ (which is also a non-zero real number). If we include $0$, it is no longer a group, since $0$ has no (multiplicative) inverse.
 \item Is $(\mathbb Z - \{0\}, \times)$ a group?
-\item If $\mathbb R_{>0}$ denotes the set of all positive real numbers, $(\mathbb R_{>0}, \times)$ is also a group. (Verify this carefully).
+\item\label{it:GrpExR>0} If $\mathbb R_{>0}$ denotes the set of all positive real numbers, $(\mathbb R_{>0}, \times)$ is also a group. (Verify this carefully).
 \item Note that if $G = \mathbb R_{<0}$ (the set of negative reals), then $(\mathbb R_{<0}, \times)$ is \textbf{not} a group. Which axiom fails? Multiplication is associative, so Axiom 1 holds. The multiplicative identity is $1$, which is not present in $G$. We can remedy this by redefining $G$ to be $G = \mathbb R_{<0} \cup \{1\}$. Associativity still holds, and now $G$ has an identity element as well. Axiom 3 holds as well, since the multiplicative inverse of any negative real number $x$ is the negative real number $1/x$. Thus, all axioms hold. However, the operation $\times$ is not a binary operation on $G$ at all! For example, $-1$ and $-2$ are elements of $G$, but their product $(-1)(-2) = +2$ is not an element of $G$.
-\item Let $G = \{1\}$, $H = \{1, -1\}$, and $K = \{1, i, -1, -i\}$, where $i = \sqrt{-1}$. Then $(G, \times)$, $(H, \times)$ and $(K, \times)$ are groups of orders $1$, $2$, and $4$ respectively.
-\item A square matrix $A$ is \emph{non-singular} (or \emph{invertible}) if its determinant is non-zero: $\det A \ne 0$. The set of all $n \times n$ non-singular real matrices forms a group under matrix multiplication, denoted $GL_n(\mathbb R)$. Matrix multiplication is associative, the identity matrix is the identity element for this multiplication, and every non-singular matrix $A$ has an inverse $A^{-1}$ (which is also non-singular). Note that $GL_n(\mathbb R)$ is certainly closed under multiplication, since $\det(AB) = (\det A)(\det B) \ne 0$ whenever $\det A, \det B \ne 0$. For $n > 1$, $GL_n(\mathbb R)$ is an example of a group where the operation is not \emph{commutative} -- if $A$ and $B$ are two $n \times n$ matrices $AB$ is generally not equal to $BA$. Example: $A = \begin{bmatrix} 1 & 1\\ 0 & 1\end{bmatrix}$, $B = \begin{bmatrix}1 & 0\\ 1 & 1\end{bmatrix}$.
-\item Let $X$ be any non-empty set, and let $S(X)$ denote the set of all bijections from $X$ to itself. That is,
+\item\label{it:GrpEx<i>} Let $G = \{1\}$, $H = \{1, -1\}$, and $K = \{1, i, -1, -i\}$, where $i = \sqrt{-1}$. Then $(G, \times)$, $(H, \times)$ and $(K, \times)$ are groups of orders $1$, $2$, and $4$ respectively.
+\item\label{it:GrpExGL} A square matrix $A$ is \emph{non-singular} (or \emph{invertible}) if its determinant is non-zero: $\det A \ne 0$. The set of all $n \times n$ non-singular real matrices forms a group under matrix multiplication, denoted $GL_n(\mathbb R)$. Matrix multiplication is associative, the identity matrix is the identity element for this multiplication, and every non-singular matrix $A$ has an inverse $A^{-1}$ (which is also non-singular). Note that $GL_n(\mathbb R)$ is certainly closed under multiplication, since $\det(AB) = (\det A)(\det B) \ne 0$ whenever $\det A, \det B \ne 0$. For $n > 1$, $GL_n(\mathbb R)$ is an example of a group where the operation is not \emph{commutative} -- if $A$ and $B$ are two $n \times n$ matrices $AB$ is generally not equal to $BA$. Example: $A = \begin{bmatrix} 1 & 1\\ 0 & 1\end{bmatrix}$, $B = \begin{bmatrix}1 & 0\\ 1 & 1\end{bmatrix}$.
+\item\label{it:GrpExS(X)} Let $X$ be any non-empty set, and let $S(X)$ denote the set of all bijections from $X$ to itself. That is,
 \begin{equation*}
 S(X) = \{\, f\colon X \to X \mid f\ \text{is $1$-$1$ and onto} \,\}
 \end{equation*}
 Then $S(X)$ forms a group under composition of functions. For function composition is associative, the identity function (that maps every element $x \in X$ to $x$ itself) is the identity element, and every bijective function $f \colon X \to X$ has an inverse $f^{-1} \colon X \to X$ that is also bijective. If $X$ has three or more elements (possibly an infinite number of elements) then $S(X)$ is not commutative.
-\item\label{it:Sn} If $X = \{1, 2, \ldots, n\}$, then $S(X)$ is written as $S_n$, and is called the \emph{symmetric group}. What is $\ord(S_n)$?
+\item\label{it:GrpExSn} If $X = \{1, 2, \ldots, n\}$, then $S(X)$ is written as $S_n$, and is called the \emph{symmetric group}. What is $\ord(S_n)$?
 \end{enumerate}
 \end{Example}
+
 When the group operation is clear from context, we shall write $xy$ to mean $x * y$.
 
 \begin{Remark*}
@@ -170,15 +163,16 @@ Note that $xy$ is different from $yx$, as the group operation need not be commut
 \end{Remark*}
 
 \subsection{Basic properties of groups}\label{subsec:BasicProps}
-Every group has a unique identity element. For, suppose $e_1$ and $e_2$ are both identity elements of a group $G$ (i.e., both $e_1$ and $e_2$ satisfy the equations when written in place of $e$ in Axiom 2). Then $e_1 = e_1 e_2 = e_2$. The former equality is true because $e_2$ is an identity element (so $x e_2 = x$ for any $x$), and the latter equality is true because $e_1$ is an identity element. Thus, we see that $e_1 = e_2$.
 
-Similarly, every element of a group has a unique inverse. Let $x$ be an element of a group $G$. By Axiom 3, it has an inverse, say $y$. Suppose $z$ is also an inverse of $x$. Then, if $e$ denotes the identity element of $G$,
+Every group has a unique identity element. For, suppose $e_1$ and $e_2$ are both identity elements of a group $G$ (i.e.\ both $e_1$ and $e_2$ satisfy the equations when written in place of $e$ in Axiom~\ref{it:Axiom2}. Then $e_1 = e_1 e_2 = e_2$. The former equality is true because $e_2$ is an identity element (so $x e_2 = x$ for any $x$), and the latter equality is true because $e_1$ is an identity element. Thus, we see that $e_1 = e_2$.
+
+Similarly, every element of a group has a unique inverse. Let $x$ be an element of a group $G$. By Axiom~\ref{it:Axiom3}, it has an inverse, say $y$. Suppose $z$ is also an inverse of $x$. Then, if $e$ denotes the identity element of $G$,
 \begin{equation*}
 y = ye = y(xz) = (yx)z = ez = z
 \end{equation*}
 The second equality follows from $z$ being an inverse of $x$; the third one from associativity; and the fourth from $y$ being an inverse of $x$.
 
-\phantomsection\label{def:Inverse} Since each element $x$ is guaranteed to have a unique inverse, we can denote this inverse as $x^{-1}$. From Axiom 3, it is clear that if $y$ is an inverse of $x$, then $x$ is also an inverse of $y$. Thus, $(x^{-1})^{-1} = x$.
+\phantomsection\label{def:Inverse} Since each element $x$ is guaranteed to have a unique inverse, we can denote this inverse as $x^{-1}$. From Axiom~\ref{it:Axiom3}, it is clear that if $y$ is an inverse of $x$, then $x$ is also an inverse of $y$. Thus, $(x^{-1})^{-1} = x$.
 
 \begin{Exercise}
 Prove that $(xy)^{-1} = y^{-1} x^{-1}$.
@@ -196,8 +190,8 @@ Similarly, $(y^{-1}x^{-1})(xy) = e$. Thus, $(xy)^{-1} = y^{-1}x^{-1}$.
 \begin{Exercise}[Cancellation Laws]
 Prove that the (left and right) cancellation laws hold in every group. That is, prove that if $x$ and $y$ are elements of a group $G$, then
 \begin{enumerate}
-\item If $\exists a \in G$, $ax = ay$, then $x = y$.
-\item If $\exists b \in G$, $xb = yb$, then $x = y$.
+\item If there exists $a \in G$ such that $ax = ay$, then $x = y$.
+\item If there exists $b \in G$ such that $xb = yb$, then $x = y$.
 \end{enumerate}
 \textbf{Solution.} \begin{enumerate}
 \item Left-multiplying by $a^{-1}$, we have $ax = ay \implies a^{-1}(ax) = a^{-1}(ay) \implies (a^{-1}a)x = (a^{-1}a)y \implies ex = ey \implies x = y$.
@@ -218,9 +212,10 @@ x^n = \underbrace{x \cdot x \cdots x}_{n\ \text{times}}.
 \end{equation*}
 Then define $x^{-n} = (x^{-1})^n$ and $x^0 = e$.
 \end{Definition}
+
 \begin{Exercise}
-Let $x \in G$, and let $m$ and $n$ be integers. With the notation given in Definition~\ref{def:Power}, prove the following.
-\begin{enumerate}
+Let $x \in G$, and let $m$ and $n$ be integers. With the notation given in \cref{def:Power}, prove the following:
+\begin{enumerate}[label = (\roman*)]
 \item $x^{-n} = (x^n)^{-1}$
 \item $x^m \cdot x^n = x^{m + n}$
 \item $(x^m)^n = x^{mn}$
@@ -233,14 +228,14 @@ If the operation in a group $G$ is denoted by $+$ (whether this denotes the usua
 \end{Remark*}
 
 \subsection{Abelian groups}\label{subsec:AbGrps}
+
 We have seen that the operation in a group is not necessarily commutative. Now we define a special class of groups with a commutative operation.
+
 \begin{Definition}
-A group $(A, *)$ is said to be \emph{Abelian} or \emph{commutative} if $*$ is a commutative operation. That is,
-\begin{equation*}
-\forall a, b \in A, a*b = b*a.
-\end{equation*}
+A group $(A, *)$ is said to be \emph{Abelian} or \emph{commutative} if $*$ is a commutative operation. That is, for all $a, b \in A$, $a * b = b * a$.
 \end{Definition}
-A group that is not Abelian is, of course, \emph{non-Abelian}. In Example~\ref{ex:Groups}, the groups defined in 11, 12, and 13 are non-Abelian.
+
+A group that is not Abelian is, of course, \emph{non-Abelian}. In \cref{ex:Groups}, the groups defined in \labelcref{it:GrpExGL,it:GrpExS(X),it:GrpExSn} are non-Abelian.
 
 \begin{Exercise}
 Let $G$ be a group.
@@ -249,55 +244,61 @@ Let $G$ be a group.
 
 \textbf{Solution.} Suppose every element of $G$ is self-inverse. That is, for all $x \in G$, $x^{-1} = x$. Let $a, b \in G$. We know that $(ab)^{-1} = b^{-1} a^{-1}$. But since all elements are self-inverse, this reduces to $ab = ba$. The converse is not true. For example, $(\mathbb Z, +)$ is an Abelian group in which not all elements are self inverse (in fact, $0$ is the only self-inverse element of this group).
 
-\item Prove that $G$ is Abelian if and only if $\forall x, y \in G$, $(xy)^{-1} = x^{-1}y^{-1}$.
+\item Prove that $G$ is Abelian if and only if for all $x, y \in G$, $(xy)^{-1} = x^{-1}y^{-1}$.
 
 \textbf{Solution.} If $G$ is Abelian, then $(xy)^{-1} = y^{-1} x^{-1} = x^{-1} y^{-1}$. Conversely, suppose $G$ satisfies the given property. Then for any two elements $x$ and $y$, $(xy)^{-1} = x^{-1} y^{-1} \implies xy = (x^{-1} y^{-1})^{-1} = (y^{-1})^{-1} (x^{-1})^{-1} = yx$.
 
-\item Prove that $G$ is Abelian iff $\forall a, b \in G$, $(ab)^2 = a^2 b^2$.
+\item Prove that $G$ is Abelian if and only if for all $a, b \in G$, $(ab)^2 = a^2 b^2$.
 
 \textbf{Solution.} If $G$ is Abelian, then $(ab)^2 = abab = aabb = a^2b^2$. Conversely, $(ab)^2 = a^2 b^2 \implies abab = aabb \implies ba = ab$ (by left and right cancellation).
 \end{enumerate}
 \end{Exercise}
 
 \section{Subgroups}\label{sec:Subgroups}
-In Example~\ref{ex:Groups}, we saw that $\mathbb Z$, $\mathbb Q$, $\mathbb R$, and $\mathbb C$ all forms groups under addition. Observe that $\mathbb Z \subseteq \mathbb Q \subseteq \mathbb R \subseteq \mathbb C$. Similarly, $\mathbb Q - \{0\}$, $\mathbb R_{>0}$, and $\mathbb R - \{0\}$ are all groups under multiplication. The former two are subsets of the latter. These are all examples of subgroups.
+
+In \cref{ex:Groups}, we saw that $\mathbb Z$, $\mathbb Q$, $\mathbb R$, and $\mathbb C$ all form groups under addition. Observe that $\mathbb Z \subseteq \mathbb Q \subseteq \mathbb R \subseteq \mathbb C$. Similarly, $\mathbb Q - \{0\}$, $\mathbb R_{>0}$, and $\mathbb R - \{0\}$ are all groups under multiplication. The former two are subsets of the latter. These are all examples of subgroups.
+
 \begin{Definition}\label{def:Subgroup}
 A \emph{subgroup} of a group $(G, *)$ is a subset $H \subseteq G$ such that $(H, *)$ is also a group. Then we write $H \le G$.
 \end{Definition}
+
 \begin{Remark*}
 It is very important that the operation be the same, for otherwise it is meaningless to call one the subgroup of the other. For example, $(\mathbb Q - \{0\}, \times)$ is \textit{not} a subgroup of $(\mathbb R, +)$, even though $\mathbb Q - \{0\} \subseteq \mathbb R$.
 \end{Remark*}
 
 Given a subset $H$ of a group $G$, to check whether $H$ is a subgroup, we need to verify that $H$ satisfies the group axioms. It is obvious that all elements of $H$ will satisfy associativity, since they are elements of $G$ as well. On the other hand, the closure of $H$ under the group operation of $G$ needs to be checked carefully, since the result of applying the operation to two elements of $H$ may be an element of $G$ that is outside $H$. (For example, the subset of odd integers is not a subgroup of $(\mathbb Z, +)$, since the sum of two odd integers is an even integer). To verify the existence of identity and inverses, it is enough to check if the identity element of the group $G$, which is already known, is present in the subset $H$, and similarly in the case of inverses. These observations are summarised in the lemma below.
+
 \begin{Lemma}\label{lem:Subgroups}
 Let $(G, *)$ be a group and $H \subseteq G$. Then $H$ is a subgroup of $G$ if and only if all of the following hold.
 \begin{enumerate}
-\item $H$ is closed under $*$. That is, $\forall x, y \in H$, $x*y \in H$.
+\item $H$ is closed under $*$. That is, for all $x, y \in H$, $x*y \in H$.
 \item $H$ contains the identity element (of $G$): $e \in H$.
-\item The inverse of every element of $H$ is also in $H$. That is, $\forall x \in H$, $x^{-1} \in H$.
+\item The inverse of every element of $H$ is also in $H$. That is, for all $x \in H$, $x^{-1} \in H$.
 \end{enumerate}
 \end{Lemma}
 
 We can, in some sense, combine closure and existence of inverses to obtain two different conditions that characterise subgroups. In many cases, it becomes easier to check these two conditions than to check the three given above.
 \begin{Theorem}\label{thm:Subgroups}
-A subset $H$ of a group $G$ is a subgroup of $G$ if and only if $H \ne \varnothing$ and $\forall x, y \in H$, $xy^{-1} \in H$.
+A subset $H$ of a group $G$ is a subgroup of $G$ if and only if $H \ne \varnothing$ and for all $x, y \in H$, $xy^{-1} \in H$.
 \end{Theorem}
+
 \begin{proof}
 If $H \le G$, then it is obviously non-empty (for $e \in H$) and for any $x, y \in H$, we have $x, y^{-1} \in H$ (since $H$ contains the inverses of all its elements), and therefore $xy^{-1} \in H$ (by closure).
 
-Conversely, suppose it is given that $H \ne \varnothing$ and $\forall x, y \in H$, $xy^{-1} \in H$.
+Conversely, suppose it is given that $H \ne \varnothing$ and for all $x, y \in H$, $xy^{-1} \in H$.
 \begin{enumerate}[label=(\roman*)]
-\item Since $H \ne \varnothing$, $\exists x \in H$. Then $x, x \in H \implies xx^{-1} \in H \implies e \in H$, which shows that $H$ contains the identity element.
+\item Since $H \ne \varnothing$, there exists $x \in H$. Then $x, x \in H \implies xx^{-1} \in H \implies e \in H$, which shows that $H$ contains the identity element.
 \item Now if $x \in H$, then $e, x \in H \implies ex^{-1} = x^{-1} \in H$, which proves that $H$ is closed under inverses.
-\item Finally, if $x, y \in H$, then by what we have proved above, $y^{-1} \in H$. Thus, $x, y^{-1} \in H \implies x(y^{-1})^{-1} \in H$ (by the assumption on $H$), thus $xy \in H$, proving closure of $H$ under the group operation.
+\item Finally, if $x, y \in H$, then by what we have proved above, $y^{-1} \in H$. Thus, $x, y^{-1} \in H \implies x(y^{-1})^{-1} \in H$ (by the assumption on $H$), i.e.\ $xy \in H$, proving closure of $H$ under the group operation.
 \end{enumerate}
 \end{proof}
 
 \begin{Example}
-Let $G$ be the group of non-zero complex numbers under multiplication, and let $\omega = e^{\frac{2\pi i}{3}}$, the primitive complex cube root of unity. Then $H = \{1, \omega, \omega^2\}$ is a subgroup of $G$. Clearly, $H$ is non-empty. Now, the elements of $H$ are all the integer powers of $\omega$ -- i.e., all the complex numbers of the form $\omega^r$ for some integer $r$. Thus, if $\omega^r$ and $\omega^s$ are any two elements of $H$, then $\omega^r \cdot (\omega^s)^{-1}  = \omega^{r - s}$ is also an element of $H$. Then by Theorem~\ref{thm:Subgroups}, $H \le G$.
+Let $G$ be the group of non-zero complex numbers under multiplication, and let $\omega = e^{\frac{2\pi i}{3}}$, the primitive complex cube root of unity. Then $H = \{1, \omega, \omega^2\}$ is a subgroup of $G$. Clearly, $H$ is non-empty. Now, the elements of $H$ are all the integer powers of $\omega$ -- i.e.\ all the complex numbers of the form $\omega^r$ for some integer $r$. Thus, if $\omega^r$ and $\omega^s$ are any two elements of $H$, then $\omega^r \cdot (\omega^s)^{-1}  = \omega^{r - s}$ is also an element of $H$. Then by Theorem~\ref{thm:Subgroups}, $H \le G$.
 \end{Example}
 
 Can two or more subgroups be combined together to construct other subgroups? The following results show that they can, in certain ways.
+
 \begin{Theorem}\label{thm:SubgroupsIntUni}
 Let $H$ and $K$ be any two subgroups of a group $G$. Then
 \begin{enumerate}
@@ -305,10 +306,12 @@ Let $H$ and $K$ be any two subgroups of a group $G$. Then
 \item $H \cup K$ is not a subgroup of $G$ unless $H \subseteq K$ or $K \subseteq H$.
 \end{enumerate}
 \end{Theorem}
+
 \begin{proof}
 \begin{enumerate}
 \item Since $e \in H$ and $e \in K$, $e \in H \cap K \ne \varnothing$. Now if $x, y \in H \cap K$, then $x, y \in H \implies xy^{-1} \in H$ and $x, y \in K \implies xy^{-1} \in K$, and therefore, $xy^{-1} \in H \cap K$. Thus, $H \cap K \le G$.
-\item Suppose that neither one of $H$ and $K$ is contained in the other. Then there exists an element $h \in H$ such that $h \notin K$, and similarly, $\exists k \in K$, $k \notin H$. Now, $hk$ cannot be an element of $H$, since $hk \in H \implies h^{-1}hk = k \in H$. Similarly, $hk \notin K$. Therefore, $hk \notin H \cup K$. Since $H \cup K$ is not closed under the operation, it is not a subgroup of $G$.
+
+\item Suppose that neither one of $H$ and $K$ is contained in the other. Then there exists an element $h \in H$ such that $h \notin K$, and similarly, there exists $k \in K$, $k \notin H$. Now, $hk$ cannot be an element of $H$, since $hk \in H \implies h^{-1}hk = k \in H$. Similarly, $hk \notin K$. Therefore, $hk \notin H \cup K$. Since $H \cup K$ is not closed under the operation, it is not a subgroup of $G$.
 
 If $H \subseteq K$, then $H \cup K = K \le G$. The other case is similar.
 \end{enumerate}
@@ -323,8 +326,9 @@ Note that in general, $HK \ne KH$. Every element of $HK$ is of the form $hk$, wh
 \begin{Theorem}\label{thm:HK}
 Let $H$ and $K$ be any two subgroups of a group $G$. Then $HK \le G$ if and only if $HK = KH$.
 \end{Theorem}
+
 \begin{proof}
-Suppose that $HK \le G$. Let $x \in HK$. Then $x^{-1} \in HK \implies x^{-1} = hk$, $\exists h \in H$, $k \in K$. Now, $x = (hk)^{-1} = k^{-1} h^{-1}$, which is an element of $KH$ since $k^{-1} \in K$ and $h^{-1} \in H$. Thus, $x \in HK \implies x \in KH$, which shows that $HK \subseteq KH$. To see that $KH \subseteq HK$ as well, consider an arbitrary element $kh \in KH$. Now $(kh)^{-1} = h^{-1}k^{-1} \in HK \implies ((kh)^{-1})^{-1} = kh \in HK$.  Therefore, $HK = KH$.
+Suppose that $HK \le G$. Let $x \in HK$. Then $x^{-1} \in HK \implies x^{-1} = hk$, for some $h \in H$, $k \in K$. Now, $x = (hk)^{-1} = k^{-1} h^{-1}$, which is an element of $KH$ since $k^{-1} \in K$ and $h^{-1} \in H$. Thus, $x \in HK \implies x \in KH$, which shows that $HK \subseteq KH$. To see that $KH \subseteq HK$ as well, consider an arbitrary element $kh \in KH$. Now $(kh)^{-1} = h^{-1}k^{-1} \in HK \implies ((kh)^{-1})^{-1} = kh \in HK$.  Therefore, $HK = KH$.
 
 For the converse, suppose that $HK = KH$. We must show that $HK \le G$. Since $H$ and $K$ are non-empty, so is $HK$. Now let $x, y \in HK$. We shall show that $xy^{-1} \in HK$. Let $x = h_1 k_1$, $y = h_2 k_2$, where $h_1, h_2 \in H$, $k_1, k_2 \in K$. Then
 \begin{align*}
@@ -368,7 +372,7 @@ A group $G$ is said to be \emph{cyclic} if it is equal to the cyclic subgroup ge
 If $a = g^i$ and $b = g^j$ are any two elements of a cyclic group $G = \langle g \rangle$, then $ab = x^i \cdot x^j = x^{i + j} = x^{j + i} = x^j \cdot x^i = ba$. Thus, any cyclic group is Abelian. But the converse is not true.
 
 \begin{Example}\label{ex:RootsOfUnity}
-Let $\omega = e^{\frac{2 \pi i}{n}}$, where $i = \sqrt{-1}$, so that $\omega^n = 1$ (i.e., $\omega$ is a primitive $n$\th root of unity). Then $G = \{1, \omega, \omega^2, \ldots, \omega^{n - 1}\}$ is a group under (complex) multiplication. $G$ is cyclic, since every element of $G$ is a power of $\omega$, so that $G = \langle \omega \rangle$. {\small Exercise: Prove that if $n$ is prime, then every non-identity element of $G$ is a generator of $G$}.
+Let $\omega = e^{\frac{2 \pi i}{n}}$, where $i = \sqrt{-1}$, so that $\omega^n = 1$ (i.e.\ $\omega$ is a primitive $n$\nth root of unity). Then $G = \{1, \omega, \omega^2, \ldots, \omega^{n - 1}\}$ is a group under (complex) multiplication. $G$ is cyclic, since every element of $G$ is a power of $\omega$, so that $G = \langle \omega \rangle$. {\small Exercise: Prove that if $n$ is prime, then every non-identity element of $G$ is a generator of $G$}.
 \end{Example}
 
 \begin{Example}
@@ -376,7 +380,7 @@ $\mathbb Z = \langle 1 \rangle$, since every integer $n$ can be written as $n \t
 \end{Example}
 
 \begin{Example}\label{ex:V4}
-Let $V_4$ denote the group formed by $\{1, 3, 5, 7\}$ under multiplication modulo $8$ (i.e., for $a, b \in V_4$, $a \cdot b = c$ where $c$ is the remainder obtained when the integer $a \times b$ is divided by $8$). This is indeed a group -- multiplication modulo $n$ is associative for any integer $n$, and the other axioms are easily seen to hold from the multiplication table given below.
+Let $V_4$ denote the group formed by $\{1, 3, 5, 7\}$ under multiplication modulo $8$ (i.e.\ for $a, b \in V_4$, $a \cdot b = c$ where $c$ is the remainder obtained when the integer $a \times b$ is divided by $8$). This is indeed a group -- multiplication modulo $n$ is associative for any integer $n$, and the other axioms are easily seen to hold from the multiplication table given below.
 \begin{equation*}
 \begin{array}{c|cccc}
 	&	1	&	3	&	5	&	7\\
@@ -446,7 +450,7 @@ Hx = \{\, hx \mid h \in H \,\}.
 The subgroup $H$ itself is a coset (of itself): $H = eH = He$. In fact, note that for any $h \in H$, $hH = Hh = H$. (It is obvious, due to closure of $H$ under the operation, that $hH$ is a subset of $H$ -- why is it \textit{equal} to $H$?).
 \end{Remark*}
 
-We shall show that left cosets (LCs) of a subgroup partition the whole group into equally sized parts ($G$: ``You're tearing me apart, LCs!'').
+We shall show that left cosets of a subgroup partition the whole group into equally sized parts.
 
 \begin{Theorem}[Lagrange]\label{thm:Lagrange}
 If $G$ is a finite group and $H$ a subgroup of $G$, then the order of $H$ divides the order of $G$: $\ord(H) \mid \ord(G)$.
@@ -460,7 +464,7 @@ G = \bigcup_{i = 1}^k x_i H
 \end{equation*}
 \end{Lemma}
 \begin{proof}
-Every element is in the coset of $H$ with respect to that element. That is, $\forall x \in G$, $x \in xH = x_i H$ for some $i = 1, \ldots, k$.
+Every element is in the coset of $H$ with respect to that element. That is, for all $x \in G$, $x \in xH = x_i H$ for some $i = 1, \ldots, k$.
 \end{proof}
 
 This does only half the work in showing that the left cosets partition the group. The other half is to show that distinct cosets are disjoint.
@@ -468,18 +472,18 @@ This does only half the work in showing that the left cosets partition the group
 Distinct left cosets of $H$ are disjoint.
 \end{Lemma}
 \begin{proof}
-Suppose $xH \cap yH \ne \varnothing$. Then $\exists z \in xH \cap yH$, so that $z = xh_1 = yh_2$, $\exists h_1, h_2 \in H$.
+Suppose $xH \cap yH \ne \varnothing$. Then there exists $z \in xH \cap yH$, i.e.\ $z = xh_1 = yh_2$, for some $h_1, h_2 \in H$.
 
 Then $y = xh_1 h_2^{-1}$. Now, for any $yh \in yH$, $yh = x \underbracket{h_1h_2^{-1}h}_{\in H} \implies yh \in xH$. Thus, $yH \subseteq xH$. Similarly, $xH \subseteq yH$, and therefore, $xH = yH$.
 \end{proof}
 
-Finally, we show that all left cosets of $H$ have the same number of elements. To test whether this is true, we simply need to use the cancellation law (Coset: ``I got the results of the test back! I \emph{definitely} have left cancellation'').
+Finally, we show that all left cosets of $H$ have the same number of elements. To test whether this is true, we simply need to use the cancellation law.
 
 \begin{Lemma}\label{lem:CosetsCardinality}
 Any two left cosets of $H$ have the same cardinality.
 \end{Lemma}
 \begin{proof}
-Let $xH$ be any left coset of $H$. We show that $|xH| = |H|$, by proving the existence of a bijection between $H$ and $xH$. Define $f \colon H \to xH$, $\forall h \in H$, $f(h) = xh$. This mapping is injective since $f(h_1) = f(h_2) \implies xh_1 = xh_2 \implies h_1 = h_2$, by left cancellation. It is surjective since every element of $xH$ is of the form $xh$, $\exists h \in H$, but $xh = f(h)$. Thus, $f$ is a bijection and $|xH| = |H|$. This also proves that all the left cosets are in bijection with one another and therefore have the same cardinality.
+Let $xH$ be any left coset of $H$. We show that $|xH| = |H|$, by proving the existence of a bijection between $H$ and $xH$. Define $f \colon H \to xH$ by $f(h) = xh$ for all $h \in H$. This mapping is injective since $f(h_1) = f(h_2) \implies xh_1 = xh_2 \implies h_1 = h_2$, by left cancellation. It is surjective since every element of $xH$ is of the form $xh$ for some $h \in H$, and $xh = f(h)$. Thus, $f$ is a bijection and $|xH| = |H|$. This also proves that all the left cosets are in bijection with one another and therefore have the same cardinality.
 \end{proof}
 
 Now we can prove Lagrange's theorem.
@@ -523,7 +527,7 @@ which is the set of all conjugates of elements of $S$ by the (fixed) element $x$
 Observe that if $H \le G$, then $xHx^{-1} \le G$. {\small (Exercise: Prove this)}. But in general, $xHx^{-1}$ may not be equal to $H$ itself. Based on this, we define a special kind of subgroup (which, ironically, is called a \emph{normal} subgroup).
 
 \begin{Definition}\label{def:NormSubgroup}
-A subgroup $N$ of a group $G$ is said to be \emph{normal} if $\forall x \in G$, $xNx^{-1} \subseteq N$. Then we write $N \unlhd G$ or $N \lhd G$.
+A subgroup $N$ of a group $G$ is said to be \emph{normal} if for all $x \in G$, $xNx^{-1} \subseteq N$. Then we write $N \unlhd G$ or $N \lhd G$.
 \end{Definition}
 Note that the statement $xNx^{-1} \subseteq N$ is equivalent to the statement that for all $n \in N$, $xnx^{-1} \in N$.
 
@@ -537,26 +541,28 @@ For any group, the trivial subgroup and the whole group are always normal subgro
 \item Prove that a finite Abelian group is simple if and only if its order is a prime number. {\tiny Hint: Every element generates a subgroup.}
 \item For any group $G$, prove that its centre $Z(G)$ is always a normal subgroup.
 \item Let $H \le G$ (not necessarily normal), and define $N = \bigcap\limits_{x \in G} xHx^{-1}$. Show that $N \unlhd G$.
-\item Let $N$ be a subgroup of index $2$ in $G$ (i.e., $|G : N| = 2$). Show that $N \unlhd G$. {\tiny Hint: If $N$ has only two left cosets, and only two right cosets, and one of them is $N$ in each case, what is the other?}
+\item Let $N$ be a subgroup of index $2$ in $G$ (i.e.\ $|G : N| = 2$). Show that $N \unlhd G$. {\tiny Hint: If $N$ has only two left cosets, and only two right cosets, and one of them is $N$ in each case, what is the other?}
 \end{enumerate}
 \end{Exercise}
 
 \begin{Theorem}
-Let $N \le G$. Then $N \unlhd G$ if and only if $\forall x \in G$, $xNx^{-1} = N$.
+Let $N \le G$. Then $N \unlhd G$ if and only if for all $x \in G$, $xNx^{-1} = N$.
 \end{Theorem}
-\begin{proof}
-If $N \unlhd G$, then for any $x \in G$, $xNx^{-1} \subseteq N$. We must prove that $N \subseteq xNx^{-1}$ as well. Let $n \in N$. Now (with $x^{-1}$ in place of $x$), $x^{-1}Nx \subseteq N \implies x^{-1}nx \in N \implies x^{-1}nx = n'$, for some $n' \in N$. Then $n = xn'x^{-1} \in xNx^{-1}$. Thus, $\forall n \in N$, $n \in xNx^{-1}$, which shows that $N \subseteq xNx^{-1}$.
 
-Conversely, if $\forall x \in G$, $xNx^{-1} = N$, then \emph{a fortiori}, $\forall x \in G$, $xNx^{-1} \subseteq N$, so that $N \unlhd G$.
+\begin{proof}
+If $N \unlhd G$, then for any $x \in G$, $xNx^{-1} \subseteq N$. We must prove that $N \subseteq xNx^{-1}$ as well. Let $n \in N$. Now (with $x^{-1}$ in place of $x$), $x^{-1}Nx \subseteq N \implies x^{-1}nx \in N \implies x^{-1}nx = n'$, for some $n' \in N$. Then $n = xn'x^{-1} \in xNx^{-1}$. Thus, for all $n \in N$, $n \in xNx^{-1}$, which shows that $N \subseteq xNx^{-1}$.
+
+Conversely, if for all $x \in G$, $xNx^{-1} = N$, then \emph{a fortiori}, for all $x \in G$, $xNx^{-1} \subseteq N$, so that $N \unlhd G$.
 \end{proof}
 
 \begin{Theorem}
-Let $N \le G$. Then $N \unlhd G$ if and only if $\forall x \in G$, $xN = Nx$.
+Let $N \le G$. Then $N \unlhd G$ if and only if for all $x \in G$, $xN = Nx$.
 \end{Theorem}
-\begin{proof}
-Suppose that $N \unlhd G$. Let $x \in G$. Now for any $n \in N$, $xnx^{-1} \in n'$, $\exists n' \in N$. Therefore, $xn = n'x \in Nx$. Thus, $xN \subseteq Nx$. Similarly, $x^{-1}nx = n''$, $\exists n'' \in N$ implies $nx = xn''$, and thus, $Nx \subseteq xN$. Therefore, $xN = Nx$.
 
-For the converse, suppose that $\forall x \in G$, $xN = Nx$. Let $x \in G$, $n \in N$. Then $xn = n'x$, $\exists n' \in N$, which implies that $xnx^{-1} = n' \in N$. Thus, $xNx^{-1} \subseteq N$, and we have $N \unlhd G$.
+\begin{proof}
+Suppose that $N \unlhd G$. Let $x \in G$. Now for any $n \in N$, $xnx^{-1} \in n'$, for some $n' \in N$. Therefore, $xn = n'x \in Nx$. Thus, $xN \subseteq Nx$. Similarly, $x^{-1}nx = n''$, for some $n'' \in N$ implies $nx = xn''$, and thus, $Nx \subseteq xN$. Therefore, $xN = Nx$.
+
+For the converse, suppose that for all $x \in G$, $xN = Nx$. Let $x \in G$, $n \in N$. Then $xn = n'x$, for some $n' \in N$, which implies that $xnx^{-1} = n' \in N$. Thus, $xNx^{-1} \subseteq N$, and we have $N \unlhd G$.
 \end{proof}
 
 \begin{appendices}
@@ -588,7 +594,7 @@ The notation $\le$ used for the subgroup relation is intentional -- it is a part
 
 If $H$ and $K$ are any two subgroups of $G$, then so is $H \cap K$. This is the largest subgroup of $G$ contained in both $H$ and $K$, in the sense that if $M \le H$ and $M \le K$, then $M \le H \cap K$. Thus, $H \cap K$ is the greatest lower bound of $H$ and $K$ in the poset $SL(G)$.
 
-\phantomsection\label{def:Join} However, $H \cup K$ is not a subgroup unless $H \subseteq K$ or $K \subseteq H$. Nevertheless, $H$ and $K$ do have a greatest upper bound in $SL(G)$. This is $\langle H, K \rangle$, the smallest subgroup of $G$ containing both $H$ and $K$ -- i.e., $\langle H, K \rangle$ is the intersection of all subgroups of $G$ that contain both $H$ and $K$. This is clearly a subgroup since it is defined as the intersection of some subgroups, and it is contained in any other subgroup containing both $H$ and $K$. Thus, $SL(G)$ forms a lattice with $H \vee K = \langle H, K \rangle$ and $H \wedge K = H \cap K$. This lattice is called the \emph{subgroup lattice} of $G$.
+\phantomsection\label{def:Join} However, $H \cup K$ is not a subgroup unless $H \subseteq K$ or $K \subseteq H$. Nevertheless, $H$ and $K$ do have a greatest upper bound in $SL(G)$. This is $\langle H, K \rangle$, the smallest subgroup of $G$ containing both $H$ and $K$ -- i.e.\ $\langle H, K \rangle$ is the intersection of all subgroups of $G$ that contain both $H$ and $K$. This is clearly a subgroup since it is defined as the intersection of some subgroups, and it is contained in any other subgroup containing both $H$ and $K$. Thus, $SL(G)$ forms a lattice with $H \vee K = \langle H, K \rangle$ and $H \wedge K = H \cap K$. This lattice is called the \emph{subgroup lattice} of $G$.
 
 \phantomsection\label{def:NL(G)}Recall that $HK \le G$ if and only if $HK = KH$. In this case, $\langle H, K \rangle = HK$. In particular, if $H$ and $K$ are normal subgroups of $G$, then $HK = KH$, and therefore $HK \le G$. Also, $xHK = HxK = HKx$ for any $x \in G$, so that $HK \unlhd G$. Similarly, $H \cap K \unlhd G$ as well {\small (verify)}. These observations show that the set of all normal subgroups of $G$ also forms a lattice, called the \emph{normal subgroup lattice} of $G$, denoted $NL(G)$.
 \begin{Exercise}
@@ -627,19 +633,19 @@ Addition modulo $n$ is associative and commutative, $0$ is the identity element,
 $\mathbb Z_n$ is also written as $\mathbb Z/n \mathbb Z$, although then it is defined as the \emph{quotient group} of $\mathbb Z$ by the normal subgroup $n \mathbb Z$.
 \end{Remark*}
 
-While $\mathbb Z_n$ looks different from the group of $n$\th roots of unity, it is actually the same group (structurally). This is obvious if we look at the Cayley tables of $\mathbb Z_n$ and $\langle \omega_n \rangle$, where in the case of the former, the rows and columns are ordered $0, 1, \ldots, n - 1$, and in that of the latter, they are ordered $1, \omega_n, \ldots, \omega_n^{n - 1}$. In group theoretic language, we say that these two groups are \emph{isomorphic}.
+While $\mathbb Z_n$ looks different from the group of $n$\nth roots of unity, it is actually the same group (structurally). This is obvious if we look at the Cayley tables of $\mathbb Z_n$ and $\langle \omega_n \rangle$, where in the case of the former, the rows and columns are ordered $0, 1, \ldots, n - 1$, and in that of the latter, they are ordered $1, \omega_n, \ldots, \omega_n^{n - 1}$. In group theoretic language, we say that these two groups are \emph{isomorphic}.
 
 \begin{Definition}\label{def:Isomorphism}
-An isomorphism from a group $(G, *)$ to a group $(H, \cdot)$ is a bijective function $f \colon G \to H$ such that
+An isomorphism from a group $(G, *)$ to a group $(H, \cdot)$ is a bijective function $f \colon G \to H$ such that for all $x, y \in G$,
 \begin{equation*}
-\forall x, y \in G, \quad f(x * y) = f(x) \cdot f(y).
+f(x * y) = f(x) \cdot f(y).
 \end{equation*}
 \end{Definition}
 That is, an isomorphism is a bijective, ``structure-preserving'' map -- as it is in the case of any other mathematical object. For a group, its structure is simply the group operation, and therefore an isomorphism must preserve the (result of the) operation. If there is an isomorphism from $G$ to $H$, we say that $G$ and $H$ are isomorphic, and write $G \cong H$. {\small Exercise: Prove that the relation $\cong$ is an equivalence relation (on the collection of all groups)}. Thus, isomorphic groups are exactly the same groups for all purposes -- the only difference is in notation. But a rose by any other name \ldots.
 
-All cyclic groups of the same order are isomorphic to one another. Let $G = \langle g \rangle$ be a finite cyclic group of order $n$. Define $f \colon G \to \mathbb Z_n$, as $f(g^k) = k$, $k = 0, 1, \ldots, n - 1$. This is a well defined function, since every element of $G$ can be expressed uniquely in the form $g^k$ with $0 \le k \le n - 1$. It is clearly a bijection for the same reason. Now if $g^i, g^j \in G$, then $g^i \cdot g^j = g^{i + j}$. But since $g^n = 1$, $g^{i + j} = g^k$, where $k = i +_n j$ (e.g., if $n = 6$, then $g^3 \cdot g^5 = g^8 = g^2$). Thus, $f(g^i \cdot g^j) = i +_n j = f(g^i) + f(g^j)$, which shows that $f$ is an isomorphism from $G$ to $\mathbb Z_n$.
+All cyclic groups of the same order are isomorphic to one another. Let $G = \langle g \rangle$ be a finite cyclic group of order $n$. Define $f \colon G \to \mathbb Z_n$, as $f(g^k) = k$, $k = 0, 1, \ldots, n - 1$. This is a well-defined function, since every element of $G$ can be expressed uniquely in the form $g^k$ with $0 \le k \le n - 1$. It is clearly a bijection for the same reason. Now if $g^i, g^j \in G$, then $g^i \cdot g^j = g^{i + j}$. But since $g^n = 1$, $g^{i + j} = g^k$, where $k = i +_n j$ (e.g. if $n = 6$, then $g^3 \cdot g^5 = g^8 = g^2$). Thus, $f(g^i \cdot g^j) = i +_n j = f(g^i) + f(g^j)$, which shows that $f$ is an isomorphism from $G$ to $\mathbb Z_n$.
 
-Now suppose $G = \langle g \rangle$ is an infinite cyclic group. Define $f\colon G \to \mathbb Z$ as $f(g^k) = k$, $k \in \mathbb Z$. Again, this is a well defined bijection since every element $G$ can be expressed uniquely in the form $g^k$ for some $k \in \mathbb Z$. It is also easy to see that this bijection preserves the operation, thus it is an isomorphism from $G$ to the additive group of integers, $\mathbb Z$ (which, we know, is an infinite cyclic group).
+Now suppose $G = \langle g \rangle$ is an infinite cyclic group. Define $f\colon G \to \mathbb Z$ as $f(g^k) = k$, $k \in \mathbb Z$. Again, this is a well-defined bijection since every element $G$ can be expressed uniquely in the form $g^k$ for some $k \in \mathbb Z$. It is also easy to see that this bijection preserves the operation, and thus it is an isomorphism from $G$ to the additive group of integers, $\mathbb Z$ (which, we know, is an infinite cyclic group).
 
 Thus, all finite cyclic groups of order $n$ are isomorphic to $\mathbb Z_n$, and since isomorphism is an equivalence relation, they are all isomorphic to one another. All infinite cyclic groups are isomorphic to $\mathbb Z$, and hence to one another as well. Therefore, we say that there is a unique cyclic group of any given (countable) order, \emph{up to isomorphism}. However, note that there is no cyclic group of uncountably infinite order.
 
@@ -741,7 +747,7 @@ We can perform the same computation by ``pasting'' wiring diagrams -- $\beta$ on
 We know what all the elements of $S_n$ are -- they are all possible permutations of $1, 2, \ldots, n$. But we have not yet examined how they interact. Let us look at two small examples.
 
 \begin{Example}\label{ex:S2}
-There are only two permutations of $\{1, 2\}$, so $S_2 = \{\id, \alpha\}$, where $\alpha = \begin{pmatrix}1 & 2\\ 2 & 1\end{pmatrix}$. $S_2$ is Abelian, and in fact cyclic: $S_2 = \langle \alpha \rangle$, since $\alpha$ is the only non-identity element, and therefore must be self-inverse -- i.e., $\alpha$ is an element of order $2$. Another way to see this is that $\ord(S_2) = 2$, which is prime, and we know that any group of prime order is cyclic.
+There are only two permutations of $\{1, 2\}$, so $S_2 = \{\id, \alpha\}$, where $\alpha = \begin{pmatrix}1 & 2\\ 2 & 1\end{pmatrix}$. $S_2$ is Abelian, and in fact cyclic: $S_2 = \langle \alpha \rangle$, since $\alpha$ is the only non-identity element, and therefore must be self-inverse -- i.e.\ $\alpha$ is an element of order $2$. Another way to see this is that $\ord(S_2) = 2$, which is prime, and we know that any group of prime order is cyclic.
 \end{Example}
 
 \begin{Example}\label{ex:S3}
@@ -858,7 +864,7 @@ Formally, if $S_n' = \{\, \alpha' \mid \alpha \in S_n \,\}$ (where for each $\al
 \section{Classification of groups of order at most $5$}\label{sec:|G|<=5}
 Now we determine all groups with at most five elements, up to isomorphism, and note that they are all Abelian. Thus, $S_3$ is the smallest non-Abelian group.
 
-Consider a group $G$. If $\ord(G) = 1$, then it is the trivial group $\{e\}$. If $\ord(G) = 2, 3, 5$, then it is cyclic, for \hyperref[cor:Prime=>Cyc]{any group of prime order is cyclic} (and hence Abelian). That leaves groups of order $4$. Let $\ord(G) = 4$. If $G$ has an element of order $4$, then it is cyclic (and hence Abelian). Suppose no element of $G$ has order $4$. We know that \hyperref[cor:OrderElem]{the order of an element divides the order of a group}. The only divisors of $4$ are $1$, $2$, and $4$, and since $G$ has no element of order $4$, all non-identity elements of $G$ must have order $2$ -- i.e., they must all be self-inverse. \hyperref[it:Ord2=>Abelian]{Therefore, $G$ is Abelian}. Let $G = \{e, a, b, c\}$. Then $a^2 = b^2 = c^2 = e$. Now, $ab$ cannot be equal to $e$ since $a^{-1} = a \ne b$. Also, $ab \ne a$, as that would imply $b = e$. Similarly, $ab \ne b$. Thus, $ab = c = ba$ (since $G$ is Abelian). In a similar manner, we see that $bc = a = cb$ and $ac = b = ca$. Thus, $G$ is the group with the Cayley table given below.
+Consider a group $G$. If $\ord(G) = 1$, then it is the trivial group $\{e\}$. If $\ord(G) = 2, 3, 5$, then it is cyclic, for \hyperref[cor:Prime=>Cyc]{any group of prime order is cyclic} (and hence Abelian). That leaves groups of order $4$. Let $\ord(G) = 4$. If $G$ has an element of order $4$, then it is cyclic (and hence Abelian). Suppose no element of $G$ has order $4$. We know that \hyperref[cor:OrderElem]{the order of an element divides the order of a group}. The only divisors of $4$ are $1$, $2$, and $4$, and since $G$ has no element of order $4$, all non-identity elements of $G$ must have order $2$ -- i.e.\ they must all be self-inverse. \hyperref[it:Ord2=>Abelian]{Therefore, $G$ is Abelian}. Let $G = \{e, a, b, c\}$. Then $a^2 = b^2 = c^2 = e$. Now, $ab$ cannot be equal to $e$ since $a^{-1} = a \ne b$. Also, $ab \ne a$, as that would imply $b = e$. Similarly, $ab \ne b$. Thus, $ab = c = ba$ (since $G$ is Abelian). In a similar manner, we see that $bc = a = cb$ and $ac = b = ca$. Thus, $G$ is the group with the Cayley table given below.
 \begin{equation*}
 \begin{array}{r|cccc}
 	&	e	&	a	&	b	&	c\\
@@ -873,11 +879,11 @@ c	&	c	&	b	&	a	&	e\\
 \section{Additional exercises}\label{sec:Exercises}
 \begin{enumerate}
 \item Find two elements $x$ and $y$ of $S_3$ such that $(xy)^2 \ne x^2 y^2$.
-\item Prove that a group $G$ in which $\forall x,y \in G$, $(xy)^k = x^k y^k$ for three consecutive integers $k$ is Abelian.
+\item Prove that a group $G$ in which for all $x,y \in G$, $(xy)^k = x^k y^k$ for three consecutive integers $k$ is Abelian.
 \item We know that if $H, K \le G$, then $H \cup K$ is not a subgroup unless one of $H$ and $K$ is contained in the other. Find an example of a group $G$ with three subgroups $H$, $K$, $N$, none of which is contained in the other two, such that $H \cup K \cup N$ is a subgroup.
-\item Show that any finite non-empty subset $H$ of a group $G$ is a subgroup if and only if it is closed under the group operation -- i.e., $\forall x, y \in H$, $xy \in H$. {\tiny Hint: Show that $\forall x \in H$, $xH = H$, and use this together with the finiteness of $H$ to conclude that $H$ contains $e$ and $x^{-1}$.}
+\item Show that any finite non-empty subset $H$ of a group $G$ is a subgroup if and only if it is closed under the group operation -- i.e.\ for all $x, y \in H$, $xy \in H$. {\tiny Hint: Show that for all $x \in H$, $xH = H$, and use this together with the finiteness of $H$ to conclude that $H$ contains $e$ and $x^{-1}$.}
 \item Let $H \le G$, and $x, y \in G$. Show that $xH = yH \iff y^{-1}x \in H \iff x^{-1}y \in H$. What is the analogous condition for $Hx = Hy$?
-\item Show that $\forall x \in G$, $x^{\ord(G)} = e$.
+\item Show that for all $x \in G$, $x^{\ord(G)} = e$.
 \item \textbf{B\'ezout's identity}: Using the fact that every subgroup of a cyclic group is cyclic, prove that for any two integers $a, b \in \mathbb Z$, $\gcd(a,b) = ma + nb$ for some integers $m, n \in \mathbb Z$. {\tiny Hint: Show that $\{\, ma + nb \mid m, n \in \mathbb Z \,\}$ is a subgroup of $\mathbb Z$. It must be cyclic. What is its generator?}
 \item Prove that any infinite group has infinitely many distinct subgroups. {\tiny Hint: Observe that $\mathbb Z$ has infinitely many subgroups, and recall that any infinite cyclic group is isomorphic to $\mathbb Z$. If a group has any element of infinite order, then the cyclic subgroup generated by the element is infinite. What if the group has no element of infinite order?}
 \item Let $A$ be an Abelian group, and $a, b \in A$ with $\ord(a) = m$, $\ord(b) = n$. Show that $\ord(ab) \le \lcm(m, n)$. Give an example where $\ord(ab) = \lcm(m,n)$, and another example where $\ord(ab) < \lcm(m,n)$.

@@ -29,7 +29,7 @@
 
 \section{Elementary Set Theory}\label{sec:SetTheory}
 
-A \newterm{set} is (informally) an unordered collection of \newterm{elements}. More formally, any set is defined by the \newterm{membership relation} $\in$ (read ``belongs to'', ``is an element of'', ``is a member of'', or ``is in''), where $s \in S$ if and only if $s$ is an element of the set $S$. If $x$ is not a member of $S$, then we write $x \notin S$. We may define a set either as a list of all its members enclosed by curly braces -- $\{$ and $\}$ -- or in the form $Y = \qty{\, x \in X \mid P(x) \,}$, where $X$ is a previously defined set, and $P(x)$ is a \newterm{predicate} (a function with a true/false value depending on the value of $x$) -- then $Y$ is the set consisting of all members of $X$ that satisfy the predicate $P(x)$ (i.e. those $x \in X$ for which $P(x)$ is true). The latter form of defining a set is called the \newterm{set-builder} notation. For example
+A \newterm{set} is (informally) an unordered collection of \newterm{elements}. More formally, any set is defined by the \newterm{membership relation} $\in$ (read ``belongs to'', ``is an element of'', ``is a member of'', or ``is in''), where $s \in S$ if and only if $s$ is an element of the set $S$. If $x$ is not a member of $S$, then we write $x \notin S$. We may define a set either as a list of all its members enclosed by curly braces -- $\{$ and $\}$ -- or in the form $Y = \qty{\, x \in X \mid P(x) \,}$, where $X$ is a previously defined set, and $P(x)$ is a \newterm{predicate} (a function with a true/false value depending on the value of $x$) -- then $Y$ is the set consisting of all members of $X$ that satisfy the predicate $P(x)$ (i.e.\ those $x \in X$ for which $P(x)$ is true). The latter form of defining a set is called the \newterm{set-builder} notation. For example
 \begin{equation*}
 S = \qty{1, \text{`a'}, 2.5, +, 9, -3}
 \end{equation*}
@@ -55,7 +55,7 @@ defines $S$ to be the set of all elements obtained by doubling an integer -- in 
 
 A set $A$ is a \newterm{subset} of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is an element of $B$. That is, for any element $a$ (of the universal set), $a \in A \implies a \in B$. Then $B$ is a \newterm{superset} of $A$, denoted by $B \supseteq A$. We may also say that $B$ \newterm{contains} $A$, or that $A$ is contained in $B$.
 
-Two sets $A$ and $B$ are \newterm{equal}, written $A = B$, if each contains the other -- i.e. $A \subseteq B$ and $B \subseteq A$. This is equivalent to the statement that $A$ and $B$ have exactly the same elements. Otherwise, $A$ is not equal to $B$ (written $A \ne B$). $A$ is a \newterm{proper} subset of $A$ (or is properly contained in $B$) if $A \subseteq B$ and $A \ne B$. Then we write $A \subsetneq B$. Similarly, $B$ is a proper superset of $A$, denoted by $B \supsetneq A$, if $B \supseteq A$ and $B \ne A$.
+Two sets $A$ and $B$ are \newterm{equal}, written $A = B$, if each contains the other -- i.e.\ $A \subseteq B$ and $B \subseteq A$. This is equivalent to the statement that $A$ and $B$ have exactly the same elements. Otherwise, $A$ is not equal to $B$ (written $A \ne B$). $A$ is a \newterm{proper} subset of $A$ (or is properly contained in $B$) if $A \subseteq B$ and $A \ne B$. Then we write $A \subsetneq B$. Similarly, $B$ is a proper superset of $A$, denoted by $B \supsetneq A$, if $B \supseteq A$ and $B \ne A$.
 
 \begin{Note*}
 It is also common to use $\subset$ and $\supset$ instead of $\subseteq$ and $\supseteq$, respectively. They are usually \emph{not} alternatives to $\subsetneq$ and $\supsetneq$, except when explicitly stated to be so.
@@ -136,7 +136,7 @@ A \cup (A \cap B) = A \cap (A \cup B) = A.
 
 \end{Exercise}
 
-Two sets $A$ and $B$ are \newterm{disjoint} if their intersection is empty -- i.e. $A \cap B = \varnothing$. Note that $A$ and $\overline A$ are always disjoint. Also note that $\varnothing$ is disjoint with all sets, and is the unique set that is disjoint with itself.
+Two sets $A$ and $B$ are \newterm{disjoint} if their intersection is empty -- i.e.\ $A \cap B = \varnothing$. Note that $A$ and $\overline A$ are always disjoint. Also note that $\varnothing$ is disjoint with all sets, and is the unique set that is disjoint with itself.
 
 Since $\cup$ and $\cap$ are associative, expressions of the form $A_1 \cup A_2 \cup \cdots \cup A_n$ and $A_1 \cap A_2 \cap \cdots \cap A_n$ are well-defined and unambiguous. These are called the \newterm{$n$-ary} (or finite) union and intersection, and denote them as $\bigcup_{i=1}^n A_i$ and $\bigcap_{i=1}^n A_i$, respectively. But it is possible to define unions and intersections of collections of sets even more generally. For this, we will discuss the concept of an indexing set.
 
@@ -172,7 +172,7 @@ A \sqcup B = \qty{\, (a, 1) \mid a \in A \,} \cup \qty{\, (b, 2) \mid b \in B \,
 The disjoint union is also denoted by $A \mathbin{\mathaccent\cdot\cup} B$, or $A \uplus B$.
 
 \begin{Note*}
-The second element in each ordered pair (i.e. $1$ or $2$) only serves to distinguish the elements that are originally from $A$, from those that are originally from $B$. Thus, for example, if $x$ is an element common to both $A$ and $B$, then $A \sqcup B$ contains two ``copies'' of $x$, namely $(x, 1)$ and $(x, 2)$. When $A$ and $B$ are disjoint, $A \sqcup B$ is equivalent to $A \cup B$ (where the meaning of ``equivalent'' will be formalised later).
+The second element in each ordered pair (i.e.\ $1$ or $2$) only serves to distinguish the elements that are originally from $A$, from those that are originally from $B$. Thus, for example, if $x$ is an element common to both $A$ and $B$, then $A \sqcup B$ contains two ``copies'' of $x$, namely $(x, 1)$ and $(x, 2)$. When $A$ and $B$ are disjoint, $A \sqcup B$ is equivalent to $A \cup B$ (where the meaning of ``equivalent'' will be formalised later).
 \end{Note*}
 
 We can also define Cartesian products and disjoint unions of a collection of sets. Let $\mathcal A = \{A_i\}_{i \in I}$ be a collection of sets indexed by $I$. Then the Cartesian product of the collection $\mathcal A$ is
@@ -217,7 +217,7 @@ Let $A$ and $B$ be arbitrary sets.
 \end{Exercise}
 
 \subsection{Relations}\label{subsec:Relations}
-A \newterm{relation} $R$ from a set $A$ to a set $B$, denoted $R \colon A \to B$, is a subset of $A \times B$, i.e. $R \subseteq A \times B$. If $(a, b) \in R$, then we write $aRb$, and if $(a, b) \notin R$, then we write $a \cancel{R} b$. The set $A$ is the \newterm{domain} and $B$ the \newterm{codomain} of $R$. Note that $\varnothing$ is also a relation, called the \newterm{empty} or \newterm{void} relation, from $A$ to $B$.
+A \newterm{relation} $R$ from a set $A$ to a set $B$, denoted $R \colon A \to B$, is a subset of $A \times B$, i.e.\ $R \subseteq A \times B$. If $(a, b) \in R$, then we write $aRb$, and if $(a, b) \notin R$, then we write $a \cancel{R} b$. The set $A$ is the \newterm{domain} and $B$ the \newterm{codomain} of $R$. Note that $\varnothing$ is also a relation, called the \newterm{empty} or \newterm{void} relation, from $A$ to $B$.
 
 \begin{Note*}
 A relation from a set $A$ to a set $B$ is a \newterm{binary relation}. More generally, if $A_1, \ldots, A_n$ are $n$ sets, then a subset of $A_1 \times \cdots \times A_n$ is an \newterm{$n$-ary relation}.
@@ -289,13 +289,13 @@ Let $S = \{1, 2, 3, 4, 5\}$. Then $P = \{\{1, 3, 5\}, \{2, 4, 6\}\}$ and $Q = \{
 Let $\sim$ be an equivalence relation on a set $A$. Show that the following hold:
 \begin{enumerate}
 \item For all $a \in A$, $a \in [a]$, and hence, each equivalence class is non-empty and $A = \bigcup_{a \in A} [a]$.
-\item For all $a, b \in A$, if $a \ne b$, then $[a] \cap [b] = \varnothing$ (i.e. any two equivalence classes are either disjoint or identical).
+\item For all $a, b \in A$, if $a \ne b$, then $[a] \cap [b] = \varnothing$ (i.e.\ any two equivalence classes are either disjoint or identical).
 \item The set of all equivalence classes of $\sim$ is a partition of $A$.
 \end{enumerate}
 \end{Exercise}
 
 \begin{Exercise}\label{exer:Partition->EqRel}
-Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a$ and $b$ belong to the same part of the partition $P$ (i.e. $a, b \in P_i$, $\exists i \in I$). Show that the following hold:
+Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a$ and $b$ belong to the same part of the partition $P$ (i.e.\ $a, b \in P_i$, $\exists i \in I$). Show that the following hold:
 \begin{enumerate}
 \item The relation $\sim$ is an equivalence relation on $A$.
 \item The equivalence classes of $\sim$ are exactly the parts of the partition of $P$.
@@ -307,7 +307,7 @@ Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim
 A reflexive, anti-symmetric, and transitive relation is called a \newterm{partial order} relation (or simply a partial order). For example, $\le$ and $\ge$ on any set of real numbers, $\mid$ on any set of non-negative integers, and $\subseteq$ and $\supseteq$ on any set of sets are partial order relations. A set $A$ together with a partial order $\preccurlyeq$ on it forms a \newterm{partially ordered set} or \newterm{poset} $(A, \preccurlyeq)$.
 
 \begin{Note*}
-The term \emph{partial} refers to the fact that two particular elements in a partially ordered set may be \newterm{incomparable} -- i.e. neither may be related to the other in the partial order. For instance, consider the subsets of $S = \{x, y, z\}$, which are partially ordered by the subset relation $\subseteq$ -- i.e. consider the poset $(2^S, \subseteq)$. Then $A = \{x, y\}$ and $B =\{y, z\}$ are incomparable, as neither is $A$ a subset of $B$, nor is $B$ a subset of $A$. On the other hand, $A$ and $C = \{x\}$ are \newterm{comparable} (as $C \subseteq A$), and $A$ and $S$ itself are also comparable (as $A \subseteq S$). A poset in which every pair of elements is comparable (i.e. in which there are no incomparable pairs of elements) is called a \newterm{total order}.
+The term \emph{partial} refers to the fact that two particular elements in a partially ordered set may be \newterm{incomparable} -- i.e.\ neither may be related to the other in the partial order. For instance, consider the subsets of $S = \{x, y, z\}$, which are partially ordered by the subset relation $\subseteq$ -- i.e.\ consider the poset $(2^S, \subseteq)$. Then $A = \{x, y\}$ and $B =\{y, z\}$ are incomparable, as neither is $A$ a subset of $B$, nor is $B$ a subset of $A$. On the other hand, $A$ and $C = \{x\}$ are \newterm{comparable} (as $C \subseteq A$), and $A$ and $S$ itself are also comparable (as $A \subseteq S$). A poset in which every pair of elements is comparable (i.e.\ in which there are no incomparable pairs of elements) is called a \newterm{total order}.
 \end{Note*}
 
 \begin{Exercise}\label{exer:DividesRel}
@@ -350,7 +350,7 @@ Let $A = \{1, 2, 3, 4, 5\}$ and $B = \{a, b, c\}$.
 \end{Example}
 
 \begin{Example}
-Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection (e.g. $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e. the smallest integer greater than or equal to $x$ -- e.g. $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection (e.g. $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e. the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
+Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection e.g.\ $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e.\ the smallest integer greater than or equal to $x$ -- e.g. $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection e.g.\ $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e.\ the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
 \end{Example}
 
 \begin{Example}\label{ex:RIsom01}
@@ -358,11 +358,11 @@ Define $f \colon \mathbb R \to \mathbb (0,1)$ (the set of all real numbers stric
 \begin{equation*}
 f(x) = \dfrac{1}{1 + e^x}.
 \end{equation*}
-Firstly, note that this is indeed a well-defined function from $\mathbb R$ to $(0, 1)$, since $e^x \ge 0$ for all $x \in \mathbb R$. Now, if $f(x) = f(y)$, then observe that $e^x = e^y$, or $e^{x - y} = 1$, which implies that $x = y$. Hence, $f$ is injective. Next, let $y$ be any element of the codomain, $(0, 1)$. Then observe that $\frac 1 y > 1$, and hence $\frac 1 y - 1$ is a positive real number. Take $x = \log\pqty{\frac 1 y - 1}$, so that $\frac 1 {1 + e^x} = y$, i.e. $f(x) = y$. Thus, for every $y \in (0, 1)$, there exists $x \in \mathbb R$ such that $f(x) = y$, which shows that $f$ is surjective. Therefore, $f$ is a bijection from $\mathbb R$ to $(0, 1)$.
+Firstly, note that this is indeed a well-defined function from $\mathbb R$ to $(0, 1)$, since $e^x \ge 0$ for all $x \in \mathbb R$. Now, if $f(x) = f(y)$, then observe that $e^x = e^y$, or $e^{x - y} = 1$, which implies that $x = y$. Hence, $f$ is injective. Next, let $y$ be any element of the codomain, $(0, 1)$. Then observe that $\frac 1 y > 1$, and hence $\frac 1 y - 1$ is a positive real number. Take $x = \log\pqty{\frac 1 y - 1}$, so that $\frac 1 {1 + e^x} = y$, i.e.\ $f(x) = y$. Thus, for every $y \in (0, 1)$, there exists $x \in \mathbb R$ such that $f(x) = y$, which shows that $f$ is surjective. Therefore, $f$ is a bijection from $\mathbb R$ to $(0, 1)$.
 \end{Example}
 
 \begin{Example}
-Let $A = \{a_1, a_2, \ldots, a_n\}$, and let $P = 2^A$, the power set of $A$. Let $X$ be the set of all binary strings of length $n$ -- i.e. the set of all sequences of the form $x_1 x_2 \cdots x_n$, where $x_i \in \{0, 1\}$, $i = 1, \ldots, n$. Define a function $\chi \colon P \to X$ as follows: For each $S \in P$, $\chi(S) = b_1 b_2 \cdots b_n$ such that $b_i = 1$ if $a_i \in S$ and $b_i = 0$ if $a_i \notin S$. Then $\chi$ is a bijection, as shown below.
+Let $A = \{a_1, a_2, \ldots, a_n\}$, and let $P = 2^A$, the power set of $A$. Let $X$ be the set of all binary strings of length $n$ -- i.e.\ the set of all sequences of the form $x_1 x_2 \cdots x_n$, where $x_i \in \{0, 1\}$, $i = 1, \ldots, n$. Define a function $\chi \colon P \to X$ as follows: For each $S \in P$, $\chi(S) = b_1 b_2 \cdots b_n$ such that $b_i = 1$ if $a_i \in S$ and $b_i = 0$ if $a_i \notin S$. Then $\chi$ is a bijection, as shown below.
 
 First, suppose that for $S, T \in P$, $\chi(S) = \chi(T) = b_1 b_2 \cdots b_n$ (say). Then, for each $i = 1, \ldots, n$, $a_i \in S$ if and only if $b_i = 1$, which is equivalent to $a_i \in T$. Thus, $S = T$. This shows that $\chi$ is injective.
 
@@ -421,7 +421,7 @@ B \ar[r]_{\id_B} & B
 Let $A$ be a set.
 \begin{enumerate}
 \item Show that $\id_A \circ \id_A = \id_A$.
-\item Show that if $i \colon A \to A$ is any function satisfying the same property as the identity function, i.e. for every set $B$ and every function $f \colon A \to B$, $f \circ i = f$, and for every set $C$ and every function $g \colon C \to A$, $i \circ g = g$,  then $i = \id_A$.
+\item Show that if $i \colon A \to A$ is any function satisfying the same property as the identity function, i.e.\ for every set $B$ and every function $f \colon A \to B$, $f \circ i = f$, and for every set $C$ and every function $g \colon C \to A$, $i \circ g = g$,  then $i = \id_A$.
 \end{enumerate}
 \end{Exercise}
 
@@ -457,9 +457,9 @@ A function $f \colon A \to B$ is an isomorphism if and only if it is a bijection
 \end{Theorem}
 
 \begin{proof}
-First, suppose that $f$ is a bijection. We need to show that $f$ is an isomorphism from $A$ to $B$ -- i.e. that it has an inverse. We construct the inverse as follows. Define $g \colon B \to A$ as $g(b) = a$, where $a \in A$ is such that $f(a) = b$, for each $b \in B$.
+First, suppose that $f$ is a bijection. We need to show that $f$ is an isomorphism from $A$ to $B$ -- i.e.\ that it has an inverse. We construct the inverse as follows. Define $g \colon B \to A$ as $g(b) = a$, where $a \in A$ is such that $f(a) = b$, for each $b \in B$.
 
-To see that $g$ is well-defined, observe that as $f$ is bijective, for every $b \in B$, there exists an $a \in A$ such that $f(a) = b$, and as $f$ is injective, this element $a$ is unique (i.e. if $f(a') = b = f(a)$, then $a' = a$).
+To see that $g$ is well-defined, observe that as $f$ is bijective, for every $b \in B$, there exists an $a \in A$ such that $f(a) = b$, and as $f$ is injective, this element $a$ is unique (i.e.\ if $f(a') = b = f(a)$, then $a' = a$).
 
 To see that $g$ is the inverse of $f$, first consider any $a \in A$. If $f(a) = b$, then $g(b) = a$, by definition of $g$. That is, $g(f(a)) = a$, which shows that $g \circ f = \id_A$. Next, consider any $b \in B$. Then, by definition of $g$, $g(b) = a \in A$ such that $f(a) = b$. That is, $f(g(b)) = b$, which shows that $f \circ g = \id_B$. Thus, $g$ is the inverse of $f$, and therefore $f$ is an isomorphism.
 
@@ -485,7 +485,7 @@ f(n) = \begin{cases}
 2|n| - 1, & n < 0.
 \end{cases}
 \end{equation*}
-Then $f$ is a bijection, which can be shown as follows. Suppose $f(m) = f(n)$, for some $m, n \in \mathbb Z$. Then, either $m, n \ge 0$ and $2(n + 1) = 2(m + 1)$, which implies that $m = n$, or else $m, n < 0$, and $2|m| - 1 = 2|n| - 1$, which implies $|m| = |n$, and hence $m = n$ (since both are negative). Therefore, $f$ is injective. Now, for any $n \in \mathbb N$, $n$ is either even or odd. If it is even, then it is of the form $2k + 2$ for some integer $k \ge 0$, i.e. $n = f(k)$. If it is odd, then it is of the form $2k - 1$, for some $k \ge 1$, i.e. $n = 2|-k| - 1 = f(-k)$. Therefore, $f$ is surjective.
+Then $f$ is a bijection, which can be shown as follows. Suppose $f(m) = f(n)$, for some $m, n \in \mathbb Z$. Then, either $m, n \ge 0$ and $2(n + 1) = 2(m + 1)$, which implies that $m = n$, or else $m, n < 0$, and $2|m| - 1 = 2|n| - 1$, which implies $|m| = |n$, and hence $m = n$ (since both are negative). Therefore, $f$ is injective. Now, for any $n \in \mathbb N$, $n$ is either even or odd. If it is even, then it is of the form $2k + 2$ for some integer $k \ge 0$, i.e.\ $n = f(k)$. If it is odd, then it is of the form $2k - 1$, for some $k \ge 1$, i.e.\ $n = 2|-k| - 1 = f(-k)$. Therefore, $f$ is surjective.
 
 Since there is a bijection from $\mathbb Z$ to $\mathbb N$, we have $\mathbb Z \cong \mathbb N$. Therefore, $\mathbb Z$ is countably infinite.
 \end{Solution*}
@@ -534,7 +534,7 @@ Now, we can define an enumeration of the elements of $A \times B$ by reading the
 Since each antidiagonal is finite, every element $(a_m, b_n)$ appears in the above enumeration after some finite number of terms. Indeed, it is not hard to verify that this enumeration defines a bijection $f \colon A \times B \to \mathbb N$, given by $f(a_m, b_n) = \binom {m + n - 1} 2 + m$.
 \end{proof}
 
-From \cref{lem:CIxCI=CI}, it is clear that $\mathbb N \times \mathbb N$, $\mathbb Z \times \mathbb Z$, and $\mathbb Z \times \mathbb N$ are countably infinite. Since each rational number can be written in the form $\frac a b$ where $a \in \mathbb Z$ and $b \in \mathbb N$, the set of rational numbers, it follows that $\mathbb Q$, is countable. Clearly, it is not finite, so in fact, it is countably infinite. 
+From \cref{lem:CIxCI=CI}, it is clear that $\mathbb N \times \mathbb N$, $\mathbb Z \times \mathbb Z$, and $\mathbb Z \times \mathbb N$ are countably infinite. Since each rational number can be written in the form $\frac a b$ where $a \in \mathbb Z$ and $b \in \mathbb N$, the set of rational numbers, it follows that $\mathbb Q$, is countable. Clearly, it is not finite. So, in fact, it is countably infinite. 
 
 \begin{Theorem}
 The set of rational numbers, $\mathbb Q$, is countably infinite. \hfill $\qed$
@@ -570,14 +570,18 @@ Show that the cardinality of any set is different from that of its power set.
 \solution{PowSetCard}{
 If $A$ is a finite set of cardinality $n$, then $|2^A| = 2^n \ne n$. Now, suppose that $A$ is an infinite set.
 
-Let $f \colon A \to 2^A$ be an injection. Note that for each $a \in A$, $f(a)$ is an element of $2^A$, i.e. $f(a)$ is a subset of $A$. Define a subset $X$ of $A$ as follows: For each $a \in A$, $a \in X$ if and only if $a \notin f(a)$.
+Let $f \colon A \to 2^A$ be an injection. Note that for each $a \in A$, $f(a)$ is an element of $2^A$, i.e.\ $f(a)$ is a subset of $A$. Define a subset $X$ of $A$ as follows: For each $a \in A$, $a \in X$ if and only if $a \notin f(a)$.
 
 Observe that $X \notin \im f$. For, if $X = f(x)$ for some $x \in A$, then either $x \in X$, in which case $x \notin f(x)$, or $x \notin X$, in which case $x \in f(x)$. But $f(x) = X$, which is a contradiction.
 
-Thus, $f$ is not surjective. Therefore, there is no surjective injection, i.e. bijection from $A$ to $2^A$, and hence $A \not\cong 2^A$.
+Thus, $f$ is not surjective. Therefore, there is no surjective injection, i.e.\ bijection from $A$ to $2^A$, and hence $A \not\cong 2^A$.
 }
 
+\clearpage
+
 \section{Finite Automata and Regular Expressions}\label{sec:FAandRE}
+
+\subsection{Deterministic Finite Automata}\label{subsec:DFA}
 
 A \newterm{deterministic finite automaton} (\newterm{DFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
 \begin{itemize}
@@ -616,11 +620,11 @@ The graphical representation of $M$ is shown below.
 \end{center}
 \end{Example}
 
-An \newterm{input} to a DFA $M = (Q, \Sigma, \delta, q_0, F)$ is a string over $\Sigma$ -- i.e. a finite sequence of symbols of $\Sigma$. If $w = s_1 s_2 \cdots s_k$ is an input string, and $q_1, q_2, \ldots, q_k \in Q$ such that
+An \newterm{input} to a DFA $M = (Q, \Sigma, \delta, q_0, F)$ is a string over $\Sigma$ -- i.e.\ a finite sequence of symbols of $\Sigma$. If $w = s_1 s_2 \cdots s_k$ is an input string, and $q_1, q_2, \ldots, q_k \in Q$ such that
 \begin{equation*}
 \delta(q_0, s_1) = q_1,~ \delta(q_1, s_2) = q_2,~ \ldots,~ \delta(q_{k-1}, s_k) = q_k,
 \end{equation*}
-then \newterm{$M$ is in the state $q_k$ after reading the input $w$}. If $q_k \in F$ (i.e. $q_k$ is an accept state), then \newterm{$M$ accepts $w$}, otherwise it \newterm{rejects $w$}. For instance, the DFA $M$ given in \cref{ex:DFAOdd1s} is in the state $A$ after reading the input \texttt{0110}, and is in the state $B$ after reading \texttt{0100}. Since $A \notin \{F\}$ and $B \in \{F\}$, it rejects \texttt{0110} and accepts \texttt{0100}.
+then \newterm{$M$ is in the state $q_k$ after reading the input $w$}. If $q_k \in F$ (i.e.\ $q_k$ is an accept state), then \newterm{$M$ accepts $w$}, otherwise it \newterm{rejects $w$}. For instance, the DFA $M$ given in \cref{ex:DFAOdd1s} is in the state $A$ after reading the input \texttt{0110}, and is in the state $B$ after reading \texttt{0100}. Since $A \notin \{F\}$ and $B \in \{F\}$, it rejects \texttt{0110} and accepts \texttt{0100}.
 
 Given the graphical representation of a DFA $M$, to check which state $M$ is in after reading an input $w = s_1 \cdots s_k$, simply begin at the start state of $M$ and follow the arrows labelled $s_1, \ldots, s_k$. For instance, in \cref{ex:DFAOdd1s}, the input \texttt{0110} corresponds to the sequence of states $A, A, B, A, A$, and the input \texttt{0100} corresponds to the sequence of states $A, A, B, B, B$ (note that in both cases, the first $A$ is the start state, and only the next four states are the results of transitions).
 
@@ -673,6 +677,246 @@ Construct a DFA that accepts all strings over the alphabet $\{\texttt a, \texttt
 \end{center}
 }
 
+\subsection{Nondeterministic Finite Automata}\label{subsec:NFA}
+
+A \newterm{nondeterministic finite automaton} (\newterm{NFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
+\begin{itemize}
+\item $Q$ is a finite set of states.
+\item $\Sigma$ is a finite input alphabet.
+\item $\delta \colon Q \times (\Sigma \cup \{\varepsilon\}) \to 2^Q$ is the transition function.
+\item $q_0 \in Q$ is the start state.
+\item $F \subseteq Q$ is the set of accept states.
+\end{itemize}
+
+Note that the transition function has codomain $2^Q$, the power set of $Q$. That is, each transition of a nondeterministic finite automaton is from one state into possibly several states or even to no state. The interpretation of this is that at each step, for a given input, the machine may have many options of the state to transition to, and an input string is accepted if there is at least one path from the start state to an accept state with arrows labelled by the input. More formally, an input $s_1 \cdots s_n$ is accepted by an NFA $M = (Q, \Sigma, \delta, q_0, F)$, if and only if there exist states $q_1, \ldots, q_k \in Q$, with $q_k \in F$, such that
+\begin{equation*}
+q_1 \in \delta(q_0, s_1),~ q_2 \in \delta(q_1, s_2),~ \ldots,~ q_k \in \delta(q_{k-1}, s_n).
+\end{equation*}
+A transition labelled by $\varepsilon$, i.e.\ a transition of the form $\delta(q, \varepsilon)$, is an \newterm{epsilon transition}, and does not consume an input symbol. An NFA also has a graphical representation similar to that of a DFA.
+
+\begin{Example}\label{ex:NFAContains110}
+The NFA shown below accepts all binary strings that contain \texttt{110} as a (contiguous) substring.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 6mm] (q0) {};
+	\node[state, minimum size = 6mm] (q1) [right = of q0] {};
+	\node[state, minimum size = 6mm] (q11) [right = of q1] {};
+	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {};
+	\path[->] 
+	(q0) edge [] node {\texttt 1}	(q1)
+	(q1) edge []	node {\texttt 1}	(q11)
+	(q11) edge []	node {\texttt 0}	(q110)
+	(q0) edge [loop above]	node {\texttt 0, \texttt 1}	()
+	(q110)	edge [loop above] node {\texttt 0, \texttt 1} ();
+\end{tikzpicture}
+\end{center}
+\end{Example}
+
+\begin{Example}
+The NFA shown below accepts all strings over the alphabet $\{\texttt a, \texttt b, \texttt c\}$ in which the symbols appear in alphabetical order.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 6mm] (A) {};
+	\node[state, minimum size = 6mm] (B) [right = of A] {};
+	\node[state, accepting, minimum size = 6mm] (C) [right = of B] {};
+	\path[->] 
+	(A) edge []				node {$\varepsilon$}	(B)
+	(B) edge []				node {$\varepsilon$}	(C)
+	(A) edge [loop above]	node {\texttt a}	()
+	(B) edge [loop above]	node {\texttt b}	()
+	(C) edge [loop above]	node {\texttt c}	();
+\end{tikzpicture}
+\end{center}
+\end{Example}
+
+\subsubsection{Conversion of NFA to DFA}
+
+Any nondeterministic finite automaton can be converted to a deterministic finite automaton, by the \newterm{subset construction}. Each transition of an NFA is from one state to a set of states, whereas any transition of a DFA is from one state to a single state. The main idea of the subset construction is to consider each set of states of an NFA as a single state of a DFA. The conversion procedure is described below.
+
+Let $M = (Q, \Sigma, \delta, q_0, F)$ be an NFA (without epsilon transitions). Define a DFA $D_M = (Q', \Sigma, \delta', q_0', F')$ as follows:
+\begin{enumerate}
+\item Every set of states of the NFA $M$ becomes a single state of the DFA $D_M$. That is, $Q' = 2^Q$.
+\item The start state of $D_M$ is the singleton set containing the start state of $M$. That is, $q_0' = \{q_0\}$.
+\item The transition function $\delta'$ of $D_M$ is given by
+\begin{equation*}
+\delta'\pqty{ \{q_1, \ldots, q_k\}, s } = \bigcup_{i=1}^k \delta(q_i, s).
+\end{equation*}
+That is, given a state $q'$ of $D_M$, which is a set of states of the NFA $M$, and an input symbol $s \in \Sigma$, for each state $q \in q'$ $\delta(q, s)$ is some set of states of $M$. Combine all these sets $\delta(q, s)$ for $q \in q'$ (via union) to get $\delta'(q', s)$.
+\item Each state of $D_M$ that contains at least one accept state of $M$ becomes an accept state. That is,
+\begin{equation*}
+F' = \qty{\, q' \in Q' \mid q' \cap F \ne \varnothing \,}.
+\end{equation*}
+\end{enumerate}
+
+If $M$ has epsilon transitions, then in addition to the above, $\delta'\pqty{ \{q_1, \ldots, q_k\}, s }$ will contain, in addition to the states described above, the states of $M$ that can be reached from each state in $\delta(q_i, s)$ via an epsilon transition.
+
+\begin{Example}
+Consider the NFA given in \cref{ex:NFAContains110}.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 6mm] (q0) {A};
+	\node[state, minimum size = 6mm] (q1) [right = of q0] {B};
+	\node[state, minimum size = 6mm] (q11) [right = of q1] {C};
+	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {D};
+	\path[->] 
+	(q0) edge [] node {\texttt 1}	(q1)
+	(q1) edge []	node {\texttt 1}	(q11)
+	(q11) edge []	node {\texttt 0}	(q110)
+	(q0) edge [loop above]	node {\texttt 0, \texttt 1}	()
+	(q110)	edge [loop above] node {\texttt 0, \texttt 1} ();
+\end{tikzpicture}
+\end{center}
+Here, the initial state is $q_0 = A$, and the set of accept states is $F = \{D\}$. Now, the equivalent DFA $D_M$ will $2^4 = 16$ states, namely $\varnothing, \{A\}, \{B\}, \{C\}, \{D\}, \{A, B\}, \{A, C\}, \ldots, \{A, B, C, D\}$. For the sake of simplicity, we will denote these as $\varnothing, A, B, C, D, AB, AC, \ldots, ABCD$.
+
+Note that many of these states may be \newterm{unreachable} -- i.e.\ there will be no path from the start state to them. We will not include them in the graphical representation of $D_M$, even though, formally, they are part of $D_M$. To find all the \newterm{reachable} (i.e.\ not unreachable) states, we will begin with the start state, and iteratively add the other states while computing the transitions from the current states corresponding to each input symbol.
+
+\begin{enumerate}
+\item Initially, we have only the start state, $A$.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 6mm] (A) {A};
+\end{tikzpicture}
+\end{center}
+
+\item Next, $\delta'(A, 0) = \delta(A, 0) = \{A\}$ (written as just $A$) and $\delta'(A, 1) = \delta(A, 1) = \{A, B\}$ (written as just $AB$).
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 10mm] (A) {A};
+	\node[state, minimum size = 10mm] (AB) [right = of A] {AB};
+	\path[->] 
+	(A) edge [] node {\texttt 1}	(AB)
+	(A) edge [loop above]	node {\texttt 0}	();
+\end{tikzpicture}
+\end{center}
+
+\item Now, $\delta'(AB, 0) = \delta(A, 0) \cup \delta(B, 0) = \{A\} \cup \varnothing = \{A\}$ (i.e. $A$) and $\delta'(AB, 1) = ABC$.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 11mm] (A) {A};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
+	\path[->] 
+	(A)		edge [bend left] 	node {\texttt 1}	(AB)
+	(AB)	edge [bend left] 	node {\texttt 0}	(A)
+	(AB)	edge [] 			node {\texttt 1}	(ABC)
+	(A)		edge [loop above]	node {\texttt 0}	();
+\end{tikzpicture}
+\end{center}
+
+\item Similarly, $\delta'(ABC, 0) = AD$ and $\delta'(ABC, 1) = ABC$.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 10mm] (A) {A};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
+	\path[->] 
+	(A)		edge [bend left] 	node {\texttt 1}	(AB)
+	(AB)	edge [bend left] 	node {\texttt 0}	(A)
+	(AB)	edge [] 			node {\texttt 1}	(ABC)
+	(ABC)	edge [] 			node {\texttt 0}	(AD)
+	(A)		edge [loop above]	node {\texttt 0}	()
+	(ABC)	edge [loop above]	node {\texttt 1}	();
+\end{tikzpicture}
+\end{center}
+
+\item Similarly, $\delta'(AD, 0) = AD$ and $\delta'(AD, 1) = ABD$.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 10mm] (A) {A};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
+	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
+	\path[->] 
+	(A)		edge [bend left] 	node {\texttt 1}	(AB)
+	(AB)	edge [bend left] 	node {\texttt 0}	(A)
+	(AB)	edge [] 			node {\texttt 1}	(ABC)
+	(ABC)	edge [] 			node {\texttt 0}	(AD)
+	(AD)	edge [] 			node {\texttt 1}	(ABD)
+	(A)		edge [loop above]	node {\texttt 0}	()
+	(ABC)	edge [loop above]	node {\texttt 1}	()
+	(AD)	edge [loop above]	node {\texttt 0}	();
+\end{tikzpicture}
+\end{center}
+
+\item Similarly, $\delta'(ABD, 0) = AD$ and $\delta'(ABD, 1) = ABCD$.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 10mm] (A) {A};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
+	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
+	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize ABCD};
+	\path[->] 
+	(A)		edge [bend left] 	node {\texttt 1}	(AB)
+	(AB)	edge [bend left] 	node {\texttt 0}	(A)
+	(AB)	edge [] 			node {\texttt 1}	(ABC)
+	(ABC)	edge [] 			node {\texttt 0}	(AD)
+	(AD)	edge [bend left] 	node {\texttt 1}	(ABD)
+	(ABD)	edge [bend left] 	node {\texttt 0}	(AD)
+	(ABD)	edge [] 			node {\texttt 1}	(ABCD)
+	(A)		edge [loop above]	node {\texttt 0}	()
+	(ABC)	edge [loop above]	node {\texttt 1}	()
+	(AD)	edge [loop above]	node {\texttt 0}	();
+\end{tikzpicture}
+\end{center}
+\item Finally, $\delta'(ABCD, 0) = AD$ and $\delta'(ABCD, 1) = ABCD$.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 10mm] (A) {A};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
+	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
+	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize ABCD};
+	\path[->] 
+	(A)		edge [bend left] 	node {\texttt 1}	(AB)
+	(AB)	edge [bend left] 	node {\texttt 0}	(A)
+	(AB)	edge [] 			node {\texttt 1}	(ABC)
+	(ABC)	edge [] 			node {\texttt 0}	(AD)
+	(AD)	edge [bend left] 	node {\texttt 1}	(ABD)
+	(ABD)	edge [bend left] 	node {\texttt 0}	(AD)
+	(ABD)	edge [] 			node {\texttt 1}	(ABCD)
+	(ABCD)	edge [bend left = 50] 	node {\texttt 0}	(AD)
+	(A)		edge [loop above]	node {\texttt 0}	()
+	(ABC)	edge [loop above]	node {\texttt 1}	()
+	(AD)	edge [loop above]	node {\texttt 0}	()
+	(ABCD)	edge [loop above]	node {\texttt 1}	();
+\end{tikzpicture}
+\end{center}
+As no new state is added in this step, all the other states (not shown here) are unreachable.
+\end{enumerate}
+Now, the states $AD$, $ABD$, and $ABCD$ all contain $D$, which is the only accept state of the original NFA. Hence, these states are accept state of the DFA.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 10mm] (A) {A};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
+	\node[state, accepting, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
+	\node[state, accepting, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
+	\node[state, accepting, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize ABCD};
+	\path[->] 
+	(A)		edge [bend left] 	node {\texttt 1}	(AB)
+	(AB)	edge [bend left] 	node {\texttt 0}	(A)
+	(AB)	edge [] 			node {\texttt 1}	(ABC)
+	(ABC)	edge [] 			node {\texttt 0}	(AD)
+	(AD)	edge [bend left] 	node {\texttt 1}	(ABD)
+	(ABD)	edge [bend left] 	node {\texttt 0}	(AD)
+	(ABD)	edge [] 			node {\texttt 1}	(ABCD)
+	(ABCD)	edge [bend left = 50] 	node {\texttt 0}	(AD)
+	(A)		edge [loop above]	node {\texttt 0}	()
+	(ABC)	edge [loop above]	node {\texttt 1}	()
+	(AD)	edge [loop above]	node {\texttt 0}	()
+	(ABCD)	edge [loop above]	node {\texttt 1}	();
+\end{tikzpicture}
+\end{center}
+\end{Example}
+
+
+\clearpage
+
 \section{Graph Theory}\label{sec:GraphTheory}
 
 A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a non-empty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
@@ -719,10 +963,10 @@ Let $G$ be a graph of order $n \ge 2$. The minimum possible degree of a vertex o
 
 \subsection{Subgraphs and Complements}\label{subsec:Subgraphs}
 
-A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e. $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e. every edge of $G$ that joins two vertices of $H$ is present in $H$.
+A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e.\ $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e.\ every edge of $G$ that joins two vertices of $H$ is present in $H$.
 
 \begin{Example}\label{ex:Subgraphs}
-\cref{fig:Subgraphs} shows a graph $G$ and three subgraphs $H_1$, $H_2$, and $H_3$ of $G$. The subgraph $H_1$ is neither a spanning subgraph (e.g. it does not contain $v_3$), nor an induced subgraph (e.g. it contains vertices $v_2$ and $v_5$ of $G$ but not the edge $v_2 v_5$). $H_2$ is a spanning subgraph and $H_3$ is an induced subgraph of $G$.
+\cref{fig:Subgraphs} shows a graph $G$ and three subgraphs $H_1$, $H_2$, and $H_3$ of $G$. The subgraph $H_1$ is neither a spanning subgraph e.g.\ it does not contain $v_3$), nor an induced subgraph e.g.\ it contains vertices $v_2$ and $v_5$ of $G$ but not the edge $v_2 v_5$). $H_2$ is a spanning subgraph and $H_3$ is an induced subgraph of $G$.
 \begin{figure}[!htbp]
 \centering
 \subcaptionbox{$G$\label{fig:SubgraphsG}}{\includegraphics{Images/Subgraphs-G.pdf}} \hfill
@@ -791,7 +1035,7 @@ The \newterm{diameter} of $G$ is the maximum of the eccentricities of vertices o
     \rad(G) & = \min_{v \in V(G)}\ecc(v) = \min_{v \in V(G)} \max_{u \in V(G)} d(u, v).
 \end{align*}
 
-The set of all vertices of $G$ having minimum eccentricity, i.e. the set of all $v \in V(G)$ such that $\ecc v = \rad G$, is the \newterm{centre} of $G$.
+The set of all vertices of $G$ having minimum eccentricity, i.e.\ the set of all $v \in V(G)$ such that $\ecc v = \rad G$, is the \newterm{centre} of $G$.
 
 \subsection{Connectedness}\label{subsec:Connectedness}
 
@@ -819,9 +1063,9 @@ Now, consider any two vertices $x$ and $y$ other than $u$ and $v$. In $G$, $x$ c
 
 \subsection{Graph Isomorphism}\label{subsec:Isomorphism}
 
-An \newterm{isomorphism} from a graph $G$ to a graph $H$ is a bijective\footnote{injective and surjective; i.e. one-to-one and onto} function $f \colon V(G) \to V(H)$ such for all vertices $u$ and $v$ of $G$, $u \sim_G v$ if and only if $f(u) \sim_H f(v)$. In other words, a graph isomorphism is a bijection from the vertex set of the first graph to that of the second, that preserves both edges and non-edges. If there exists an isomorphism from $G$ to $H$, then $G$ and $H$ are \newterm{isomorphic}. Then we write $G \cong H$.
+An \newterm{isomorphism} from a graph $G$ to a graph $H$ is a bijective\footnote{injective and surjective; i.e.\ one-to-one and onto} function $f \colon V(G) \to V(H)$ such for all vertices $u$ and $v$ of $G$, $u \sim_G v$ if and only if $f(u) \sim_H f(v)$. In other words, a graph isomorphism is a bijection from the vertex set of the first graph to that of the second, that preserves both edges and non-edges. If there exists an isomorphism from $G$ to $H$, then $G$ and $H$ are \newterm{isomorphic}. Then we write $G \cong H$.
 
-Isomorphic graphs have exactly the same structure -- i.e. all properties of the graph that do not depend on the labelling or drawing will be shared by isomorphic graphs. For example, isomorphic graphs have the same order, size, degree sequence, diameter, and radius. Indeed, if $f$ is an isomorphism from $G$ to $H$, and $v$ is a vertex of $G$, then the neighbours of $f(v)$ in $H$ are the images of the neighbours of $v$ in $G$, and $\deg_G v = \deg_H f(v)$. Similarly, if $u$ and $v$ are two vertices of $G$, then $d_G(u, v) = d_H(f(u), f(v))$.
+Isomorphic graphs have exactly the same structure -- i.e.\ all properties of the graph that do not depend on the labelling or drawing will be shared by isomorphic graphs. For example, isomorphic graphs have the same order, size, degree sequence, diameter, and radius. Indeed, if $f$ is an isomorphism from $G$ to $H$, and $v$ is a vertex of $G$, then the neighbours of $f(v)$ in $H$ are the images of the neighbours of $v$ in $G$, and $\deg_G v = \deg_H f(v)$. Similarly, if $u$ and $v$ are two vertices of $G$, then $d_G(u, v) = d_H(f(u), f(v))$.
 
 \begin{Theorem}
 Graph isomorphism is an equivalence relation on the class of all graphs.
@@ -837,7 +1081,7 @@ Finally, suppose that $G \cong H$ and $H \cong K$. Then there exist isomorphisms
 
 \subsection{Self-Complementary Graphs}\label{subsec:SC}
 
-A graph is \newterm{self-complementary} if it is isomorphic to its complement -- i.e. $G$ is self-complementary if $G \cong \overline G$. For example, $K_1$, $P_4$ and $C_5$ are self-complementary graphs of orders $1$, $4$, and $5$ respectively. There is one more self-complementary graph of order $5$, namely the \newterm{bull graph}, which can be constructed by adding one new vertex to $P_4$ and making it adjacent to the two non-pendant vertices of the path. This graph is shown below.
+A graph is \newterm{self-complementary} if it is isomorphic to its complement -- i.e.\ $G$ is self-complementary if $G \cong \overline G$. For example, $K_1$, $P_4$ and $C_5$ are self-complementary graphs of orders $1$, $4$, and $5$ respectively. There is one more self-complementary graph of order $5$, namely the \newterm{bull graph}, which can be constructed by adding one new vertex to $P_4$ and making it adjacent to the two non-pendant vertices of the path. This graph is shown below.
 
 \begin{center}
 \includegraphics{Images/BullGraph.pdf}
@@ -848,7 +1092,7 @@ The order of any self-complementary graph is $4k$ or $4k + 1$, for some non-nega
 \end{Theorem}
 
 \begin{proof}
-Let $G$ be a self-complementary graph of order $n$ and size $m$. Then the size of $\overline G$ is $\binom n 2 - m$. Since $G \cong \overline G$, $m = \binom n 2 - m$, which implies that $m = \frac 1 2 \binom n 2 = \frac {n(n - 1)}{4}$. As $m$ is an integer, this implies that $4$ divides $n(n - 1)$, which in turn implies that either one of $n$ and $n - 1$ is divisible by $4$, or both $n$ and $n - 1$ are even. Since the latter is not possible, it follows that $n = 4k$ or $n - 1 = 4k$, i.e. $n = 4k$ or $4k + 1$ for some integer $k$.
+Let $G$ be a self-complementary graph of order $n$ and size $m$. Then the size of $\overline G$ is $\binom n 2 - m$. Since $G \cong \overline G$, $m = \binom n 2 - m$, which implies that $m = \frac 1 2 \binom n 2 = \frac {n(n - 1)}{4}$. As $m$ is an integer, this implies that $4$ divides $n(n - 1)$, which in turn implies that either one of $n$ and $n - 1$ is divisible by $4$, or both $n$ and $n - 1$ are even. Since the latter is not possible, it follows that $n = 4k$ or $n - 1 = 4k$, i.e.\ $n = 4k$ or $4k + 1$ for some integer $k$.
 \end{proof}
 
 
@@ -943,7 +1187,7 @@ A $(p,q)$-graph $T$ is a tree if and only if it is acyclic and $p = q + 1$.
 \begin{proof}
 Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is acyclic. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
 
-Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected -- i.e. it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots + (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
+Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected -- i.e.\ it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots + (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
 \end{proof}
 
 \begin{Exercise}\label{exer:TreePendantVertices}
@@ -952,7 +1196,7 @@ A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that ever
 \end{Exercise}
 
 \begin{Exercise}\label{exer:TreeCentre}
-The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e. the set of all vertices $v$ of $G$ with $\ecc v = \rad v$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
+The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad v$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
 \hint{TreeCentre}{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
 \end{Exercise}
 
@@ -995,7 +1239,7 @@ A = \begin{bmatrix}
 \end{equation*}
 \end{Example}
 
-Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself -- i.e. $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ -- i.e. $a_{ij} = a_{ji}$. Thus, we have the following observation.
+Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself -- i.e.\ $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ -- i.e.\ $a_{ij} = a_{ji}$. Thus, we have the following observation.
 
 \begin{Observation}
 The adjacency matrix of a (simple, undirected) graph is a symmetric, zero-diagonal, $(0, 1)$-matrix.
@@ -1022,7 +1266,7 @@ A = \begin{bmatrix}
 From the Handshaking Lemma and the preceding observation, it follows that the sum of all entries of $A$ is twice the number of edges of the graph.
 
 \begin{Exercise}
-Show that for any graph $G$ of order $n$, $\mathcal A(\overline G) = J - I - \mathcal A(G)$ where $I$ is the identity matrix and $J$ is the square all-ones matrix (i.e. a matrix with all entries $1$), both of order $n$.
+Show that for any graph $G$ of order $n$, $\mathcal A(\overline G) = J - I - \mathcal A(G)$ where $I$ is the identity matrix and $J$ is the square all-ones matrix (i.e.\ a matrix with all entries $1$), both of order $n$.
 \end{Exercise}
 
 \begin{Exercise}
@@ -1050,7 +1294,7 @@ Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v
 \end{Theorem}
 
 \begin{proof}
-We prove the result by induction on $m$. For $m = 1$, the $(i,j)$-entry of $A^1 = A$ is $a_{ij}$, which is $1$ if and only if $v_i$ is adjacent to $v_j$, i.e. if and only if there is a walk of length $1$ (namely, an edge) from $v_i$ to $v_j$. Thus, the result holds for $m = 1$.
+We prove the result by induction on $m$. For $m = 1$, the $(i,j)$-entry of $A^1 = A$ is $a_{ij}$, which is $1$ if and only if $v_i$ is adjacent to $v_j$, i.e.\ if and only if there is a walk of length $1$ (namely, an edge) from $v_i$ to $v_j$. Thus, the result holds for $m = 1$.
 
 Now suppose, for the sake of induction, that the result holds for some $m \ge 1$, and consider $A^{m + 1}$. The $(i,j)$-entry of $A^{m + 1}$ is
 \begin{equation*}
@@ -1063,7 +1307,7 @@ Alternatively, note that
 \begin{equation*}
 (A^m)_{ij} = \sum_{k_1, k_2, \ldots, k_{m-1}} a_{i k_1} a_{k_1 k_2} \cdots a_{k_{m-1} j}
 \end{equation*}
-and each term in this summation will be $1$ if and only if $a_{i k_1} = a_{k_1 k_2} = \cdots = a_{k_{m-1} j} = 1$, i.e. $v_i \sim v_{k_1} \sim v_{k_2} \sim \cdots \sim v_{k_{m-1}} \sim v_j$, which corresponds to a walk of length $m$ from $v_i$ to $v_j$. Hence $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_j$.
+and each term in this summation will be $1$ if and only if $a_{i k_1} = a_{k_1 k_2} = \cdots = a_{k_{m-1} j} = 1$, i.e.\ $v_i \sim v_{k_1} \sim v_{k_2} \sim \cdots \sim v_{k_{m-1}} \sim v_j$, which corresponds to a walk of length $m$ from $v_i$ to $v_j$. Hence $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_j$.
 
 \begin{Theorem}
 Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v_n\}$. Then
@@ -1077,7 +1321,7 @@ where $c_3(G)$ denotes the number of triangles in $G$.
 \begin{proof}
 We know that $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_j$.
 \begin{enumerate}[label=(\roman*)]
-\item Hence, the $i$\nth diagonal entry of $A^2$, viz. $(A^2)_{ii}$, is the number of walks of length $2$ from $v_i$ to itself. Any walk of length $2$ from $v_i$ to itself is of the form $v_i v_j v_i$, where $v_j$ is a vertex adjacent to $v_i$. Thus, the number of such walks is equal to the number of vertices adjacent to $v_i$, i.e. $\deg v_i$. Hence, $\tr(A^2) = \sum_{i=1}^n \deg v_i = 2|E(G)|$, by Handshaking Lemma.
+\item Hence, the $i$\nth diagonal entry of $A^2$, viz. $(A^2)_{ii}$, is the number of walks of length $2$ from $v_i$ to itself. Any walk of length $2$ from $v_i$ to itself is of the form $v_i v_j v_i$, where $v_j$ is a vertex adjacent to $v_i$. Thus, the number of such walks is equal to the number of vertices adjacent to $v_i$, i.e.\ $\deg v_i$. Hence, $\tr(A^2) = \sum_{i=1}^n \deg v_i = 2|E(G)|$, by Handshaking Lemma.
 
 \item Similarly, $(A^3)_{ii}$ is the number of walks of length $3$ from $v_i$ to itself. Any such walk is of the form $v_i v_j v_k v_i$, which implies that $v_i$, $v_j$, and $v_k$ form a triangle in $G$. Moreover, each such triangle corresponds to two distinct walks from $v_i$ to itself, when traversed in the two opposite directions. Thus, $(A^3)_{ii}$ is twice the number of triangles having $v_i$ as one of its vertices. Therefore, $\tr(A^3)$ is $6 c_3(G)$, since each triangle contains three vertices, each of which counts the triangle twice in the sum $\tr(A^3)$. \qedhere
 \end{enumerate}
@@ -1130,7 +1374,7 @@ Dijkstra's algorithm is a procedure to determine the shortest paths (and hence d
 \end{algorithm}
 
 
-The input to the algorithm is the set of vertices $V$ and the weighted adjacency matrix $W$. Initially, the algorithm takes the weights of the edges from $s$ to the other vertices as the \newterm{tentative best distances} to those vertices. It also maintains a set $K$ of vertices to which the shortest paths from $s$ have been found (so that no further improvement is possible), and a set $U$ of vertices to which shorter paths may yet be found, passing through some vertex in $K$. In each step, the vertex $t \in U$ with minimum tentative best distance is selected -- it is guaranteed that no shorter path exists from $s$ to this vertex (since any such path would have to pass through some other vertex of $U$, but the distances to such a vertex is larger than the distance to $t$). This vertex $t$ is removed from $U$ and added to $K$, and then for each vertex $u$ remaining in $U$, the distance from $s$ to $u$ \emph{through} $t$ is compared with the current best distance to $u$. If the former is found to be smaller, the best distance to $u$ is updated to that value and $t$ is marked as the vertex through which $u$ is to be reached in the shortest path -- this is indicated by $\tree(u)$ in the algorithm. This procedure is repeated until there is only vertex remaining in $U$ (i.e. until $|U| = 1$).
+The input to the algorithm is the set of vertices $V$ and the weighted adjacency matrix $W$. Initially, the algorithm takes the weights of the edges from $s$ to the other vertices as the \newterm{tentative best distances} to those vertices. It also maintains a set $K$ of vertices to which the shortest paths from $s$ have been found (so that no further improvement is possible), and a set $U$ of vertices to which shorter paths may yet be found, passing through some vertex in $K$. In each step, the vertex $t \in U$ with minimum tentative best distance is selected -- it is guaranteed that no shorter path exists from $s$ to this vertex (since any such path would have to pass through some other vertex of $U$, but the distances to such a vertex is larger than the distance to $t$). This vertex $t$ is removed from $U$ and added to $K$, and then for each vertex $u$ remaining in $U$, the distance from $s$ to $u$ \emph{through} $t$ is compared with the current best distance to $u$. If the former is found to be smaller, the best distance to $u$ is updated to that value and $t$ is marked as the vertex through which $u$ is to be reached in the shortest path -- this is indicated by $\tree(u)$ in the algorithm. This procedure is repeated until there is only vertex remaining in $U$ (i.e.\ until $|U| = 1$).
 
 
 \begin{Example}

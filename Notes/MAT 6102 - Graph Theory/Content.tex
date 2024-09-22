@@ -36,7 +36,7 @@
 \clearpage
 
 \section{Introduction}\label{sec:Intro}
-A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a nonempty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
+A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a non-empty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
 
 Two vertices $u$ and $v$ of $G$ are \newterm{adjacent}, denoted by $u \sim v$, if $uv \in E$ (note that $uv$ here denotes an unordered pair of vertices, and $uv = vu$). If there is no edge between $u$ and $v$, then they are \newterm{nonadjacent}, denoted by $u \nsim v$. The vertex $v$ and the edge $uv$ are said to be \newterm{incident} with each other. The \newterm{degree} of a vertex $v$ is the number of edges incident with it, or equivalently, the number of vertices adjacent with it, and is denoted by $\deg v$. The \newterm{open neighbourhood} (or simply \newterm{neighbourhood}) of a vertex $v$ is the set of all vertices adjacent to $v$, and is denoted by $\Nb(v)$. Thus, $\deg v = |\Nb(v)|$. The \newterm{closed neighbourhood} of $v$ is $\Nb[v] = \Nb(v) \cup \{v\}$.
 
@@ -89,10 +89,10 @@ Let $G$ be a graph of order $n \ge 2$. The minimum possible degree of a vertex o
 
 \section{Subgraphs and Complements}\label{sec:Subgraphs}
 
-A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e. $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e. every edge of $G$ that joins two vertices of $H$ is present in $H$.
+A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e.\ $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e.\ every edge of $G$ that joins two vertices of $H$ is present in $H$.
 
 \begin{Example}\label{ex:Subgraphs}
-\cref{fig:Subgraphs} shows a graph $G$ and three subgraphs $H_1$, $H_2$, and $H_3$ of $G$. The subgraph $H_1$ is neither a spanning subgraph (e.g. it does not contain $v_3$), nor an induced subgraph (e.g. it contains vertices $v_2$ and $v_5$ of $G$ but not the edge $v_2 v_5$). $H_2$ is a spanning subgraph and $H_3$ is an induced subgraph of $G$.
+\cref{fig:Subgraphs} shows a graph $G$ and three subgraphs $H_1$, $H_2$, and $H_3$ of $G$. The subgraph $H_1$ is neither a spanning subgraph (e.g.\ it does not contain $v_3$), nor an induced subgraph (e.g.\ it contains vertices $v_2$ and $v_5$ of $G$ but not the edge $v_2 v_5$). $H_2$ is a spanning subgraph and $H_3$ is an induced subgraph of $G$.
 \begin{figure}[!htbp]
 \centering
 \subcaptionbox{$G$\label{fig:SubgraphsG}}{\includegraphics{Images/Subgraphs-G.pdf}} \hfill
@@ -175,7 +175,7 @@ The \newterm{diameter} of $G$ is the maximum of the eccentricities of vertices o
     \rad(G) & = \min_{v \in V(G)}\ecc(v) = \min_{v \in V(G)} \max_{u \in V(G)} d(u, v).
 \end{align*}
 
-The set of all vertices of $G$ having minimum eccentricity, i.e. the set of all $v \in V(G)$ such that $\ecc v = \rad G$, is the \newterm{centre} of $G$.
+The set of all vertices of $G$ having minimum eccentricity, i.e.\ the set of all $v \in V(G)$ such that $\ecc v = \rad G$, is the \newterm{centre} of $G$.
 
 
 \section{Connectedness}\label{sec:Connectedness}
@@ -211,7 +211,7 @@ If $G$ is a graph of order $n$ and minimum degree $\delta(G) \ge \frac{n-1}{2}$,
 
 An \newterm{isomorphism} from a graph $G$ to a graph $H$ is a bijective function $f \colon V(G) \to V(H)$ such for all vertices $u$ and $v$ of $G$, $u \sim_G v$ if and only if $f(u) \sim_H f(v)$. In other words, a graph isomorphism is a bijection from the vertex set of the first graph to that of the second, that preserves both edges and non-edges. If there exists an isomorphism from $G$ to $H$, then $G$ and $H$ are \newterm{isomorphic}. Then we write $G \cong H$.
 
-Isomorphic graphs have exactly the same structure -- i.e. all properties of the graph that do not depend on the labelling or drawing will be shared by isomorphic graphs. For example, isomorphic graphs have the same order, size, degree sequence, diameter, and radius. Indeed, if $f$ is an isomorphism from $G$ to $H$, and $v$ is a vertex of $G$, then the neighbours of $f(v)$ in $H$ are the images of the neighbours of $v$ in $G$, and $\deg_G v = \deg_H f(v)$. Similarly, if $u$ and $v$ are two vertices of $G$, then $d_G(u, v) = d_H(f(u), f(v))$.
+Isomorphic graphs have exactly the same structure -- i.e.\ all properties of the graph that do not depend on the labelling or drawing will be shared by isomorphic graphs. For example, isomorphic graphs have the same order, size, degree sequence, diameter, and radius. Indeed, if $f$ is an isomorphism from $G$ to $H$, and $v$ is a vertex of $G$, then the neighbours of $f(v)$ in $H$ are the images of the neighbours of $v$ in $G$, and $\deg_G v = \deg_H f(v)$. Similarly, if $u$ and $v$ are two vertices of $G$, then $d_G(u, v) = d_H(f(u), f(v))$.
 
 \begin{Theorem}
 Graph isomorphism is an equivalence relation on the class of all graphs.
@@ -228,7 +228,7 @@ Finally, suppose that $G \cong H$ and $H \cong K$. Then there exist isomorphisms
 
 \section{Self-Complementary Graphs}\label{sec:SC}
 
-A graph is \newterm{self-complementary} if it is isomorphic to its complement -- i.e. $G$ is self-complementary if $G \cong \overline G$. For example, $K_1$, $P_4$ and $C_5$ are self-complementary graphs of orders $1$, $4$, and $5$ respectively. There is one more self-complementary graph of order $5$, namely the \newterm{bull graph}, which can be constructed by adding one new vertex to $P_4$ and making it adjacent to the two non-pendant vertices of the path. This graph is shown below.
+A graph is \newterm{self-complementary} if it is isomorphic to its complement -- i.e.\ $G$ is self-complementary if $G \cong \overline G$. For example, $K_1$, $P_4$ and $C_5$ are self-complementary graphs of orders $1$, $4$, and $5$ respectively. There is one more self-complementary graph of order $5$, namely the \newterm{bull graph}, which can be constructed by adding one new vertex to $P_4$ and making it adjacent to the two non-pendant vertices of the path. This graph is shown below.
 
 \begin{center}
 \includegraphics{Images/BullGraph.pdf}
@@ -239,7 +239,7 @@ The order of any self-complementary graph is $4k$ or $4k + 1$, for some non-nega
 \end{Theorem}
 
 \begin{proof}
-Let $G$ be a self-complementary graph of order $n$ and size $m$. Then the size of $\overline G$ is $\binom n 2 - m$. Since $G \cong \overline G$, $m = \binom n 2 - m$, which implies that $m = \frac 1 2 \binom n 2 = \frac {n(n - 1)}{4}$. As $m$ is an integer, this implies that $4$ divides $n(n - 1)$, which in turn implies that either one of $n$ and $n - 1$ is divisible by $4$, or both $n$ and $n - 1$ are even. Since the latter is not possible, it follows that $n = 4k$ or $n - 1 = 4k$, i.e. $n = 4k$ or $4k + 1$ for some integer $k$.
+Let $G$ be a self-complementary graph of order $n$ and size $m$. Then the size of $\overline G$ is $\binom n 2 - m$. Since $G \cong \overline G$, $m = \binom n 2 - m$, which implies that $m = \frac 1 2 \binom n 2 = \frac {n(n - 1)}{4}$. As $m$ is an integer, this implies that $4$ divides $n(n - 1)$, which in turn implies that either one of $n$ and $n - 1$ is divisible by $4$, or both $n$ and $n - 1$ are even. Since the latter is not possible, it follows that $n = 4k$ or $n - 1 = 4k$, i.e.\ $n = 4k$ or $4k + 1$ for some integer $k$.
 \end{proof}
 
 
@@ -339,7 +339,7 @@ A $(p,q)$-graph $T$ is a tree if and only if it is acyclic and $p = q + 1$.
 \begin{proof}
 Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is acyclic. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
 
-Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected -- i.e. it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
+Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected -- i.e.\ it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
 \end{proof}
 
 \begin{Exercise}
@@ -348,7 +348,7 @@ A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that ever
 \end{Exercise}
 
 \begin{Exercise}
-The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e. the set of all vertices $v$ of $G$ with $\ecc v = \rad v$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
+The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad v$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
 \hint{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
 \end{Exercise}
 
@@ -416,7 +416,7 @@ A = \begin{bmatrix}
 \end{equation*}
 \end{Example}
 
-Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself -- i.e. $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ -- i.e. $a_{ij} = a_{ji}$. Thus, we have the following observation.
+Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself -- i.e.\ $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ -- i.e.\ $a_{ij} = a_{ji}$. Thus, we have the following observation.
 
 \begin{Observation}
 The adjacency matrix of a (simple, undirected) graph is a symmetric, zero-diagonal, $(0, 1)$-matrix.
@@ -454,7 +454,7 @@ Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v
 \end{Theorem}
 
 \begin{proof}
-We prove the result by induction on $m$. For $m = 1$, the $(i,j)$-entry of $A^1 = A$ is $a_{ij}$, which is $1$ if and only if $v_i$ is adjacent to $v_j$, i.e. if and only if there is a walk of length $1$ (namely, an edge) from $v_i$ to $v_j$. Thus, the result holds for $m = 1$.
+We prove the result by induction on $m$. For $m = 1$, the $(i,j)$-entry of $A^1 = A$ is $a_{ij}$, which is $1$ if and only if $v_i$ is adjacent to $v_j$, i.e.\ if and only if there is a walk of length $1$ (namely, an edge) from $v_i$ to $v_j$. Thus, the result holds for $m = 1$.
 
 Now suppose, for the sake of induction, that the result holds for some $m \ge 1$, and consider $A^{m + 1}$. The $(i,j)$-entry of $A^{m + 1}$ is
 \begin{equation*}
@@ -475,7 +475,7 @@ where $c_3(G)$ denotes the number of triangles in $G$.
 \begin{proof}
 We know that $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_j$.
 \begin{enumerate}[label=(\roman*)]
-\item Hence, the $i$\nth diagonal entry of $A^2$, viz. $(A^2)_{ii}$, is the number of walks of length $2$ from $v_i$ to itself. Any walk of length $2$ from $v_i$ to itself is of the form $v_i v_j v_i$, where $v_j$ is a vertex adjacent to $v_i$. Thus, the number of such walks is equal to the number of vertices adjacent to $v_i$, i.e. $\deg v_i$. Hence, $\tr(A^2) = \sum_{i=1}^n \deg v_i = 2|E(G)|$, by Handshaking Lemma.
+\item Hence, the $i$\nth diagonal entry of $A^2$, viz. $(A^2)_{ii}$, is the number of walks of length $2$ from $v_i$ to itself. Any walk of length $2$ from $v_i$ to itself is of the form $v_i v_j v_i$, where $v_j$ is a vertex adjacent to $v_i$. Thus, the number of such walks is equal to the number of vertices adjacent to $v_i$, i.e.\ $\deg v_i$. Hence, $\tr(A^2) = \sum_{i=1}^n \deg v_i = 2|E(G)|$, by Handshaking Lemma.
 
 \item Similarly, $(A^3)_{ii}$ is the number of walks of length $3$ from $v_i$ to itself. Any such walk is of the form $v_i v_j v_k v_i$, which implies that $v_i$, $v_j$, and $v_k$ form a triangle in $G$. Moreover, each such triangle corresponds to two distinct walks from $v_i$ to itself, when traversed in the two opposite directions. Thus, $(A^3)_{ii}$ is twice the number of triangles having $v_i$ as one of its vertices. Therefore, $\tr(A^3)$ is $6 c_3(G)$, since each triangle contains three vertices, each of which counts the triangle twice in the sum $\tr(A^3)$. \qedhere
 \end{enumerate}
@@ -553,7 +553,7 @@ For any graph $G$ of size $m \ge 1$, its line graph $\LG(G)$ has order $m$ and s
 \begin{proof}
 By definition, the vertices of $\LG(G)$ are the edges of $G$, and hence the order of $\LG(G)$ is the size of $G$, $m$.
 
-Now, let $e = uv$ be an edge of $G$. In $\LG(G)$, $e$ is a vertex, and it is adjacent to another vertex $f$ if and only if $f$ is an edge of $G$ and is adjacent to $e$, i.e. $f$ is an edge of $G$ incident with one of the end vertices of $e$, namely $u$ and $v$. Thus, the degree of the vertex $e$ of $\LG(G)$ is equal to the total number of edges that are incident with either $u$ or $v$ in $G$, except for the edge $e$ itself.
+Now, let $e = uv$ be an edge of $G$. In $\LG(G)$, $e$ is a vertex, and it is adjacent to another vertex $f$ if and only if $f$ is an edge of $G$ and is adjacent to $e$, i.e.\ $f$ is an edge of $G$ incident with one of the end vertices of $e$, namely $u$ and $v$. Thus, the degree of the vertex $e$ of $\LG(G)$ is equal to the total number of edges that are incident with either $u$ or $v$ in $G$, except for the edge $e$ itself.
 
 Clearly, $u$ is incident with to $\deg_G u - 1$ edges other than $e$, and $v$ is incident with $\deg_G v - 1$ edges other than $e$. Thus, the degree of $e$ in $\LG(G)$ is $\deg_G u  - 1 + \deg_G v - 1$.
 
@@ -583,7 +583,7 @@ The adjacency matrix of the line graph of $G$ can be computed from the incidence
 	
 	Observe that the $(i, j)$ entry of $B^T B$ is the dot product of the $i$\nth and $j$\nth columns of $B$. As each column of $B$ has exactly two non-zero entries, both equal to $1$, the $(i, i)$ entry of $B^T B$ is $2$, and therefore the diagonal entries of $B^T B - 2I$ are all zero.
 	
-	For $i \ne j$, the dot product of the $i$\nth and $j$\nth columns of $B$ will be $1$ if the edges $e_i$ and $e_j$ are adjacent (i.e. have one vertex in common), and $0$ otherwise -- note that the dot product cannot be $2$, as no two distinct columns of $B$ can be equal. Thus, for $i \ne j$, the $(i, j)$-entry of $B^T B$, which is equal to the $(i, j)$ entry of $B^T B - 2I$, is $1$ if and only if the edges $e_i$ and $e_j$ are adjacent in $G$, or equivalently, the vertices $e_i$ and $e_j$ of $\LG(G)$ are adjacent. Thus, $B^T B - 2I$ is the adjacency matrix of $G$.
+	For $i \ne j$, the dot product of the $i$\nth and $j$\nth columns of $B$ will be $1$ if the edges $e_i$ and $e_j$ are adjacent (i.e.\ have one vertex in common), and $0$ otherwise -- note that the dot product cannot be $2$, as no two distinct columns of $B$ can be equal. Thus, for $i \ne j$, the $(i, j)$-entry of $B^T B$, which is equal to the $(i, j)$ entry of $B^T B - 2I$, is $1$ if and only if the edges $e_i$ and $e_j$ are adjacent in $G$, or equivalently, the vertices $e_i$ and $e_j$ of $\LG(G)$ are adjacent. Thus, $B^T B - 2I$ is the adjacency matrix of $G$.
 \end{proof}
 
 A graph $G$ is said to be a line graph if it is the line graph of some graph $H$. Not every graph is a line graph, as shown by the following example.
@@ -607,7 +607,7 @@ If $G$ is a connected graph, and $v$ is any vertex of $G$, then the following ar
 \end{Theorem}
 
 \begin{proof}
-\cref{it:CutverChar1} $\implies $ \cref{it:CutverChar3}. Since $v$ is a cutvertex, the graph $G - v$ is disconnected, i.e. it has two or more components. Let $U$ be the set of all the vertices in any one of the components, and let $W$ be the set of all the remaining vertices of $G - v$. Clearly, $\{U, W\}$ is a partition of $V(G) - \{v\}$. Now, if $u \in U$ and $w \in W$, then $u$ and $w$ are in different components of $G - v$, which implies that any path from $u$ to $w$ must pass through $v$.
+\cref{it:CutverChar1} $\implies $ \cref{it:CutverChar3}. Since $v$ is a cutvertex, the graph $G - v$ is disconnected, i.e.\ it has two or more components. Let $U$ be the set of all the vertices in any one of the components, and let $W$ be the set of all the remaining vertices of $G - v$. Clearly, $\{U, W\}$ is a partition of $V(G) - \{v\}$. Now, if $u \in U$ and $w \in W$, then $u$ and $w$ are in different components of $G - v$, which implies that any path from $u$ to $w$ must pass through $v$.
 
 \noindent \cref{it:CutverChar3} $\implies$ \cref{it:CutverChar2} is obvious as the latter is a special case of the former.
 
@@ -639,7 +639,7 @@ If $G$ is a connected graph of order at least $3$, then the following are equiva
 
 \section{Connectivity}\label{sec:Connectivity}
 
-A set $S$ of vertices of a connected graph $G$ is a \newterm{separating set} or \newterm{vertex cut} of $G$ if $G - S$ is disconnected or trivial (i.e. a graph of order $1$). The \newterm{vertex connectivity} (or \newterm{connectivity}) of $G$, denoted by $\kappa(G)$ (or $\kappa$) is the cardinality of a minimum separating set of $G$ -- i.e. the minimum number of vertices $G$ whose removal results in a disconnected or trivial graph. Similarly, a \newterm{disconnecting set} of a connected graph $G$ is a set $S$ of edges of $G$ such that $G - S$ is disconnected or trivial. The cardinality of a minimum disconnecting set of $G$ is the \newterm{edge connectivity} of $G$, and is denoted by $\lambda(G)$ (or $\lambda$). The vertex connectivity and edge connectivity of a disconnected graph are defined to be $0$.
+A set $S$ of vertices of a connected graph $G$ is a \newterm{separating set} or \newterm{vertex cut} of $G$ if $G - S$ is disconnected or trivial (i.e.\ a graph of order $1$). The \newterm{vertex connectivity} (or \newterm{connectivity}) of $G$, denoted by $\kappa(G)$ (or $\kappa$) is the cardinality of a minimum separating set of $G$ -- i.e.\ the minimum number of vertices $G$ whose removal results in a disconnected or trivial graph. Similarly, a \newterm{disconnecting set} of a connected graph $G$ is a set $S$ of edges of $G$ such that $G - S$ is disconnected or trivial. The cardinality of a minimum disconnecting set of $G$ is the \newterm{edge connectivity} of $G$, and is denoted by $\lambda(G)$ (or $\lambda$). The vertex connectivity and edge connectivity of a disconnected graph are defined to be $0$.
 
 \begin{Theorem}\label{thm:ConnectivityBounds}
 For any graph $G$, $\kappa(G) \le \lambda(G) \le \delta(G)$.
@@ -738,7 +738,7 @@ For any graph $G$ of order $n$,
 \begin{proof}
 Let $M_0$ be a maximum set of independent vertices of $G$. Then $\beta_0 = |M_0|$, and $V \setminus M_0$ is a vertex cover. Hence, $\alpha_0 \le \vqty{V \setminus M_0} = n - \beta_0$. Let $N_0$ be a minimum cover of $G$. Then $\alpha_0 = |N_0|$, and $V \setminus N_0$ is independent. Hence, $\beta_0 \ge \vqty{V \setminus N_0} = n - \alpha_0$. Thus, $\alpha_0 + \beta_0 = n$.
 
-Now, let $M_1$ be a maximum set of independent edges. Form an edge cover $Y$ of $G$ by adding to $M_1$ one edge incident with each vertex not covered by $M_1$. Then $|Y| = n - |M_1| = n - \beta_1$, which implies that $n - \beta_1 \ge \alpha_1$, i.e. $\alpha_1 + \beta_1 \le n$.
+Now, let $M_1$ be a maximum set of independent edges. Form an edge cover $Y$ of $G$ by adding to $M_1$ one edge incident with each vertex not covered by $M_1$. Then $|Y| = n - |M_1| = n - \beta_1$, which implies that $n - \beta_1 \ge \alpha_1$, i.e.\ $\alpha_1 + \beta_1 \le n$.
 
 Next, let $N_1$ be a minimum edge cover of $G$. Then an independent set of edges is obtained by taking one edge of each component of the induced graph $\langle N_1 \rangle$. Hence, $\beta_1 \ge n - |N_1| = n - \alpha_1$, which implies that $\alpha_1 + \beta_1 \ge n$. Thus, $\alpha_1 + \beta_1 = n$.
 \end{proof}
@@ -780,7 +780,7 @@ Conversely, suppose that $M$ is not a maximum matching in $G$. Then $G$ has a ma
 \end{proof}
 
 \subsection*{Hall's matching condition}\label{subsec:Hall}
-Let $G$ be a bipartite graph with bipartition $(V_1, V_2)$. If $M$ is a matching of $G$ that saturates $V_1$ (i.e. saturates all vertices in $V_1$), then observe that for every subset $S \subseteq V_1$, $|N_G(S)| \ge |S|$, where $N_G(S)$ is the set of all vertices of $G$ that have at least one neighbour in $S$ -- equivalently, it is the union of the neighbourhoods of all the vertices in $S$.
+Let $G$ be a bipartite graph with bipartition $(V_1, V_2)$. If $M$ is a matching of $G$ that saturates $V_1$ (i.e.\ saturates all vertices in $V_1$), then observe that for every subset $S \subseteq V_1$, $|N_G(S)| \ge |S|$, where $N_G(S)$ is the set of all vertices of $G$ that have at least one neighbour in $S$ -- equivalently, it is the union of the neighbourhoods of all the vertices in $S$.
 
 If $G$ is a bipartite graph, then a partite set $X$ of $G$ is said to satisfy \newterm{Hall's condition} if $|N_G(S)| \ge |S|$ for all $S \subseteq X$.
 
@@ -880,7 +880,7 @@ Let $k = \max(\chi(G), \chi(H))$, and let $c_1$ and $c_2$ be optimal colourings 
 
 \item Let $G = K_p + C_{2r + 1}$, where $r \ge 2$. Compute $\omega(G)$ and $\chi(G)$.
 
-\item Suppose that $G$ is a graph such that $\chi(G) = \omega(G) + 1$. Recursively define $H_k$ as $H_1 = G$, $H_k = H_{k - 1} + G$, $k > 1$ (i.e. $H_k$ is the join of $k$ copies of $G$). Prove that $\chi(H_k) = \omega(H_k) + k$.
+\item Suppose that $G$ is a graph such that $\chi(G) = \omega(G) + 1$. Recursively define $H_k$ as $H_1 = G$, $H_k = H_{k - 1} + G$, $k > 1$ (i.e.\ $H_k$ is the join of $k$ copies of $G$). Prove that $\chi(H_k) = \omega(H_k) + k$.
 \end{enumerate}
 \end{Exercise}
 
