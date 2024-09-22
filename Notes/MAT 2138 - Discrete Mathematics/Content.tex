@@ -333,7 +333,7 @@ f^{-1}(b) = \qty{\, a \in A \mid f(a) = b \,}.
 Note that the image of the function is a subset of the codomain, while the preimage of an element is the subset of the domain.
 
 \begin{Note*}
-Intuitively, we think of a function as a rule that assigns, to each element of the domain, a unique element of the codomain. For instance, it is common in calculus to define a function using a formula -- e.g. $f \colon \mathbb R \to \mathbb R$, $f(x) = x^2 - 1$. However, the formula or the expression itself is not the function. The function $g \colon \mathbb Z \to \mathbb Q$, defined by the formula $g(x) = x^2 - 1$, is different from the previously defined function $f$, although they are both defined using the same formula. Moreover, it may not be possible to define a function using any closed-form formula.
+Intuitively, we think of a function as a rule that assigns, to each element of the domain, a unique element of the codomain. For instance, it is common in calculus to define a function using a formula -- e.g.\ $f \colon \mathbb R \to \mathbb R$, $f(x) = x^2 - 1$. However, the formula or the expression itself is not the function. The function $g \colon \mathbb Z \to \mathbb Q$, defined by the formula $g(x) = x^2 - 1$, is different from the previously defined function $f$, although they are both defined using the same formula. Moreover, it may not be possible to define a function using any closed-form formula.
 \end{Note*}
 
 A function is \newterm{injective} (or \newterm{$1$-$1$}) if it is left-unique. That is, $f \colon A \to B$ is injective if, for any $a_1, a_2 \in A$, $f(a_1) = f(a_2)$ implies that $a_1 = a_2$. An injective function is also called an \newterm{injection}. A \newterm{surjective} (or \newterm{onto}) function is one in which every element of the codomain has a non-empty preimage. That is, $f \colon A \to B$ is surjective if, for each $b \in B$, $b = f(a)$ for some $a \in A$. Note that $f$ is surjective if and only if $\im f = \cod f$. A surjective function is also called a \newterm{surjection}. A function that is both injective and surjective is \newterm{bijective}. A bijective function is also called a \newterm{bijection} or a \newterm{one-to-one correspondence}.
@@ -350,7 +350,7 @@ Let $A = \{1, 2, 3, 4, 5\}$ and $B = \{a, b, c\}$.
 \end{Example}
 
 \begin{Example}
-Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection e.g.\ $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e.\ the smallest integer greater than or equal to $x$ -- e.g. $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection e.g.\ $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e.\ the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
+Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection e.g.\ $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e.\ the smallest integer greater than or equal to $x$ -- e.g.\ $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection e.g.\ $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e.\ the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
 \end{Example}
 
 \begin{Example}\label{ex:RIsom01}
@@ -609,8 +609,8 @@ B & B & A
 The graphical representation of $M$ is shown below.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 5mm] (A) {A};
-	\node[state, accepting, minimum size = 5mm] (B) [right = of A] {B};
+	\node[state, initial, minimum size = 5mm] (A) {$A$};
+	\node[state, accepting, minimum size = 5mm] (B) [right = of A] {$B$};
 	\path[->]
 	(A) edge [loop above]	node {\texttt 0}	()
 	(A) edge [bend left]	node {\texttt 1}	(B)
@@ -677,6 +677,8 @@ Construct a DFA that accepts all strings over the alphabet $\{\texttt a, \texttt
 \end{center}
 }
 
+Observe that two of the states of the DFA given in the solution of \cref{exer:DFABeginaab} are states that, once entered, cannot be left -- i.e.\ every transition out of such each of these states is into that state itself. Such a state is a \newterm{trap state}. One of these two trap states is an accept states -- which indicates that any input that leads to this state is accepted regardless of what the rest of the input contains -- while the other trap state is a non-accept state -- which indicates that any input leading to this state is \emph{permanently} rejected and that no further ``correction'' can be made to get the input accepted.
+
 \subsection{Nondeterministic Finite Automata}\label{subsec:NFA}
 
 A \newterm{nondeterministic finite automaton} (\newterm{NFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
@@ -712,7 +714,7 @@ The NFA shown below accepts all binary strings that contain \texttt{110} as a (c
 \end{center}
 \end{Example}
 
-\begin{Example}
+\begin{Example}\label{ex:NFAabcAlphabetical}
 The NFA shown below accepts all strings over the alphabet $\{\texttt a, \texttt b, \texttt c\}$ in which the symbols appear in alphabetical order.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
@@ -748,16 +750,16 @@ F' = \qty{\, q' \in Q' \mid q' \cap F \ne \varnothing \,}.
 \end{equation*}
 \end{enumerate}
 
-If $M$ has epsilon transitions, then in addition to the above, $\delta'\pqty{ \{q_1, \ldots, q_k\}, s }$ will contain, in addition to the states described above, the states of $M$ that can be reached from each state in $\delta(q_i, s)$ via an epsilon transition.
+If $M$ has epsilon transitions, then $\delta'\pqty{ \{q_1, \ldots, q_k\}, s }$ will contain, in addition to the states described above, the states of $M$ that can be reached from each state in $\delta(q_i, s)$ via any sequence epsilon transitions. Similarly, $q_0'$ will be the set of all states of $M$ that can be reached from $q_0$ via (a sequence of) epsilon transitions.
 
 \begin{Example}
 Consider the NFA given in \cref{ex:NFAContains110}.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {A};
-	\node[state, minimum size = 6mm] (q1) [right = of q0] {B};
-	\node[state, minimum size = 6mm] (q11) [right = of q1] {C};
-	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {D};
+	\node[state, initial, minimum size = 6mm] (q0) {$A$};
+	\node[state, minimum size = 6mm] (q1) [right = of q0] {$B$};
+	\node[state, minimum size = 6mm] (q11) [right = of q1] {$C$};
+	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {$D$};
 	\path[->] 
 	(q0) edge [] node {\texttt 1}	(q1)
 	(q1) edge []	node {\texttt 1}	(q11)
@@ -766,7 +768,7 @@ Consider the NFA given in \cref{ex:NFAContains110}.
 	(q110)	edge [loop above] node {\texttt 0, \texttt 1} ();
 \end{tikzpicture}
 \end{center}
-Here, the initial state is $q_0 = A$, and the set of accept states is $F = \{D\}$. Now, the equivalent DFA $D_M$ will $2^4 = 16$ states, namely $\varnothing, \{A\}, \{B\}, \{C\}, \{D\}, \{A, B\}, \{A, C\}, \ldots, \{A, B, C, D\}$. For the sake of simplicity, we will denote these as $\varnothing, A, B, C, D, AB, AC, \ldots, ABCD$.
+Here, the initial state is $q_0 = A$, and the set of accept states is $F = \{D\}$. Now, the equivalent DFA $D_M$ will $2^4 = 16$ states, namely $\varnothing, \{A\}, \{B\}, \{C\}, \spliteq \{D\}, \{A, B\}, \{A, C\}, \ldots, \{A, B, C, D\}$. For the sake of simplicity, we will denote these as $\varnothing, A, B, C, D, AB, AC, \ldots, ABCD$.
 
 Note that many of these states may be \newterm{unreachable} -- i.e.\ there will be no path from the start state to them. We will not include them in the graphical representation of $D_M$, even though, formally, they are part of $D_M$. To find all the \newterm{reachable} (i.e.\ not unreachable) states, we will begin with the start state, and iteratively add the other states while computing the transitions from the current states corresponding to each input symbol.
 
@@ -774,27 +776,27 @@ Note that many of these states may be \newterm{unreachable} -- i.e.\ there will 
 \item Initially, we have only the start state, $A$.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (A) {A};
+	\node[state, initial, minimum size = 6mm] (A) {$A$};
 \end{tikzpicture}
 \end{center}
 
-\item Next, $\delta'(A, 0) = \delta(A, 0) = \{A\}$ (written as just $A$) and $\delta'(A, 1) = \delta(A, 1) = \{A, B\}$ (written as just $AB$).
+\item Next, $\delta'(A, \texttt 0) = \delta(A, \texttt 0) = \{A\}$ (written as just $A$) and $\delta'(A, \texttt  1) = \delta(A, \texttt  1) = \{A, B\}$ (written as just $AB$).
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {A};
-	\node[state, minimum size = 10mm] (AB) [right = of A] {AB};
+	\node[state, initial, minimum size = 10mm] (A) {$A$};
+	\node[state, minimum size = 10mm] (AB) [right = of A] {$AB$};
 	\path[->] 
 	(A) edge [] node {\texttt 1}	(AB)
 	(A) edge [loop above]	node {\texttt 0}	();
 \end{tikzpicture}
 \end{center}
 
-\item Now, $\delta'(AB, 0) = \delta(A, 0) \cup \delta(B, 0) = \{A\} \cup \varnothing = \{A\}$ (i.e. $A$) and $\delta'(AB, 1) = ABC$.
+\item Now, $\delta'(AB, \texttt 0) = \delta(A, \texttt 0) \cup \delta(B, \texttt 0) = \{A\} \cup \varnothing = \{A\}$ (i.e.\ $A$) and $\delta'(AB, \texttt 1) = ABC$.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 11mm] (A) {A};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
+	\node[state, initial, minimum size = 11mm] (A) {$A$};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
 	\path[->] 
 	(A)		edge [bend left] 	node {\texttt 1}	(AB)
 	(AB)	edge [bend left] 	node {\texttt 0}	(A)
@@ -803,13 +805,13 @@ Note that many of these states may be \newterm{unreachable} -- i.e.\ there will 
 \end{tikzpicture}
 \end{center}
 
-\item Similarly, $\delta'(ABC, 0) = AD$ and $\delta'(ABC, 1) = ABC$.
+\item Similarly, $\delta'(ABC, \texttt 0) = AD$ and $\delta'(ABC, \texttt 1) = ABC$.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {A};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
+	\node[state, initial, minimum size = 10mm] (A) {$A$};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
 	\path[->] 
 	(A)		edge [bend left] 	node {\texttt 1}	(AB)
 	(AB)	edge [bend left] 	node {\texttt 0}	(A)
@@ -820,14 +822,14 @@ Note that many of these states may be \newterm{unreachable} -- i.e.\ there will 
 \end{tikzpicture}
 \end{center}
 
-\item Similarly, $\delta'(AD, 0) = AD$ and $\delta'(AD, 1) = ABD$.
+\item Similarly, $\delta'(AD, \texttt 0) = AD$ and $\delta'(AD, \texttt 1) = ABD$.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {A};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
-	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
+	\node[state, initial, minimum size = 10mm] (A) {$A$};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
 	\path[->] 
 	(A)		edge [bend left] 	node {\texttt 1}	(AB)
 	(AB)	edge [bend left] 	node {\texttt 0}	(A)
@@ -840,15 +842,15 @@ Note that many of these states may be \newterm{unreachable} -- i.e.\ there will 
 \end{tikzpicture}
 \end{center}
 
-\item Similarly, $\delta'(ABD, 0) = AD$ and $\delta'(ABD, 1) = ABCD$.
+\item Similarly, $\delta'(ABD, \texttt 0) = AD$ and $\delta'(ABD, \texttt 1) = ABCD$.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {A};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
-	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
-	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize ABCD};
+	\node[state, initial, minimum size = 10mm] (A) {$A$};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
+	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
 	\path[->] 
 	(A)		edge [bend left] 	node {\texttt 1}	(AB)
 	(AB)	edge [bend left] 	node {\texttt 0}	(A)
@@ -862,15 +864,16 @@ Note that many of these states may be \newterm{unreachable} -- i.e.\ there will 
 	(AD)	edge [loop above]	node {\texttt 0}	();
 \end{tikzpicture}
 \end{center}
-\item Finally, $\delta'(ABCD, 0) = AD$ and $\delta'(ABCD, 1) = ABCD$.
+
+\item Finally, $\delta'(ABCD, \texttt 0) = AD$ and $\delta'(ABCD, \texttt 1) = ABCD$.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {A};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
-	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
-	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize ABCD};
+	\node[state, initial, minimum size = 10mm] (A) {$A$};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
+	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
 	\path[->] 
 	(A)		edge [bend left] 	node {\texttt 1}	(AB)
 	(AB)	edge [bend left] 	node {\texttt 0}	(A)
@@ -888,15 +891,16 @@ Note that many of these states may be \newterm{unreachable} -- i.e.\ there will 
 \end{center}
 As no new state is added in this step, all the other states (not shown here) are unreachable.
 \end{enumerate}
+
 Now, the states $AD$, $ABD$, and $ABCD$ all contain $D$, which is the only accept state of the original NFA. Hence, these states are accept state of the DFA.
 \begin{center}
 \begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {A};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small AB};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize ABC};
-	\node[state, accepting, minimum size = 11mm] (AD) [right = of ABC] {\small AD};
-	\node[state, accepting, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize ABD};
-	\node[state, accepting, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize ABCD};
+	\node[state, initial, minimum size = 10mm] (A) {$A$};
+	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+	\node[state, accepting, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+	\node[state, accepting, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
+	\node[state, accepting, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
 	\path[->] 
 	(A)		edge [bend left] 	node {\texttt 1}	(AB)
 	(AB)	edge [bend left] 	node {\texttt 0}	(A)
@@ -914,6 +918,130 @@ Now, the states $AD$, $ABD$, and $ABCD$ all contain $D$, which is the only accep
 \end{center}
 \end{Example}
 
+\begin{Example}
+Consider the NFA given in \cref{ex:NFAContains110}.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, minimum size = 6mm] (A) {$A$};
+	\node[state, minimum size = 6mm] (B) [right = of A] {$B$};
+	\node[state, accepting, minimum size = 6mm] (C) [right = of B] {$C$};
+	\path[->] 
+	(A) edge []				node {$\varepsilon$}	(B)
+	(B) edge []				node {$\varepsilon$}	(C)
+	(A) edge [loop above]	node {\texttt a}	()
+	(B) edge [loop above]	node {\texttt b}	()
+	(C) edge [loop above]	node {\texttt c}	();
+\end{tikzpicture}
+\end{center}
+Here, the start state is $A$, but $B$ can be reached from $A$ via an epsilon transition, and $C$ can be reached from $B$ via an epsilon transition. Hence, the start state of the converted DFA will be $ABC$, which will also be an accept state, since it contains $C$, an accept state of the original NFA. Next, $\delta(A, \texttt a) = A$, $\delta(B, \texttt a) = \delta(C, \texttt a) = \varnothing$. But $B$ and $C$ can be reached from $A$ by epsilon transitions. Therefore, $\delta'(ABC, \texttt a) = ABC$. Similarly, $\delta'(ABC, \texttt b) = BC$, which will also be an accept state. Similarly, $\delta'(ABC, \texttt c) = C$, also an accept state.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, accepting, minimum size = 11mm] (ABC) {\footnotesize $ABC$};
+	\node[state, accepting, minimum size = 11mm] (BC) [right = of A] {\small $BC$};
+%	\node[state, accepting, minimum size = 6mm] (C) [right = of B] {C};
+	\path[->] 
+	(ABC) edge []				node {\texttt b}	(BC)
+%	(BC) edge []				node {$\varepsilon$}	(C)
+	(ABC) edge [loop above]	node {\texttt a}	();
+%	(B) edge [loop above]	node {\texttt b}	()
+%	(C) edge [loop above]	node {\texttt c}	();
+\end{tikzpicture}
+\end{center}
+But now, $\delta(B, \texttt a) = \delta(C, \texttt a) = \varnothing$. Hence, $\delta'(BC, \texttt a) = \varnothing$. Note that $\varnothing$ will be state from which there are no transitions into any other states -- i.e.\ it is a trap state. Hence, $\delta'(\varnothing, \texttt a) = \delta'(\varnothing, \texttt b) = \varnothing$. Proceeding thus, we find that $\delta'(BC, \texttt b) = BC$, $\delta'(BC, \texttt c) = C$, $\delta'(C, \texttt a) = \delta'(C, \texttt b) = \varnothing$, and $\delta'(C, \texttt c) = C$.
+\begin{center}
+\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+	\node[state, initial, accepting, minimum size = 11mm] (ABC) {\footnotesize $ABC$};
+	\node[state, accepting, minimum size = 11mm] (BC) [right = of A] {\small $BC$};
+	\node[state, accepting, minimum size = 11mm] (C) [right = of B] {$C$};
+	\node[state, minimum size = 11mm] (T) [below = of C] {$\varnothing$};
+	\path[->] 
+	(ABC) edge []				node {\texttt b}	(BC)
+	(ABC) edge [bend right]		node [swap] {\texttt c}	(C)
+	(BC) edge []				node {\texttt c}	(C)
+	(BC) edge []				node [swap] {\texttt a}	(T)
+	(C) edge []				node {\texttt a, \texttt b}	(T)
+	(ABC) edge [loop above]	node {\texttt a}	()
+	(BC) edge [loop above]	node {\texttt b}	()
+	(C) edge [loop above]	node {\texttt c}	();
+\end{tikzpicture}
+\end{center}
+\end{Example}
+
+\subsection{Regular Expressions}\label{subsec:RE}
+
+A \newterm{regular expression} (\newterm{RE}) over an alphabet $\Sigma$ is an expression consisting of one or more of the symbols in $\Sigma$ or $\varepsilon$ or $\varnothing$, one or both of the operators $+$ and ${}^*$, and parentheses $($ and $)$, whose syntax is defined recursively as follows:
+\begin{enumerate}
+\item For each $s \in \Sigma$, $s$ is a regular expression, and $\varepsilon$ and $\varnothing$ are regular expressions.
+\item If $r$ is a regular expression, then so is $(r)^*$.
+\item If $r_1$ and $r_2$ are regular expressions, then so are $r_1 + r_2$ and $(r_1)(r_2)$.
+\end{enumerate}
+
+\begin{Note*}
+If $r$ is a single symbol (i.e.\ $r \in \Sigma$), then $(r)^*$ can also be written as $r^*$; $(r)(r')$ can also be written as $r(r')$; and $(r')(r)$ can also be written as $(r')r$.
+\end{Note*}
+
+\begin{Example}
+The following are some regular expressions over $\Sigma = \{0, 1\}$:
+\begin{align*}
+& 0 + 1, \quad 0(0 + 1), \quad (0 + 1)^*110(0 + 1)^*, \quad 1^* 0^* + 0^* 1^*, \spliteq\splitalign \quad 0^* 1 0^*(0^* 1 0^* 1)^* 0^*, \quad 0 (0 + 1)^* 0 + 1 (0 + 1)^* 1
+\end{align*}
+\end{Example}
+
+Each RE represents or generates a particular language. To rigorously define the language generated by an RE, we will first define some operations on languages.
+
+Let $L_1$ and $L_2$ be two languages over the same alphabet $\Sigma$. Recall that this means $L_1$ and $L_2$ are sets of strings of symbols in $\Sigma$, i.e.\ $L_1, L_2 \subseteq \Sigma^*$.
+\begin{enumerate}
+\item The \newterm{union} of $L_1$ and $L_2$ is $L_1 \cup L_2$, defined as their union as sets.
+\begin{equation*}
+L_1 \cup L_2 = \qty{\, w \in \Sigma^* \mid w \in L_1 ~\text{or}~ w \in L_2 \,}
+\end{equation*}
+
+\item The \newterm{concatenation} of $L_1$ and $L_2$ is $L_1 L_2$, the language of all strings obtained by concatenating a string of $L_1$ with a string of $L_2$.
+\begin{equation*}
+L_1 L_2 = \qty{\, w_1 w_2 \mid w_1 \in L_1,\, w_2 \in L_2 \,}
+\end{equation*}
+
+\item The \newterm{Kleene star} of $L_1$ is $L_1^*$, the language of all strings obtained by concatenating any finite number of strings of $L_1$ together.
+\begin{align*}
+L_1^* & = \qty{\, w_1 w_2 \dots w_n \mid w_i \in L_i,\, i = 1, \ldots, n,\, n \in \mathbb N_0 \,} \\
+& = \{\varepsilon\} \cup L_1 \cup L_1 L_1 \cup L_1 L_1 L_1 \cup \cdots
+\end{align*}
+\end{enumerate}
+
+The language generated by an RE can now be recursively defined as follows:
+\begin{enumerate}
+\item The language generated by the RE $s$, where $s \in \Sigma$ (a single symbol), is $\{s\}$ and the language generated by the RE $\varepsilon$ is ${\varepsilon}$.
+\item The language generated by the RE $\varnothing$ is the empty language $\varnothing = \{\}$. Note that this language does \emph{not} contain the empty string!
+\item If $r_1$ and $r_2$ are two REs over the same alphabet $\Sigma$, that generate languages $L_1$ and $L_2$, respectively, then
+\begin{enumerate}
+\item the RE $r_1 + r_2$ generates the language $L_1 + L_2$
+\item the RE $(r_1)(r_2)$ generates the language $L_1 L_2$
+\item the RE $(r_1)^*$ generates the language $L_1^*$.
+\end{enumerate}
+\end{enumerate}
+
+\begin{Example} Let $\Sigma = \{0, 1\}$.
+\begin{enumerate}
+\item The RE $0 + 1$ generates the language $\{0, 1\}$.
+\item The RE $0(0 + 1)$ generates the language $\{00, 01\}$.
+\item The RE $(0 + 1)^*110(0 + 1)^*$ generates the language of all binary strings containing $011$ as a substring.
+\item The RE $0^* 1^* + 1^* 0^*$ generates the language of all binary strings that are either a string of (zero or more) $0$s followed by a string of $1$s, or a string of $1$s followed by a string of $0$s.
+\end{enumerate}
+\end{Example}
+
+\begin{Exercise} Let $\Sigma = \{0, 1\}$.
+\begin{enumerate}
+\item What is the language generated by $0 (0 + 1)^* 0 + 1 (0 + 1)^* 1$?
+\item What is the language generated by $0^* 1 0^*(0^* 1 0^* 1)^* 0^*$?
+\end{enumerate}
+\end{Exercise}
+
+\solution{REs}{
+\begin{enumerate}
+\item All binary strings of length at least $2$, beginning and ending in the same symbol.
+\item All binary strings containing an odd number of $1$s.
+\end{enumerate}
+}
 
 \clearpage
 
