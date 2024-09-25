@@ -27,7 +27,7 @@
 
 \section{Elementary Set Theory}\label{sec:SetTheory}
 
-A \newterm{set} is (informally) an unordered collection of \newterm{elements}. More formally, any set is defined by the \newterm{membership relation} $\in$ (read ``belongs to'', ``is an element of'', ``is a member of'', or ``is in''), where $s \in S$ if and only if $s$ is an element of the set $S$. If $x$ is not a member of $S$, then we write $x \notin S$. We may define a set either as a list of all its members enclosed by curly braces -- $\{$ and $\}$ -- or in the form $Y = \qty{\, x \in X \mid P(x) \,}$, where $X$ is a previously defined set, and $P(x)$ is a \newterm{predicate} (a function with a true/false value depending on the value of $x$) -- then $Y$ is the set consisting of all members of $X$ that satisfy the predicate $P(x)$ (i.e., those $x \in X$ for which $P(x)$ is true). The latter form of defining a set is called the \newterm{set-builder} notation. For example
+A \newterm{set} is (informally) an unordered collection of \newterm{elements}. More formally, any set is defined by the \newterm{membership relation} $\in$ (read ``belongs to'', ``is an element of'', ``is a member of'', or ``is in''), where $s \in S$ if and only if $s$ is an element of the set $S$. If $x$ is not a member of $S$, then we write $x \notin S$. We may define a set either as a list of all its members enclosed by curly braces -- $\{$ and $\}$ -- or in the form $Y = \qty{\, x \in X \mid P(x) \,}$, where $X$ is a previously defined set, and $P(x)$ is a \newterm{predicate} (a function with a true/false value depending on the value of $x$) -- then $Y$ is the set consisting of all members of $X$ that satisfy the predicate $P(x)$ (i.e.\ those $x \in X$ for which $P(x)$ is true). The latter form of defining a set is called the \newterm{set-builder} notation. For example
 \begin{equation*}
 S = \qty{1, \text{`a'}, 2.5, +, 9, -3}
 \end{equation*}
@@ -51,9 +51,9 @@ defines $S$ to be the set of all elements obtained by doubling an integer -- in 
 
 \subsection{Relations Among Sets}\label{subsec:SetRels}
 
-A set $A$ is a \newterm{subset} of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is an element of $B$. That is, for any element $a$ (of the universal set), $a \in A \implies a \in B$. Then $B$ is a \newterm{superset} of $A$, denoted by $B \supseteq A$. We may also say that $B$ \newterm{contains} $A$, or that $A$ is contained in $B$.
+A set $A$ is a \newterm{subset} of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is an element of $B$. That is, for any element $a$ (of the universal set), $a \in A$ implies $a \in B$. Then $B$ is a \newterm{superset} of $A$, denoted by $B \supseteq A$. We may also say that $B$ \newterm{contains} $A$, or that $A$ is contained in $B$.
 
-Two sets $A$ and $B$ are \newterm{equal}, written $A = B$, if each contains the other -- i.e., $A \subseteq B$ and $B \subseteq A$. This is equivalent to the statement that $A$ and $B$ have exactly the same elements. Otherwise, $A$ is not equal to $B$ (written $A \ne B$). $A$ is a \newterm{proper} subset of $A$ (or is properly contained in $B$) if $A \subseteq B$ and $A \ne B$. Then we write $A \subsetneq B$. Similarly, $B$ is a proper superset of $A$, denoted by $B \supsetneq A$, if $B \supseteq A$ and $B \ne A$.
+Two sets $A$ and $B$ are \newterm{equal}, written $A = B$, if each contains the other -- i.e.\ $A \subseteq B$ and $B \subseteq A$. This is equivalent to the statement that $A$ and $B$ have exactly the same elements. Otherwise, $A$ is not equal to $B$ (written $A \ne B$). $A$ is a \newterm{proper} subset of $A$ (or is properly contained in $B$) if $A \subseteq B$ and $A \ne B$. Then we write $A \subsetneq B$. Similarly, $B$ is a proper superset of $A$, denoted by $B \supsetneq A$, if $B \supseteq A$ and $B \ne A$.
 
 \begin{Note*}
 It is also common to use $\subset$ and $\supset$ instead of $\subseteq$ and $\supseteq$, respectively. They are usually \emph{not} alternatives to $\subsetneq$ and $\supsetneq$, except when explicitly stated to be so.
@@ -134,7 +134,7 @@ A \cup (A \cap B) = A \cap (A \cup B) = A.
 
 \end{Exercise}
 
-Two sets $A$ and $B$ are \newterm{disjoint} if their intersection is empty -- i.e., $A \cap B = \varnothing$. Note that $A$ and $\overline A$ are always disjoint. Also note that $\varnothing$ is disjoint with all sets, and is the unique set that is disjoint with itself.
+Two sets $A$ and $B$ are \newterm{disjoint} if their intersection is empty -- i.e.\ $A \cap B = \varnothing$. Note that $A$ and $\overline A$ are always disjoint. Also note that $\varnothing$ is disjoint with all sets, and is the unique set that is disjoint with itself.
 
 Since $\cup$ and $\cap$ are associative, expressions of the form $A_1 \cup A_2 \cup \cdots \cup A_n$ and $A_1 \cap A_2 \cap \cdots \cap A_n$ are well-defined and unambiguous. These are called the \newterm{$n$-ary} (or finite) union and intersection, and denote them as $\bigcup_{i=1}^n A_i$ and $\bigcap_{i=1}^n A_i$, respectively. But it is possible to define unions and intersections of collections of sets even more generally. For this, we will discuss the concept of an indexing set.
 
@@ -161,7 +161,7 @@ The \newterm{Cartesian product} of two sets $A$ and $B$, denoted by $A \times B$
 \begin{equation*}
 A \times B = \qty{\, (a, b) \mid a \in A,\, b \in B \,}.
 \end{equation*}
-The Cartesian product of $A$ with itself is often written as $A^2$. Similarly, the Cartesian product $A \times \cdots A$ with $n$ terms (defined as an iterated Cartesian product of two sets at a time) is denoted by $A^n$. 
+The Cartesian product of $A$ with itself is often written as $A^2$. Similarly, the Cartesian product $A \times \cdots \times A$ with $n$ terms (defined as an iterated Cartesian product of two sets at a time) is denoted by $A^n$. 
 
 The \newterm{disjoint union} (or \newterm{coproduct}) of two sets $A$ and $B$, denoted by $A \sqcup B$, consists of all the ordered pairs of the form $(x, i)$ where $i = 1$ when $x \in A$ and $i = 2$ when $x \in B$. That is,
 \begin{equation*}
@@ -170,7 +170,7 @@ A \sqcup B = \qty{\, (a, 1) \mid a \in A \,} \cup \qty{\, (b, 2) \mid b \in B \,
 The disjoint union is also denoted by $A \coprod B$, $A \mathbin{\mathaccent\cdot\cup} B$, or $A \uplus B$.
 
 \begin{Note*}
-The second element in each ordered pair (i.e., $1$ or $2$) only serves to distinguish the elements that are originally from $A$, from those that are originally from $B$. Thus, for example, if $x$ is an element common to both $A$ and $B$, then $A \sqcup B$ contains two ``copies'' of $x$, namely $(x, 1)$ and $(x, 2)$. When $A$ and $B$ are disjoint, $A \sqcup B$ is equivalent to $A \cup B$ (where the meaning of ``equivalent'' will be formalised later).
+The second element in each ordered pair (i.e.\ $1$ or $2$) only serves to distinguish the elements that are originally from $A$, from those that are originally from $B$. Thus, for example, if $x$ is an element common to both $A$ and $B$, then $A \sqcup B$ contains two ``copies'' of $x$, namely $(x, 1)$ and $(x, 2)$. When $A$ and $B$ are disjoint, $A \sqcup B$ is equivalent to $A \cup B$ (where the meaning of ``equivalent'' will be formalised later).
 \end{Note*}
 
 We can also define Cartesian products and disjoint unions of a collection of sets. Let $\mathcal A = \{A_i\}_{i \in I}$ be a collection of sets indexed by $I$. Then the Cartesian product of the collection $\mathcal A$ is
@@ -287,13 +287,13 @@ Let $S = \{1, 2, 3, 4, 5\}$. Then $P = \{\{1, 3, 5\}, \{2, 4, 6\}\}$ and $Q = \{
 Let $\sim$ be an equivalence relation on a set $A$. Show that the following hold:
 \begin{enumerate}
 \item For all $a \in A$, $a \in [a]$, and hence, each equivalence class is non-empty and $A = \bigcup_{a \in A} [a]$.
-\item For all $a, b \in A$, if $a \ne b$, then $[a] \cap [b] = \varnothing$ (i.e., any two equivalence classes are either disjoint or identical).
+\item For all $a, b \in A$, if $a \ne b$, then $[a] \cap [b] = \varnothing$ (i.e.\ any two equivalence classes are either disjoint or identical).
 \item The set of all equivalence classes of $\sim$ is a partition of $A$.
 \end{enumerate}
 \end{Exercise}
 
 \begin{Exercise}\label{exer:Partition->EqRel}
-Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a$ and $b$ belong to the same part of the partition $P$ (i.e., $a, b \in P_i$, $\exists i \in I$). Show that the following hold:
+Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim$ on $A$ as follows: For any $a, b \in A$, $a \sim b$ if and only if $a$ and $b$ belong to the same part of the partition $P$ (i.e.\ $a, b \in P_i$, $\exists i \in I$). Show that the following hold:
 \begin{enumerate}
 \item The relation $\sim$ is an equivalence relation on $A$.
 \item The equivalence classes of $\sim$ are exactly the parts of the partition of $P$.
@@ -305,7 +305,7 @@ Let $P = \{P_i\}_{i \in I}$ be a partition of a set $A$. Define a relation $\sim
 A reflexive, anti-symmetric, and transitive relation is called a \newterm{partial order} relation (or simply a partial order). For example, $\le$ and $\ge$ on any set of real numbers, $\mid$ on any set of non-negative integers, and $\subseteq$ and $\supseteq$ on any set of sets are partial order relations. A set $A$ together with a partial order $\preccurlyeq$ on it forms a \newterm{partially ordered set} or \newterm{poset} $(A, \preccurlyeq)$.
 
 \begin{Note*}
-The term \emph{partial} refers to the fact that two particular elements in a partially ordered set may be \newterm{incomparable} -- i.e., neither may be related to the other in the partial order. For instance, consider the subsets of $S = \{x, y, z\}$, which are partially ordered by the subset relation $\subseteq$ -- i.e., consider the poset $(2^S, \subseteq)$. Then $A = \{x, y\}$ and $B =\{y, z\}$ are incomparable, as neither is $A$ a subset of $B$, nor is $B$ a subset of $A$. On the other hand, $A$ and $C = \{x\}$ are \newterm{comparable} (as $C \subseteq A$), and $A$ and $S$ itself are also comparable (as $A \subseteq S$). A poset in which every pair of elements is comparable (i.e., in which there are no incomparable pairs of elements) is called a \newterm{total order}.
+The term \emph{partial} refers to the fact that two particular elements in a partially ordered set may be \newterm{incomparable} -- i.e.\ neither may be related to the other in the partial order. For instance, consider the subsets of $S = \{x, y, z\}$, which are partially ordered by the subset relation $\subseteq$ -- i.e.\ consider the poset $(2^S, \subseteq)$. Then $A = \{x, y\}$ and $B =\{y, z\}$ are incomparable, as neither is $A$ a subset of $B$, nor is $B$ a subset of $A$. On the other hand, $A$ and $C = \{x\}$ are \newterm{comparable} (as $C \subseteq A$), and $A$ and $S$ itself are also comparable (as $A \subseteq S$). A poset in which every pair of elements is comparable (i.e.\ in which there are no incomparable pairs of elements) is called a \newterm{total order}.
 \end{Note*}
 
 \begin{Exercise}\label{exer:DividesRel}
@@ -331,7 +331,7 @@ f^{-1}(b) = \qty{\, a \in A \mid f(a) = b \,}.
 Note that the image of the function is a subset of the codomain, while the preimage of an element is the subset of the domain.
 
 \begin{Note*}
-Intuitively, we think of a function as a rule that assigns, to each element of the domain, a unique element of the codomain. For instance, it is common in calculus to define a function using a formula -- e.g., $f \colon \mathbb R \to \mathbb R$, $f(x) = x^2 - 1$. However, the formula or the expression itself is not the function. The function $g \colon \mathbb Z \to \mathbb Q$, defined by the formula $g(x) = x^2 - 1$, is different from the previously defined function $f$, although they are both defined using the same formula. Moreover, it may not be possible to define a function using any closed-form formula.
+Intuitively, we think of a function as a rule that assigns, to each element of the domain, a unique element of the codomain. For instance, it is common in calculus to define a function using a formula -- e.g.\ $f \colon \mathbb R \to \mathbb R$, $f(x) = x^2 - 1$. However, the formula or the expression itself is not the function. The function $g \colon \mathbb Z \to \mathbb Q$, defined by the formula $g(x) = x^2 - 1$, is different from the previously defined function $f$, although they are both defined using the same formula. Moreover, it may not be possible to define a function using any closed-form formula.
 \end{Note*}
 
 A function is \newterm{injective} (or \newterm{$1$-$1$}) if it is left-unique. That is, $f \colon A \to B$ is injective if, for any $a_1, a_2 \in A$, $f(a_1) = f(a_2)$ implies that $a_1 = a_2$. An injective function is also called an \newterm{injection}. A \newterm{surjective} (or \newterm{onto}) function is one in which every element of the codomain has a non-empty preimage. That is, $f \colon A \to B$ is surjective if, for each $b \in B$, $b = f(a)$ for some $a \in A$. Note that $f$ is surjective if and only if $\im f = \cod f$. A surjective function is also called a \newterm{surjection}. A function that is both injective and surjective is \newterm{bijective}. A bijective function is also called a \newterm{bijection} or a \newterm{one-to-one correspondence}.
@@ -348,19 +348,19 @@ Let $A = \{1, 2, 3, 4, 5\}$ and $B = \{a, b, c\}$.
 \end{Example}
 
 \begin{Example}
-Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection (e.g., $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e., the smallest integer greater than or equal to $x$ -- e.g., $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection (e.g., $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e., the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
+Define $f \colon \mathbb Z \to \mathbb R$ as $f(n) = n$, for all $n \in \mathbb Z$. Then $f$ is an injection, but not a surjection (e.g.\ $1.5 \in \mathbb R$ has no preimage under $f$). Define $g \colon \mathbb R \to \mathbb Z$ as $g(x) = \lceil x \rceil$, the ceiling of $x$ (i.e.\ the smallest integer greater than or equal to $x$ -- e.g.\ $\lceil 3.2 \rceil = 4$, and $\lceil -1.5 \rceil = 0$). Then $g$ is a surjection (for any $n \in \mathbb Z$, $n \in \mathbb R$ as well, and $g(n) = \lceil n \rceil = n$), but not an injection (e.g.\ $g(1.8) = g(2) = 2$). Similarly, define $h \colon \mathbb R \to \mathbb Z$ as $h(x) = \lfloor x \rfloor$, the floor of $x$ (i.e.\ the greatest integer less than or equal to $x$). Then $h$ is a surjection (but not an injection) from $\mathbb R$ to $\mathbb Z$, different from $g$.
 \end{Example}
 
-\begin{Example}
+\begin{Example}\label{ex:RIsom01}
 Define $f \colon \mathbb R \to \mathbb (0,1)$ (the set of all real numbers strictly between $0$ and $1$) as
 \begin{equation*}
 f(x) = \dfrac{1}{1 + e^x}.
 \end{equation*}
-Firstly, note that this is indeed a well-defined function from $\mathbb R$ to $(0, 1)$, since $e^x \ge 0$ for all $x \in \mathbb R$. Now, if $f(x) = f(y)$, then observe that $e^x = e^y$, or $e^{x - y} = 1$, which implies that $x = y$. Hence, $f$ is injective. Next, let $y$ be any element of the codomain, $(0, 1)$. Then observe that $\frac 1 y > 1$, and hence $\frac 1 y - 1$ is a positive real number. Take $x = \log\pqty{\frac 1 y - 1}$, so that $\frac 1 {1 + e^x} = y$, i.e., $f(x) = y$. Thus, for every $y \in (0, 1)$, there exists $x \in \mathbb R$ such that $f(x) = y$, which shows that $f$ is surjective. Therefore, $f$ is a bijection from $\mathbb R$ to $(0, 1)$.
+Firstly, note that this is indeed a well-defined function from $\mathbb R$ to $(0, 1)$, since $e^x \ge 0$ for all $x \in \mathbb R$. Now, if $f(x) = f(y)$, then observe that $e^x = e^y$, or $e^{x - y} = 1$, which implies that $x = y$. Hence, $f$ is injective. Next, let $y$ be any element of the codomain, $(0, 1)$. Then observe that $\frac 1 y > 1$, and hence $\frac 1 y - 1$ is a positive real number. Take $x = \log\pqty{\frac 1 y - 1}$, so that $\frac 1 {1 + e^x} = y$, i.e.\ $f(x) = y$. Thus, for every $y \in (0, 1)$, there exists $x \in \mathbb R$ such that $f(x) = y$, which shows that $f$ is surjective. Therefore, $f$ is a bijection from $\mathbb R$ to $(0, 1)$.
 \end{Example}
 
 \begin{Example}
-Let $A = \{a_1, a_2, \ldots, a_n\}$, and let $P = 2^A$, the power set of $A$. Let $X$ be the set of all binary strings of length $n$ -- i.e., the set of all sequences of the form $x_1 x_2 \cdots x_n$, where $x_i \in \{0, 1\}$, $i = 1, \ldots, n$. Define a function $\chi \colon P \to X$ as follows: For each $S \in P$, $\chi(S) = b_1 b_2 \cdots b_n$ such that $b_i = 1$ if $a_i \in S$ and $b_i = 0$ if $a_i \notin S$. Then $\chi$ is a bijection, as shown below.
+Let $A = \{a_1, a_2, \ldots, a_n\}$, and let $P = 2^A$, the power set of $A$. Let $X$ be the set of all binary strings of length $n$ -- i.e.\ the set of all sequences of the form $x_1 x_2 \cdots x_n$, where $x_i \in \{0, 1\}$, $i = 1, \ldots, n$. Define a function $\chi \colon P \to X$ as follows: For each $S \in P$, $\chi(S) = b_1 b_2 \cdots b_n$ such that $b_i = 1$ if $a_i \in S$ and $b_i = 0$ if $a_i \notin S$. Then $\chi$ is a bijection, as shown below.
 
 First, suppose that for $S, T \in P$, $\chi(S) = \chi(T) = b_1 b_2 \cdots b_n$ (say). Then, for each $i = 1, \ldots, n$, $a_i \in S$ if and only if $b_i = 1$, which is equivalent to $a_i \in T$. Thus, $S = T$. This shows that $\chi$ is injective.
 
@@ -419,7 +419,7 @@ B \ar[r]_{\id_B} & B
 Let $A$ be a set.
 \begin{enumerate}
 \item Show that $\id_A \circ \id_A = \id_A$.
-\item Show that if $i \colon A \to A$ is any function satisfying the same property as the identity function, i.e., for every set $B$ and every function $f \colon A \to B$, $f \circ i = f$, and for every set $C$ and every function $g \colon C \to A$, $i \circ g = g$,  then $i = \id_A$.
+\item Show that if $i \colon A \to A$ is any function satisfying the same property as the identity function, i.e.\ for every set $B$ and every function $f \colon A \to B$, $f \circ i = f$, and for every set $C$ and every function $g \colon C \to A$, $i \circ g = g$,  then $i = \id_A$.
 \end{enumerate}
 \end{Exercise}
 
@@ -455,9 +455,9 @@ A function $f \colon A \to B$ is an isomorphism if and only if it is a bijection
 \end{Theorem}
 
 \begin{proof}
-First, suppose that $f$ is a bijection. We need to show that $f$ is an isomorphism from $A$ to $B$ -- i.e., that it has an inverse. We construct the inverse as follows. Define $g \colon B \to A$ as $g(b) = a$, where $a \in A$ is such that $f(a) = b$, for each $b \in B$.
+First, suppose that $f$ is a bijection. We need to show that $f$ is an isomorphism from $A$ to $B$ -- i.e.\ that it has an inverse. We construct the inverse as follows. Define $g \colon B \to A$ as $g(b) = a$, where $a \in A$ is such that $f(a) = b$, for each $b \in B$.
 
-To see that $g$ is well-defined, observe that as $f$ is bijective, for every $b \in B$, there exists an $a \in A$ such that $f(a) = b$, and as $f$ is injective, this element $a$ is unique (i.e., if $f(a') = b = f(a)$, then $a' = a$).
+To see that $g$ is well-defined, observe that as $f$ is bijective, for every $b \in B$, there exists an $a \in A$ such that $f(a) = b$, and as $f$ is injective, this element $a$ is unique (i.e.\ if $f(a') = b = f(a)$, then $a' = a$).
 
 To see that $g$ is the inverse of $f$, first consider any $a \in A$. If $f(a) = b$, then $g(b) = a$, by definition of $g$. That is, $g(f(a)) = a$, which shows that $g \circ f = \id_A$. Next, consider any $b \in B$. Then, by definition of $g$, $g(b) = a \in A$ such that $f(a) = b$. That is, $f(g(b)) = b$, which shows that $f \circ g = \id_B$. Thus, $g$ is the inverse of $f$, and therefore $f$ is an isomorphism.
 
@@ -468,9 +468,108 @@ Conversely, suppose that $f \colon A \to B$ is an isomorphism. We will show that
 The \newterm{cardinality} of a set is the number of elements in it. As sets can have infinitely many elements, we will define cardinality more rigorously using the concept of set isomorphisms.
 
 \begin{Definition}
-Two sets $A$ and $B$ have the same \newterm{cardinality} if $A \cong B$. If $A \cong \{1, \ldots, n\}$, then $A$ is \newterm{finite} of cardinality $n$. If $A \cong \mathbb N$, then $A$ is \newterm{countably infinite}. In either case, $A$ is \newterm{countable}. Otherwise, $A$ is \newterm{uncountable} or \newterm{uncountably infinite}.
+Two sets $A$ and $B$ have the same \newterm{cardinality} if $A \cong B$. If $A \cong \{1, \ldots, n\}$, then $A$ is \newterm{finite} of cardinality $n$. If $A$ is not finite, then it is \newterm{infinite}. If $A \cong \mathbb N$, then $A$ is \newterm{countably infinite}. If $A$ is either finite or countably infinite, it is \newterm{countable}. Otherwise, $A$ is \newterm{uncountable} or \newterm{uncountably infinite}.
 \end{Definition}
 
-%\begin{appendices}
-%
-%\end{appendices}
+\begin{Exercise}
+Prove that $\mathbb Z$ is countably infinite.
+\end{Exercise}
+
+\begin{Solution*}
+Define a function $f \colon \mathbb Z \to \mathbb N$ by
+\begin{equation*}
+f(n) = \begin{cases}
+2(n + 1), & n \ge 0 \\
+2|n| - 1, & n < 0.
+\end{cases}
+\end{equation*}
+Then $f$ is a bijection, which can be shown as follows. Suppose $f(m) = f(n)$, for some $m, n \in \mathbb Z$. Then, either $m, n \ge 0$ and $2(n + 1) = 2(m + 1)$, which implies that $m = n$, or else $m, n < 0$, and $2|m| - 1 = 2|n| - 1$, which implies $|m| = |n$, and hence $m = n$ (since both are negative). Therefore, $f$ is injective. Now, for any $n \in \mathbb N$, $n$ is either even or odd. If it is even, then it is of the form $2k + 2$ for some integer $k \ge 0$, i.e.\ $n = f(k)$. If it is odd, then it is of the form $2k - 1$, for some $k \ge 1$, i.e.\ $n = 2|-k| - 1 = f(-k)$. Therefore, $f$ is surjective.
+
+Since there is a bijection from $\mathbb Z$ to $\mathbb N$, we have $\mathbb Z \cong \mathbb N$. Therefore, $\mathbb Z$ is countably infinite.
+\end{Solution*}
+
+\begin{Exercise}
+Let $A$ and $B$ be two sets. Prove the following.
+\begin{enumerate}
+\item If $A$ and $B$ are finite, then $A \cup B$ is finite.
+\item If $A$ is finite and $B$ is countably infinite, then $A \cup B$ is countably infinite.
+\item If $A$ and $B$ are countably infinite, then $A \cup B$ is countably infinite.
+\item If $A$ and $B$ are countable, $A \cup B$ is countable.
+\end{enumerate}
+Hence show that if $A_1, \ldots, A_n$ are $n$ countable sets, and $A = A_1 \cup \cdots \cup A_n$, then
+\begin{enumerate}
+\item $A$ is countable, and
+\item $A$ is countably infinite if and only if at least one $A_i$ is countably infinite.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Remark*}\label{rem:NBijectionIsEnumeration}
+A bijection from $\mathbb N$ to a set $S$ defines an enumeration of all the distinct elements of $S$. That is, suppose that $f \colon \mathbb N \to S$ is a bijection. Now, $f(1)$ is an element of $S$, say $s_1$. Then, $f(2)$ is another element of $S$, say $s_2$, and $s_1 \ne s_2$ (since $f$ is injective). Similarly, $f(3), f(4), \ldots$, are distinct elements $s_3, s_4, \ldots$ of $S$. Since $f$ is surjective, each element of $S$ is $s_n = f(n)$, for some $n \in \mathbb N$. Thus, in order to show that a set is countably infinite, it is sufficient to give an enumeration of all its distinct elements as a sequence. But note that in this case, one must prove that \emph{every} element of the set is indeed an $n$\nth term of the sequence for some positive integer $n$.
+\end{Remark*}
+
+\begin{Lemma}\label{lem:CIxCI=CI}
+If $A$ and $B$ are countably infinite, then $A \times B$ is countably infinite.
+\end{Lemma}
+
+\begin{proof}
+Since $A$ and $B$ are countably infinite, there exist bijections $a \colon \mathbb N \to A$ and $b \colon \mathbb N \to B$. For each $n \in \mathbb N$, denote $a(n)$ by $a_n$, and $b(n)$ by $b_n$ (see \cref{rem:NBijectionIsEnumeration}). Then, $A = \{a_1, a_2, \ldots\}$ and $B = \{b_1, b_2, \ldots\}$. Now,
+\begin{equation*}
+A \times B = \{(a_1, b_1), (a_1, b_2), (a_1, b_3), \ldots, (a_2, b_1), (a_2, b_2), (a_2, b_3), \ldots\}.
+\end{equation*}
+Consider the elements of $A \times B$ as being arranged on an infinite grid as shown below.
+\begin{equation*}
+\begin{matrix}
+(a_1, b_1) & (a_1, b_2) & (a_1, b_3) & \cdots \\
+(a_2, b_1) & (a_2, b_2) & (a_2, b_3) & \cdots \\
+(a_3, b_1) & (a_3, b_2) & (a_3, b_3) & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{matrix}
+\end{equation*}
+Now, we can define an enumeration of the elements of $A \times B$ by reading the elements along the antidiagonals, starting from $(a_1, b_1)$. Explicitly, the enumeration is
+\begin{equation*}
+(a_1, b_1),\, (a_1, b_2),\, (a_2, b_1),\, (a_1, b_3),\, (a_2, b_2),\, (a_3, b_1),\, \ldots.
+\end{equation*}
+Since each anti-diagonal is finite, every element $(a_m, b_n)$ appears in the above enumeration after some finite number of terms. Indeed, it is not hard to verify that this enumeration defines a bijection $f \colon A \times B \to \mathbb N$, given by $f(a_m, b_n) = \binom {m + n - 1} 2 + m$.
+\end{proof}
+
+From \cref{lem:CIxCI=CI}, it is clear that $\mathbb N \times \mathbb N$, $\mathbb Z \times \mathbb Z$, and $\mathbb Z \times \mathbb N$ are countably infinite. Since each rational number can be written in the form $\frac a b$ where $a \in \mathbb Z$ and $b \in \mathbb N$, the set of rational numbers, it follows that $\mathbb Q$, is countable. Clearly, it is not finite. So, in fact, it is countably infinite. 
+
+\begin{Theorem}
+The set of rational numbers, $\mathbb Q$, is countably infinite. \hfill $\qed$
+\end{Theorem}
+
+\subsubsection{Uncountable Sets}\label{subsec:UncountableSets}
+All the examples of infinite sets that we have seen so far were countable. Are there any uncountable sets at all? We shall show that the set of real numbers is uncountably infinite. Recall from \cref{ex:RIsom01} that $\mathbb R \cong (0, 1)$. Thus, in order to show that $\mathbb R$ is uncountable, it is enough to show that $(0, 1)$ is uncountable.
+
+\begin{Theorem}
+The open interval $(0, 1)$ consisting of all real numbers strictly between $0$ and $1$ is uncountably infinite.
+\end{Theorem}
+
+\begin{proof}
+Let $f \colon \mathbb N \to (0, 1))$ be any injection from $\mathbb N$ to $(0, 1)$. Since each real number in the interval $(0, 1)$ has a unique infinite decimal expansion, for each $n \in \mathbb N$, $f(n)$ can be written in the form $f(n) = 0.a_{n1} a_{n2} a_{n3} \cdots$, where $0 \le a_{ni} \le 9$, $i = 1, 2, \ldots$.
+
+Let $x = 0.x_1 x_2 x_3 \ldots$, where
+\begin{equation*}
+x_n = \begin{cases}
+2, & a_{nn} \ne 2 \\
+3, & a_{nn} = 2.
+\end{cases}
+\end{equation*}
+Then clearly, $x \in (0, 1)$. But $x \ne f(n)$ for any $n \in \mathbb N$, as can be seen by comparing the $n$\nth digits of $x$ and $f(n)$. If the $n$\nth digit of $f(n)$ is $2$, then the $n$\nth digit of $x$ is $x_n = 3$, whereas if the $n$\nth digit of $f(n)$ is not $2$, then that of $x$ is $x_n = 2$. Thus, $x \notin \im f$, and hence $f$ is not surjective.
+
+The above argument shows that no injection from $\mathbb N$ to $(0, 1)$ can be surjective. That is, there is no bijection (surjective injection) from $\mathbb N$ to $(0, 1)$, and therefore the latter is not countably infinite. Since $(0, 1)$ is infinite, but not countably infinite, it is uncountably infinite.
+\end{proof}
+
+\begin{Exercise}
+Show that the cardinality of any set is different from that of its power set.
+\end{Exercise}
+
+\begin{Solution*}
+If $A$ is a finite set of cardinality $n$, then $|2^A| = 2^n \ne n$. Now, suppose that $A$ is an infinite set.
+
+Let $f \colon A \to 2^A$ be an injection. Note that for each $a \in A$, $f(a)$ is an element of $2^A$, i.e.\ $f(a)$ is a subset of $A$. Define a subset $X$ of $A$ as follows: For each $a \in A$, $a \in X$ if and only if $a \notin f(a)$.
+
+Observe that $X \notin \im f$. For, if $X = f(x)$ for some $x \in A$, then either $x \in X$, in which case $x \notin f(x)$, or $x \notin X$, in which case $x \in f(x)$. But $f(x) = X$, which is a contradiction.
+
+Thus, $f$ is not surjective. Therefore, there is no surjective injection, i.e.\ bijection from $A$ to $2^A$, and hence $A \not\cong 2^A$.
+\end{Solution*}
