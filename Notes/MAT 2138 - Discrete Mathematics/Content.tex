@@ -53,7 +53,7 @@ defines $S$ to be the set of all elements obtained by doubling an integer -- in 
 
 \subsection{Relations Among Sets}\label{subsec:SetRels}
 
-A set $A$ is a \newterm{subset} of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is an element of $B$. That is, for any element $a$ (of the universal set), $a \in A \implies a \in B$. Then $B$ is a \newterm{superset} of $A$, denoted by $B \supseteq A$. We may also say that $B$ \newterm{contains} $A$, or that $A$ is contained in $B$.
+A set $A$ is a \newterm{subset} of a set $B$, denoted by $A \subseteq B$, if every element of $A$ is an element of $B$. That is, for any element $a$ (of the universal set), $a \in A$ implies $a \in B$. Then $B$ is a \newterm{superset} of $A$, denoted by $B \supseteq A$. We may also say that $B$ \newterm{contains} $A$, or that $A$ is contained in $B$.
 
 Two sets $A$ and $B$ are \newterm{equal}, written $A = B$, if each contains the other -- i.e.\ $A \subseteq B$ and $B \subseteq A$. This is equivalent to the statement that $A$ and $B$ have exactly the same elements. Otherwise, $A$ is not equal to $B$ (written $A \ne B$). $A$ is a \newterm{proper} subset of $A$ (or is properly contained in $B$) if $A \subseteq B$ and $A \ne B$. Then we write $A \subsetneq B$. Similarly, $B$ is a proper superset of $A$, denoted by $B \supsetneq A$, if $B \supseteq A$ and $B \ne A$.
 
@@ -163,7 +163,7 @@ The \newterm{Cartesian product} of two sets $A$ and $B$, denoted by $A \times B$
 \begin{equation*}
 A \times B = \qty{\, (a, b) \mid a \in A,\, b \in B \,}.
 \end{equation*}
-The Cartesian product of $A$ with itself is often written as $A^2$. Similarly, the Cartesian product $A \times \cdots A$ with $n$ terms (defined as an iterated Cartesian product of two sets at a time) is denoted by $A^n$. 
+The Cartesian product of $A$ with itself is often written as $A^2$. Similarly, the Cartesian product $A \times \cdots \times A$ with $n$ terms (defined as an iterated Cartesian product of two sets at a time) is denoted by $A^n$. 
 
 The \newterm{disjoint union} (or \newterm{coproduct}) of two sets $A$ and $B$, denoted by $A \sqcup B$, consists of all the ordered pairs of the form $(x, i)$ where $i = 1$ when $x \in A$ and $i = 2$ when $x \in B$. That is,
 \begin{equation*}
@@ -566,7 +566,6 @@ The above argument shows that no injection from $\mathbb N$ to $(0, 1)$ can be s
 Show that the cardinality of any set is different from that of its power set.
 \end{Exercise}
 
-%\begin{Solution*}
 \solution{PowSetCard}{
 If $A$ is a finite set of cardinality $n$, then $|2^A| = 2^n \ne n$. Now, suppose that $A$ is an infinite set.
 
@@ -583,7 +582,7 @@ Thus, $f$ is not surjective. Therefore, there is no surjective injection, i.e.\ 
 
 \subsection{Deterministic Finite Automata}\label{subsec:DFA}
 
-A \newterm{deterministic finite automaton}\footnote{The plural of \emph{automaton} is \emph{automata}} (\newterm{DFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
+A \newterm{deterministic finite automaton}\footnote{The plural of \emph{automaton} (\textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa t\textschwa n} or \textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa \textsecstress t\textturnscripta n}) is \emph{automata} (\textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa t\textschwa}).} (\newterm{DFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
 \begin{itemize}
 \item $Q$ is a finite set whose elements are \newterm{states}.
 \item $\Sigma$ is a finite \newterm{input alphabet}, whose elements are \newterm{input symbols}.
@@ -963,6 +962,20 @@ But now, $\delta(B, \ta) = \delta(C, \ta) = \varnothing$. Hence, $\delta'(BC, \t
 \end{center}
 \end{Example}
 
+\subsubsection{Product Construction}\label{subsubsec:ProductFA}
+
+If $L_1$ and $L_2$ and languages over the same alphabet $\Sigma$, and $M_1$ and $M_2$, respectively, are the NFAs accepting them, then the \newterm{intersection} of $L_1$ and $L_2$,
+\begin{equation*}
+L_1 \cap L_2 = \qty{\, w \in \Sigma^* \mid w \in L_1 ~\text{and}~ w \in L_2 \,}
+\end{equation*}
+is accepted by the product of $M_1$ and $M_2$, defined as follows: Let $M_1 = (Q_1, \Sigma, \delta_1, q_{10}, F_1)$ and $M_2 = (Q_2, \Sigma, \delta_2, q_{20}, F_2)$. Then their \newterm{product} $M_1 \times M_2 = (Q, \Sigma, \delta, q_0, F)$, where
+\begin{enumerate}[label = (\roman*)]
+\item $Q = Q_1 \times Q_2$, the Cartesian product of $Q_1$ and $Q_2$. That is, each state of $M_1 \times M_2$ is a pair of states, the first from $M_1$ and the second from $M_2$.
+\item For each $q_1 \in Q_1$, $q_2 \in Q_2$, and $s \in \Sigma$, $\delta((q_1, q_2), s) = (\delta_1(q_1, s), \delta_2(q_2, s))$.
+\item $q_0 = (q_{10}, q_{20})$.
+\item $F = F_1 \times F_2$.
+\end{enumerate}
+
 \subsection{Regular Expressions}\label{subsec:RE}
 
 A \newterm{regular expression} (\newterm{RE}) over an alphabet $\Sigma$ is an expression consisting of one or more of the symbols in $\Sigma$ or $\varepsilon$ or $\varnothing$, one or both of the operators $+$ and ${}^*$, and parentheses $($ and $)$, whose syntax is defined recursively as follows:
@@ -997,7 +1010,7 @@ L_1 \cup L_2 = \qty{\, w \in \Sigma^* \mid w \in L_1 ~\text{or}~ w \in L_2 \,}
 L_1 L_2 = \qty{\, w_1 w_2 \mid w_1 \in L_1,\, w_2 \in L_2 \,}
 \end{equation*}
 
-\item The \newterm{Kleene star}\footnote{Named after the mathematician Stephen Cole Kleene, \href{https://foldoc.org/Stephen+Kleene}{pronounced \ttt{klay'nee}}.} of $L_1$ is $L_1^*$, the language of all strings obtained by concatenating any finite number of strings of $L_1$ together.
+\item The \newterm{Kleene star}\footnote{Named after the mathematician Stephen Cole Kleene, \href{https://foldoc.org/Stephen+Kleene}{pronounced \ttt{klay-nee} (\textipa{\textprimstress}kle\textsci ni)}.} of $L_1$ is $L_1^*$, the language of all strings obtained by concatenating any finite number of strings of $L_1$ together.
 \begin{align*}
 L_1^* & = \qty{\, w_1 w_2 \dots w_n \mid w_i \in L_i,\, i = 1, \ldots, n,\, n \in \mathbb N_0 \,} \\
 & = \{\varepsilon\} \cup L_1 \cup L_1 L_1 \cup L_1 L_1 L_1 \cup \cdots
@@ -1150,6 +1163,80 @@ Now we eliminate the non-initial and non-accept states one by one.
 \end{enumerate}
 Thus, an RE equivalent to the given NFA is $(\tz + \tone)^* \tone\tone\tz (\tz + \tone)^*$. We easily verify that indeed, this is an equivalent RE. The original NFA accepts all binary strings containing the substring $\tone\tone\tz$. Every such string can be written as some binary string (i.e.\ a string generated by $(\tz + \tone)^*$), followed by $\tone\tone\tz$, (generated by $\tone\tone\tz$) followed by any binary string (generated by $(\tz + \tone)^*$)).
 \end{Example}
+
+\begin{Example} Consider the NFA shown below.
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+   \node[state, initial, minimum size = 5mm] (W)   {W};
+   \node[state, minimum size = 5mm] (X) [above right=of W] {X};
+   \node[state, minimum size = 5mm] (Y) [below right=of W] {Y};
+   \node[state, accepting, minimum size = 5mm] (Z) [below right=of X] {Z};
+   \path[->] 
+   (W) edge  node {\ta} (X)
+       edge  node [swap] {\tb} (Y)
+         
+   (X) edge  node  {\tb} (Z)
+       edge  node  {\tb} (Y)
+       edge [loop above] node {\ta} ()
+       
+   (Y) edge  node [swap] {\ta} (Z)
+       edge [loop below] node {\tb} ();
+\end{tikzpicture}
+\end{center}
+This NFA is already in the form necessary to apply the conversion procedure, as the start state $W$ has no arrows entering it, and there is a unique accept state $Z$ with no arrows leaving it.
+\begin{enumerate}
+\item There is only one arrow from a different state entering $X$, which is from $W$, there are two arrows leaving $X$, which are to $Y$ and $Z$, and there is a self-loop on $X$ labelled $a$. On eliminating $X$, we get the following GFA.
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+   \node[state, initial, minimum size = 5mm] (W)   {W};
+   \node[state, minimum size = 5mm] (Y) [below right=of W] {Y};
+   \node[state, accepting, minimum size = 5mm] (Z) [above right=of Y] {Z};
+   \path[->] 
+   (W) edge  node  {$\ta \ta^* \tb$} (Z)
+       edge  node  [swap] {$\tb + \ta \ta^* \tb$} (Y)
+       
+   (Y) edge  node [swap] {\ta} (Z)
+       edge [loop below] node {\tb} ();
+\end{tikzpicture}
+\end{center}
+
+\item Next, we eliminate $Y$.
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+   \node[state, initial, minimum size = 5mm] (W)   {W};
+   \node[state, accepting, minimum size = 5mm] (Z) [right = 5cm of W] {Z};
+   \path[->] 
+   (W) edge  node  {$\ta \ta^* \tb + (\tb + \ta \ta^* \tb)\tb^*\ta$} (Z);
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+Thus, the equivalent RE is $\ta \ta^* \tb + (\tb + \ta \ta^* \tb)\tb^*\ta$.
+\end{Example}
+
+\begin{Exercise}
+Convert the NFA given below to an RE.
+\begin{center}
+\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+   \node[state, initial, minimum size = 5mm] (A) {A};
+   \node[state, minimum size = 5mm] (B) [above right=of A, xshift = 1cm] {B};
+   \node[state, accepting, minimum size = 5mm] (C) [below right = of A, xshift = 1cm] {C};
+   \node[state, accepting, minimum size = 5mm] (D) [below right = of B, xshift = 1cm] {D};
+   \path[->] 
+   (A) edge  node {\tz} (B)
+       edge  node [swap] {$\varepsilon$} (C)
+         
+   (B) edge  node  {\tone} (D)
+       edge [loop above] node {\tone} ()
+       
+   (C)   edge  node   {$\varepsilon$} (B)
+   (C.355) edge  node [yshift = 2pt] {\tz} (D.235)
+       
+   (D.205) edge node [yshift=-2pt] {\tz} (C.25);
+\end{tikzpicture}
+\end{center}
+
+
+\end{Exercise}
 
 \clearpage
 
@@ -1587,7 +1674,7 @@ w_{ij} = \begin{cases}
 \end{cases}
 \end{equation*}
 
-Dijkstra's algorithm is a procedure to determine the shortest paths (and hence distances) from a given source vertex $s$ of $G$ to all the other vertices. 
+Dijkstra's algorithm\footnote{Named after its inventor, the computer scientist and mathematician Edsger Dijkstra, pronounced \texttt{dyke-stra} (\textipa{\textprimstress d\textepsilon ikstra\textlengthmark} or \textipa{\textprimstress da\textsci kstr\textschwa}).} is a procedure to determine the shortest paths (and hence distances) from a given source vertex $s$ of $G$ to all the other vertices. 
 
 \begin{algorithm}\caption{Dijkstra's algorithm}\label{alg:Dijkstra}
 \begin{algorithmic}[1]
