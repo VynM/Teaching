@@ -1,0 +1,108 @@
+% !TeX root = Theory of Computation.tex
+
+\usepackage{natbib}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm, bbm}
+\usepackage{tipa}
+\usepackage[all, cmtip, 2cell]{xy}
+\usepackage{graphicx, subcaption}
+\usepackage{physics}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+\tikzstyle{accepting} = [double distance = 1.3pt, outer sep = 1pt+\pgflinewidth]
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\usepackage{xspace, cancel}
+
+\usepackage{enumitem, array}
+\setlist{noitemsep}
+
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\setcounter{tocdepth}{3}
+\usepackage{tocloft}
+\renewcommand{\cftdot}{}
+
+\usepackage{hyperref}
+\definecolor{linkcolor}{RGB}{32, 96, 192}
+\hypersetup{colorlinks, linkcolor = linkcolor, urlcolor = linkcolor, linktocpage = true}
+\usepackage{bookmark}
+\bookmarksetup{color = [RGB]{32, 96, 192}}
+
+\usepackage[capitalise]{cleveref}
+\crefformat{enumi}{#2\textup{#1}#3}
+
+\usepackage{kbordermatrix}
+\usepackage{algorithm, algpseudocode}
+
+\usepackage{ocgx2}
+
+\usepackage[intoc]{nomencl}
+\makenomenclature
+
+\usepackage[toc, page]{appendix}
+
+\usepackage{newpxmath}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Observation}[Theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem*{Definition*}{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem*{Example*}{Example}
+\newtheorem{Exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{Remark*}{Remark}
+\newtheorem*{Note*}{Note}
+\newtheorem*{Solution*}{Solution}
+
+\newcommand{\solution}[2]{
+\noindent\textit{\switchocg{sol:#1}{Solution.}} \begin{ocg}{Solution}{sol:#1}{0}
+#2
+\end{ocg}
+}
+
+\crefname{Section}{Section}{Sections}
+\crefname{Exercise}{Exercise}{Exercises}
+
+\definecolor{alertcolor}{rgb}{0.8, 0.5, 0}
+\newcommand{\newterm}[1]{{\color{alertcolor} #1}}
+
+\definecolor{hintcolor}{rgb}{0, 0, 0.5}
+\newcommand{\hint}[2]{
+\switchocg{hint:#1}{\color{hintcolor}\textbf{\small Hint.}}
+\begin{ocg}{Hint}{hint:#1}{0}
+\small \color{hintcolor} #2
+\end{ocg}
+}
+
+\newcommand{\rev}{^\mathrm{R}}
+\DeclareMathOperator{\Nb}{N}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\newcommand{\ttt}{\texttt}
+\newcommand{\tz}{\ttt 0}
+\newcommand{\tone}{\ttt 1}
+\newcommand{\ta}{\ttt a}
+\newcommand{\tb}{\ttt b}
+\newcommand{\tc}{\ttt c}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\symdiff}{\mathbin{\triangle}}
+\newcommand{\nth}{\textsuperscript{th}\xspace}
+
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
