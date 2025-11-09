@@ -282,14 +282,14 @@ An equivalence relation on a set is essentially the same as a partition of the s
 The subsets $P_i$, $i \in I$, are called the \newterm{parts} of the partition $P$.
 
 \begin{Example}
-Let $S = \{1, 2, 3, 4, 5\}$. Then $P = \{\{1, 3, 5\}, \{2, 4, 6\}\}$ and $Q = \{\{1, 4\}, \{2\}, \{3, 5\}\}\}$ are two different partitions of $S$.
+Let $S = \{1, 2, 3, 4, 5\}$. Then $P = \{\{1, 3, 5\}, \{2, 4\}\}$ and $Q = \{\{1, 4\}, \{2\}, \{3, 5\}\}\}$ are two different partitions of $S$.
 \end{Example}
 
 \begin{Exercise}\label{exer:EqRel->Partition}
 Let $\sim$ be an equivalence relation on a set $A$. Show that the following hold:
 \begin{enumerate}
 \item For all $a \in A$, $a \in [a]$, and hence, each equivalence class is non-empty and $A = \bigcup_{a \in A} [a]$.
-\item For all $a, b \in A$, if $a \ne b$, then $[a] \cap [b] = \varnothing$ (i.e.\ any two equivalence classes are either disjoint or identical).
+\item For all $a, b \in A$, if $[a] \ne [b]$, then $[a] \cap [b] = \varnothing$ (i.e.\ any two equivalence classes are either disjoint or identical).
 \item The set of all equivalence classes of $\sim$ is a partition of $A$.
 \end{enumerate}
 \end{Exercise}
@@ -578,667 +578,667 @@ Thus, $f$ is not surjective. Therefore, there is no surjective injection, i.e.\ 
 
 \clearpage
 
-\section{Finite Automata and Regular Expressions}\label{sec:FAandRE}
-
-\subsection{Deterministic Finite Automata}\label{subsec:DFA}
-
-A \newterm{deterministic finite automaton}\footnote{The plural of \emph{automaton} (\textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa t\textschwa n} or \textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa \textsecstress t\textturnscripta n}) is \emph{automata} (\textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa t\textschwa}).} (\newterm{DFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
-\begin{itemize}
-\item $Q$ is a finite set whose elements are \newterm{states}.
-\item $\Sigma$ is a finite \newterm{input alphabet}, whose elements are \newterm{input symbols}.
-\item $\delta \colon Q \times \Sigma \to Q$ is the \newterm{transition function}.
-\item $q_0 \in Q$ is the \newterm{start state} (or \newterm{initial state}).
-\item $F \subseteq Q$ is the set of \newterm{accept states} (or \newterm{final states}).
-\end{itemize}
-
-The transition function may be specified using a \newterm{transition table}, which has rows indexed by the states and columns indexed by the input symbols, with the entry in the row of $q$ and column of $s$ being the value of $\delta(q, s)$). See \cref{ex:DFAOdd1s}.
-
-A DFA has a graphical representation as a directed graph in which each vertex is a state and each edge is a \newterm{transition}. That is, if $\delta(q_1, s) = q_2$ (where $q_1$ and $q_2$ are states and $s$ is an input symbol), then the graph has an edge labelled $s$ from the vertex $q_1$ to the vertex $q_2$. It is usual to depict the vertices by circles, with the vertex label (name of the state) written inside the circle, if necessary. The start state is indicated by an arrow without a source entering it, and accept states are indicated by using double-circles. See \cref{ex:DFAOdd1s}.
-
-\begin{Example}\label{ex:DFAOdd1s}
-Consider a DFA $M = (Q, \Sigma, \delta, A, F)$, where $Q = \{A, B, C\}$, $\Sigma = \{0, 1\}$, $F = \{B\}$, and $\delta$ is as defined by the transition table given below.
-\begin{equation*}
-\begin{array}{r|cc}
-\delta & 0 & 1 \\
-\hline
-A & A & B \\
-B & B & A
-\end{array}
-\end{equation*}
-The graphical representation of $M$ is shown below.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 5mm] (A) {$A$};
-	\node[state, accepting, minimum size = 5mm] (B) [right = of A] {$B$};
-	\path[->]
-	(A) edge [loop above]	node {\tz}	()
-	(A) edge [bend left]	node {\tone}	(B)
-	(B) edge [loop above]	node {\tz}	()
-	(B) edge [bend left]	node {\tone}	(A);
-\end{tikzpicture}
-\end{center}
-\end{Example}
-
-An \newterm{input} to a DFA $M = (Q, \Sigma, \delta, q_0, F)$ is a string over $\Sigma$ -- i.e.\ a finite sequence of symbols of $\Sigma$. If $w = s_1 s_2 \cdots s_k$ is an input string, and $q_1, q_2, \ldots, q_k \in Q$ such that
-\begin{equation*}
-\delta(q_0, s_1) = q_1,~ \delta(q_1, s_2) = q_2,~ \ldots,~ \delta(q_{k-1}, s_k) = q_k,
-\end{equation*}
-then \newterm{$M$ is in the state $q_k$ after reading the input $w$}. If $q_k \in F$ (i.e.\ $q_k$ is an accept state), then \newterm{$M$ accepts $w$}, otherwise it \newterm{rejects $w$}. For instance, the DFA $M$ given in \cref{ex:DFAOdd1s} is in the state $A$ after reading the input \ttt{0110}, and is in the state $B$ after reading \ttt{0100}. Since $A \notin \{F\}$ and $B \in \{F\}$, it rejects \ttt{0110} and accepts \ttt{0100}.
-
-Given the graphical representation of a DFA $M$, to check which state $M$ is in after reading an input $w = s_1 \cdots s_k$, simply begin at the start state of $M$ and follow the arrows labelled $s_1, \ldots, s_k$. For instance, in \cref{ex:DFAOdd1s}, the input \ttt{0110} corresponds to the sequence of states $A, A, B, A, A$, and the input \ttt{0100} corresponds to the sequence of states $A, A, B, B, B$ (note that in both cases, the first $A$ is the start state, and only the next four states are the results of transitions).
-
-A \newterm{language} over an alphabet $\Sigma$ is a set of strings over $\Sigma$. In particular, the language $\Sigma^*$ is the set of all strings over $\Sigma$. Thus, a language over $\Sigma$ is any subset of $\Sigma^*$. If $M$ is a DFA with input alphabet $\Sigma$, then $M$ \newterm{accepts the language} $L$ if $L$ is the set of all strings accepted by $M$. For example, the DFA $M$ in \cref{ex:DFAOdd1s} accepts the language of all binary strings containing an odd number of $\tone$s.
-
-\begin{Note*}
-Although we say simply that $M$ accepts $L$, this means not only that every string in $L$ is accepted by $M$, but also that every string \emph{not} in $L$ is \emph{rejected} by $M$.
-\end{Note*}
-
-\begin{Exercise}\label{exer:DFAEven0s}
-Construct a DFA that accepts all binary strings with an even number of $\tz$s.
-\end{Exercise}
-
-\solution{DFAEven0s}{
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, accepting, minimum size = 6mm] (A) {};
-	\node[state, minimum size = 6mm] (B) [right = of A] {};
-	\path[->]
-	(A) edge [loop above]	node {\tone}	()
-	(A) edge [bend left]	node {\tz}	(B)
-	(B) edge [loop above]	node {\tone}	()
-	(B) edge [bend left]	node {\tz}	(A);
-\end{tikzpicture}
-\end{center}
-}
-
-\begin{Exercise}\label{exer:DFABeginaab}
-Construct a DFA that accepts all strings over the alphabet $\{\ta, \tb\}$ that begin in \ttt{aab}.
-\end{Exercise}
-
-\solution{DFABeginaab}{
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {};
-	\node[state, minimum size = 6mm] (A) [right = of q0] {};
-	\node[state, minimum size = 6mm] (AA) [right = of A] {};
-	\node[state, accepting, minimum size = 6mm] (AAB) [right = of AA] {};
-	\node[state, minimum size = 6mm] (T) [below = of A] {};
-	\path[->] 
-	(q0) edge [] node {\ta}	(A)
-	(q0) edge [] node [swap] {\tb} (T)
-	(A) edge []	node {\ta}	(AA)
-	(A) edge [] node {\tb} (T)
-	(AA) edge []	node {\tb}	(AAB)
-	(AA) edge [] node {\ta} (T)
-	(AAB) edge [loop above]	node {\ta, \tb}	()
-	(T)	edge [loop below] node {\ta, \tb} ();
-\end{tikzpicture}
-\end{center}
-}
-
-Observe that two of the states of the DFA given in the solution of \cref{exer:DFABeginaab} are states that, once entered, cannot be left -- i.e.\ every transition out of such each of these states is into that state itself. Such a state is a \newterm{trap state}. One of these two trap states is an accept states -- which indicates that any input that leads to this state is accepted regardless of what the rest of the input contains -- while the other trap state is a non-accept state -- which indicates that any input leading to this state is \emph{permanently} rejected and that no further ``correction'' can be made to get the input accepted.
-
-\subsection{Nondeterministic Finite Automata}\label{subsec:NFA}
-
-A \newterm{nondeterministic finite automaton} (\newterm{NFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
-\begin{itemize}
-\item $Q$ is a finite set of states.
-\item $\Sigma$ is a finite input alphabet.
-\item $\delta \colon Q \times (\Sigma \cup \{\varepsilon\}) \to 2^Q$ is the transition function.
-\item $q_0 \in Q$ is the start state.
-\item $F \subseteq Q$ is the set of accept states.
-\end{itemize}
-
-Note that the transition function has codomain $2^Q$, the power set of $Q$. That is, each transition of a nondeterministic finite automaton is from one state into possibly several states or even to no state. The interpretation of this is that at each step, for a given input, the machine may have many options of the state to transition to, and an input string is accepted if there is at least one path from the start state to an accept state with arrows labelled by the input. More formally, an input $s_1 \cdots s_n$ is accepted by an NFA $M = (Q, \Sigma, \delta, q_0, F)$, if and only if there exist states $q_1, \ldots, q_k \in Q$, with $q_k \in F$, such that
-\begin{equation*}
-q_1 \in \delta(q_0, s_1),~ q_2 \in \delta(q_1, s_2),~ \ldots,~ q_k \in \delta(q_{k-1}, s_n).
-\end{equation*}
-A transition labelled by $\varepsilon$, i.e.\ a transition of the form $\delta(q, \varepsilon)$, is an \newterm{epsilon transition}, and does not consume an input symbol. An NFA also has a graphical representation similar to that of a DFA.
-
-\begin{Example}\label{ex:NFAContains110}
-The NFA shown below accepts all binary strings that contain \ttt{110} as a (contiguous) substring.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {};
-	\node[state, minimum size = 6mm] (q1) [right = of q0] {};
-	\node[state, minimum size = 6mm] (q11) [right = of q1] {};
-	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {};
-	\path[->] 
-	(q0) edge [] node {\tone}	(q1)
-	(q1) edge []	node {\tone}	(q11)
-	(q11) edge []	node {\tz}	(q110)
-	(q0) edge [loop above]	node {\tz, \tone}	()
-	(q110)	edge [loop above] node {\tz, \tone} ();
-\end{tikzpicture}
-\end{center}
-\end{Example}
-
-\begin{Example}\label{ex:NFAabcAlphabetical}
-The NFA shown below accepts all strings over the alphabet $\{\ta, \tb, \tc\}$ in which the symbols appear in alphabetical order.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (A) {};
-	\node[state, minimum size = 6mm] (B) [right = of A] {};
-	\node[state, accepting, minimum size = 6mm] (C) [right = of B] {};
-	\path[->] 
-	(A) edge []				node {$\varepsilon$}	(B)
-	(B) edge []				node {$\varepsilon$}	(C)
-	(A) edge [loop above]	node {\ta}	()
-	(B) edge [loop above]	node {\tb}	()
-	(C) edge [loop above]	node {\tc}	();
-\end{tikzpicture}
-\end{center}
-\end{Example}
-
-\subsubsection{Conversion of NFA to DFA}\label{subsubsec:NFAtoDFA}
-
-Trivially, a deterministic finite automaton can be considered as a nondeterministic finite automaton. That is, NFAs are at least as powerful as DFAs, in the sense that any language accepted by a DFA is also accepted by an NFA. Now we will see that conversely, NFAs are not strictly more powerful than DFAs. Any NFA can be converted to an equivalent DFA\footnote{Two finite automata are \newterm{equivalent} if the language accepted by them is the same}, by the \newterm{subset construction}. Each transition of an NFA is from one state to a set of states, whereas any transition of a DFA is from one state to a single state. The main idea of the subset construction is to consider each set of states of an NFA as a single state of a DFA. The conversion procedure is described below.
-
-Let $M = (Q, \Sigma, \delta, q_0, F)$ be an NFA (without epsilon transitions). Define a DFA $D_M = (Q', \Sigma, \delta', q_0', F')$ as follows:
-\begin{enumerate}
-\item Every set of states of the NFA $M$ becomes a single state of the DFA $D_M$. That is, $Q' = 2^Q$.
-\item The start state of $D_M$ is the singleton set containing the start state of $M$. That is, $q_0' = \{q_0\}$.
-\item The transition function $\delta'$ of $D_M$ is given by
-\begin{equation*}
-\delta'\pqty{ \{q_1, \ldots, q_k\}, s } = \bigcup_{i=1}^k \delta(q_i, s).
-\end{equation*}
-That is, given a state $q'$ of $D_M$, which is a set of states of the NFA $M$, and an input symbol $s \in \Sigma$, for each state $q \in q'$ $\delta(q, s)$ is some set of states of $M$. Combine all these sets $\delta(q, s)$ for $q \in q'$ (via union) to get $\delta'(q', s)$.
-\item Each state of $D_M$ that contains at least one accept state of $M$ becomes an accept state. That is,
-\begin{equation*}
-F' = \qty{\, q' \in Q' \mid q' \cap F \ne \varnothing \,}.
-\end{equation*}
-\end{enumerate}
-
-If $M$ has epsilon transitions, then $\delta'\pqty{ \{q_1, \ldots, q_k\}, s }$ will contain, in addition to the states described above, the states of $M$ that can be reached from each state in $\delta(q_i, s)$ via any sequence epsilon transitions. Similarly, $q_0'$ will be the set of all states of $M$ that can be reached from $q_0$ via (a sequence of) epsilon transitions.
-
-\begin{Example}
-Consider the NFA given in \cref{ex:NFAContains110}.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {$A$};
-	\node[state, minimum size = 6mm] (q1) [right = of q0] {$B$};
-	\node[state, minimum size = 6mm] (q11) [right = of q1] {$C$};
-	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {$D$};
-	\path[->] 
-	(q0) edge [] node {\tone}	(q1)
-	(q1) edge []	node {\tone}	(q11)
-	(q11) edge []	node {\tz}	(q110)
-	(q0) edge [loop above]	node {\tz, \tone}	()
-	(q110)	edge [loop above] node {\tz, \tone} ();
-\end{tikzpicture}
-\end{center}
-Here, the initial state is $q_0 = A$, and the set of accept states is $F = \{D\}$. Now, the equivalent DFA $D_M$ will $2^4 = 16$ states, namely $\varnothing, \{A\}, \{B\}, \{C\}, \spliteq \{D\}, \{A, B\}, \{A, C\}, \ldots, \{A, B, C, D\}$. For the sake of simplicity, we will denote these as $\varnothing, A, B, C, D, AB, AC, \ldots, ABCD$.
-
-Note that many of these states may be \newterm{unreachable} -- i.e.\ there will be no path from the start state to them. We will not include them in the graphical representation of $D_M$, even though, formally, they are part of $D_M$. To find all the \newterm{reachable} (i.e.\ not unreachable) states, we will begin with the start state, and iteratively add the other states while computing the transitions from the current states corresponding to each input symbol.
-
-\begin{enumerate}
-\item Initially, we have only the start state, $A$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (A) {$A$};
-\end{tikzpicture}
-\end{center}
-
-\item Next, $\delta'(A, \tz) = \delta(A, \tz) = \{A\}$ (written as just $A$) and $\delta'(A, \ttt  1) = \delta(A, \ttt  1) = \{A, B\}$ (written as just $AB$).
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {$A$};
-	\node[state, minimum size = 10mm] (AB) [right = of A] {$AB$};
-	\path[->] 
-	(A) edge [] node {\tone}	(AB)
-	(A) edge [loop above]	node {\tz}	();
-\end{tikzpicture}
-\end{center}
-
-\item Now, $\delta'(AB, \tz) = \delta(A, \tz) \cup \delta(B, \tz) = \{A\} \cup \varnothing = \{A\}$ (i.e.\ $A$) and $\delta'(AB, \tone) = ABC$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 11mm] (A) {$A$};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
-	\path[->] 
-	(A)		edge [bend left] 	node {\tone}	(AB)
-	(AB)	edge [bend left] 	node {\tz}	(A)
-	(AB)	edge [] 			node {\tone}	(ABC)
-	(A)		edge [loop above]	node {\tz}	();
-\end{tikzpicture}
-\end{center}
-
-\item Similarly, $\delta'(ABC, \tz) = AD$ and $\delta'(ABC, \tone) = ABC$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {$A$};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
-	\path[->] 
-	(A)		edge [bend left] 	node {\tone}	(AB)
-	(AB)	edge [bend left] 	node {\tz}	(A)
-	(AB)	edge [] 			node {\tone}	(ABC)
-	(ABC)	edge [] 			node {\tz}	(AD)
-	(A)		edge [loop above]	node {\tz}	()
-	(ABC)	edge [loop above]	node {\tone}	();
-\end{tikzpicture}
-\end{center}
-
-\item Similarly, $\delta'(AD, \tz) = AD$ and $\delta'(AD, \tone) = ABD$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {$A$};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
-	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
-	\path[->] 
-	(A)		edge [bend left] 	node {\tone}	(AB)
-	(AB)	edge [bend left] 	node {\tz}	(A)
-	(AB)	edge [] 			node {\tone}	(ABC)
-	(ABC)	edge [] 			node {\tz}	(AD)
-	(AD)	edge [] 			node {\tone}	(ABD)
-	(A)		edge [loop above]	node {\tz}	()
-	(ABC)	edge [loop above]	node {\tone}	()
-	(AD)	edge [loop above]	node {\tz}	();
-\end{tikzpicture}
-\end{center}
-
-\item Similarly, $\delta'(ABD, \tz) = AD$ and $\delta'(ABD, \tone) = ABCD$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {$A$};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
-	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
-	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
-	\path[->] 
-	(A)		edge [bend left] 	node {\tone}	(AB)
-	(AB)	edge [bend left] 	node {\tz}	(A)
-	(AB)	edge [] 			node {\tone}	(ABC)
-	(ABC)	edge [] 			node {\tz}	(AD)
-	(AD)	edge [bend left] 	node {\tone}	(ABD)
-	(ABD)	edge [bend left] 	node {\tz}	(AD)
-	(ABD)	edge [] 			node {\tone}	(ABCD)
-	(A)		edge [loop above]	node {\tz}	()
-	(ABC)	edge [loop above]	node {\tone}	()
-	(AD)	edge [loop above]	node {\tz}	();
-\end{tikzpicture}
-\end{center}
-
-\item Finally, $\delta'(ABCD, \tz) = AD$ and $\delta'(ABCD, \tone) = ABCD$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {$A$};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
-	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
-	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
-	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
-	\path[->] 
-	(A)		edge [bend left] 	node {\tone}	(AB)
-	(AB)	edge [bend left] 	node {\tz}	(A)
-	(AB)	edge [] 			node {\tone}	(ABC)
-	(ABC)	edge [] 			node {\tz}	(AD)
-	(AD)	edge [bend left] 	node {\tone}	(ABD)
-	(ABD)	edge [bend left] 	node {\tz}	(AD)
-	(ABD)	edge [] 			node {\tone}	(ABCD)
-	(ABCD)	edge [bend left = 50] 	node {\tz}	(AD)
-	(A)		edge [loop above]	node {\tz}	()
-	(ABC)	edge [loop above]	node {\tone}	()
-	(AD)	edge [loop above]	node {\tz}	()
-	(ABCD)	edge [loop above]	node {\tone}	();
-\end{tikzpicture}
-\end{center}
-As no new state is added in this step, all the other states (not shown here) are unreachable.
-\end{enumerate}
-
-Now, the states $AD$, $ABD$, and $ABCD$ all contain $D$, which is the only accept state of the original NFA. Hence, these states are accept state of the DFA.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 10mm] (A) {$A$};
-	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
-	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
-	\node[state, accepting, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
-	\node[state, accepting, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
-	\node[state, accepting, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
-	\path[->] 
-	(A)		edge [bend left] 	node {\tone}	(AB)
-	(AB)	edge [bend left] 	node {\tz}	(A)
-	(AB)	edge [] 			node {\tone}	(ABC)
-	(ABC)	edge [] 			node {\tz}	(AD)
-	(AD)	edge [bend left] 	node {\tone}	(ABD)
-	(ABD)	edge [bend left] 	node {\tz}	(AD)
-	(ABD)	edge [] 			node {\tone}	(ABCD)
-	(ABCD)	edge [bend left = 50] 	node {\tz}	(AD)
-	(A)		edge [loop above]	node {\tz}	()
-	(ABC)	edge [loop above]	node {\tone}	()
-	(AD)	edge [loop above]	node {\tz}	()
-	(ABCD)	edge [loop above]	node {\tone}	();
-\end{tikzpicture}
-\end{center}
-\end{Example}
-
-\begin{Example}
-Consider the NFA given in \cref{ex:NFAContains110}.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (A) {$A$};
-	\node[state, minimum size = 6mm] (B) [right = of A] {$B$};
-	\node[state, accepting, minimum size = 6mm] (C) [right = of B] {$C$};
-	\path[->] 
-	(A) edge []				node {$\varepsilon$}	(B)
-	(B) edge []				node {$\varepsilon$}	(C)
-	(A) edge [loop above]	node {\ta}	()
-	(B) edge [loop above]	node {\tb}	()
-	(C) edge [loop above]	node {\tc}	();
-\end{tikzpicture}
-\end{center}
-Here, the start state is $A$, but $B$ can be reached from $A$ via an epsilon transition, and $C$ can be reached from $B$ via an epsilon transition. Hence, the start state of the converted DFA will be $ABC$, which will also be an accept state, since it contains $C$, an accept state of the original NFA. Next, $\delta(A, \ta) = A$, $\delta(B, \ta) = \delta(C, \ta) = \varnothing$. But $B$ and $C$ can be reached from $A$ by epsilon transitions. Therefore, $\delta'(ABC, \ta) = ABC$. Similarly, $\delta'(ABC, \tb) = BC$, which will also be an accept state. Similarly, $\delta'(ABC, \tc) = C$, also an accept state.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, accepting, minimum size = 11mm] (ABC) {\footnotesize $ABC$};
-	\node[state, accepting, minimum size = 11mm] (BC) [right = of A] {\small $BC$};
-	\path[->] 
-	(ABC) edge []				node {\tb}	(BC)
-	(ABC) edge [loop above]	node {\ta}	();
-\end{tikzpicture}
-\end{center}
-But now, $\delta(B, \ta) = \delta(C, \ta) = \varnothing$. Hence, $\delta'(BC, \ta) = \varnothing$. Note that $\varnothing$ will be state from which there are no transitions into any other states -- i.e.\ it is a trap state. Hence, $\delta'(\varnothing, \ta) = \delta'(\varnothing, \tb) = \varnothing$. Proceeding thus, we find that $\delta'(BC, \tb) = BC$, $\delta'(BC, \tc) = C$, $\delta'(C, \ta) = \delta'(C, \tb) = \varnothing$, and $\delta'(C, \tc) = C$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, accepting, minimum size = 11mm] (ABC) {\footnotesize $ABC$};
-	\node[state, accepting, minimum size = 11mm] (BC) [right = of A] {\small $BC$};
-	\node[state, accepting, minimum size = 11mm] (C) [right = of B] {$C$};
-	\node[state, minimum size = 11mm] (T) [below = of C] {$\varnothing$};
-	\path[->] 
-	(ABC) edge []				node {\tb}	(BC)
-	(ABC) edge [bend right]		node [swap] {\tc}	(C)
-	(BC) edge []				node {\tc}	(C)
-	(BC) edge []				node [swap] {\ta}	(T)
-	(C) edge []				node {\ta, \tb}	(T)
-	(ABC) edge [loop above]	node {\ta}	()
-	(BC) edge [loop above]	node {\tb}	()
-	(C) edge [loop above]	node {\tc}	();
-\end{tikzpicture}
-\end{center}
-\end{Example}
-
-\subsubsection{Product Construction}\label{subsubsec:ProductFA}
-
-If $L_1$ and $L_2$ and languages over the same alphabet $\Sigma$, and $M_1$ and $M_2$, respectively, are the NFAs accepting them, then the \newterm{intersection} of $L_1$ and $L_2$,
-\begin{equation*}
-L_1 \cap L_2 = \qty{\, w \in \Sigma^* \mid w \in L_1 ~\text{and}~ w \in L_2 \,}
-\end{equation*}
-is accepted by the product of $M_1$ and $M_2$, defined as follows: Let $M_1 = (Q_1, \Sigma, \delta_1, q_{10}, F_1)$ and $M_2 = (Q_2, \Sigma, \delta_2, q_{20}, F_2)$. Then their \newterm{product} $M_1 \times M_2 = (Q, \Sigma, \delta, q_0, F)$, where
-\begin{enumerate}[label = (\roman*)]
-\item $Q = Q_1 \times Q_2$, the Cartesian product of $Q_1$ and $Q_2$. That is, each state of $M_1 \times M_2$ is a pair of states, the first from $M_1$ and the second from $M_2$.
-\item For each $q_1 \in Q_1$, $q_2 \in Q_2$, and $s \in \Sigma$, $\delta((q_1, q_2), s) = (\delta_1(q_1, s), \delta_2(q_2, s))$.
-\item $q_0 = (q_{10}, q_{20})$.
-\item $F = F_1 \times F_2$.
-\end{enumerate}
-
-\subsection{Regular Expressions}\label{subsec:RE}
-
-A \newterm{regular expression} (\newterm{RE}) over an alphabet $\Sigma$ is an expression consisting of one or more of the symbols in $\Sigma$ or $\varepsilon$ or $\varnothing$, one or both of the operators $+$ and ${}^*$, and parentheses $($ and $)$, whose syntax is defined recursively as follows:
-\begin{enumerate}
-\item For each $s \in \Sigma$, $s$ is a regular expression, and $\varepsilon$ and $\varnothing$ are regular expressions.
-\item If $r$ is a regular expression, then so is $(r)^*$.
-\item If $r_1$ and $r_2$ are regular expressions, then so are $r_1 + r_2$ and $(r_1)(r_2)$.
-\end{enumerate}
-
-\begin{Note*}
-If $r$ is a single symbol (i.e.\ $r \in \Sigma$), then $(r)^*$ can also be written as $r^*$; $(r)(r')$ can also be written as $r(r')$; and $(r')(r)$ can also be written as $(r')r$.
-\end{Note*}
-
-\begin{Example}
-The following are some regular expressions over $\Sigma = \{\tz, \tone\}$:
-\begin{align*}
-& \tz + \tone, ~~ \tz(\tz + \tone), ~~ (\tz + \tone)^*\tone\tone\tz(\tz + \tone)^*, ~~ \tone^* \tz^* + \tz^* \tone^*, \spliteq\splitalign ~~ \tz^* \tone \tz^*(\tz^* \tone \tz^* \tone)^* \tz^*, ~~ \tz (\tz + \tone)^* \tz + \tone (\tz + \tone)^* \tone
-\end{align*}
-\end{Example}
-
-Each RE represents or generates a particular language. To rigorously define the language generated by an RE, we will first define some operations on languages.
-
-Let $L_1$ and $L_2$ be two languages over the same alphabet $\Sigma$. Recall that this means $L_1$ and $L_2$ are sets of strings of symbols in $\Sigma$, i.e.\ $L_1, L_2 \subseteq \Sigma^*$.
-\begin{enumerate}
-\item The \newterm{union} of $L_1$ and $L_2$ is $L_1 \cup L_2$, defined as their union as sets.
-\begin{equation*}
-L_1 \cup L_2 = \qty{\, w \in \Sigma^* \mid w \in L_1 ~\text{or}~ w \in L_2 \,}
-\end{equation*}
-
-\item The \newterm{concatenation} of $L_1$ and $L_2$ is $L_1 L_2$, the language of all strings obtained by concatenating a string of $L_1$ with a string of $L_2$.
-\begin{equation*}
-L_1 L_2 = \qty{\, w_1 w_2 \mid w_1 \in L_1,\, w_2 \in L_2 \,}
-\end{equation*}
-
-\item The \newterm{Kleene star}\footnote{Named after the mathematician Stephen Cole Kleene, \href{https://foldoc.org/Stephen+Kleene}{pronounced \ttt{klay-nee} (\textipa{\textprimstress}kle\textsci ni)}.} of $L_1$ is $L_1^*$, the language of all strings obtained by concatenating any finite number of strings of $L_1$ together.
-\begin{align*}
-L_1^* & = \qty{\, w_1 w_2 \dots w_n \mid w_i \in L_i,\, i = 1, \ldots, n,\, n \in \mathbb N_0 \,} \\
-& = \{\varepsilon\} \cup L_1 \cup L_1 L_1 \cup L_1 L_1 L_1 \cup \cdots
-\end{align*}
-\end{enumerate}
-
-The language generated by an RE can now be recursively defined as follows:
-\begin{enumerate}
-\item The language generated by the RE $s$, where $s \in \Sigma$ (a single symbol), is $\{s\}$ and the language generated by the RE $\varepsilon$ is ${\varepsilon}$.
-\item The language generated by the RE $\varnothing$ is the empty language $\varnothing = \{\}$. Note that this language does \emph{not} contain the empty string!
-\item If $r_1$ and $r_2$ are two REs over the same alphabet $\Sigma$, that generate languages $L_1$ and $L_2$, respectively, then
-\begin{enumerate}[label = (\roman*)]
-\item the RE $r_1 + r_2$ generates the language $L_1 + L_2$
-\item the RE $(r_1)(r_2)$ generates the language $L_1 L_2$
-\item the RE $(r_1)^*$ generates the language $L_1^*$.
-\end{enumerate}
-\end{enumerate}
-
-\begin{Example} Let $\Sigma = \{\tz, \tone\}$.
-\begin{enumerate}
-\item The RE $\tz + \tone$ generates the language $\{\tz, \tone\}$.
-\item The RE $\tz(\tz + \tone)$ generates the language $\{\ttt{00}, \ttt{01}\}$.
-\item The RE $(\tz + \tone)^*\ttt{110}(\tz + \tone)^*$ generates the language of all binary strings containing $\ttt{110}$ as a substring.
-\item The RE $\tz^* \tone^* + \tone^* \tz^*$ generates the language of all binary strings that are either a string of (zero or more) $\tz$s followed by a string of $\tone$s, or a string of $\tone$s followed by a string of $\tz$s.
-\end{enumerate}
-\end{Example}
-
-\begin{Exercise} Let $\Sigma = \{\tz, \tone\}$.
-\begin{enumerate}
-\item What is the language generated by $\tz (\tz + \tone)^* \tz + 1 (0 + 1)^* 1$?
-\item What is the language generated by $\tz^* \tone \tz^*(\tz^* \tone \tz^* \tone)^* \tz^*$?
-\end{enumerate}
-\end{Exercise}
-
-\solution{REs}{
-\begin{enumerate}
-\item All binary strings of length at least $2$, beginning and ending in the same symbol.
-\item All binary strings containing an odd number of $\tone$s.
-\end{enumerate}
-}
-
-\subsubsection{Conversion of NFA to RE}\label{sububsec:NFAtoRE}
-
-Any nondeterministic finite automaton can be converted to an equivalent\footnote{An RE is equivalent to an NFA is one that generates the language accepted by the NFA.} regular expression. The conversion procedure involves first reducing the given NFA, by eliminating one state at a time, to intermediate finite automata of a new kind, until just one start state and one accept state remain. A \newterm{generalised (nondeterministic) finite automaton} (\newterm{GFA} or \newterm{GNFA}) is a finite automaton in which the arrows are labelled by REs, and a transition along this arrow is made if the next few characters of the input match the RE. That is, if the arrow from state $q_1$ to state $q_2$ is labelled by the regular expression $r$, and the unread part of the input when $q_1$ is reached is $s_1 s_2 \cdots s_n$, then a transition can be made to $q_2$ is $s_1 s_2 \cdots s_i$ is a string generated by $r$ for some $i \le k$. Trivially, every NFA is a GFA, since any single symbol or $\varepsilon$ is an RE, and a transition of an NFA consists of reading one symbol and moving along one arrow, or reading no symbol (i.e.\ an empty string) and making an epsilon transition.
-
-The procedure for converting an NFA to RE is as follows. Let $M = (Q, \Sigma, \delta, q_0, F)$ be an NFA. Furthermore, assume that $q_0$ has no arrows entering it and $F$ contains a single state $q_f$ with no arrows leaving it -- in both cases, even self-loops are not allowed\footnote{It is easy to see that any NFA can be converted to an equivalent NFA satisfying this condition by using epsilon transitions. If $q_0$ has an arrow entering it, then make a new start state $q_0'$ with an epsilon transition into $q_0$, which will no longer be the start state. Similarly, if $q_f$ has an arrow leaving it, make it a non-accept state and add a new accept state $q_f'$ with an epsilon transition into it from $q_f$. If $M$ has multiple accept states, make all of them non-accept states, and add a new accept state $q_f$ with an epsilon transition into it from each of the old accept states.}. Now, iteratively reduce $M$ by eliminating one state other than $q_0$ and $q_f$ at a time as given below:
-\begin{enumerate}
-\item Let $q$ be any state different from $q_0$ and $q_f$, and let $r$ be the label on the self-loop on $q$.
-\item For each state $q_1 \ne q$ with a transition into $q$ labelled $r_1$, and each state $q_2 \ne q$ into which there is a transition from $q$ labelled $r_2$, let $r_{12} = r_1 r^* r_2$ (suitably parenthesised), where $r$ is the regular expression on the self-loop on $q$ (if $q$ has no self-loop, then this is just $r_1 r_2$).
-\item If there is no arrow from $q_1$ to $q_2$, add an arrow labelled $r_{12}$. If an arrow already exists from $q_1$ to $q_2$, replace its label, say $r'$, by $r' + r_{12}$.
-\item Delete $q$.
-\end{enumerate}
-When $q_0$ and $q_f$ are the only states remaining, the label on the arrow from $q_0$ to $q_f$ is the RE equivalent to the NFA $M$.
-
-\begin{Note*}
-The order in which the states are eliminated does not matter, although the REs obtained may differ (but be equivalent) according to the order followed.
-\end{Note*}
-
-\begin{Example}\label{ex:NFAContains110ToRE}
-Consider the NFA given in \cref{ex:NFAContains110}.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (A) {$A$};
-	\node[state, minimum size = 6mm] (B) [right = of A] {$B$};
-	\node[state, minimum size = 6mm] (C) [right = of B] {$C$};
-	\node[state, accepting, minimum size = 6mm] (D) [right = of C] {$D$};
-	\path[->] 
-	(A) edge [] node {\tone}	(B)
-	(B) edge []	node {\tone}	(C)
-	(C) edge []	node {\tz}	(D)
-	(A) edge [loop above]	node {\tz, \tone}	()
-	(D)	edge [loop above] node {\tz, \tone} ();
-\end{tikzpicture}
-\end{center}
-The start state $A$ has two arrows entering it and the accept state $D$ has two arrows leaving it (in each case, self-loops labelled $\tz$ and $\tone$). Therefore, we first add a new start state $q_0$ with an epsilon transition into $A$ (no longer a start state), and a new accept state $q_f$ with an epsilon transition into it from $D$, which will be made a non-accept state.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
-	\node[state, minimum size = 6mm] (A) [right = of q0] {$A$};
-	\node[state, minimum size = 6mm] (B) [right = of A] {$B$};
-	\node[state, minimum size = 6mm] (C) [right = of B] {$C$};
-	\node[state, minimum size = 6mm] (D) [right = of C] {$D$};
-	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
-	\path[->] 
-	(q0) edge [] node {$\varepsilon$} (A)
-	(A) edge [] node {\tone}	(B)
-	(B) edge []	node {\tone}	(C)
-	(C) edge []	node {\tz}	(D)
-	(D) edge [] node {$\varepsilon$} (qf)
-	(A) edge [loop above]	node {\tz, \tone}	()
-	(D)	edge [loop above] node {\tz, \tone} ();
-\end{tikzpicture}
-\end{center}
-Now we eliminate the non-initial and non-accept states one by one.
-\begin{enumerate}
-\item If we choose to eliminate $A$ first, we first note that there is one arrow, labelled $\varepsilon$, coming into $A$ from $q_0$, and one arrow, labelled $q$, going from $A$ into $B$. Also, there are self-loops on $A$ labelled $0$ and $1$. Therefore, we add an arrow from $q_0$ to $B$ labelled $\varepsilon(0 + 1)^*1 = (0 + 1)^*1$, and then delete $A$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
-	\node[state, minimum size = 6mm] (B) [right = 3cm of q0] {$B$};
-	\node[state, minimum size = 6mm] (C) [right = of B] {$C$};
-	\node[state, minimum size = 6mm] (D) [right = of C] {$D$};
-	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
-	\path[->] 
-	(q0) edge [] node {$(\tz + \tone)^*\tone$} (B)
-	(B) edge []	node {\tone}	(C)
-	(C) edge []	node {\tz}	(D)
-	(D) edge [] node {$\varepsilon$} (qf)
-	(D)	edge [loop above] node {\tz, \tone} ();
-\end{tikzpicture}
-\end{center}
-
-\item Next, if we wish to eliminate $B$, we replace the arrow from $q_0$ to $B$ labelled $(\tz + \tone)^*\tone$ and the arrow labelled $\tone$ from $B$ to $C$ by the arrow $(\tz + \tone)^* \tone \tone$ from $q_0$ to $C$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
-	\node[state, minimum size = 6mm] (C) [right =  3cm of q0] {$C$};
-	\node[state, minimum size = 6mm] (D) [right = of C] {$D$};
-	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
-	\path[->] 
-	(q0) edge [] node {$(\tz + \tone)^*\tone\tone$} (C)
-	(C) edge []	node {\tz}	(D)
-	(D) edge [] node {$\varepsilon$} (qf)
-	(D)	edge [loop above] node {\tz, \tone} ();
-\end{tikzpicture}
-\end{center}
-
-\item Similarly, we may eliminate $C$ next.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
-	\node[state, minimum size = 6mm] (D) [right =  3cm of q0] {$D$};
-	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
-	\path[->] 
-	(q0) edge [] node {$(\tz + \tone)^*\tone\tone\tz$} (D)
-	(D) edge [] node {$\varepsilon$} (qf)
-	(D)	edge [loop above] node {\tz, \tone} ();
-\end{tikzpicture}
-\end{center}
-
-\item Finally, we eliminate $D$.
-\begin{center}
-\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
-	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
-	\node[state, accepting, minimum size = 6mm] (qf) [right = 5cm of q0] {$q_f$};
-	\path[->] 
-	(q0) edge [] node {$(\tz + \tone)^*\tone\tone\tz(\tz + \tone)^*$} (qf);
-\end{tikzpicture}
-\end{center}
-\end{enumerate}
-Thus, an RE equivalent to the given NFA is $(\tz + \tone)^* \tone\tone\tz (\tz + \tone)^*$. We easily verify that indeed, this is an equivalent RE. The original NFA accepts all binary strings containing the substring $\tone\tone\tz$. Every such string can be written as some binary string (i.e.\ a string generated by $(\tz + \tone)^*$), followed by $\tone\tone\tz$, (generated by $\tone\tone\tz$) followed by any binary string (generated by $(\tz + \tone)^*$)).
-\end{Example}
-
-\begin{Example} Consider the NFA shown below.
-\begin{center}
-\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
-   \node[state, initial, minimum size = 5mm] (W)   {W};
-   \node[state, minimum size = 5mm] (X) [above right=of W] {X};
-   \node[state, minimum size = 5mm] (Y) [below right=of W] {Y};
-   \node[state, accepting, minimum size = 5mm] (Z) [below right=of X] {Z};
-   \path[->] 
-   (W) edge  node {\ta} (X)
-       edge  node [swap] {\tb} (Y)
-         
-   (X) edge  node  {\tb} (Z)
-       edge  node  {\tb} (Y)
-       edge [loop above] node {\ta} ()
-       
-   (Y) edge  node [swap] {\ta} (Z)
-       edge [loop below] node {\tb} ();
-\end{tikzpicture}
-\end{center}
-This NFA is already in the form necessary to apply the conversion procedure, as the start state $W$ has no arrows entering it, and there is a unique accept state $Z$ with no arrows leaving it.
-\begin{enumerate}
-\item There is only one arrow from a different state entering $X$, which is from $W$, there are two arrows leaving $X$, which are to $Y$ and $Z$, and there is a self-loop on $X$ labelled $a$. On eliminating $X$, we get the following GFA.
-\begin{center}
-\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
-   \node[state, initial, minimum size = 5mm] (W)   {W};
-   \node[state, minimum size = 5mm] (Y) [below right=of W] {Y};
-   \node[state, accepting, minimum size = 5mm] (Z) [above right=of Y] {Z};
-   \path[->] 
-   (W) edge  node  {$\ta \ta^* \tb$} (Z)
-       edge  node  [swap] {$\tb + \ta \ta^* \tb$} (Y)
-       
-   (Y) edge  node [swap] {\ta} (Z)
-       edge [loop below] node {\tb} ();
-\end{tikzpicture}
-\end{center}
-
-\item Next, we eliminate $Y$.
-\begin{center}
-\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
-   \node[state, initial, minimum size = 5mm] (W)   {W};
-   \node[state, accepting, minimum size = 5mm] (Z) [right = 5cm of W] {Z};
-   \path[->] 
-   (W) edge  node  {$\ta \ta^* \tb + (\tb + \ta \ta^* \tb)\tb^*\ta$} (Z);
-\end{tikzpicture}
-\end{center}
-\end{enumerate}
-Thus, the equivalent RE is $\ta \ta^* \tb + (\tb + \ta \ta^* \tb)\tb^*\ta$.
-\end{Example}
-
-\begin{Exercise}
-Convert the NFA given below to an RE.
-\begin{center}
-\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
-   \node[state, initial, minimum size = 5mm] (A) {A};
-   \node[state, minimum size = 5mm] (B) [above right=of A, xshift = 1cm] {B};
-   \node[state, accepting, minimum size = 5mm] (C) [below right = of A, xshift = 1cm] {C};
-   \node[state, accepting, minimum size = 5mm] (D) [below right = of B, xshift = 1cm] {D};
-   \path[->] 
-   (A) edge  node {\tz} (B)
-       edge  node [swap] {$\varepsilon$} (C)
-         
-   (B) edge  node  {\tone} (D)
-       edge [loop above] node {\tone} ()
-       
-   (C)   edge  node   {$\varepsilon$} (B)
-   (C.355) edge  node [yshift = 2pt] {\tz} (D.235)
-       
-   (D.205) edge node [yshift=-2pt] {\tz} (C.25);
-\end{tikzpicture}
-\end{center}
-
-
-\end{Exercise}
-
-\clearpage
+%\section{Finite Automata and Regular Expressions}\label{sec:FAandRE}
+%
+%\subsection{Deterministic Finite Automata}\label{subsec:DFA}
+%
+%A \newterm{deterministic finite automaton}\footnote{The plural of \emph{automaton} (\textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa t\textschwa n} or \textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa \textsecstress t\textturnscripta n}) is \emph{automata} (\textipa{\textopeno\textlengthmark\textprimstress t\textturnscripta m\textschwa t\textschwa}).} (\newterm{DFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
+%\begin{itemize}
+%\item $Q$ is a finite set whose elements are \newterm{states}.
+%\item $\Sigma$ is a finite \newterm{input alphabet}, whose elements are \newterm{input symbols}.
+%\item $\delta \colon Q \times \Sigma \to Q$ is the \newterm{transition function}.
+%\item $q_0 \in Q$ is the \newterm{start state} (or \newterm{initial state}).
+%\item $F \subseteq Q$ is the set of \newterm{accept states} (or \newterm{final states}).
+%\end{itemize}
+%
+%The transition function may be specified using a \newterm{transition table}, which has rows indexed by the states and columns indexed by the input symbols, with the entry in the row of $q$ and column of $s$ being the value of $\delta(q, s)$). See \cref{ex:DFAOdd1s}.
+%
+%A DFA has a graphical representation as a directed graph in which each vertex is a state and each edge is a \newterm{transition}. That is, if $\delta(q_1, s) = q_2$ (where $q_1$ and $q_2$ are states and $s$ is an input symbol), then the graph has an edge labelled $s$ from the vertex $q_1$ to the vertex $q_2$. It is usual to depict the vertices by circles, with the vertex label (name of the state) written inside the circle, if necessary. The start state is indicated by an arrow without a source entering it, and accept states are indicated by using double-circles. See \cref{ex:DFAOdd1s}.
+%
+%\begin{Example}\label{ex:DFAOdd1s}
+%Consider a DFA $M = (Q, \Sigma, \delta, A, F)$, where $Q = \{A, B, C\}$, $\Sigma = \{0, 1\}$, $F = \{B\}$, and $\delta$ is as defined by the transition table given below.
+%\begin{equation*}
+%\begin{array}{r|cc}
+%\delta & 0 & 1 \\
+%\hline
+%A & A & B \\
+%B & B & A
+%\end{array}
+%\end{equation*}
+%The graphical representation of $M$ is shown below.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 5mm] (A) {$A$};
+%	\node[state, accepting, minimum size = 5mm] (B) [right = of A] {$B$};
+%	\path[->]
+%	(A) edge [loop above]	node {\tz}	()
+%	(A) edge [bend left]	node {\tone}	(B)
+%	(B) edge [loop above]	node {\tz}	()
+%	(B) edge [bend left]	node {\tone}	(A);
+%\end{tikzpicture}
+%\end{center}
+%\end{Example}
+%
+%An \newterm{input} to a DFA $M = (Q, \Sigma, \delta, q_0, F)$ is a string over $\Sigma$ -- i.e.\ a finite sequence of symbols of $\Sigma$. If $w = s_1 s_2 \cdots s_k$ is an input string, and $q_1, q_2, \ldots, q_k \in Q$ such that
+%\begin{equation*}
+%\delta(q_0, s_1) = q_1,~ \delta(q_1, s_2) = q_2,~ \ldots,~ \delta(q_{k-1}, s_k) = q_k,
+%\end{equation*}
+%then \newterm{$M$ is in the state $q_k$ after reading the input $w$}. If $q_k \in F$ (i.e.\ $q_k$ is an accept state), then \newterm{$M$ accepts $w$}, otherwise it \newterm{rejects $w$}. For instance, the DFA $M$ given in \cref{ex:DFAOdd1s} is in the state $A$ after reading the input \ttt{0110}, and is in the state $B$ after reading \ttt{0100}. Since $A \notin \{F\}$ and $B \in \{F\}$, it rejects \ttt{0110} and accepts \ttt{0100}.
+%
+%Given the graphical representation of a DFA $M$, to check which state $M$ is in after reading an input $w = s_1 \cdots s_k$, simply begin at the start state of $M$ and follow the arrows labelled $s_1, \ldots, s_k$. For instance, in \cref{ex:DFAOdd1s}, the input \ttt{0110} corresponds to the sequence of states $A, A, B, A, A$, and the input \ttt{0100} corresponds to the sequence of states $A, A, B, B, B$ (note that in both cases, the first $A$ is the start state, and only the next four states are the results of transitions).
+%
+%A \newterm{language} over an alphabet $\Sigma$ is a set of strings over $\Sigma$. In particular, the language $\Sigma^*$ is the set of all strings over $\Sigma$. Thus, a language over $\Sigma$ is any subset of $\Sigma^*$. If $M$ is a DFA with input alphabet $\Sigma$, then $M$ \newterm{accepts the language} $L$ if $L$ is the set of all strings accepted by $M$. For example, the DFA $M$ in \cref{ex:DFAOdd1s} accepts the language of all binary strings containing an odd number of $\tone$s.
+%
+%\begin{Note*}
+%Although we say simply that $M$ accepts $L$, this means not only that every string in $L$ is accepted by $M$, but also that every string \emph{not} in $L$ is \emph{rejected} by $M$.
+%\end{Note*}
+%
+%\begin{Exercise}\label{exer:DFAEven0s}
+%Construct a DFA that accepts all binary strings with an even number of $\tz$s.
+%\end{Exercise}
+%
+%\solution{DFAEven0s}{
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, accepting, minimum size = 6mm] (A) {};
+%	\node[state, minimum size = 6mm] (B) [right = of A] {};
+%	\path[->]
+%	(A) edge [loop above]	node {\tone}	()
+%	(A) edge [bend left]	node {\tz}	(B)
+%	(B) edge [loop above]	node {\tone}	()
+%	(B) edge [bend left]	node {\tz}	(A);
+%\end{tikzpicture}
+%\end{center}
+%}
+%
+%\begin{Exercise}\label{exer:DFABeginaab}
+%Construct a DFA that accepts all strings over the alphabet $\{\ta, \tb\}$ that begin in \ttt{aab}.
+%\end{Exercise}
+%
+%\solution{DFABeginaab}{
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {};
+%	\node[state, minimum size = 6mm] (A) [right = of q0] {};
+%	\node[state, minimum size = 6mm] (AA) [right = of A] {};
+%	\node[state, accepting, minimum size = 6mm] (AAB) [right = of AA] {};
+%	\node[state, minimum size = 6mm] (T) [below = of A] {};
+%	\path[->] 
+%	(q0) edge [] node {\ta}	(A)
+%	(q0) edge [] node [swap] {\tb} (T)
+%	(A) edge []	node {\ta}	(AA)
+%	(A) edge [] node {\tb} (T)
+%	(AA) edge []	node {\tb}	(AAB)
+%	(AA) edge [] node {\ta} (T)
+%	(AAB) edge [loop above]	node {\ta, \tb}	()
+%	(T)	edge [loop below] node {\ta, \tb} ();
+%\end{tikzpicture}
+%\end{center}
+%}
+%
+%Observe that two of the states of the DFA given in the solution of \cref{exer:DFABeginaab} are states that, once entered, cannot be left -- i.e.\ every transition out of such each of these states is into that state itself. Such a state is a \newterm{trap state}. One of these two trap states is an accept states -- which indicates that any input that leads to this state is accepted regardless of what the rest of the input contains -- while the other trap state is a non-accept state -- which indicates that any input leading to this state is \emph{permanently} rejected and that no further ``correction'' can be made to get the input accepted.
+%
+%\subsection{Nondeterministic Finite Automata}\label{subsec:NFA}
+%
+%A \newterm{nondeterministic finite automaton} (\newterm{NFA}) is a $5$-tuple $(Q, \Sigma, \delta, q_0, F)$ where
+%\begin{itemize}
+%\item $Q$ is a finite set of states.
+%\item $\Sigma$ is a finite input alphabet.
+%\item $\delta \colon Q \times (\Sigma \cup \{\varepsilon\}) \to 2^Q$ is the transition function.
+%\item $q_0 \in Q$ is the start state.
+%\item $F \subseteq Q$ is the set of accept states.
+%\end{itemize}
+%
+%Note that the transition function has codomain $2^Q$, the power set of $Q$. That is, each transition of a nondeterministic finite automaton is from one state into possibly several states or even to no state. The interpretation of this is that at each step, for a given input, the machine may have many options of the state to transition to, and an input string is accepted if there is at least one path from the start state to an accept state with arrows labelled by the input. More formally, an input $s_1 \cdots s_n$ is accepted by an NFA $M = (Q, \Sigma, \delta, q_0, F)$, if and only if there exist states $q_1, \ldots, q_k \in Q$, with $q_k \in F$, such that
+%\begin{equation*}
+%q_1 \in \delta(q_0, s_1),~ q_2 \in \delta(q_1, s_2),~ \ldots,~ q_k \in \delta(q_{k-1}, s_n).
+%\end{equation*}
+%A transition labelled by $\varepsilon$, i.e.\ a transition of the form $\delta(q, \varepsilon)$, is an \newterm{epsilon transition}, and does not consume an input symbol. An NFA also has a graphical representation similar to that of a DFA.
+%
+%\begin{Example}\label{ex:NFAContains110}
+%The NFA shown below accepts all binary strings that contain \ttt{110} as a (contiguous) substring.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {};
+%	\node[state, minimum size = 6mm] (q1) [right = of q0] {};
+%	\node[state, minimum size = 6mm] (q11) [right = of q1] {};
+%	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {};
+%	\path[->] 
+%	(q0) edge [] node {\tone}	(q1)
+%	(q1) edge []	node {\tone}	(q11)
+%	(q11) edge []	node {\tz}	(q110)
+%	(q0) edge [loop above]	node {\tz, \tone}	()
+%	(q110)	edge [loop above] node {\tz, \tone} ();
+%\end{tikzpicture}
+%\end{center}
+%\end{Example}
+%
+%\begin{Example}\label{ex:NFAabcAlphabetical}
+%The NFA shown below accepts all strings over the alphabet $\{\ta, \tb, \tc\}$ in which the symbols appear in alphabetical order.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (A) {};
+%	\node[state, minimum size = 6mm] (B) [right = of A] {};
+%	\node[state, accepting, minimum size = 6mm] (C) [right = of B] {};
+%	\path[->] 
+%	(A) edge []				node {$\varepsilon$}	(B)
+%	(B) edge []				node {$\varepsilon$}	(C)
+%	(A) edge [loop above]	node {\ta}	()
+%	(B) edge [loop above]	node {\tb}	()
+%	(C) edge [loop above]	node {\tc}	();
+%\end{tikzpicture}
+%\end{center}
+%\end{Example}
+%
+%\subsubsection{Conversion of NFA to DFA}\label{subsubsec:NFAtoDFA}
+%
+%Trivially, a deterministic finite automaton can be considered as a nondeterministic finite automaton. That is, NFAs are at least as powerful as DFAs, in the sense that any language accepted by a DFA is also accepted by an NFA. Now we will see that conversely, NFAs are not strictly more powerful than DFAs. Any NFA can be converted to an equivalent DFA\footnote{Two finite automata are \newterm{equivalent} if the language accepted by them is the same}, by the \newterm{subset construction}. Each transition of an NFA is from one state to a set of states, whereas any transition of a DFA is from one state to a single state. The main idea of the subset construction is to consider each set of states of an NFA as a single state of a DFA. The conversion procedure is described below.
+%
+%Let $M = (Q, \Sigma, \delta, q_0, F)$ be an NFA (without epsilon transitions). Define a DFA $D_M = (Q', \Sigma, \delta', q_0', F')$ as follows:
+%\begin{enumerate}
+%\item Every set of states of the NFA $M$ becomes a single state of the DFA $D_M$. That is, $Q' = 2^Q$.
+%\item The start state of $D_M$ is the singleton set containing the start state of $M$. That is, $q_0' = \{q_0\}$.
+%\item The transition function $\delta'$ of $D_M$ is given by
+%\begin{equation*}
+%\delta'\pqty{ \{q_1, \ldots, q_k\}, s } = \bigcup_{i=1}^k \delta(q_i, s).
+%\end{equation*}
+%That is, given a state $q'$ of $D_M$, which is a set of states of the NFA $M$, and an input symbol $s \in \Sigma$, for each state $q \in q'$ $\delta(q, s)$ is some set of states of $M$. Combine all these sets $\delta(q, s)$ for $q \in q'$ (via union) to get $\delta'(q', s)$.
+%\item Each state of $D_M$ that contains at least one accept state of $M$ becomes an accept state. That is,
+%\begin{equation*}
+%F' = \qty{\, q' \in Q' \mid q' \cap F \ne \varnothing \,}.
+%\end{equation*}
+%\end{enumerate}
+%
+%If $M$ has epsilon transitions, then $\delta'\pqty{ \{q_1, \ldots, q_k\}, s }$ will contain, in addition to the states described above, the states of $M$ that can be reached from each state in $\delta(q_i, s)$ via any sequence epsilon transitions. Similarly, $q_0'$ will be the set of all states of $M$ that can be reached from $q_0$ via (a sequence of) epsilon transitions.
+%
+%\begin{Example}
+%Consider the NFA given in \cref{ex:NFAContains110}.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {$A$};
+%	\node[state, minimum size = 6mm] (q1) [right = of q0] {$B$};
+%	\node[state, minimum size = 6mm] (q11) [right = of q1] {$C$};
+%	\node[state, accepting, minimum size = 6mm] (q110) [right = of q11] {$D$};
+%	\path[->] 
+%	(q0) edge [] node {\tone}	(q1)
+%	(q1) edge []	node {\tone}	(q11)
+%	(q11) edge []	node {\tz}	(q110)
+%	(q0) edge [loop above]	node {\tz, \tone}	()
+%	(q110)	edge [loop above] node {\tz, \tone} ();
+%\end{tikzpicture}
+%\end{center}
+%Here, the initial state is $q_0 = A$, and the set of accept states is $F = \{D\}$. Now, the equivalent DFA $D_M$ will $2^4 = 16$ states, namely $\varnothing, \{A\}, \{B\}, \{C\}, \spliteq \{D\}, \{A, B\}, \{A, C\}, \ldots, \{A, B, C, D\}$. For the sake of simplicity, we will denote these as $\varnothing, A, B, C, D, AB, AC, \ldots, ABCD$.
+%
+%Note that many of these states may be \newterm{unreachable} -- i.e.\ there will be no path from the start state to them. We will not include them in the graphical representation of $D_M$, even though, formally, they are part of $D_M$. To find all the \newterm{reachable} (i.e.\ not unreachable) states, we will begin with the start state, and iteratively add the other states while computing the transitions from the current states corresponding to each input symbol.
+%
+%\begin{enumerate}
+%\item Initially, we have only the start state, $A$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (A) {$A$};
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Next, $\delta'(A, \tz) = \delta(A, \tz) = \{A\}$ (written as just $A$) and $\delta'(A, \ttt  1) = \delta(A, \ttt  1) = \{A, B\}$ (written as just $AB$).
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 10mm] (A) {$A$};
+%	\node[state, minimum size = 10mm] (AB) [right = of A] {$AB$};
+%	\path[->] 
+%	(A) edge [] node {\tone}	(AB)
+%	(A) edge [loop above]	node {\tz}	();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Now, $\delta'(AB, \tz) = \delta(A, \tz) \cup \delta(B, \tz) = \{A\} \cup \varnothing = \{A\}$ (i.e.\ $A$) and $\delta'(AB, \tone) = ABC$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 11mm] (A) {$A$};
+%	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+%	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+%	\path[->] 
+%	(A)		edge [bend left] 	node {\tone}	(AB)
+%	(AB)	edge [bend left] 	node {\tz}	(A)
+%	(AB)	edge [] 			node {\tone}	(ABC)
+%	(A)		edge [loop above]	node {\tz}	();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Similarly, $\delta'(ABC, \tz) = AD$ and $\delta'(ABC, \tone) = ABC$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 10mm] (A) {$A$};
+%	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+%	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+%	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+%	\path[->] 
+%	(A)		edge [bend left] 	node {\tone}	(AB)
+%	(AB)	edge [bend left] 	node {\tz}	(A)
+%	(AB)	edge [] 			node {\tone}	(ABC)
+%	(ABC)	edge [] 			node {\tz}	(AD)
+%	(A)		edge [loop above]	node {\tz}	()
+%	(ABC)	edge [loop above]	node {\tone}	();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Similarly, $\delta'(AD, \tz) = AD$ and $\delta'(AD, \tone) = ABD$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 10mm] (A) {$A$};
+%	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+%	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+%	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+%	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
+%	\path[->] 
+%	(A)		edge [bend left] 	node {\tone}	(AB)
+%	(AB)	edge [bend left] 	node {\tz}	(A)
+%	(AB)	edge [] 			node {\tone}	(ABC)
+%	(ABC)	edge [] 			node {\tz}	(AD)
+%	(AD)	edge [] 			node {\tone}	(ABD)
+%	(A)		edge [loop above]	node {\tz}	()
+%	(ABC)	edge [loop above]	node {\tone}	()
+%	(AD)	edge [loop above]	node {\tz}	();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Similarly, $\delta'(ABD, \tz) = AD$ and $\delta'(ABD, \tone) = ABCD$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 10mm] (A) {$A$};
+%	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+%	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+%	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+%	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
+%	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
+%	\path[->] 
+%	(A)		edge [bend left] 	node {\tone}	(AB)
+%	(AB)	edge [bend left] 	node {\tz}	(A)
+%	(AB)	edge [] 			node {\tone}	(ABC)
+%	(ABC)	edge [] 			node {\tz}	(AD)
+%	(AD)	edge [bend left] 	node {\tone}	(ABD)
+%	(ABD)	edge [bend left] 	node {\tz}	(AD)
+%	(ABD)	edge [] 			node {\tone}	(ABCD)
+%	(A)		edge [loop above]	node {\tz}	()
+%	(ABC)	edge [loop above]	node {\tone}	()
+%	(AD)	edge [loop above]	node {\tz}	();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Finally, $\delta'(ABCD, \tz) = AD$ and $\delta'(ABCD, \tone) = ABCD$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 10mm] (A) {$A$};
+%	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+%	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+%	\node[state, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+%	\node[state, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
+%	\node[state, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
+%	\path[->] 
+%	(A)		edge [bend left] 	node {\tone}	(AB)
+%	(AB)	edge [bend left] 	node {\tz}	(A)
+%	(AB)	edge [] 			node {\tone}	(ABC)
+%	(ABC)	edge [] 			node {\tz}	(AD)
+%	(AD)	edge [bend left] 	node {\tone}	(ABD)
+%	(ABD)	edge [bend left] 	node {\tz}	(AD)
+%	(ABD)	edge [] 			node {\tone}	(ABCD)
+%	(ABCD)	edge [bend left = 50] 	node {\tz}	(AD)
+%	(A)		edge [loop above]	node {\tz}	()
+%	(ABC)	edge [loop above]	node {\tone}	()
+%	(AD)	edge [loop above]	node {\tz}	()
+%	(ABCD)	edge [loop above]	node {\tone}	();
+%\end{tikzpicture}
+%\end{center}
+%As no new state is added in this step, all the other states (not shown here) are unreachable.
+%\end{enumerate}
+%
+%Now, the states $AD$, $ABD$, and $ABCD$ all contain $D$, which is the only accept state of the original NFA. Hence, these states are accept state of the DFA.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 10mm] (A) {$A$};
+%	\node[state, minimum size = 11mm] (AB) [right = of A] {\small $AB$};
+%	\node[state, minimum size = 11mm] (ABC) [right = of AB] {\footnotesize $ABC$};
+%	\node[state, accepting, minimum size = 11mm] (AD) [right = of ABC] {\small $AD$};
+%	\node[state, accepting, minimum size = 11mm] (ABD) [right = of AD] {\footnotesize $ABD$};
+%	\node[state, accepting, minimum size = 11mm] (ABCD) [right = of ABD] {\scriptsize $ABCD$};
+%	\path[->] 
+%	(A)		edge [bend left] 	node {\tone}	(AB)
+%	(AB)	edge [bend left] 	node {\tz}	(A)
+%	(AB)	edge [] 			node {\tone}	(ABC)
+%	(ABC)	edge [] 			node {\tz}	(AD)
+%	(AD)	edge [bend left] 	node {\tone}	(ABD)
+%	(ABD)	edge [bend left] 	node {\tz}	(AD)
+%	(ABD)	edge [] 			node {\tone}	(ABCD)
+%	(ABCD)	edge [bend left = 50] 	node {\tz}	(AD)
+%	(A)		edge [loop above]	node {\tz}	()
+%	(ABC)	edge [loop above]	node {\tone}	()
+%	(AD)	edge [loop above]	node {\tz}	()
+%	(ABCD)	edge [loop above]	node {\tone}	();
+%\end{tikzpicture}
+%\end{center}
+%\end{Example}
+%
+%\begin{Example}
+%Consider the NFA given in \cref{ex:NFAContains110}.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (A) {$A$};
+%	\node[state, minimum size = 6mm] (B) [right = of A] {$B$};
+%	\node[state, accepting, minimum size = 6mm] (C) [right = of B] {$C$};
+%	\path[->] 
+%	(A) edge []				node {$\varepsilon$}	(B)
+%	(B) edge []				node {$\varepsilon$}	(C)
+%	(A) edge [loop above]	node {\ta}	()
+%	(B) edge [loop above]	node {\tb}	()
+%	(C) edge [loop above]	node {\tc}	();
+%\end{tikzpicture}
+%\end{center}
+%Here, the start state is $A$, but $B$ can be reached from $A$ via an epsilon transition, and $C$ can be reached from $B$ via an epsilon transition. Hence, the start state of the converted DFA will be $ABC$, which will also be an accept state, since it contains $C$, an accept state of the original NFA. Next, $\delta(A, \ta) = A$, $\delta(B, \ta) = \delta(C, \ta) = \varnothing$. But $B$ and $C$ can be reached from $A$ by epsilon transitions. Therefore, $\delta'(ABC, \ta) = ABC$. Similarly, $\delta'(ABC, \tb) = BC$, which will also be an accept state. Similarly, $\delta'(ABC, \tc) = C$, also an accept state.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, accepting, minimum size = 11mm] (ABC) {\footnotesize $ABC$};
+%	\node[state, accepting, minimum size = 11mm] (BC) [right = of A] {\small $BC$};
+%	\path[->] 
+%	(ABC) edge []				node {\tb}	(BC)
+%	(ABC) edge [loop above]	node {\ta}	();
+%\end{tikzpicture}
+%\end{center}
+%But now, $\delta(B, \ta) = \delta(C, \ta) = \varnothing$. Hence, $\delta'(BC, \ta) = \varnothing$. Note that $\varnothing$ will be state from which there are no transitions into any other states -- i.e.\ it is a trap state. Hence, $\delta'(\varnothing, \ta) = \delta'(\varnothing, \tb) = \varnothing$. Proceeding thus, we find that $\delta'(BC, \tb) = BC$, $\delta'(BC, \tc) = C$, $\delta'(C, \ta) = \delta'(C, \tb) = \varnothing$, and $\delta'(C, \tc) = C$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, accepting, minimum size = 11mm] (ABC) {\footnotesize $ABC$};
+%	\node[state, accepting, minimum size = 11mm] (BC) [right = of A] {\small $BC$};
+%	\node[state, accepting, minimum size = 11mm] (C) [right = of B] {$C$};
+%	\node[state, minimum size = 11mm] (T) [below = of C] {$\varnothing$};
+%	\path[->] 
+%	(ABC) edge []				node {\tb}	(BC)
+%	(ABC) edge [bend right]		node [swap] {\tc}	(C)
+%	(BC) edge []				node {\tc}	(C)
+%	(BC) edge []				node [swap] {\ta}	(T)
+%	(C) edge []				node {\ta, \tb}	(T)
+%	(ABC) edge [loop above]	node {\ta}	()
+%	(BC) edge [loop above]	node {\tb}	()
+%	(C) edge [loop above]	node {\tc}	();
+%\end{tikzpicture}
+%\end{center}
+%\end{Example}
+%
+%\subsubsection{Product Construction}\label{subsubsec:ProductFA}
+%
+%If $L_1$ and $L_2$ and languages over the same alphabet $\Sigma$, and $M_1$ and $M_2$, respectively, are the NFAs accepting them, then the \newterm{intersection} of $L_1$ and $L_2$,
+%\begin{equation*}
+%L_1 \cap L_2 = \qty{\, w \in \Sigma^* \mid w \in L_1 ~\text{and}~ w \in L_2 \,}
+%\end{equation*}
+%is accepted by the product of $M_1$ and $M_2$, defined as follows: Let $M_1 = (Q_1, \Sigma, \delta_1, q_{10}, F_1)$ and $M_2 = (Q_2, \Sigma, \delta_2, q_{20}, F_2)$. Then their \newterm{product} $M_1 \times M_2 = (Q, \Sigma, \delta, q_0, F)$, where
+%\begin{enumerate}[label = (\roman*)]
+%\item $Q = Q_1 \times Q_2$, the Cartesian product of $Q_1$ and $Q_2$. That is, each state of $M_1 \times M_2$ is a pair of states, the first from $M_1$ and the second from $M_2$.
+%\item For each $q_1 \in Q_1$, $q_2 \in Q_2$, and $s \in \Sigma$, $\delta((q_1, q_2), s) = (\delta_1(q_1, s), \delta_2(q_2, s))$.
+%\item $q_0 = (q_{10}, q_{20})$.
+%\item $F = F_1 \times F_2$.
+%\end{enumerate}
+%
+%\subsection{Regular Expressions}\label{subsec:RE}
+%
+%A \newterm{regular expression} (\newterm{RE}) over an alphabet $\Sigma$ is an expression consisting of one or more of the symbols in $\Sigma$ or $\varepsilon$ or $\varnothing$, one or both of the operators $+$ and ${}^*$, and parentheses $($ and $)$, whose syntax is defined recursively as follows:
+%\begin{enumerate}
+%\item For each $s \in \Sigma$, $s$ is a regular expression, and $\varepsilon$ and $\varnothing$ are regular expressions.
+%\item If $r$ is a regular expression, then so is $(r)^*$.
+%\item If $r_1$ and $r_2$ are regular expressions, then so are $r_1 + r_2$ and $(r_1)(r_2)$.
+%\end{enumerate}
+%
+%\begin{Note*}
+%If $r$ is a single symbol (i.e.\ $r \in \Sigma$), then $(r)^*$ can also be written as $r^*$; $(r)(r')$ can also be written as $r(r')$; and $(r')(r)$ can also be written as $(r')r$.
+%\end{Note*}
+%
+%\begin{Example}
+%The following are some regular expressions over $\Sigma = \{\tz, \tone\}$:
+%\begin{align*}
+%& \tz + \tone, ~~ \tz(\tz + \tone), ~~ (\tz + \tone)^*\tone\tone\tz(\tz + \tone)^*, ~~ \tone^* \tz^* + \tz^* \tone^*, \spliteq\splitalign ~~ \tz^* \tone \tz^*(\tz^* \tone \tz^* \tone)^* \tz^*, ~~ \tz (\tz + \tone)^* \tz + \tone (\tz + \tone)^* \tone
+%\end{align*}
+%\end{Example}
+%
+%Each RE represents or generates a particular language. To rigorously define the language generated by an RE, we will first define some operations on languages.
+%
+%Let $L_1$ and $L_2$ be two languages over the same alphabet $\Sigma$. Recall that this means $L_1$ and $L_2$ are sets of strings of symbols in $\Sigma$, i.e.\ $L_1, L_2 \subseteq \Sigma^*$.
+%\begin{enumerate}
+%\item The \newterm{union} of $L_1$ and $L_2$ is $L_1 \cup L_2$, defined as their union as sets.
+%\begin{equation*}
+%L_1 \cup L_2 = \qty{\, w \in \Sigma^* \mid w \in L_1 ~\text{or}~ w \in L_2 \,}
+%\end{equation*}
+%
+%\item The \newterm{concatenation} of $L_1$ and $L_2$ is $L_1 L_2$, the language of all strings obtained by concatenating a string of $L_1$ with a string of $L_2$.
+%\begin{equation*}
+%L_1 L_2 = \qty{\, w_1 w_2 \mid w_1 \in L_1,\, w_2 \in L_2 \,}
+%\end{equation*}
+%
+%\item The \newterm{Kleene star}\footnote{Named after the mathematician Stephen Cole Kleene, \href{https://foldoc.org/Stephen+Kleene}{pronounced \ttt{klay-nee} (\textipa{\textprimstress}kle\textsci ni)}.} of $L_1$ is $L_1^*$, the language of all strings obtained by concatenating any finite number of strings of $L_1$ together.
+%\begin{align*}
+%L_1^* & = \qty{\, w_1 w_2 \dots w_n \mid w_i \in L_i,\, i = 1, \ldots, n,\, n \in \mathbb N_0 \,} \\
+%& = \{\varepsilon\} \cup L_1 \cup L_1 L_1 \cup L_1 L_1 L_1 \cup \cdots
+%\end{align*}
+%\end{enumerate}
+%
+%The language generated by an RE can now be recursively defined as follows:
+%\begin{enumerate}
+%\item The language generated by the RE $s$, where $s \in \Sigma$ (a single symbol), is $\{s\}$ and the language generated by the RE $\varepsilon$ is ${\varepsilon}$.
+%\item The language generated by the RE $\varnothing$ is the empty language $\varnothing = \{\}$. Note that this language does \emph{not} contain the empty string!
+%\item If $r_1$ and $r_2$ are two REs over the same alphabet $\Sigma$, that generate languages $L_1$ and $L_2$, respectively, then
+%\begin{enumerate}[label = (\roman*)]
+%\item the RE $r_1 + r_2$ generates the language $L_1 + L_2$
+%\item the RE $(r_1)(r_2)$ generates the language $L_1 L_2$
+%\item the RE $(r_1)^*$ generates the language $L_1^*$.
+%\end{enumerate}
+%\end{enumerate}
+%
+%\begin{Example} Let $\Sigma = \{\tz, \tone\}$.
+%\begin{enumerate}
+%\item The RE $\tz + \tone$ generates the language $\{\tz, \tone\}$.
+%\item The RE $\tz(\tz + \tone)$ generates the language $\{\ttt{00}, \ttt{01}\}$.
+%\item The RE $(\tz + \tone)^*\ttt{110}(\tz + \tone)^*$ generates the language of all binary strings containing $\ttt{110}$ as a substring.
+%\item The RE $\tz^* \tone^* + \tone^* \tz^*$ generates the language of all binary strings that are either a string of (zero or more) $\tz$s followed by a string of $\tone$s, or a string of $\tone$s followed by a string of $\tz$s.
+%\end{enumerate}
+%\end{Example}
+%
+%\begin{Exercise} Let $\Sigma = \{\tz, \tone\}$.
+%\begin{enumerate}
+%\item What is the language generated by $\tz (\tz + \tone)^* \tz + 1 (0 + 1)^* 1$?
+%\item What is the language generated by $\tz^* \tone \tz^*(\tz^* \tone \tz^* \tone)^* \tz^*$?
+%\end{enumerate}
+%\end{Exercise}
+%
+%\solution{REs}{
+%\begin{enumerate}
+%\item All binary strings of length at least $2$, beginning and ending in the same symbol.
+%\item All binary strings containing an odd number of $\tone$s.
+%\end{enumerate}
+%}
+%
+%\subsubsection{Conversion of NFA to RE}\label{sububsec:NFAtoRE}
+%
+%Any nondeterministic finite automaton can be converted to an equivalent\footnote{An RE is equivalent to an NFA is one that generates the language accepted by the NFA.} regular expression. The conversion procedure involves first reducing the given NFA, by eliminating one state at a time, to intermediate finite automata of a new kind, until just one start state and one accept state remain. A \newterm{generalised (nondeterministic) finite automaton} (\newterm{GFA} or \newterm{GNFA}) is a finite automaton in which the arrows are labelled by REs, and a transition along this arrow is made if the next few characters of the input match the RE. That is, if the arrow from state $q_1$ to state $q_2$ is labelled by the regular expression $r$, and the unread part of the input when $q_1$ is reached is $s_1 s_2 \cdots s_n$, then a transition can be made to $q_2$ is $s_1 s_2 \cdots s_i$ is a string generated by $r$ for some $i \le k$. Trivially, every NFA is a GFA, since any single symbol or $\varepsilon$ is an RE, and a transition of an NFA consists of reading one symbol and moving along one arrow, or reading no symbol (i.e.\ an empty string) and making an epsilon transition.
+%
+%The procedure for converting an NFA to RE is as follows. Let $M = (Q, \Sigma, \delta, q_0, F)$ be an NFA. Furthermore, assume that $q_0$ has no arrows entering it and $F$ contains a single state $q_f$ with no arrows leaving it -- in both cases, even self-loops are not allowed\footnote{It is easy to see that any NFA can be converted to an equivalent NFA satisfying this condition by using epsilon transitions. If $q_0$ has an arrow entering it, then make a new start state $q_0'$ with an epsilon transition into $q_0$, which will no longer be the start state. Similarly, if $q_f$ has an arrow leaving it, make it a non-accept state and add a new accept state $q_f'$ with an epsilon transition into it from $q_f$. If $M$ has multiple accept states, make all of them non-accept states, and add a new accept state $q_f$ with an epsilon transition into it from each of the old accept states.}. Now, iteratively reduce $M$ by eliminating one state other than $q_0$ and $q_f$ at a time as given below:
+%\begin{enumerate}
+%\item Let $q$ be any state different from $q_0$ and $q_f$, and let $r$ be the label on the self-loop on $q$.
+%\item For each state $q_1 \ne q$ with a transition into $q$ labelled $r_1$, and each state $q_2 \ne q$ into which there is a transition from $q$ labelled $r_2$, let $r_{12} = r_1 r^* r_2$ (suitably parenthesised), where $r$ is the regular expression on the self-loop on $q$ (if $q$ has no self-loop, then this is just $r_1 r_2$).
+%\item If there is no arrow from $q_1$ to $q_2$, add an arrow labelled $r_{12}$. If an arrow already exists from $q_1$ to $q_2$, replace its label, say $r'$, by $r' + r_{12}$.
+%\item Delete $q$.
+%\end{enumerate}
+%When $q_0$ and $q_f$ are the only states remaining, the label on the arrow from $q_0$ to $q_f$ is the RE equivalent to the NFA $M$.
+%
+%\begin{Note*}
+%The order in which the states are eliminated does not matter, although the REs obtained may differ (but be equivalent) according to the order followed.
+%\end{Note*}
+%
+%\begin{Example}\label{ex:NFAContains110ToRE}
+%Consider the NFA given in \cref{ex:NFAContains110}.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (A) {$A$};
+%	\node[state, minimum size = 6mm] (B) [right = of A] {$B$};
+%	\node[state, minimum size = 6mm] (C) [right = of B] {$C$};
+%	\node[state, accepting, minimum size = 6mm] (D) [right = of C] {$D$};
+%	\path[->] 
+%	(A) edge [] node {\tone}	(B)
+%	(B) edge []	node {\tone}	(C)
+%	(C) edge []	node {\tz}	(D)
+%	(A) edge [loop above]	node {\tz, \tone}	()
+%	(D)	edge [loop above] node {\tz, \tone} ();
+%\end{tikzpicture}
+%\end{center}
+%The start state $A$ has two arrows entering it and the accept state $D$ has two arrows leaving it (in each case, self-loops labelled $\tz$ and $\tone$). Therefore, we first add a new start state $q_0$ with an epsilon transition into $A$ (no longer a start state), and a new accept state $q_f$ with an epsilon transition into it from $D$, which will be made a non-accept state.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
+%	\node[state, minimum size = 6mm] (A) [right = of q0] {$A$};
+%	\node[state, minimum size = 6mm] (B) [right = of A] {$B$};
+%	\node[state, minimum size = 6mm] (C) [right = of B] {$C$};
+%	\node[state, minimum size = 6mm] (D) [right = of C] {$D$};
+%	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
+%	\path[->] 
+%	(q0) edge [] node {$\varepsilon$} (A)
+%	(A) edge [] node {\tone}	(B)
+%	(B) edge []	node {\tone}	(C)
+%	(C) edge []	node {\tz}	(D)
+%	(D) edge [] node {$\varepsilon$} (qf)
+%	(A) edge [loop above]	node {\tz, \tone}	()
+%	(D)	edge [loop above] node {\tz, \tone} ();
+%\end{tikzpicture}
+%\end{center}
+%Now we eliminate the non-initial and non-accept states one by one.
+%\begin{enumerate}
+%\item If we choose to eliminate $A$ first, we first note that there is one arrow, labelled $\varepsilon$, coming into $A$ from $q_0$, and one arrow, labelled $q$, going from $A$ into $B$. Also, there are self-loops on $A$ labelled $0$ and $1$. Therefore, we add an arrow from $q_0$ to $B$ labelled $\varepsilon(0 + 1)^*1 = (0 + 1)^*1$, and then delete $A$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
+%	\node[state, minimum size = 6mm] (B) [right = 3cm of q0] {$B$};
+%	\node[state, minimum size = 6mm] (C) [right = of B] {$C$};
+%	\node[state, minimum size = 6mm] (D) [right = of C] {$D$};
+%	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
+%	\path[->] 
+%	(q0) edge [] node {$(\tz + \tone)^*\tone$} (B)
+%	(B) edge []	node {\tone}	(C)
+%	(C) edge []	node {\tz}	(D)
+%	(D) edge [] node {$\varepsilon$} (qf)
+%	(D)	edge [loop above] node {\tz, \tone} ();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Next, if we wish to eliminate $B$, we replace the arrow from $q_0$ to $B$ labelled $(\tz + \tone)^*\tone$ and the arrow labelled $\tone$ from $B$ to $C$ by the arrow $(\tz + \tone)^* \tone \tone$ from $q_0$ to $C$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
+%	\node[state, minimum size = 6mm] (C) [right =  3cm of q0] {$C$};
+%	\node[state, minimum size = 6mm] (D) [right = of C] {$D$};
+%	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
+%	\path[->] 
+%	(q0) edge [] node {$(\tz + \tone)^*\tone\tone$} (C)
+%	(C) edge []	node {\tz}	(D)
+%	(D) edge [] node {$\varepsilon$} (qf)
+%	(D)	edge [loop above] node {\tz, \tone} ();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Similarly, we may eliminate $C$ next.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
+%	\node[state, minimum size = 6mm] (D) [right =  3cm of q0] {$D$};
+%	\node[state, accepting, minimum size = 6mm] (qf) [right = of D] {$q_f$};
+%	\path[->] 
+%	(q0) edge [] node {$(\tz + \tone)^*\tone\tone\tz$} (D)
+%	(D) edge [] node {$\varepsilon$} (qf)
+%	(D)	edge [loop above] node {\tz, \tone} ();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Finally, we eliminate $D$.
+%\begin{center}
+%\begin{tikzpicture}[> = stealth, shorten > = 1pt, node distance = 2cm, on grid, auto, initial text =]
+%	\node[state, initial, minimum size = 6mm] (q0) {$q_0$};
+%	\node[state, accepting, minimum size = 6mm] (qf) [right = 5cm of q0] {$q_f$};
+%	\path[->] 
+%	(q0) edge [] node {$(\tz + \tone)^*\tone\tone\tz(\tz + \tone)^*$} (qf);
+%\end{tikzpicture}
+%\end{center}
+%\end{enumerate}
+%Thus, an RE equivalent to the given NFA is $(\tz + \tone)^* \tone\tone\tz (\tz + \tone)^*$. We easily verify that indeed, this is an equivalent RE. The original NFA accepts all binary strings containing the substring $\tone\tone\tz$. Every such string can be written as some binary string (i.e.\ a string generated by $(\tz + \tone)^*$), followed by $\tone\tone\tz$, (generated by $\tone\tone\tz$) followed by any binary string (generated by $(\tz + \tone)^*$)).
+%\end{Example}
+%
+%\begin{Example} Consider the NFA shown below.
+%\begin{center}
+%\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+%   \node[state, initial, minimum size = 5mm] (W)   {W};
+%   \node[state, minimum size = 5mm] (X) [above right=of W] {X};
+%   \node[state, minimum size = 5mm] (Y) [below right=of W] {Y};
+%   \node[state, accepting, minimum size = 5mm] (Z) [below right=of X] {Z};
+%   \path[->] 
+%   (W) edge  node {\ta} (X)
+%       edge  node [swap] {\tb} (Y)
+%         
+%   (X) edge  node  {\tb} (Z)
+%       edge  node  {\tb} (Y)
+%       edge [loop above] node {\ta} ()
+%       
+%   (Y) edge  node [swap] {\ta} (Z)
+%       edge [loop below] node {\tb} ();
+%\end{tikzpicture}
+%\end{center}
+%This NFA is already in the form necessary to apply the conversion procedure, as the start state $W$ has no arrows entering it, and there is a unique accept state $Z$ with no arrows leaving it.
+%\begin{enumerate}
+%\item There is only one arrow from a different state entering $X$, which is from $W$, there are two arrows leaving $X$, which are to $Y$ and $Z$, and there is a self-loop on $X$ labelled $a$. On eliminating $X$, we get the following GFA.
+%\begin{center}
+%\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+%   \node[state, initial, minimum size = 5mm] (W)   {W};
+%   \node[state, minimum size = 5mm] (Y) [below right=of W] {Y};
+%   \node[state, accepting, minimum size = 5mm] (Z) [above right=of Y] {Z};
+%   \path[->] 
+%   (W) edge  node  {$\ta \ta^* \tb$} (Z)
+%       edge  node  [swap] {$\tb + \ta \ta^* \tb$} (Y)
+%       
+%   (Y) edge  node [swap] {\ta} (Z)
+%       edge [loop below] node {\tb} ();
+%\end{tikzpicture}
+%\end{center}
+%
+%\item Next, we eliminate $Y$.
+%\begin{center}
+%\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+%   \node[state, initial, minimum size = 5mm] (W)   {W};
+%   \node[state, accepting, minimum size = 5mm] (Z) [right = 5cm of W] {Z};
+%   \path[->] 
+%   (W) edge  node  {$\ta \ta^* \tb + (\tb + \ta \ta^* \tb)\tb^*\ta$} (Z);
+%\end{tikzpicture}
+%\end{center}
+%\end{enumerate}
+%Thus, the equivalent RE is $\ta \ta^* \tb + (\tb + \ta \ta^* \tb)\tb^*\ta$.
+%\end{Example}
+%
+%\begin{Exercise}
+%Convert the NFA given below to an RE.
+%\begin{center}
+%\begin{tikzpicture}[shorten >=1pt, node distance=1.5cm, on grid, auto, initial text=]
+%   \node[state, initial, minimum size = 5mm] (A) {A};
+%   \node[state, minimum size = 5mm] (B) [above right=of A, xshift = 1cm] {B};
+%   \node[state, accepting, minimum size = 5mm] (C) [below right = of A, xshift = 1cm] {C};
+%   \node[state, accepting, minimum size = 5mm] (D) [below right = of B, xshift = 1cm] {D};
+%   \path[->] 
+%   (A) edge  node {\tz} (B)
+%       edge  node [swap] {$\varepsilon$} (C)
+%         
+%   (B) edge  node  {\tone} (D)
+%       edge [loop above] node {\tone} ()
+%       
+%   (C)   edge  node   {$\varepsilon$} (B)
+%   (C.355) edge  node [yshift = 2pt] {\tz} (D.235)
+%       
+%   (D.205) edge node [yshift=-2pt] {\tz} (C.25);
+%\end{tikzpicture}
+%\end{center}
+%
+%
+%\end{Exercise}
+%
+%\clearpage
 
 \section{Graph Theory}\label{sec:GraphTheory}
 
@@ -1311,6 +1311,24 @@ If $G$ is a graph of order $n$, and $\deg_G v = k$, what is $\deg_{\overline G} 
 \begin{Exercise}
 Show that if $G$ and $\overline G$ are $k$-regular graphs of order $n$ then $k$ is an even number and $n = 4t + 1$ for some integer $t$.
 \end{Exercise}
+
+A \newterm{triangle} in a graph is a subgraph consisting of three mutually adjacent vertices -- i.e. an instance of $K_3$ as a subgraph.
+
+\begin{Theorem}[Ramsey]\label{thm:R(3,3)}
+If $G$ is any graph of order at least six, then either $G$ or $\overline G$ contains a triangle.
+\end{Theorem}
+
+\begin{proof}
+Consider a graph $G$ of order $n \ge 6$, and let $v \in V(G)$. Since $\deg_G v + \deg_{\overline G} v = n - 1 \ge 5$, in either $G$ or $\overline G$, $v$ has degree at least $3$.
+
+Without loss of generality, suppose that $v$ is adjacent to three vertices $x$, $y$, $z$ in $G$. Now, if any two of $x$, $y$, and $z$ are adjacent to each other in $G$, then, together with $v$, they form a triangle in $G$. Otherwise, $xyz$ is a triangle in $\overline G$.
+\end{proof}
+
+\begin{Definition}
+For positive integers $m$ and $n$, the \newterm{Ramsey number} $R(m, n)$ is the least positive integer such that if $G$ is any graph of order $R(m, n)$, then either $G$ contains $K_m$ or $\overline G$ contains $K_n$ as a subgraph -- i.e. $G$ contains either $K_m$ or $\overline K_n$ as an induced subgraph.
+\end{Definition}
+
+Observe that there exists a graph $G$ of order $5$ such that neither $G$ nor $G$ contains a triangle. Therefore, by Theorem~\ref{thm:R(3,3)}, $R(3, 3) = 6$.
 
 \subsection{Walks, Paths, and Cycles}\label{subsec:Walks}
 
@@ -1480,6 +1498,17 @@ l & = d(w, x) + d(w, y) + 1 \\
 If $x, y \in V_1$, then both $d(v, x)$ and $d(v, y)$ are even, and if $x, y \in V_2$, then both these numbers are odd. In either case, $d(v, x) + d(v, y)$ is even, and hence $l$ is odd, which is a contradiction. Hence, $(V_1, V_2)$ is a bipartition of $G$ as claimed.
 \end{proof}
 
+\subsubsection{Complete Bipartite Graphs}\label{subsec:Krs}
+
+The \newterm{complete bipartite graph} $K_{r, s}$ is the bipartite graph with bipartition $(V_1, V_2)$, where $|V_1| = r$, $|V_2| = s$, and every vertex in $V_1$ is adjacent to every vertex in $V_2$. The complete bipartite graph $K_{1, n}$ is the \newterm{star graph} of order $n + 1$.
+
+\begin{Exercise}
+If $G$ is a bipartite graph with bipartition $(V_1, V_2)$, show that
+\begin{equation*}
+\sum_{v \in V_1} \deg v = \sum_{v \in V_2} \deg v.
+\end{equation*}
+\end{Exercise}
+
 \subsection{Trees}\label{subsec:Trees}
 
 A \newterm{tree} is a connected, acyclic graph. There are several well known characterisations or alternative definitions of trees. We take the given definition as the basic one and prove its equivalence to some others.
@@ -1605,6 +1634,17 @@ Suppose $G$ is a disconnected graph with components $G_1, G_2, \ldots, G_k$, and
 where $0_{n_i}$ denotes the $n_i \times n_i$ zero-matrix.
 \end{Exercise}
 
+\begin{Exercise}
+Suppose $G$ is a bipartite graph with bipartition $(V_1, V_2)$, and furthermore, assume that the vertices are ordered in such a way that the first $r$ vertices are in $V_1$ and the next $s$ vertices are in $V_2$. Show that the adjacency matrix of $G$ is given by the partitioned matrix
+\begin{equation*}
+\mathcal A(G) = \begin{bmatrix}
+0_r & B \\
+B^T & 0_s
+\end{bmatrix}
+\end{equation*}
+where $B$ is a $(0, 1)$-matrix of order $r \times s$. What is $B$ when $G$ is $K_{r, s}$?
+\end{Exercise}
+
 \begin{Exercise}\label{exer:A2ij}
 Show that the $(i,j)$-entry of $A^2$ is the number of walks of length $2$ from $v_i$ to $v_j$. Hence show that $\trace(A^2) = 2|E(G)|$.\\
 \hint{A2ij}{Recall that if $A$ is any $n \times n$ matrix, then the $(i,j)$-entry of $A^2$ is $\sum_{k=1}^{n} a_{ik}a_{kj}$. As $A$ is a $(0, 1)$-matrix, each term in this summation is $1$ or $0$, with the former if and only if $a_{ik} = a_{kj} = 1$. What does this imply about the vertices $v_i$, $v_k$, and $v_j$? Then, as $k$ varies from $1$ to $n$, what does the value of the sum imply about $v_i$ and $v_j$?}
@@ -1699,6 +1739,7 @@ Dijkstra's algorithm\footnote{Named after its inventor, the computer scientist a
 
 The input to the algorithm is the set of vertices $V$ and the weighted adjacency matrix $W$. Initially, the algorithm takes the weights of the edges from $s$ to the other vertices as the \newterm{tentative best distances} to those vertices. It also maintains a set $K$ of vertices to which the shortest paths from $s$ have been found (so that no further improvement is possible), and a set $U$ of vertices to which shorter paths may yet be found, passing through some vertex in $K$. In each step, the vertex $t \in U$ with minimum tentative best distance is selected -- it is guaranteed that no shorter path exists from $s$ to this vertex (since any such path would have to pass through some other vertex of $U$, but the distances to such a vertex is larger than the distance to $t$). This vertex $t$ is removed from $U$ and added to $K$, and then for each vertex $u$ remaining in $U$, the distance from $s$ to $u$ \emph{through} $t$ is compared with the current best distance to $u$. If the former is found to be smaller, the best distance to $u$ is updated to that value and $t$ is marked as the vertex through which $u$ is to be reached in the shortest path -- this is indicated by $\tree(u)$ in the algorithm. This procedure is repeated until there is only vertex remaining in $U$ (i.e.\ until $|U| = 1$).
 
+\clearpage
 
 \begin{Example}
 In the graph shown below, find the shortest paths from $B$ to all the other vertices.\\
