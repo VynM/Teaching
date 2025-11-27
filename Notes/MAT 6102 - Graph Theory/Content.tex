@@ -460,7 +460,7 @@ Now suppose, for the sake of induction, that the result holds for some $m \ge 1$
 \begin{equation*}
 (A^{m + 1})_{ij} = \sum_{k = 1}^{n} (A^m)_{ik} a_{kj}.
 \end{equation*}
-First, note that $a_{kj} = 1$ if and only if $v_k \sim v_j$. Therefore, the above sum is equal to the sum of all $(A^m)_{ik}$ where $v_k \sim v_j$. Now, by the induction hypothesis, $(A^m)_{ik}$ is the number of walks of length $m$ from $v_i$ to $v_k$. If $v_j$ is adjacent to $v_j$, then each walk of length $m$ from $v_i$ to $v_k$, together with the edge from $v_j$ to $v_j$, forms a walk of length $m + 1$ from $v_i$ to $v_j$. Thus, for each $k$ such that $v_k \sim v_j$, $(A^m)_{ik} a_{kj} = (A^m)_{ik}$ is the number of walks of length $m + 1$ from $v_i$ to $v_j$ that pass through $k$. Summing over all $k$, this gives the total number of walks of length $m + 1$ from $v_i$ to $v_j$. Hence the result follows by induction.
+First, note that $a_{kj} = 1$ if and only if $v_k \sim v_j$. Therefore, the above sum is equal to the sum of all $(A^m)_{ik}$ where $v_k \sim v_j$. Now, by the induction hypothesis, $(A^m)_{ik}$ is the number of walks of length $m$ from $v_i$ to $v_k$. If $v_k$ is adjacent to $v_j$, then each walk of length $m$ from $v_i$ to $v_k$, together with the edge from $v_k$ to $v_j$, forms a walk of length $m + 1$ from $v_i$ to $v_j$. Thus, for each $k$ such that $v_k \sim v_j$, $(A^m)_{ik} a_{kj} = (A^m)_{ik}$ is the number of walks of length $m + 1$ from $v_i$ to $v_j$ that pass through $k$. Summing over all $k$, this gives the total number of walks of length $m + 1$ from $v_i$ to $v_j$. Hence the result follows by induction.
 \end{proof}
 
 \begin{Theorem}
