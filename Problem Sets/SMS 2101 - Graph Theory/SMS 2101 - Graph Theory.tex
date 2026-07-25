@@ -1,0 +1,277 @@
+% !TEX program = xelatex
+
+\documentclass[svgnames]{amsart}
+\usepackage[paperwidth=6in, paperheight=8in, top=20mm, bottom=18mm, left=10mm, right=10mm]{geometry}
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=*, itemsep=0.8em}
+\setlist[enumerate,2]{label=(\alph*), leftmargin=1.7em, itemsep=0.25em, topsep=0.25em}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault, lining, scale=0.9]{FiraSans}
+\usepackage{kmath}
+
+\usepackage{xcolor}
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\setlength{\parindent}{0pt}
+\linespread{1.15}
+
+\newcommand{\comp}[1]{\overline{#1}}
+\newcommand{\dist}{\operatorname{d}}
+\newcommand{\ecc}{\operatorname{ecc}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\rad}{\operatorname{rad}}
+\newcommand{\sectiontitle}[1]{%
+  \medskip
+  {\noindent\large\bfseries\color{blue!35!black} #1}\par
+  \smallskip
+}
+
+\title{SMS 2101: Graph Theory}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\small
+Unless stated otherwise, all graphs are finite, simple, and undirected. \\
+For a graph $G$, take $n=|V(G)|$ and $m=|E(G)|$.
+\end{center}
+
+\sectiontitle{I. Foundations}
+
+\begin{enumerate}
+\item Let $G$ have vertex set $\{1,2,\ldots,7\}$ and edge set
+\[
+ E(G)=\{12,13,14,23,25,35,36,45,47,56,67\}.
+\]
+\begin{enumerate}
+  \item Find the order, size, degree of each vertex, and degree sequence of $G$.
+  \item Let $H$ have vertex set $\{1,2,3,5\}$ and edge set
+  $\{12,13,23,25\}$. Is $H$ a subgraph of $G$? Is it induced?
+  \item Give a spanning tree of $G$.
+  \item Find the degree sequence and size of $\comp G$ without listing all
+  its edges.
+\end{enumerate}
+
+\item Decide whether each description is possible. Justify each answer.
+\begin{enumerate}
+  \item A graph has degree sequence $(6,5,4,4,3,2,2,2)$.
+  \item At a meeting of eleven people, each person shakes hands with
+  exactly five others.
+  \item A graph of order $9$ has one vertex of each degree
+  $0,1,\ldots,8$.
+\end{enumerate}
+
+\item For the graph $G$ in Problem~1, determine whether each sequence is
+a walk, trail, path, closed walk, or cycle, and find its length.
+\[
+\begin{array}{lll}
+W_1=(1,2,3,5,2,1),&
+W_2=(7,4,5,3,6,7),&
+W_3=(2,1,3,2,5,6,3).
+\end{array}
+\]
+
+\item Apply the Havel-Hakimi algorithm to each vector below. State
+whether it is graphical. If it is, construct a graph having that degree
+sequence.
+\[
+ (5,4,4,3,3,3,2),
+ \qquad
+ (4,4,3,1,1,1).
+\]
+Record every reduced vector used by the algorithm.
+
+\item For the graph $G$ in Problem~1:
+\begin{enumerate}
+  \item find all geodesics from vertex $2$ to vertex $7$;
+  \item find the eccentricity of every vertex; and
+  \item determine $\rad(G)$, $\diam(G)$, and the centre of $G$.
+\end{enumerate}
+
+\item Let
+\[
+\begin{aligned}
+E(G_1)&=\{12,23,34,45,51,13\},\\
+E(G_2)&=\{ce,ea,ad,db,bc,ca\}.
+\end{aligned}
+\]
+\begin{enumerate}
+  \item Give an isomorphism from $G_1$ to $G_2$.
+  \item The graphs $C_6$ and $2K_3$ have the same degree sequence.
+  Explain why they are not isomorphic.
+\end{enumerate}
+
+\item Let $Q$ have vertex set
+\[
+ \{a,b,c,x,y,z,w\}
+\]
+and edge set
+\[
+ \{ax,ay,by,bz,cx,cz,cw\}.
+\]
+\begin{enumerate}
+  \item Find a bipartition of $Q$.
+  \item Is this bipartition unique, apart from interchanging its two parts?
+  \item Add the edge $ac$. Exhibit an odd cycle in the resulting graph.
+\end{enumerate}
+
+\item For each statement below, decide whether the information guarantees
+that $G$ is a tree. Prove your answer or give a counterexample.
+\begin{enumerate}
+  \item $G$ is connected, has $12$ vertices, and has $11$ edges.
+  \item $G$ is acyclic, has $12$ vertices, and has $11$ edges.
+  \item $G$ has $12$ vertices and $11$ edges.
+\end{enumerate}
+
+\item Let $T$ be the tree with
+\[
+V(T)=\{a,b,c,d,e,f,g,h,i\},\qquad
+E(T)=\{ab,bc,cd,de,cf,cg,gh,hi\}.
+\]
+Find its pendant vertices, diameter, radius, and centre. Also show the
+successive stages of the leaf-deletion procedure used to find the centre.
+
+\sectiontitle{II. Core techniques}
+
+\item For each of $K_5$, $K_{2,4}$, and $K_{3,3}$, decide whether it is
+Eulerian and whether it is Hamiltonian. Whenever the answer is yes,
+exhibit an Eulerian circuit or a Hamiltonian cycle. Whenever it is no,
+give a reason.
+
+\item Let $R$ have vertices $v_1,\ldots,v_5$ and edges
+\[
+e_1=v_1v_2,\ e_2=v_1v_3,\ e_3=v_2v_3,\ e_4=v_2v_4,\
+e_5=v_3v_5,\ e_6=v_4v_5.
+\]
+\begin{enumerate}
+  \item Write the adjacency matrix $A(R)$ in the vertex order
+  $v_1,\ldots,v_5$.
+  \item Write the vertex-edge incidence matrix $B(R)$ using the edge
+  order $e_1,\ldots,e_6$.
+  \item Verify directly that $BB^{T}=A+D$, where $D$ is the diagonal
+  matrix of vertex degrees.
+\end{enumerate}
+
+\item Use powers of the adjacency matrix from Problem~11 to find:
+\begin{enumerate}
+  \item the number of walks of length $2$ from $v_1$ to $v_5$;
+  \item the number of closed walks of length $3$ starting at $v_1$; and
+  \item the total number of triangles in $R$.
+\end{enumerate}
+Explain how each answer is read from the appropriate matrix entry or
+trace.
+
+\item Apply Dijkstra's algorithm to the weighted graph below, starting at
+$s$. At every iteration, record the permanent vertex, all tentative
+distances, and the predecessor of each unsettled vertex. Give the
+shortest-path tree and the shortest path from $s$ to $t$.
+
+\begin{center}
+\begin{tikzpicture}[
+  scale=0.82,
+  every node/.style={transform shape},
+  vertex/.style={circle, draw=blue!35!black, fill=blue!5,
+    minimum size=6mm, inner sep=0pt, font=\bfseries},
+  edge label/.style={fill=white, inner sep=1pt, font=\small}
+]
+\node[vertex] (s) at (0,1) {$s$};
+\node[vertex] (a) at (2,2) {$a$};
+\node[vertex] (b) at (2,0) {$b$};
+\node[vertex] (c) at (4,2) {$c$};
+\node[vertex] (d) at (4,0) {$d$};
+\node[vertex] (t) at (6,1) {$t$};
+
+\draw (s)--node[edge label] {4} (a);
+\draw (s)--node[edge label] {2} (b);
+\draw (a)--node[edge label] {1} (b);
+\draw (a)--node[edge label] {5} (c);
+\draw (b)--node[edge label] {8} (c);
+\draw (b)--node[edge label] {9} (d);
+\draw (c)--node[edge label] {2} (d);
+\draw (c)--node[edge label] {6} (t);
+\draw (d)--node[edge label] {3} (t);
+\end{tikzpicture}
+\end{center}
+
+How do the shortest path and distance from $s$ to $t$ change if the
+weight of $ct$ is changed from $6$ to $2$?
+
+\item Let $G$ be a graph of order $n$.
+\begin{enumerate}
+  \item Express $\deg_{\comp G}(v)$ in terms of $\deg_G(v)$.
+  \item Prove that $A(\comp G)=J-I-A(G)$.
+  \item If $G$ and $\comp G$ are both $k$-regular, determine $n$ in
+  terms of $k$, and show that $k$ must be even.
+\end{enumerate}
+
+\sectiontitle{III. Proof and synthesis}
+
+\item Prove the Handshaking Lemma. Deduce that:
+\begin{enumerate}
+  \item every graph has an even number of vertices of odd degree; and
+  \item a $k$-regular graph of odd regularity has even order.
+\end{enumerate}
+
+\item Prove that every graph on at least two vertices has two vertices
+of the same degree.
+
+\item Prove that every graph on six vertices contains a triangle either
+in the graph or in its complement. Show that five vertices do not suffice
+by considering $C_5$. Thus establish that $R(3,3)=6$.
+
+\item Prove that if $G$ is disconnected, then $\comp G$ is connected.
+In fact, show that any two vertices of $\comp G$ are at distance at most
+$2$.
+
+\item Let $G$ be connected. Prove that if $\diam(G)\geq 3$, then
+$\diam(\comp G)\leq 3$.
+
+\item Suppose $G$ has order $n\geq2$ and
+\[
+\delta(G)\geq \frac{n-1}{2}.
+\]
+Prove that $G$ is connected. Then prove the stronger conclusion
+$\diam(G)\leq2$ (and hence, in particular, $\diam(G)\leq3$).
+
+\item Prove that a graph is bipartite if and only if it contains no odd
+cycle. For the converse, fix a vertex in each component and partition
+the component according to whether distance from that vertex is even or
+odd.
+
+\item Prove that a graph $T$ is a tree if and only if there is a unique
+path between every pair of its vertices. Use this to prove that every
+tree of order $n$ has exactly $n-1$ edges.
+
+\item Prove that every non-trivial tree has at least two pendant vertices.
+Then justify the leaf-deletion method: deleting all pendant vertices from
+a tree with at least three vertices produces a smaller tree with the same
+centre. Deduce that the centre of a tree consists of either one vertex or
+two adjacent vertices.
+
+\item
+\begin{enumerate}
+  \item Prove that a self-complementary graph has order $4r$ or $4r+1$
+  for some non-negative integer $r$.
+  \item Verify explicitly that $P_4$ is self-complementary.
+  \item Let $G$ be self-complementary. Form $H$ from the disjoint union
+  of $G$ and a path $a-b-c-d$ by joining every vertex of $G$ to $b$ and
+  $c$. Prove that $H$ is self-complementary. Use this construction to
+  give a self-complementary graph of order $8$.
+\end{enumerate}
+
+\item Prove that every vertex of an Eulerian graph has even degree. Give
+an example of a graph in which every vertex has even degree but which is
+not Eulerian, and explain which part of the definition fails.
+\end{enumerate}
+
+\end{document}
