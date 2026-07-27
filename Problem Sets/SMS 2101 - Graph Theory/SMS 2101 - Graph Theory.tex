@@ -1,11 +1,11 @@
 % !TEX program = xelatex
 
 \documentclass[svgnames]{amsart}
-\usepackage[paperwidth=6in, paperheight=8in, top=20mm, bottom=18mm, left=10mm, right=10mm]{geometry}
+\usepackage[paperwidth=6in, paperheight=8in, top=20mm, bottom=18mm, left=10mm, right=10mm, head=14pt]{geometry}
 
 \usepackage{amsmath, amsfonts, amssymb, amsthm}
 \usepackage{enumitem}
-\setlist[enumerate,1]{label=\arabic*., leftmargin=*, itemsep=0.8em}
+\setlist[enumerate,1]{label=\arabic*., leftmargin=*, itemsep=0.6em}
 \setlist[enumerate,2]{label=(\alph*), leftmargin=1.7em, itemsep=0.25em, topsep=0.25em}
 
 \usepackage[T1]{fontenc}
@@ -18,21 +18,15 @@
 \cfoot*{\pagemark}
 
 \usepackage{tikz}
-\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta, positioning}
 
 \setlength{\parindent}{0pt}
-\linespread{1.15}
 
 \newcommand{\comp}[1]{\overline{#1}}
 \newcommand{\dist}{\operatorname{d}}
 \newcommand{\ecc}{\operatorname{ecc}}
 \newcommand{\diam}{\operatorname{diam}}
 \newcommand{\rad}{\operatorname{rad}}
-\newcommand{\sectiontitle}[1]{%
-  \medskip
-  {\noindent\large\bfseries\color{blue!35!black} #1}\par
-  \smallskip
-}
 
 \title{SMS 2101: Graph Theory}
 \date{}
@@ -46,7 +40,7 @@ Unless stated otherwise, all graphs are finite, simple, and undirected. \\
 For a graph $G$, take $n=|V(G)|$ and $m=|E(G)|$.
 \end{center}
 
-\sectiontitle{I. Foundations}
+\section*{Foundations}
 
 \begin{enumerate}
 \item Let $G$ have vertex set $\{1,2,\ldots,7\}$ and edge set
@@ -57,18 +51,18 @@ For a graph $G$, take $n=|V(G)|$ and $m=|E(G)|$.
   \item Find the order, size, degree of each vertex, and degree sequence of $G$.
   \item Let $H$ have vertex set $\{1,2,3,5\}$ and edge set
   $\{12,13,23,25\}$. Is $H$ a subgraph of $G$? Is it induced?
-  \item Give a spanning tree of $G$.
   \item Find the degree sequence and size of $\comp G$ without listing all
   its edges.
 \end{enumerate}
 
 \item Decide whether each description is possible. Justify each answer.
 \begin{enumerate}
-  \item A graph has degree sequence $(6,5,4,4,3,2,2,2)$.
   \item At a meeting of eleven people, each person shakes hands with
   exactly five others.
+  \item A graph has degree sequence $(6,5,4,4,3,2,2,2)$.
   \item A graph of order $9$ has one vertex of each degree
   $0,1,\ldots,8$.
+  \item There exists a graph of order $n\geq 2$ in which all vertices have different degrees.
 \end{enumerate}
 
 \item For the graph $G$ in Problem~1, determine whether each sequence is
@@ -141,7 +135,11 @@ E(T)=\{ab,bc,cd,de,cf,cg,gh,hi\}.
 Find its pendant vertices, diameter, radius, and centre. Also show the
 successive stages of the leaf-deletion procedure used to find the centre.
 
-\sectiontitle{II. Core techniques}
+\end{enumerate}
+
+\section*{Core techniques}
+
+\begin{enumerate}[resume]
 
 \item For each of $K_5$, $K_{2,4}$, and $K_{3,3}$, decide whether it is
 Eulerian and whether it is Hamiltonian. Whenever the answer is yes,
@@ -171,7 +169,7 @@ e_5=v_3v_5,\ e_6=v_4v_5.
 Explain how each answer is read from the appropriate matrix entry or
 trace.
 
-\item Apply Dijkstra's algorithm to the weighted graph below, starting at
+\item Apply Dijkstra's algorithm to the directed weighted graph below, starting at
 $s$. At every iteration, record the permanent vertex, all tentative
 distances, and the predecessor of each unsettled vertex. Give the
 shortest-path tree and the shortest path from $s$ to $t$.
@@ -182,39 +180,48 @@ shortest-path tree and the shortest path from $s$ to $t$.
   every node/.style={transform shape},
   vertex/.style={circle, draw=blue!35!black, fill=blue!5,
     minimum size=6mm, inner sep=0pt, font=\bfseries},
+  arc/.style={-{Stealth[length=2mm]}, draw=blue!35!black},
   edge label/.style={fill=white, inner sep=1pt, font=\small}
 ]
 \node[vertex] (s) at (0,1) {$s$};
-\node[vertex] (a) at (2,2) {$a$};
-\node[vertex] (b) at (2,0) {$b$};
-\node[vertex] (c) at (4,2) {$c$};
-\node[vertex] (d) at (4,0) {$d$};
-\node[vertex] (t) at (6,1) {$t$};
+\node[vertex] (a) at (2.4,2.3) {$a$};
+\node[vertex] (b) at (2.4,-0.3) {$b$};
+\node[vertex] (c) at (5.2,2.3) {$c$};
+\node[vertex] (d) at (5.2,-0.3) {$d$};
+\node[vertex] (t) at (7.6,1) {$t$};
 
-\draw (s)--node[edge label] {4} (a);
-\draw (s)--node[edge label] {2} (b);
-\draw (a)--node[edge label] {1} (b);
-\draw (a)--node[edge label] {5} (c);
-\draw (b)--node[edge label] {8} (c);
-\draw (b)--node[edge label] {9} (d);
-\draw (c)--node[edge label] {2} (d);
-\draw (c)--node[edge label] {6} (t);
-\draw (d)--node[edge label] {3} (t);
+\draw[arc] (s)--node[edge label, above] {7} (a);
+\draw[arc] (s)--node[edge label, below] {2} (b);
+\draw[arc, bend left=15] (a) to node[edge label, right] {6} (b);
+\draw[arc, bend left=15] (b) to node[edge label, left] {2} (a);
+\draw[arc] (a)--node[edge label, above] {4} (c);
+\draw[arc, bend left=16] (b) to node[edge label, below left, pos=0.42] {9} (c);
+\draw[arc, bend left=16] (c) to node[edge label, above right, pos=0.58] {4} (b);
+\draw[arc] (a)--node[edge label, right, pos=0.42] {6} (d);
+\draw[arc, bend left=15] (b) to node[edge label, below] {12} (d);
+\draw[arc, bend left=15] (d) to node[edge label, above] {5} (b);
+\draw[arc] (c)--node[edge label, right] {1} (d);
+\draw[arc, bend left=15] (c) to node[edge label, above] {10} (t);
+\draw[arc, bend left=15] (t) to node[edge label, below] {6} (c);
+\draw[arc] (d)--node[edge label, below] {3} (t);
 \end{tikzpicture}
 \end{center}
 
 How do the shortest path and distance from $s$ to $t$ change if the
-weight of $ct$ is changed from $6$ to $2$?
+weight of the arc $c\to t$ is changed from $10$ to $2$?
 
 \item Let $G$ be a graph of order $n$.
 \begin{enumerate}
   \item Express $\deg_{\comp G}(v)$ in terms of $\deg_G(v)$.
-  \item Prove that $A(\comp G)=J-I-A(G)$.
-  \item If $G$ and $\comp G$ are both $k$-regular, determine $n$ in
-  terms of $k$, and show that $k$ must be even.
+  \item Prove that $A(\comp G)=J-I-A(G)$, where $J$ is the all-ones matrix of order $n$ and $I$ is the identity matrix of order $n$.
+  \item If $G$ and $\comp G$ are both $k$-regular, determine $n$ in terms of $k$, and show that $k$ must be even.
 \end{enumerate}
 
-\sectiontitle{III. Proof and synthesis}
+\end{enumerate}
+
+\section*{Proof and synthesis}
+
+\begin{enumerate}[resume]
 
 \item Prove the Handshaking Lemma. Deduce that:
 \begin{enumerate}
