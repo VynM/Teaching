@@ -1,0 +1,651 @@
+% !TeX root = Graph Theory.tex
+
+\title{\textbf{Graph Theory}}
+\author{\textsc{SMS 2101}}
+
+\date{\today}
+\maketitle
+
+\begingroup
+\let\clearpage\relax
+\tableofcontents
+\endgroup
+
+\clearpage
+
+\renewcommand{\nomname}{List of Symbols}
+\nomenclature[01]{$V(G)$}{Vertex set of graph $G$}
+\nomenclature[02]{$E(G)$}{Edge set of graph $G$}
+\nomenclature[03]{$\sim$}{is adjacent to}
+\nomenclature[04]{$\deg(v)$}{Degree of vertex $v$}
+\nomenclature[05]{$\delta(G)$}{Minimum degree of graph $G$}
+\nomenclature[06]{$\Delta(G)$}{Maximum degree of graph $G$}
+\nomenclature[07]{$\ecc(v)$}{Eccentricity of vertex $v$}
+\nomenclature[08]{$\rad(G)$}{Radius of graph $G$}
+\nomenclature[09]{$\diam(G)$}{Diameter of graph $G$}
+\nomenclature[10]{$\overline G$}{Complement of graph $G$}
+\nomenclature[11]{$A(G)$}{Adjacency matrix of graph $G$}
+\nomenclature[12]{$B(G)$}{$(0,1)$ incidence matrix of graph $G$}
+
+\nomenclature[20]{$K_n$}{Complete graph of order $n$ (size $\binom{n}{2}$)}
+\nomenclature[21]{$P_n$}{Path graph of order $n$ (size $n - 1$)}
+\nomenclature[22]{$C_n$}{Cycle graph of order $n$ (size $n$)}
+\nomenclature[23]{$K_{p,q}$}{Complete bipartite graph with partite sets of cardinalities $p$ and $q$}
+\printnomenclature[10em]
+
+\clearpage
+
+\section{Graphs and Degree Sequences}\label{sec:GraphsDegreeSequences}
+A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a non-empty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
+
+Two vertices $u$ and $v$ of $G$ are \newterm{adjacent}, denoted by $u \sim v$, if $uv \in E$ (note that $uv$ here denotes an unordered pair of vertices, and $uv = vu$). If there is no edge between $u$ and $v$, then they are \newterm{nonadjacent}, denoted by $u \nsim v$. The vertex $v$ and the edge $uv$ are said to be \newterm{incident} with each other. The \newterm{degree} of a vertex $v$ is the number of edges incident with it, or equivalently, the number of vertices adjacent with it, and is denoted by $\deg v$. The \newterm{open neighbourhood} (or simply \newterm{neighbourhood}) of a vertex $v$ is the set of all vertices adjacent to $v$, and is denoted by $\Nb(v)$. Thus, $\deg v = |\Nb(v)|$. The \newterm{closed neighbourhood} of $v$ is $\Nb[v] = \Nb(v) \cup \{v\}$.
+
+\begin{Exercise}
+Write down the degrees of all the vertices of the graph shown below.
+\begin{center}
+\includegraphics[scale=1.3]{Images/Subgraphs-G.pdf}
+\end{center}
+Compute the sum of the degrees. What is the size of the graph?
+\end{Exercise}
+
+\begin{Lemma}[Handshaking Lemma]
+The sum of the degrees of all vertices of a graph is twice its size.
+\end{Lemma}
+
+\begin{proof}
+Let $G$ be a graph, and consider the sum of its degrees, $\sum_{v \in V(G)} \deg v$. As each edge is incident with exactly two vertices, each edge is counted once by two terms in this summation. Thus, the sum is equal to twice the number of edges.
+\end{proof}
+
+\begin{Corollary}
+The number of vertices of odd degree in a graph is always even.
+\end{Corollary}
+
+\begin{proof}
+Let $G$ be a graph. We know that
+\begin{equation}
+\sum_{v \in V(G)} \deg v = 2 |E(G)|. \label{eq:deg-sum}
+\end{equation}
+Considering the vertices of odd and even degrees, we can write \eqref{eq:deg-sum} as
+\begin{equation}
+\sum_{\scriptsize
+	\begin{matrix}
+	v \in V(G) :\\
+	\deg v\ \text{odd}
+	\end{matrix}
+	} \deg v +
+\sum_{\scriptsize
+	\begin{matrix}
+	v \in V(G) :\\
+	\deg v\ \text{even}
+	\end{matrix}
+	} \deg v 
+	= 2 |E(G)|.
+\end{equation}
+Both the RHS and the second term on the LHS are even integers, and therefore so is the first term on the LHS. But a sum of odd integers is even only if the number of terms is even. Thus, $G$ has an even number of vertices of odd degree.
+\end{proof}
+
+The \newterm{degree sequence} of a graph is the sequence obtained by listing the degrees of its vertices in non-increasing order. The \newterm{minimum degree} of $G$ is $\delta(G) = \min_{v \in V(G)} \deg v$, and the \newterm{maximum degree} of $G$ is $\Delta(G) = \max_{v \in V(G)} \deg v$. A \newterm{regular graph} is a graph in which all vertices have the same degree, or equivalently, if $\delta(G) = \Delta(G)$. This common value of the degree is the \newterm{regularity} of the graph. A regular graph of regularity $k$ is a \newterm{$k$-regular} graph. A \newterm{cubic} graph is a $3$-regular graph.
+
+\begin{DExercise}
+Prove that if $G$ is a graph of order $n$ and size $m$, then $\delta(G) \le 2\frac m n \le \Delta(G)$.
+\footnote{Exercises marked with a * are optional (and sometimes more difficult).}
+\end{DExercise}
+
+\begin{Theorem}
+In any graph on two or more vertices, at least two vertices have the same degree.
+\end{Theorem}
+
+\begin{proof}
+Let $G$ be a graph of order $n \ge 2$. The minimum possible degree of a vertex of $G$ is $0$, and the maximum possible degree is $n - 1$ (as there are only $n$ vertices in $G$). Thus, in order for the $n$ vertices of $G$ to have different degrees, the $n$ different degrees must be exactly $0, 1, \ldots, n - 1$. But if some vertex of $G$ has degree $n - 1$, then it is adjacent to all other vertices, and therefore $G$ cannot have a vertex of degree $0$. Thus, at least two vertices of $G$ have the same degree.
+\end{proof}
+
+\subsection{Subgraphs and Complements}
+
+A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e.\ $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e.\ every edge of $G$ that joins two vertices of $H$ is present in $H$.
+
+\begin{Example}\label{ex:Subgraphs}
+\cref{fig:Subgraphs} shows a graph $G$ and three subgraphs $H_1$, $H_2$, and $H_3$ of $G$. The subgraph $H_1$ is neither a spanning subgraph (e.g.\ it does not contain $v_3$), nor an induced subgraph (e.g.\ it contains vertices $v_2$ and $v_5$ of $G$ but not the edge $v_2 v_5$). $H_2$ is a spanning subgraph and $H_3$ is an induced subgraph of $G$.
+\begin{figure}[!htbp]
+\centering
+\subcaptionbox{$G$\label{fig:SubgraphsG}}{\includegraphics{Images/Subgraphs-G.pdf}} \hfill
+\subcaptionbox{$H_1$\label{fig:SubgraphsH1}}{\includegraphics{Images/Subgraphs-H1.pdf}} \hfill
+\subcaptionbox{$H_2$\label{fig:SubgraphsH2}}{\includegraphics{Images/Subgraphs-H2.pdf}} \hfill
+\subcaptionbox{$H_3$\label{fig:SubgraphsH3}}{\includegraphics{Images/Subgraphs-H3.pdf}}
+\caption{A graph with three of its subgraphs}\label{fig:Subgraphs}
+\end{figure}
+\end{Example}
+
+A graph is \newterm{complete} if all its vertices are adjacent to one another. The complete graph of order $n$ is denoted by $K_n$. As there is an edge between every pair of distinct vertices of $K_n$, the size of $K_n$ is $\binom n 2$. The \newterm{totally disconnected graph} of order $n$, denoted by $\overline{K_n}$, is the graph of order $n$ that has no edges.
+
+The \newterm{complement} of a graph $G$ is the graph $\overline G$ with the same vertices as $G$, in which any two vertices $u$ and $v$ are adjacent if and only if they are non-adjacent in $G$. Thus, if $G$ is an $(n, m)$-graph, then $\overline G$ is an $\pqty{n, \binom n 2 - m}$-graph. Observe that $\overline K_n$ is (as the notation suggests) the complement of $K_n$.
+
+\begin{Exercise}
+Let $G$ be a graph of order $n$.
+\begin{enumerate}
+\item If $\deg_G v = k$, what is $\deg_{\overline G} v$?
+\item If $(d_1, \ldots, d_n)$ is the degree sequence of $G$, what is the degree sequence of $\overline G$?
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Walks, Trails, Paths, and Cycles}
+
+A \newterm{walk} in a simple graph $G$ is a sequence of vertices $v_0, v_1, \ldots, v_k$ such that $v_i \sim v_{i + 1}$ for $i = 0, \ldots, k - 1$ (we will hereafter omit the commas from the sequence). This is a walk \newterm{from $v_0$ to $v_k$} (or \newterm{between $v_0$ and $v_k$}), having \newterm{length} $k$. We may also say that this is a walk of length $k$ \newterm{starting at} $v_0$ and \newterm{ending at} $v_k$.
+
+A walk in which no edge is repeated is a \newterm{trail}. A walk in which no vertex is repeated is a \newterm{path}. Note that the length of a path is the number of edges in it.
+
+A \newterm{closed walk} in $G$ is a walk starting and ending at the same vertex. A closed trail is a \newterm{circuit}. A closed walk in which no vertex is repeated (except for its first and last vertices being the same) is a \newterm{cycle}. Note that the length of a cycle is also equal to the number of vertices in it. A cycle of the form $v_1 \cdots v_{k-1} v_k$ is usually referred to as ``the cycle $v_1 \cdots v_{k-1}$''.
+
+\begin{Example}\label{ex:Walk}
+Consider the graph $G$ shown below.
+
+\begin{center}
+\includegraphics{Images/Walks.pdf}
+\end{center}
+A walk of length $5$ from $b$ to $c$ in $G$ is $b, f, e, a, e, c$.
+
+\begin{center}
+\includegraphics{Images/Walk1.pdf}
+\end{center}
+This walk is not a path, since the vertex $e$ is repeated. An example of a path from $b$ to $c$ in the same graph $G$ is $b, f, e, c$. The length of this path is $3$.
+
+\begin{center}
+\includegraphics{Images/Path1.pdf}
+\end{center}
+A cycle of length $4$ in $G$ is $b, f, e, c, b$.
+
+\begin{center}
+\includegraphics{Images/Cycle1.pdf}
+\end{center}
+\end{Example}
+
+The \newterm{path graph} (or also simply the \newterm{path}) of order $n$ is the graph of order $n$ which is itself a path, and is denoted by $P_n$. Similarly, the graph of order $n$ that is itself a cycle is the \newterm{cycle graph} $C_n$.
+
+\subsection{Ramsey Numbers}\label{subsec:Ramsey}
+
+Consider the cycle graph $C_5$. Construct its complement, and observe that neither $C_5$ nor $\overline{C_5}$ contains a triangle -- i.e. three mutually adjacent vertices, or in other words, a complete subgraph of order $3$. The result below shows that this is not possible for any graph of order six or greater.
+
+\begin{Theorem}\label{thm:TriangleInGraphOrComplement}
+If $G$ is a graph on at least six vertices, then either $G$ or $\overline G$ contains a triangle.
+\end{Theorem}
+
+\begin{proof}
+Let $v$ be a vertex of $G$, and consider five other vertices of $G$. Then, since $\deg_G v + \deg_{\overline G} v = 5$, it follows that $v$ is adjacent to at least three vertices in either $G$ or $\overline G$. Without loss of generality, assume that $v$ is adjacent to three vertices $x$, $y$, and $z$ in $G$.
+
+Now, if any two of $X$, $y$, and $z$ are adjacent in $G$, then, together with $v$, they form a triangle in $G$. If no two of $x$, $y$, and $z$ are adjacent in $G$, then $xyz$ is a triangle in $\overline G$.
+\end{proof}
+
+The \newterm{Ramsey number} $R(m, n)$ (where $m$ and $n$ are positive integers) is the least positive integer $r$ such that for any graph $G$ of order $r$, either $G$ contains $K_m$ or $\overline G$ contains $K_n$. \cref{thm:TriangleInGraphOrComplement} shows that $R(3, 3) \le 6$ (why not equal to $6$?) and considering the example of $C_5$, we see that $R(3, 3) = 6$.
+
+\section{Havel--Hakimi and Connectedness}\label{sec:HavelHakimiConnectedness}
+
+\subsection{Graphical Sequences and the Havel--Hakimi Theorem}
+
+A finite sequence of non-negative integers is said to be \newterm{graphical} if it is the degree sequence of some simple graph.
+
+\begin{Theorem}[Havel--Hakimi]\label{thm:HavelHakimi}
+Let $d = (d_1, d_2, \ldots, d_n)$ be a non-increasing sequence of non-negative integers with $d_1 < n$. Delete the first term $d_1$, subtract $1$ from each of the next $d_1$ terms, and then rearrange the resulting sequence in non-increasing order. Then the original sequence is graphical if and only if the resulting sequence is graphical.
+\end{Theorem}
+
+\begin{algorithm}
+\caption{Havel--Hakimi test}\label{alg:HavelHakimi}
+\begin{algorithmic}[1]
+\Require A finite sequence of non-negative integers
+\State Delete all zero terms and arrange the remaining terms in non-increasing order
+\While{the sequence is non-empty}
+    \State Let $r$ be the first term, and delete it from the sequence
+    \If{$r$ is greater than the number of remaining terms}
+        \State \Return not graphical
+    \EndIf
+    \State Subtract $1$ from each of the next $r$ terms
+    \If{some term has become negative}
+        \State \Return not graphical
+    \EndIf
+    \State Delete all zero terms and rearrange the remaining terms in non-increasing order
+\EndWhile
+\State \Return graphical
+\end{algorithmic}
+\end{algorithm}
+
+To construct a graph using the Havel--Hakimi process, keep the terms labelled by the vertices they correspond to. At each step, when the first term is $r$, join that vertex to the vertices corresponding to the next $r$ terms, and then perform the reduction.
+
+\begin{Example}
+Apply the Havel--Hakimi algorithm to $(3,3,2,2,2)$. We obtain
+\begin{equation*}
+(3,3,2,2,2)
+\longrightarrow (2,2,1,1)
+\longrightarrow (1,1,0)
+\longrightarrow (0,0).
+\end{equation*}
+Hence the given sequence is graphical.
+\end{Example}
+
+\subsection{Distance and Connectedness}
+
+The \newterm{distance} between two vertices $u$ and $v$ of a graph $G$ is the length of a shortest path between $u$ and $v$ -- such a shortest path between $u$ and $v$ is a \newterm{geodesic} from $u$ to $v$. Thus, the distance between $u$ and $v$ in $G$, denoted by $d_G(u, v)$ is the length of a geodesic from $u$ to $v$ in $G$. When the graph $G$ is clear from the context, we will write $d_G(u, v)$ as $d(u, v)$.
+
+The \newterm{eccentricity} of a vertex $v$, denoted by $\ecc(v)$, is the maximum of all distances from $v$ to any other vertex. That is,
+\begin{equation*}
+    \ecc(v) = \max_{u \in V(G)} d(u, v) .
+\end{equation*}
+
+The \newterm{diameter} of $G$ is the maximum of the eccentricities of vertices of $G$, and the \newterm{radius} of $G$ is the minimum of the eccentricities of vertices of $G$. They are denoted by $\diam(G)$ and $\rad(G)$ respectively. Thus,
+\begin{align*}
+    \diam(G) & = \max_{v \in V(G)} \ecc(v)= \max_{u, v \in V(G)} d(u, v) \\
+    \rad(G) & = \min_{v \in V(G)}\ecc(v) = \min_{v \in V(G)} \max_{u \in V(G)} d(u, v).
+\end{align*}
+
+The set of all vertices of $G$ having minimum eccentricity, i.e.\ the set of all $v \in V(G)$ such that $\ecc v = \rad G$, is the \newterm{centre} of $G$.
+
+A graph is \newterm{connected} if there is a path between every two of its vertices. Otherwise, it is \newterm{disconnected}. A \newterm{(connected) component} of a graph $G$ is a maximal connected subgraph of $G$. Thus, a graph $G$ is connected if and only if it has exactly one component.
+
+\begin{Theorem}\label{thm:GorGCompConn}
+For any graph $G$, either $G$ or $\overline G$ is connected.
+\end{Theorem}
+
+\begin{proof}
+Consider a graph $G$, and suppose that $G$ is disconnected. We shall show that $\overline G$ is connected, by showing that there is a path between every two vertices of $\overline G$.
+
+Let $u$ and $v$ be any two vertices of $\overline G$. If they are not adjacent in $G$, then they are adjacent in $\overline G$, and hence there is a path $uv$ from $u$ to $v$ in $\overline G$. If $u$ and $v$ are adjacent in $G$, then they belong to the same component of $G$. As $G$ is disconnected, it has at least one more component containing at least one vertex, say $w$, which is necessarily non-adjacent to both $u$ and $v$. Hence, in $\overline G$, $w$ is adjacent to both $u$ and $v$. Thus, there is a path $uwv$ from $u$ to $v$ in $\overline G$. Therefore, $\overline G$ is connected.
+\end{proof}
+
+\begin{Theorem}\label{thm:Diam>=3}
+For any connected graph $G$, if $\diam G \ge 3$, then $\diam \overline G \le 3$.
+\end{Theorem}
+
+\begin{proof}
+Consider a graph $G$ of diameter at least $3$. Then there exist vertices $u$ and $v$ in $G$ such that $d_G(u, v) = 3$. This implies that $u$ and $v$ are non-adjacent in $G$, and hence adjacent in $\overline G$.
+
+Now, consider any two vertices $x$ and $y$ other than $u$ and $v$. In $G$, $x$ can be adjacent to at most one of $u$ and $v$, for otherwise, $d_G(u,v) = 2$. Hence, $x$ is adjacent to at least one of $u$ and $v$ in $\overline G$. Similarly, $y$ is adjacent to at least one of $u$ and $v$ in $\overline G$. Thus, there is a path of length at most $3$ from $x$ to $y$ in $\overline G$ (namely $xuy$, $xvy$, $xuvy$, or $xvuy$), which implies that $d_{\overline G}(x, y) \le 3$. Therefore, $\diam \overline G \le 3$.
+\end{proof}
+
+\begin{Exercise}
+If $G$ is a graph of order $n$ and minimum degree $\delta(G) \ge \frac{n-1}{2}$, show that $G$ is connected and $\diam G \le 2$.
+\end{Exercise}
+
+\section[Isomorphism and Self-Complementary Graphs]{Isomorphism and~\screenbreak Self-Complementary Graphs}\label{sec:IsomorphismSelfComplementary}
+
+An \newterm{isomorphism} from a graph $G$ to a graph $H$ is a bijective function $f \colon V(G) \to V(H)$ such that for all vertices $u$ and $v$ of $G$, $u \sim_G v$ if and only if $f(u) \sim_H f(v)$. In other words, a graph isomorphism is a bijection from the vertex set of the first graph to that of the second, that preserves both edges and non-edges. If there exists an isomorphism from $G$ to $H$, then $G$ and $H$ are \newterm{isomorphic}. Then we write $G \cong H$.
+
+Isomorphic graphs have exactly the same structure -- i.e.\ all properties of the graph that do not depend on the labelling or drawing will be shared by isomorphic graphs. For example, isomorphic graphs have the same order, size, degree sequence, diameter, and radius. Indeed, if $f$ is an isomorphism from $G$ to $H$, and $v$ is a vertex of $G$, then the neighbours of $f(v)$ in $H$ are the images of the neighbours of $v$ in $G$, and $\deg_G v = \deg_H f(v)$. Similarly, if $u$ and $v$ are two vertices of $G$, then $d_G(u, v) = d_H(f(u), f(v))$.
+
+\begin{Theorem}
+Graph isomorphism is an equivalence relation on the class of all graphs.
+\end{Theorem}
+
+\begin{proof}
+To show that graph isomorphism is an equivalence relation, we need to show that $\cong$ is a reflexive, symmetric, transitive relation between graphs. First, observe that the identity map on the vertex set of a graph is an isomorphism from the graph to itself -- for, if $G$ is a graph and $\id$ denotes the identity map on its vertex set then for any two vertices $u$ and $v$ of $G$, $u \sim v$ if and only if $\id(u) \sim \id(v)$, as $\id(u) = u$ and $\id(v) = v$. Hence, $\cong$ is reflexive.
+
+Next, suppose that $G \cong H$. Then there exists an isomorphism $f$ from $G$ to $H$. Since $f \colon V(G) \to V(H)$ is bijective, it has an inverse $f^{-1} \colon V(H) \to V(G)$. We claim that $f^{-1}$ is an isomorphism from $H$ to $G$. We know that $f^{-1}$ is bijective. To see that it preserves edges and non-edges, observe that if $x$ and $y$ are two vertices of $H$, then $x = f(f^{-1}(x))$ and $y = f(f^{-1}(y))$, which implies that $x \sim_H y$ if and only if $f^{-1}(x) \sim_G f^{-1}(y)$ (since $f$ is an isomorphism from $G$ to $H$). Therefore, $f^{-1}$ is an isomorphism from $H$ to $G$. This shows that $H \cong G$. Thus, $\cong$ is symmetric.
+
+Finally, suppose that $G \cong H$ and $H \cong K$. Then there exist isomorphisms $f$ from $G$ to $H$ and $g$ from $H$ to $K$. We claim that $g \circ f$ is an isomorphism from $G$ to $K$. Indeed, $g \circ f$ is a function from $V(G)$ to $V(K)$, and being a composition of bijections, is itself a bijection. Now, suppose $u$ and $v$ are two vertices of $G$. Then $u \sim_G v$ if and only if $f(u) \sim_H f(v)$ (since $f$ is an isomorphism from $G$ to $H$) if and only if $g(f(u)) \sim_K g(f(v))$ (since $g$ is an isomorphism from $H$ to $K$). Thus, $g \circ f$ is an isomorphism from $G$ to $K$. Therefore, $\cong$ is transitive.
+\end{proof}
+
+A graph is \newterm{self-complementary} if it is isomorphic to its complement -- i.e.\ $G$ is self-complementary if $G \cong \overline G$. For example, $K_1$, $P_4$ and $C_5$ are self-complementary graphs of orders $1$, $4$, and $5$ respectively. There is one more self-complementary graph of order $5$, namely the \newterm{bull graph}, which can be constructed by adding one new vertex to $P_4$ and making it adjacent to the two non-pendant vertices of the path. This graph is shown below.
+
+\begin{center}
+\includegraphics{Images/BullGraph.pdf}
+\end{center}
+
+\begin{Theorem}\label{thm:SCOrder}
+The order of any self-complementary graph is $4k$ or $4k + 1$, for some non-negative integer $k$.
+\end{Theorem}
+
+\begin{proof}
+Let $G$ be a self-complementary graph of order $n$ and size $m$. Then the size of $\overline G$ is $\binom n 2 - m$. Since $G \cong \overline G$, $m = \binom n 2 - m$, which implies that $m = \frac 1 2 \binom n 2 = \frac {n(n - 1)}{4}$. As $m$ is an integer, this implies that $4$ divides $n(n - 1)$, which in turn implies that either one of $n$ and $n - 1$ is divisible by $4$, or both $n$ and $n - 1$ are even. Since the latter is not possible, it follows that $n = 4k$ or $n - 1 = 4k$, i.e.\ $n = 4k$ or $4k + 1$ for some integer $k$.
+\end{proof}
+
+From \cref{thm:GorGCompConn}, we know that a graph and its complement cannot both be disconnected. Thus, if $G$ is a disconnected graph, then $\overline G$ must be connected, and therefore it cannot be isomorphic to $G$. This implies that a self-complementary graph is necessarily connected.
+
+\begin{Corollary}\label{cor:SCConn}
+Every self-complementary graph is connected. \qed
+\end{Corollary}
+
+Similarly, from \cref{thm:Diam>=3}, we obtain the following corollary about the diameter of self-complementary graphs.
+
+\begin{Corollary}
+Every non-trivial self-complementary graph has diameter $2$ or $3$.
+\end{Corollary}
+
+\begin{proof}
+Consider a non-trivial, self-complementary graph $G$, and suppose that it has diameter strictly greater than $3$. Then, by \cref{thm:Diam>=3}, $\diam \overline G \le 3$, which implies that $\diam \overline G \ne \diam G$, a contradiction, since $G \cong \overline G$. Hence, $\diam G \le 3$. On the other hand, a non-trivial graph cannot have diameter $0$, hence $\diam G \ge 1$. But if $\diam G = 1$, then $G$ is a non-trivial complete graph, whose complement is a totally disconnected graph, which is again impossible. Hence, $\diam G = 2$ or $3$.
+\end{proof}
+
+\begin{Exercise}
+If $G$ is a regular self-complementary graph of order $n$, show that $n = 4k + 1$, for some integer $k$, and $\diam G = 2$.
+\end{Exercise}
+
+\begin{Exercise}
+Construct a self-complementary graph of order $9$.
+\end{Exercise}
+
+\section{Bipartite Graphs and Trees}\label{sec:BipartiteTrees}
+
+\subsection{Bipartite Graphs}
+
+A graph $G = (V, E)$ is \newterm{bipartite} if its vertex set $V$ can be partitioned into two subsets $V_1$ and $V_2$ such that no two vertices in $V_i$ are adjacent, for $i = 1, 2$. That is, there exist two non-empty, disjoint subsets $V_1, V_2 \subseteq V$ such that $V_1 \cup V_2 = V$, and every edge of $G$ (if any) joins a vertex in $V_1$ with a vertex in $V_2$. Then we say that $(V_1, V_2)$ is a \newterm{bipartition} of $G$. The sets $V_1$ and $V_2$ are called the \newterm{partite sets} of $G$.
+
+The following theorem characterises bipartite graphs in terms of its cycles. A cycle is \newterm{even} if its length is even and \newterm{odd} if its length is odd.
+
+\begin{Theorem}
+A graph is bipartite if and only if it contains no odd cycles.
+\end{Theorem}
+
+\begin{proof}
+First, suppose that $G$ is a bipartite graph with bipartition $(V_1, V_2)$, and let $v_1 v_2 \ldots v_k$ be a cycle of length $k$ in $G$. Without loss of generality, suppose that $v_1 \in V_1$. Then, since $v_2 \sim v_1$, $v_2 \in V_2$, which in turn implies that $v_3 \in V_1$, as $v_2 \sim v_3$. Proceeding similarly, we see $v_i \in V_1$ if $i$ is odd and $v_i \in V_2$ if $i$ is even. But $v_k \sim v_1$ and $v_1 \in V_1$ implies that $v_k \in V_2$. Therefore, $k$ (the length of the cycle) is even.
+
+Conversely, suppose $G$ is a graph that has no odd cycles. Without loss of generality, assume that $G$ is connected -- otherwise, apply the argument to each component. Let $v$ be any vertex of $G$. Define subsets $V_1$ and $V_2$ of $V(G)$ as follows:
+\begin{align*}
+    V_1 = \qty{\, u \in V \mid d(u, v)\ \text{is even} \,} \\
+    V_2 = \qty{\, u \in V \mid d(u, v)\ \text{is odd} \,}.
+\end{align*}
+We claim that $(V_1, V_2)$ is a bipartition of $G$.
+
+Suppose not, and let $x$ and $y$ be adjacent vertices of $G$, both belonging to $V_i$ for $i = 1$ or $2$. Let $P$ and $Q$ be shortest paths from $v$ to $x$ and $y$ respectively. Let $w$ be the last vertex common to both $P$ and $Q$ when traversing $P$ from $v$ to $x$. Then the path $P[w,x]$, the edge $(x, y)$, and the path $Q[y,w]$ form an odd cycle in $G$, which is a contradiction. Hence, $(V_1, V_2)$ is a bipartition of $G$ as claimed.
+\end{proof}
+
+A \newterm{complete bipartite graph} is a bipartite graph in which every vertex of one partite set is adjacent to all the vertices of the other partite set. The complete bipartite graph with partite sets of cardinalities $p$ and $q$ is denoted by $K_{p,q}$.
+
+\begin{Exercise}
+If $G$ is a bipartite graph with bipartition $(V_1, V_2)$, show that
+\begin{equation*}
+\sum_{v \in V_1} \deg v = \sum_{v \in V_2} \deg v.
+\end{equation*}
+\end{Exercise}
+
+\begin{Exercise}
+Identify partite sets for each of $P_6$, $C_6$, and $K_{2,4}$. Explain why the same method fails for $C_5$.
+\end{Exercise}
+
+\subsection{Trees}
+
+A \newterm{tree} is a connected, acyclic graph. There are several well known characterisations or alternative definitions of trees. We take the given definition as the basic one and prove its equivalence to some others.
+
+\begin{Theorem}\label{thm:UniPath}
+A graph $T$ is a tree if and only if there is a unique path joining every two vertices of $T$.
+\end{Theorem}
+\begin{proof}
+First, suppose that $T$ is a tree, and let $u$ and $v$ be vertices of $T$. Since $T$ is connected, there is a path, say $P$, joining $u$ and $v$. Now we must show that this path is unique. Assume to the contrary that there exists another path $Q$ from $u$ to $v$. When traversing $P$ from $u$ to $v$, let $x$ be the first vertex common to $P$ and $Q$ such that its successor on $P$ is not present on $Q$. Let $y$ be the next vertex common to both $P$ and $Q$ when traversing $P$ from $x$ to $v$. Then $P[x,y]$ and $Q[x,y]$ together form a cycle in the tree $T$, which is a contradiction. Thus, $P$ is the unique path joining $u$ and $v$.
+
+Conversely, suppose that $T$ is a graph in which there is a unique path joining any two vertices. Clearly, $T$ is connected. To show that $T$ is acyclic, suppose that $v_1 v_2 \ldots v_n$ is a cycle in $T$. Then we get two different paths joining $v_1$ and $v_n$, namely the path $v_1 v_2 \ldots v_n$ and the path $v_1 v_n$ (since $v_1 \sim v_n$ in the cycle). This contradicts our assumption. Thus, $T$ must be acyclic and hence is a tree.
+\end{proof}
+
+The next two results show that the size of a tree is always one less than its order, and that conversely, this property together with either connectedness or acyclicity implies that the graph is a tree.
+\begin{Theorem}\label{thm:Conn;p=q+1}
+A $(p, q)$-graph $T$ is a tree if and only if it is connected and $p = q + 1$.
+\end{Theorem}
+\begin{proof}
+Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is connected. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
+
+For the converse, suppose that $T$ is a connected $(p,q)$-graph with $p = q + 1$. We must show that is acyclic. Suppose to the contrary that $T$ has a cycle $C$ with $k$ vertices. Then $C$ has $k$ edges as well. Since $T$ is connected, there is a path from every vertex not on $C$ to some vertex of $C$. The shortest path from each vertex $v$ not on $C$ to a vertex on $C$ has a unique edge incident with $v$, which is not part of $C$. Since there are $p - k$ vertices in $T$ not on $C$, there are $p - k$ such edges. Thus $q \ge (p - k) + k = p$, which contradicts our assumption that $p = q + 1$. Thus, $T$ must be acyclic.
+\end{proof}
+
+\begin{Theorem}\label{thm:Acyc;p=q+1}
+A $(p,q)$-graph $T$ is a tree if and only if it is acyclic and $p = q + 1$.
+\end{Theorem}
+\begin{proof}
+Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is acyclic. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
+
+Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected -- i.e.\ it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots + (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
+\end{proof}
+
+\begin{Exercise}
+A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that every non-trivial tree contains at least two pendant vertices.\\
+    \hint{Observe that a non-trivial tree cannot have a vertex of degree zero. Use Handshaking Lemma and assume every degree is at least $2$ to get a contradiction.}
+\end{Exercise}
+
+\begin{Exercise}
+The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad G$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
+\hint{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
+\end{Exercise}
+
+\begin{Solution*}
+Let $T$ be a tree on $n$ vertices. We prove the result by induction on $n$.
+
+If $n = 1$ or $2$, the result obviously holds. Suppose, for the sake of induction, that the result holds for all trees of order less than $n$.
+
+Consider $T$, of order $n \ge 3$. Then $T$ has at least two pendant vertices. Let $T'$ be the tree (of order less than $n$) obtained by deleting all the pendant vertices of $T$.
+
+Then the vertices of $T'$ have eccentricities exactly one less than their eccentricities in $T$, and therefore, $T$ and $T'$ have the same centre. Hence, the result follows by induction.
+\end{Solution*}
+
+\section{Eulerian and Hamiltonian Graphs}\label{sec:EulerianHamiltonian}
+
+An \newterm{Eulerian circuit} in a graph is a circuit containing every edge of the graph. A graph is said to be \newterm{Eulerian} if it contains an Eulerian circuit. A \newterm{Hamiltonian cycle} in a graph is a cycle containing every vertex of the graph. A graph is said to be \newterm{Hamiltonian} if it contains a Hamiltonian cycle.
+
+Notice the difference between the two definitions: an Eulerian circuit is required to contain every edge of the graph, while a Hamiltonian cycle is required to contain every vertex of the graph.
+
+\begin{Example}
+Every cycle $C_n$ is both Eulerian and Hamiltonian. The complete bipartite graph $K_{2,4}$ is Eulerian but not Hamiltonian. If its partite sets are $\{a,b\}$ and $\{1,2,3,4\}$, then
+\begin{equation*}
+a\,1\,b\,2\,a\,3\,b\,4\,a
+\end{equation*}
+is an Eulerian circuit. On the other hand, a cycle in a bipartite graph uses the same number of vertices from both partite sets, and hence $K_{2,4}$ cannot have a Hamiltonian cycle.
+\end{Example}
+
+\begin{Theorem}
+If a graph is Eulerian, then every vertex of the graph has even degree.
+\end{Theorem}
+
+\begin{proof}
+Consider an Eulerian circuit in a graph $G$. Every time the circuit enters a vertex through an edge, it must leave the same vertex through a different edge. Thus, the edges incident with any vertex occur in pairs, one used while entering and one used while leaving. The starting vertex is also the ending vertex of the circuit, and the same pairing works there as well. Hence every vertex has even degree.
+\end{proof}
+
+\begin{Exercise}
+\begin{enumerate}
+\item Decide whether each of $K_5$, $K_{2,4}$, and $K_{3,3}$ is Eulerian and whether it is Hamiltonian. Whenever the answer is yes, exhibit a corresponding circuit or cycle.
+\item Find an Eulerian circuit in the graph obtained from two cycles by identifying one vertex of the first with one vertex of the second.
+\item Give a graph in which every vertex has even degree but which is not Eulerian, and state which part of the definition fails.
+\end{enumerate}
+\end{Exercise}
+
+\section{Matrices Associated with Graphs}\label{sec:GraphMatrices}
+
+\subsection{Adjacency Matrices}
+
+The \newterm{adjacency matrix} of a graph $G$ of order $n$, with vertex set $V = \{v_1, \ldots, v_n\}$, is the $n \times n$ matrix $A = A(G)$ whose $(i,j)$-entry is
+\begin{equation*}
+a_{ij} = \begin{cases}
+1, & v_i \sim v_j \\
+0, & v_i \nsim v_j.
+\end{cases}
+\end{equation*}
+
+\begin{Example}\label{ex:GNM(6-11)AdjMat}
+The adjacency matrix of the graph
+\begin{center}
+\includegraphics{Images/GNM(6,11).pdf}
+\end{center}
+is
+\begin{equation*}
+A = \begin{bmatrix}
+0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 1 & 0 & 1 & 1 & 1 & 1 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0
+\end{bmatrix}.
+\end{equation*}
+\end{Example}
+
+Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself -- i.e.\ $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ -- i.e.\ $a_{ij} = a_{ji}$. Thus, we have the following observation.
+
+\begin{Observation}
+The adjacency matrix of a (simple, undirected) graph is a symmetric, zero-diagonal, $(0, 1)$-matrix.
+\end{Observation}
+
+In the $i$\nth row of the adjacency matrix, for each $j$, the $j$\nth entry is $1$ if $v_j$ is adjacent to $v_i$, and $0$ otherwise. That is, the number of $1$s in the $i$\nth row is the number of vertices adjacent to $v_i$, or in other words, the degree of $v_i$. Thus, the row sums of $A$ are the vertex degrees. Observe that $A \mathbbm 1$ is the vector of row sums, where $\mathbbm 1$ is the vector (of suitable size) with all entries equal to $1$. For instance, with the matrix $A$ given in \cref{ex:GNM(6-11)AdjMat},
+\begin{equation*}
+A = \begin{bmatrix}
+0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 1 & 0 & 1 & 1 & 1 & 1 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+1 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1
+\end{bmatrix} =
+\begin{bmatrix}
+6 \\ 2 \\ 6 \\ 2 \\ 2 \\ 2 \\ 2
+\end{bmatrix}.
+\end{equation*}
+From the Handshaking Lemma and the preceding observation, it follows that the sum of all entries of $A$ is twice the number of edges of the graph.
+
+\begin{Exercise}\label{exer:A2ij}
+Show that the $(i,j)$-entry of $A^2$ is the number of walks of length $2$ from $v_i$ to $v_j$. Hence show that $\tr(A^2) = 2|E(G)|$.\\
+\hint{Recall that if $A$ is any $n \times n$ matrix, then the $(i,j)$-entry of $A^2$ is $\sum_{k=1}^{n} a_{ik}a_{kj}$. As $A$ is a $(0, 1)$-matrix, each term in this summation is $1$ or $0$, with the former if and only if $a_{ik} = a_{kj} = 1$. What does this imply about the vertices $v_i$, $v_k$, and $v_j$? Then, as $k$ varies from $1$ to $n$, what does the value of the sum imply about $v_i$ and $v_j$?}
+\end{Exercise}
+
+The following result (which generalises the statement in \cref{exer:A2ij}) shows that the adjacency matrix can be used to obtain certain information about walks in the graph.
+
+\begin{Theorem}[Statement only]
+Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v_n\}$. Then the $(i,j)$-entry of $A^m$, for any positive integer $m$, is the number of walks of length $m$ from $v_i$ to $v_j$.
+\end{Theorem}
+
+\subsection{Incidence Matrices}
+
+Consider an $(n, m)$-graph $G$ having vertex set $\{v_1, \ldots, v_n\}$ and edge set $\{e_1, \ldots, e_m\}$. The \newterm{incidence matrix} of $G$ is the $n \times m$ matrix $B = B(G)$ whose $(i, j)$-entry is $1$ if the vertex $v_i$ is incident with the edge $e_j$, and $0$ otherwise.
+
+\begin{Example}\label{ex:GNM(6-8)AdjMat}
+The incidence matrix of the graph
+\begin{center}
+\includegraphics{Images/GNM(6,8).pdf}
+\end{center}
+is
+\begin{equation*}
+B = \begin{bmatrix}
+1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 \\
+0 & 0 & 1 & 1 & 0 & 0 & 0 & 1
+\end{bmatrix}.
+\end{equation*}
+\end{Example}
+
+Each column of the incidence matrix corresponds to an edge of the graph, and the only non-zero entries in the column correspond to the end-vertices of the edge -- thus, each column contains exactly two $1$s. In a simple graph, there is at most one edge between a given pair of vertices, and hence no two columns of the incidence matrix can be equal. We therefore have the following observation.
+
+\begin{Observation}
+The incidence matrix of a (simple, undirected) graph is a $(0, 1)$-matrix in which every column has exactly two $1$s, and no two columns are equal.
+\end{Observation}
+
+Let $D(G)$ be the diagonal matrix of vertex degrees:
+\begin{equation*}
+D(G) = \operatorname{diag}(\deg v_1, \ldots, \deg v_n).
+\end{equation*}
+
+\begin{Theorem}[Statement only]
+For a simple undirected graph,
+\begin{equation*}
+B(G)B(G)^T = A(G) + D(G).
+\end{equation*}
+\end{Theorem}
+
+\begin{Exercise}
+Compute $B B^T$ for a path on four vertices and verify the preceding theorem.
+\end{Exercise}
+
+\section{Dijkstra's Algorithm}\label{sec:Dijkstra}
+
+Let $G$ be a directed graph on $n$ vertices $v_1, \ldots, v_n$, in which each (directed) edge has a positive weight attached to it (say, representing the cost of traversing that edge). Let $W$ be the \newterm{weighted adjacency matrix} of $G$, defined as follows. $W$ is an $n \times n$ matrix with rows and columns indexed by the vertices of $G$, and having $(i,j)$-entry
+\begin{equation*}
+w_{ij} = \begin{cases}
+0, & i = j\\
+\text{Weight of the edge $(v_i, v_j)$}, & v_i \sim v_j\\
+\infty, & v_i \not\sim v_j.
+\end{cases}
+\end{equation*}
+
+Dijkstra's algorithm is a procedure to determine the shortest paths (and hence distances) from a given source vertex $s$ of $G$ to all the other vertices.
+
+\begin{algorithm}\caption{Dijkstra's algorithm}\label{alg:Dijkstra}
+\begin{algorithmic}[1]
+	\State $K \gets \{s\}$, $U \gets V(G) - \{s\}$
+	\State $\bestDTo(u) \gets w_{su}$, $\forall u \in U$
+	\State $\tree(u) \gets s$, $\forall u \in U$
+	\While{$U \ne \varnothing$}
+		\State $t \gets u \in U$ such that $\bestDTo(u)$ is minimum
+		\State $U \gets U - \{t\}$ \Comment{Remove $t$ from $U$ and}
+		\State $K \gets K \cup \{t\}$ \Comment{add it to $K$}
+		\For{$u \in U$}
+			\State $du_t \gets \bestDTo(t) + w_{tu}$ \Comment{Distance to $u$ through $t$}
+			\If{$du_t < \bestDTo(u)$}
+				\State $\bestDTo(u) \gets du_t$
+				\State $\tree(u) \gets t$
+			\EndIf
+		\EndFor
+	\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+The input to the algorithm is the set of vertices $V$ and the weighted adjacency matrix $W$. Initially, the algorithm takes the weights of the edges from $s$ to the other vertices as the \newterm{tentative best distances} to those vertices. It also maintains a set $K$ of vertices to which the shortest paths from $s$ have been found (so that no further improvement is possible), and a set $U$ of vertices to which shorter paths may yet be found, passing through some vertex in $K$. In each step, the vertex $t \in U$ with minimum tentative best distance is selected -- it is guaranteed that no shorter path exists from $s$ to this vertex (since any such path would have to pass through some other vertex of $U$, but the distances to such a vertex is larger than the distance to $t$). This vertex $t$ is removed from $U$ and added to $K$, and then for each vertex $u$ remaining in $U$, the distance from $s$ to $u$ \emph{through} $t$ is compared with the current best distance to $u$. If the former is found to be smaller, the best distance to $u$ is updated to that value and $t$ is marked as the vertex through which $u$ is to be reached in the shortest path -- this is indicated by $\tree(u)$ in the algorithm. This procedure is repeated until all vertices reachable from $s$ have been processed.
+
+\begin{Example}
+In the graph shown below, find the shortest paths from $B$ to all the other vertices.\\
+\begin{center}
+\includegraphics[scale=0.6]{Images/Dijkstra.pdf}
+\end{center}
+The weighted adjacency matrix of the graph is
+\begin{equation*}
+W = \kbordermatrix{
+	&	A & B & C & D & E\\
+	A & 0 & 7 & \infty & \infty & 6\\
+	B & \infty & 0 & 5 & 10 & \infty\\
+	C & 12 & 6 & 0 & 3 & \infty\\
+	D & 11 & \infty & 8 & 0 & \infty\\
+	E & 4 & 5 & \infty & 6 & 0
+}.
+\end{equation*}
+
+The results of applying the algorithm are tabulated below and the tree of shortest paths is also shown.
+
+\ifdim\textwidth>5.5in
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{cc}
+
+	\begin{minipage}{7cm}
+	$\begin{array}{r|cccc}
+	 	 &		A	&	C	&	D	&	E\\
+	\hline
+	B(0) &	\infty_B	&	\boxed{5_B}	&	10_B	&	\infty_B\\
+	C(5) &	17_C	&	\_	&	\boxed{8_C}	&	\infty_B\\
+	D(8) &	\boxed{17_C}	&	\_	&	\_	&	\infty_B\\
+	A(17)&	\_	&	\_	&	\_	&	23_A\\
+	\hline
+	B	&	17_C	&	5_B	&	8_C	&	23_A
+	\end{array}$
+	\end{minipage}
+&
+	\begin{minipage}{5cm}
+		\centering
+	\includegraphics[scale=0.7]{Images/ShortestPaths.pdf}
+	\end{minipage}
+
+\end{tabular}
+}
+\end{center}
+\else
+\begin{center}
+\resizebox{\textwidth}{!}{$\begin{array}{r|cccc}
+ 	 &		A	&	C	&	D	&	E\\
+\hline
+B(0) &	\infty_B	&	\boxed{5_B}	&	10_B	&	\infty_B\\
+C(5) &	17_C	&	\_	&	\boxed{8_C}	&	\infty_B\\
+D(8) &	\boxed{17_C}	&	\_	&	\_	&	\infty_B\\
+A(17)&	\_	&	\_	&	\_	&	23_A\\
+\hline
+B	&	17_C	&	5_B	&	8_C	&	23_A
+\end{array}$}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.7]{Images/ShortestPaths.pdf}
+\end{center}
+\fi
+
+\end{Example}
