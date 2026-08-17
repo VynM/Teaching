@@ -41,6 +41,8 @@
 \usepackage{algorithm, algpseudocode}
 \algrenewcommand\algorithmicrequire{\textbf{Input:}}
 
+\usepackage{ocgx2}\usepackage{ocgx2}
+
 \usepackage{kbordermatrix}
 
 \usepackage[intoc]{nomencl}
@@ -71,6 +73,12 @@
 \newtheorem*{Remark*}{Remark}
 \newtheorem*{Solution*}{Solution}
 \newtheorem*{Note*}{Note}
+
+\newcommand{\solution}[2]{
+\noindent\textit{\switchocg{sol:#1}{Solution.}} \begin{ocg}{Solution}{sol:#1}{0}
+#2
+\end{ocg}
+}
 
 \definecolor{alertcolor}{rgb}{0.8, 0.5, 0}
 \newcommand{\newterm}[1]{{\color{alertcolor} #1}}

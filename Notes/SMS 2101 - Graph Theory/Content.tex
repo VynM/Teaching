@@ -258,9 +258,13 @@ Consider a graph $G$ of diameter at least $3$. Then there exist vertices $u$ and
 Now, consider any two vertices $x$ and $y$ other than $u$ and $v$. In $G$, $x$ can be adjacent to at most one of $u$ and $v$, for otherwise, $d_G(u,v) = 2$. Hence, $x$ is adjacent to at least one of $u$ and $v$ in $\overline G$. Similarly, $y$ is adjacent to at least one of $u$ and $v$ in $\overline G$. Thus, there is a path of length at most $3$ from $x$ to $y$ in $\overline G$ (namely $xuy$, $xvy$, $xuvy$, or $xvuy$), which implies that $d_{\overline G}(x, y) \le 3$. Therefore, $\diam \overline G \le 3$.
 \end{proof}
 
-\begin{Exercise}
+\begin{Theorem}
 If $G$ is a graph of order $n$ and minimum degree $\delta(G) \ge \frac{n-1}{2}$, show that $G$ is connected and $\diam G \le 2$.
-\end{Exercise}
+\end{Theorem}
+
+\begin{proof}
+Consider any two distinct vertices $x$ and $y$ of $G$. If they are adjacent, then $xy$ is an $x$-$y$ path in $G$, and hence $d(x, y) = 1$. Suppose that $x$ and $y$ are non-adjacent. Then, since $\deg x$ and $\deg y$ are both at least $\frac{n-1}{2}$, they are commonly adjacent to at least one of the remaining $n - 2$ vertices, and hence $d(x, y) = 2$.
+\end{proof}
 
 \section[Isomorphism and Self-Complementary Graphs]{Isomorphism and~\screenbreak Self-Complementary Graphs}\label{sec:IsomorphismSelfComplementary}
 
@@ -318,32 +322,9 @@ If $G$ is a regular self-complementary graph of order $n$, show that $n = 4k + 1
 Construct a self-complementary graph of order $9$.
 \end{Exercise}
 
-\section{Bipartite Graphs and Trees}\label{sec:BipartiteTrees}
-
-\subsection{Bipartite Graphs}
+\section{Bipartite Graphs}\label{sec:Bipartite}
 
 A graph $G = (V, E)$ is \newterm{bipartite} if its vertex set $V$ can be partitioned into two subsets $V_1$ and $V_2$ such that no two vertices in $V_i$ are adjacent, for $i = 1, 2$. That is, there exist two non-empty, disjoint subsets $V_1, V_2 \subseteq V$ such that $V_1 \cup V_2 = V$, and every edge of $G$ (if any) joins a vertex in $V_1$ with a vertex in $V_2$. Then we say that $(V_1, V_2)$ is a \newterm{bipartition} of $G$. The sets $V_1$ and $V_2$ are called the \newterm{partite sets} of $G$.
-
-The following theorem characterises bipartite graphs in terms of its cycles. A cycle is \newterm{even} if its length is even and \newterm{odd} if its length is odd.
-
-\begin{Theorem}
-A graph is bipartite if and only if it contains no odd cycles.
-\end{Theorem}
-
-\begin{proof}
-First, suppose that $G$ is a bipartite graph with bipartition $(V_1, V_2)$, and let $v_1 v_2 \ldots v_k$ be a cycle of length $k$ in $G$. Without loss of generality, suppose that $v_1 \in V_1$. Then, since $v_2 \sim v_1$, $v_2 \in V_2$, which in turn implies that $v_3 \in V_1$, as $v_2 \sim v_3$. Proceeding similarly, we see $v_i \in V_1$ if $i$ is odd and $v_i \in V_2$ if $i$ is even. But $v_k \sim v_1$ and $v_1 \in V_1$ implies that $v_k \in V_2$. Therefore, $k$ (the length of the cycle) is even.
-
-Conversely, suppose $G$ is a graph that has no odd cycles. Without loss of generality, assume that $G$ is connected -- otherwise, apply the argument to each component. Let $v$ be any vertex of $G$. Define subsets $V_1$ and $V_2$ of $V(G)$ as follows:
-\begin{align*}
-    V_1 = \qty{\, u \in V \mid d(u, v)\ \text{is even} \,} \\
-    V_2 = \qty{\, u \in V \mid d(u, v)\ \text{is odd} \,}.
-\end{align*}
-We claim that $(V_1, V_2)$ is a bipartition of $G$.
-
-Suppose not, and let $x$ and $y$ be adjacent vertices of $G$, both belonging to $V_i$ for $i = 1$ or $2$. Let $P$ and $Q$ be shortest paths from $v$ to $x$ and $y$ respectively. Let $w$ be the last vertex common to both $P$ and $Q$ when traversing $P$ from $v$ to $x$. Then the path $P[w,x]$, the edge $(x, y)$, and the path $Q[y,w]$ form an odd cycle in $G$, which is a contradiction. Hence, $(V_1, V_2)$ is a bipartition of $G$ as claimed.
-\end{proof}
-
-A \newterm{complete bipartite graph} is a bipartite graph in which every vertex of one partite set is adjacent to all the vertices of the other partite set. The complete bipartite graph with partite sets of cardinalities $p$ and $q$ is denoted by $K_{p,q}$.
 
 \begin{Exercise}
 If $G$ is a bipartite graph with bipartition $(V_1, V_2)$, show that
@@ -353,52 +334,96 @@ If $G$ is a bipartite graph with bipartition $(V_1, V_2)$, show that
 \end{Exercise}
 
 \begin{Exercise}
+A firm employs a total of 17 security guards. Each day, 15 guards have to be on duty. But in a month, each guard can be given a maximum of 26 days duty. Is it possible to satisfy the requirement with the existing 17 guards?
+\end{Exercise}
+
+\begin{Exercise}
 Identify partite sets for each of $P_6$, $C_6$, and $K_{2,4}$. Explain why the same method fails for $C_5$.
 \end{Exercise}
 
-\subsection{Trees}
+The following theorem and its converse (given as an exercise) characterise bipartite graphs in terms of its cycles. A cycle is \newterm{even} if its length is even and \newterm{odd} if its length is odd.
+
+\begin{Theorem}
+A bipartite  graph contains no odd cycles.
+\end{Theorem}
+
+\begin{proof}
+Suppose that $G$ is a bipartite graph with bipartition $(V_1, V_2)$, and let $v_1 v_2 \ldots v_k$ be a cycle of length $k$ in $G$. Without loss of generality, suppose that $v_1 \in V_1$. Then, since $v_2 \sim v_1$, $v_2 \in V_2$, which in turn implies that $v_3 \in V_1$, as $v_2 \sim v_3$. Proceeding similarly, we see $v_i \in V_1$ if $i$ is odd and $v_i \in V_2$ if $i$ is even. But $v_k \sim v_1$ and $v_1 \in V_1$ implies that $v_k \in V_2$. Therefore, $k$ (the length of the cycle) is even.
+\end{proof}
+
+\begin{DExercise}
+Prove that if a graph contains no odd cycles, then it is bipartite.
+\end{DExercise}
+
+\begin{Solution*}
+Suppose that $G$ is a graph that has no odd cycles. Without loss of generality, assume that $G$ is connected -- otherwise, apply the argument to each component. Let $v$ be any vertex of $G$. Define subsets $V_1$ and $V_2$ of $V(G)$ as follows:
+\begin{align*}
+    V_1 = \qty{\, u \in V \mid d(u, v)\ \text{is even} \,} \\
+    V_2 = \qty{\, u \in V \mid d(u, v)\ \text{is odd} \,}.
+\end{align*}
+We claim that $(V_1, V_2)$ is a bipartition of $G$.
+
+Suppose not, and let $x$ and $y$ be adjacent vertices of $G$, both belonging to $V_i$ for $i = 1$ or $2$. Let $P$ and $Q$ be shortest paths from $v$ to $x$ and $y$ respectively. Let $w$ be the last vertex common to both $P$ and $Q$ when traversing $P$ from $v$ to $x$. Then the path $P[w,x]$, the edge $(x, y)$, and the path $Q[y,w]$ form an odd cycle in $G$, which is a contradiction. Hence, $(V_1, V_2)$ is a bipartition of $G$ as claimed.
+\end{Solution*}
+
+A \newterm{complete bipartite graph} is a bipartite graph in which every vertex of one partite set is adjacent to all the vertices of the other partite set. The complete bipartite graph with partite sets of cardinalities $p$ and $q$ is denoted by $K_{p,q}$.
+
+
+\section{Trees}\label{sec:Trees}
 
 A \newterm{tree} is a connected, acyclic graph. There are several well known characterisations or alternative definitions of trees. We take the given definition as the basic one and prove its equivalence to some others.
 
 \begin{Theorem}\label{thm:UniPath}
 A graph $T$ is a tree if and only if there is a unique path joining every two vertices of $T$.
 \end{Theorem}
+
 \begin{proof}
 First, suppose that $T$ is a tree, and let $u$ and $v$ be vertices of $T$. Since $T$ is connected, there is a path, say $P$, joining $u$ and $v$. Now we must show that this path is unique. Assume to the contrary that there exists another path $Q$ from $u$ to $v$. When traversing $P$ from $u$ to $v$, let $x$ be the first vertex common to $P$ and $Q$ such that its successor on $P$ is not present on $Q$. Let $y$ be the next vertex common to both $P$ and $Q$ when traversing $P$ from $x$ to $v$. Then $P[x,y]$ and $Q[x,y]$ together form a cycle in the tree $T$, which is a contradiction. Thus, $P$ is the unique path joining $u$ and $v$.
 
 Conversely, suppose that $T$ is a graph in which there is a unique path joining any two vertices. Clearly, $T$ is connected. To show that $T$ is acyclic, suppose that $v_1 v_2 \ldots v_n$ is a cycle in $T$. Then we get two different paths joining $v_1$ and $v_n$, namely the path $v_1 v_2 \ldots v_n$ and the path $v_1 v_n$ (since $v_1 \sim v_n$ in the cycle). This contradicts our assumption. Thus, $T$ must be acyclic and hence is a tree.
 \end{proof}
 
-The next two results show that the size of a tree is always one less than its order, and that conversely, this property together with either connectedness or acyclicity implies that the graph is a tree.
-\begin{Theorem}\label{thm:Conn;p=q+1}
-A $(p, q)$-graph $T$ is a tree if and only if it is connected and $p = q + 1$.
+\begin{Theorem}
+A tree of order $n$ has size $n - 1$.
 \end{Theorem}
+
 \begin{proof}
+See Exercise~\ref{exer:Conn;p=q+1}.
+\end{proof}
+
+The next two optional exercises show that a tree can be characterised as a connected graph whose size is one less than its order, or as an acyclic connected graph whose size is one less than its order.
+
+\begin{DExercise}\label{exer:Conn;p=q+1}
+A $(p, q)$-graph $T$ is a tree if and only if it is connected and $p = q + 1$.
+\end{DExercise}
+
+\begin{Solution*}
 Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is connected. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
 
 For the converse, suppose that $T$ is a connected $(p,q)$-graph with $p = q + 1$. We must show that is acyclic. Suppose to the contrary that $T$ has a cycle $C$ with $k$ vertices. Then $C$ has $k$ edges as well. Since $T$ is connected, there is a path from every vertex not on $C$ to some vertex of $C$. The shortest path from each vertex $v$ not on $C$ to a vertex on $C$ has a unique edge incident with $v$, which is not part of $C$. Since there are $p - k$ vertices in $T$ not on $C$, there are $p - k$ such edges. Thus $q \ge (p - k) + k = p$, which contradicts our assumption that $p = q + 1$. Thus, $T$ must be acyclic.
-\end{proof}
+\end{Solution*}
 
-\begin{Theorem}\label{thm:Acyc;p=q+1}
-A $(p,q)$-graph $T$ is a tree if and only if it is acyclic and $p = q + 1$.
-\end{Theorem}
-\begin{proof}
+\begin{DExercise}\label{exer:Acyc;p=q+1}
+Prove that a $(p,q)$-graph $T$ is a tree if and only if it is acyclic and $p = q + 1$.
+\end{DExercise}
+
+\begin{Solution*}
 Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is acyclic. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
 
 Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected -- i.e.\ it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots + (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
-\end{proof}
+\end{Solution*}
 
 \begin{Exercise}
-A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that every non-trivial tree contains at least two pendant vertices.\\
+A \newterm{pendant vertex} or \newterm{leaf} of a graph is a vertex of degree $1$. Prove that every non-trivial tree contains at least two pendant vertices.\\
     \hint{Observe that a non-trivial tree cannot have a vertex of degree zero. Use Handshaking Lemma and assume every degree is at least $2$ to get a contradiction.}
 \end{Exercise}
 
 \begin{Exercise}
-The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad G$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
+Recall that the \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity. Show that every tree has a centre consisting of either one vertex or exactly two adjacent vertices.\\
 \hint{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
 \end{Exercise}
 
-\begin{Solution*}
+\solution{TreeCentre}{
 Let $T$ be a tree on $n$ vertices. We prove the result by induction on $n$.
 
 If $n = 1$ or $2$, the result obviously holds. Suppose, for the sake of induction, that the result holds for all trees of order less than $n$.
@@ -406,7 +431,7 @@ If $n = 1$ or $2$, the result obviously holds. Suppose, for the sake of inductio
 Consider $T$, of order $n \ge 3$. Then $T$ has at least two pendant vertices. Let $T'$ be the tree (of order less than $n$) obtained by deleting all the pendant vertices of $T$.
 
 Then the vertices of $T'$ have eccentricities exactly one less than their eccentricities in $T$, and therefore, $T$ and $T'$ have the same centre. Hence, the result follows by induction.
-\end{Solution*}
+}
 
 \section{Eulerian and Hamiltonian Graphs}\label{sec:EulerianHamiltonian}
 
@@ -502,7 +527,7 @@ Show that the $(i,j)$-entry of $A^2$ is the number of walks of length $2$ from $
 
 The following result (which generalises the statement in \cref{exer:A2ij}) shows that the adjacency matrix can be used to obtain certain information about walks in the graph.
 
-\begin{Theorem}[Statement only]
+\begin{Theorem}
 Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v_n\}$. Then the $(i,j)$-entry of $A^m$, for any positive integer $m$, is the number of walks of length $m$ from $v_i$ to $v_j$.
 \end{Theorem}
 
@@ -539,7 +564,7 @@ Let $D(G)$ be the diagonal matrix of vertex degrees:
 D(G) = \operatorname{diag}(\deg v_1, \ldots, \deg v_n).
 \end{equation*}
 
-\begin{Theorem}[Statement only]
+\begin{Theorem}
 For a simple undirected graph,
 \begin{equation*}
 B(G)B(G)^T = A(G) + D(G).
