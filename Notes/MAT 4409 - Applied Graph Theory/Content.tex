@@ -6,7 +6,7 @@
 \maketitle
 
 \tableofcontents
-\newpage
+\clearpage
 
 \renewcommand{\nomname}{List of Symbols}
 \nomenclature[01]{$V(G)$}{Vertex set of graph $G$}
@@ -21,9 +21,8 @@
 \nomenclature[10]{$A(G)$}{Adjacency matrix of graph $G$}
 \nomenclature[11]{$B(G)$}{Incidence matrix of graph $G$}
 
-% The following symbols will be needed when Topic 2 is activated.
-%\nomenclature[10]{$G - v$}{Graph obtained from $G$ by deleting vertex $v$ and all edges incident with $v$}
-%\nomenclature[11]{$G - e$}{Graph obtained from $G$ by deleting edge $e$}
+\nomenclature[12]{$G - v$}{Graph obtained from $G$ by deleting vertex $v$ and all edges incident with $v$}
+\nomenclature[13]{$G - e$}{Graph obtained from $G$ by deleting edge $e$}
 
 \nomenclature[20]{$K_n$}{Complete graph of order $n$ (size $\binom{n}{2}$)}
 \nomenclature[21]{$P_n$}{Path graph of order $n$ (size $n - 1$)}
@@ -31,12 +30,11 @@
 
 \nomenclature[30]{$L(G)$}{Line graph of $G$}
 \printnomenclature[10em]
-
-\newpage
+\clearpage
 
 \section{Algebraic and Structural Properties}\label{sec:AlgebraicStructural}
 
-\subsection{Graphs and Degree}\label{sec:Intro}
+\subsection{Graphs and Degree}\label{subsec:Intro}
 Throughout these notes, all graphs are finite, simple, and undirected unless stated otherwise.
 
 A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a non-empty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
@@ -73,7 +71,7 @@ Prove the following:
 \end{enumerate}
 \end{Exercise}
 
-\subsection{Cartesian Products}\label{sec:CartProds}
+\subsection{Cartesian Products}\label{subsec:CartProds}
 
 The \newterm{Cartesian product} of two graphs $G$ and $H$ is the graph denoted by $G \times H$, whose vertex set is $V(G) \times V(H)$ (the Cartesian product of the vertex sets $V(G)$ and $V(H)$, consisting of all ordered pairs $(u, v)$ where $u$ is a vertex of $G$ and $v$ is a vertex of $H$), in which two vertices $(u_1, v_1)$ and $(u_2, v_2)$ are adjacent if and only if either $u_1 = u_2$ and $v_1 \sim v_2$ or $u_1 \sim u_2$ and $v_1 = v_2$.
 
@@ -81,26 +79,7 @@ The \newterm{Cartesian product} of two graphs $G$ and $H$ is the graph denoted b
 Prove that if $G$ is a graph of order $p_1$ and size $q_1$, and $H$ is a graph of order $p_2$ and size $q_2$, then $G \times H$ is a graph of order $p_1 p_2$ and size $p_1 q_2 + p_2 q_1$.
 \end{Exercise}
 
-\begin{Solution*}
-By definition, the vertex set of $G \times H$ is the Cartesian product $V(G) \times V(H)$ of the vertex sets of $G$ and $H$, and therefore contains $|V(G)| \times |V(H)|$ elements. Thus, the order of $G \times H$ is $p_1 p_2$.
-
-Now, consider any vertex $(u, v)$ of $G \times H$. Corresponding to every vertex $u'$ adjacent to $u$ in $G$, there is an edge from $(u, v)$ to $(u', v)$ in $G \times H$. Similarly, corresponding to every vertex $v'$ adjacent to $v$ in $H$, there is an edge from $(u, v)$ to $(u, v')$ in $G \times H$. Thus, the degree of $(u, v)$ in $G \times H$ is $\deg u + \deg v$. Hence, by the Handshaking Lemma, the size of $G \times H$ is half the sum of its vertex degrees, which is
-\begin{align*}
-|E(G\times H)|
-&=\frac 1 2 \sum_{\substack{u \in V(G)\\v \in V(H)}}(\deg u+\deg v)\\
-&=\frac 1 2 \sum_{\substack{u \in V(G)\\v \in V(H)}}\deg u
-  +\frac 1 2 \sum_{\substack{u \in V(G)\\v \in V(H)}}\deg v\\
-&=p_2\pqty{\frac 1 2\sum_{u \in V(G)}\deg u}
-  +p_1\pqty{\frac 1 2\sum_{v \in V(H)}\deg v}\\
-&=p_2q_1+p_1q_2.
-\end{align*}
-\end{Solution*}
-
-\begin{Exercise}
-Show that if $G$ is an $r$-regular graph and $H$ is an $s$-regular graph, then $G \times H$ is a regular graph of regularity $r + s$.
-\end{Exercise}
-
-\subsection{Subgraphs}\label{sec:Subgraphs}
+\subsection{Subgraphs}\label{subsec:Subgraphs}
 
 A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets are, respectively, subsets of the vertex and edge sets of $G$ -- i.e.\ $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$. A \newterm{spanning subgraph} of $G$ is a subgraph containing all the vertices of $G$. A subgraph $H$ of a graph $G$ is an \newterm{induced subgraph} if for all vertices $u, v \in V(H)$, $uv \in E(H)$ whenever $uv \in E(G)$ -- i.e.\ every edge of $G$ that joins two vertices of $H$ is present in $H$.
 
@@ -118,7 +97,7 @@ A \newterm{subgraph} of a graph $G$ is a graph $H$ whose vertex and edge sets ar
 
 A graph is \newterm{complete} if all its vertices are adjacent to one another. The complete graph of order $n$ is denoted by $K_n$. As there is an edge between every pair of distinct vertices of $K_n$, the size of $K_n$ is $\binom n 2$. A \newterm{totally disconnected graph} has no edges.
 
-\subsection{Walks, Paths, and Cycles}\label{sec:Walks}
+\subsection{Walks, Paths, and Cycles}\label{subsec:Walks}
 
 A \newterm{walk} in a simple graph $G$ is a sequence of vertices $v_1, v_2, \ldots, v_k$ such that $v_i \sim v_{i + 1}$ for $i = 1, 2, \ldots, k - 1$. This is a walk \newterm{from $v_1$ to $v_k$} or \newterm{between $v_1$ and $v_k$}, having \newterm{length} $k - 1$. We may also say that this is a walk of length $k - 1$ starting at $v_1$ and ending at $v_k$.
 
@@ -163,7 +142,7 @@ Next, let $i \le k$ be maximal such that $v_i \sim v_0$. Since all $\deg v_0$ ne
 Prove that any two longest paths in a connected graph share at least one common vertex.
 \end{Exercise}
 
-\subsection{Distances and Connectedness}\label{sec:DistancesConnectedness}
+\subsection{Distances and Connectedness}\label{subsec:DistancesConnectedness}
 
 The \newterm{distance} between two vertices $u$ and $v$ of a graph $G$ is the length of a shortest path between $u$ and $v$ -- such a shortest path between $u$ and $v$ is a \newterm{geodesic} from $u$ to $v$. Thus, the distance between $u$ and $v$ in $G$, denoted by $d_G(u, v)$, is the length of a geodesic from $u$ to $v$ in $G$. If there is no path from $u$ to $v$ in $G$, then we set $d_G(u, v) = \infty$. When the graph $G$ is clear from the context, we will write $d_G(u, v)$ as $d(u, v)$.
 
@@ -186,134 +165,55 @@ The set of all vertices of $G$ having minimum eccentricity,i.e.\ the set of all 
 Prove that for any connected graph $G$, $\rad G \le \diam G \le 2 \rad G$.
 \end{Exercise}
 
-% The following material is retained for Topics 2 and 3, but is not part of
-% Topic 1. Remove the \iffalse and \fi when it is ready to be developed.
-\iffalse
-\section{Bipartite Graphs}\label{sec:Bipartite}
 
-A graph $G = (V, E)$ is \newterm{bipartite} if its vertex set $V$ can be partitioned into two subsets $V_1$ and $V_2$ such that no two vertices in $V_i$ are adjacent, for $i = 1, 2$. That is, there exist two non-empty, disjoint subsets $V_1, V_2 \subseteq V$ such that $V_1 \cup V_2 = V$, and every edge of $G$ (if any) joins a vertex in $V_1$ with a vertex in $V_2$. Then we say that $(V_1, V_2)$ is a \newterm{bipartition} of $G$.
+\subsection{Bipartite Graphs}\label{subsec:Bipartite}
 
-The following theorem characterises bipartite graphs in terms of its cycles. A cycle is \newterm{even} if its length is even and \newterm{odd} if its length is odd.
+A graph $G = (V, E)$ is \newterm{bipartite} if its vertex set $V$ can be partitioned into two (possibly empty) subsets $V_1$ and $V_2$ such that no two vertices in $V_i$ are adjacent, for $i = 1, 2$. That is, there exist two disjoint subsets $V_1, V_2 \subseteq V$ such that $V_1 \cup V_2 = V$, and every edge of $G$ (if any) joins a vertex in $V_1$ with a vertex in $V_2$. Then we say that $(V_1, V_2)$ is a \newterm{bipartition} of $G$.
+
+The following theorem characterises bipartite graphs in terms of their cycles. A cycle is \newterm{even} if its length is even and \newterm{odd} if its length is odd.
 
 \begin{Theorem}
 A graph is bipartite if and only if it contains no odd cycles.
 \end{Theorem}
 
-\begin{proof}
-First, suppose that $G$ is a bipartite graph with bipartition $(V_1, V_2)$, and let $v_1, v_2, \ldots, v_k$ be a cycle of length $k$ in $G$. Without loss of generality, suppose that $v_1 \in V_1$. Then, since $v_2 \sim v_1$, $v_2 \in V_2$, which in turn implies that $v_3 \in V_1$, as $v_2 \sim v_3$. Proceeding similarly, we see $v_i \in V_1$ if $i$ is odd and $v_i \in V_2$ if $i$ is even. But $v_k \sim v_1$ and $v_1 \in V_1$ implies that $v_k \in V_2$. Therefore, $k$ (the length of the cycle) is even.
+The \newterm{complete bipartite graph} $K_{m,n}$ is the bipartite graph with $m$ vertices in one partite set and $n$ vertices in the other partite set, such that every vertex of one partite set is adjacent to every vertex of the other.
 
-Conversely, suppose $G$ is a graph that has no odd cycles. Without loss of generality, assume that $G$ is connected -- otherwise, apply the argument to each component. Let $v$ be any vertex of $G$. Define subsets $V_1$ and $V_2$ of $V(G)$ as follows:
-\begin{align*}
-    V_1 = \qty{\, u \in V \mid d(u, v)\ \text{is even} \,} \\
-    V_2 = \qty{\, u \in V \mid d(u, v)\ \text{is odd} \,}.
-\end{align*}
-We claim that $(V_1, V_2)$ is a bipartition of $G$.
+\subsection{Trees}\label{subsec:Trees}
 
-Suppose not, and let $x$ and $y$ be adjacent vertices of $G$, both belonging to $V_i$ for $i = 1$ or $2$. Let $P$ and $Q$ be shortest paths from $v$ to $x$ and $y$ respectively. Let $w$ be the last vertex common to both $P$ and $Q$ when traversing $P$ from $v$ to $x$. Then the portion of $P$ from $w$ to $x$, the edge $(x, y)$, and the portion of $Q$ from $y$ to $w$ forms a cycle in $G$, having length, say $l$, given by
-\begin{align*}
-l & = d(w, x) + d(w, y) + 1 \\
-& = [d(v, x) - d(v, w)] + [d(v, y) - d(v, w)] + 1 \\
-& = d(v, x) + d(v, y) - 2 d(v, w) + 1.
-\end{align*}
-If $x, y \in V_1$, then both $d(v, x)$ and $d(v, y)$ are even, and if $x, y \in V_2$, then both these numbers are odd. In either case, $d(v, x) + d(v, y)$ is even, and hence $l$ is odd, which is a contradiction. Hence, $(V_1, V_2)$ is a bipartition of $G$ as claimed.
-\end{proof}
+A \newterm{tree} is a connected, acyclic graph. There are several well-known characterisations or alternative definitions of trees. We take the given definition as the basic one and prove its equivalence to some others. If $u$ and $v$ are non-adjacent vertices of a graph $T$, then $T+uv$ denotes the graph obtained from $T$ by adding the edge $uv$.
 
-\section{Trees}\label{sec:Trees}
-
-A \newterm{tree} is a connected, acyclic graph. There are several well known characterisations or alternative definitions of trees. We take the given definition as the basic one and prove its equivalence to some others.
-
-\begin{Theorem}\label{thm:UniPath}
-A graph $T$ is a tree if and only if there is a unique path joining every two vertices of $T$.
-\end{Theorem}
-\begin{proof}
-First, suppose that $T$ is a tree, and let $u$ and $v$ be vertices of $T$. Since $T$ is connected, there is a path, say $P_1$, joining $u$ and $v$. Now we must show that this path is unique. Assume to the contrary that there exists another path $P_2$ from $u$ to $v$. When traversing $P_1$ from $u$ to $v$, let $w$ be the first vertex that is present on $P_1$ but not $P_2$. Let $x$ be the vertex on $P_1$ preceding $w$, and note that $x$ is on $P_2$ as well. Let $y$ be the next vertex common to both $P_1$ and $P_2$ when traversing $P_1$ from $x$ to $v$. Then the portion of $P_1$ from $x$ to $y$ together with the portion of $P_2$ from $y$ to $x$ forms a cycle in the tree $T$, which is a contradiction. Thus, $P_1$ is the unique path joining $u$ and $v$.
-
-Conversely, suppose that $T$ is a graph in which there is a unique path joining any two vertices. Clearly, $T$ is connected. To show that $T$ is acyclic, suppose that $v_1, v_2, \ldots, v_n$ is a cycle in $T$. Then we get two different paths joining $v_1$ and $v_n$, namely the path $v_1, v_2, \ldots, v_n$ and the path $v_1, v_n$ (since $v_1 \sim v_n$ in the cycle). This contradicts our assumption. Thus, $T$ must be acyclic and hence is a tree.
-\end{proof}
-
-The next two results show that the size of a tree is always one less than its order, and that conversely, this property together with either connectedness or acyclicity implies that the graph is a tree.
 \begin{Theorem}\label{thm:Conn;p=q+1}
-A $(p, q)$-graph $T$ is a tree if and only if it is connected and $p = q + 1$.
-\end{Theorem}
-\begin{proof}
-Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is connected. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
-
-For the converse, suppose that $T$ is a connected $(p,q)$-graph with $p = q + 1$. We must show that is acyclic. Suppose to the contrary that $T$ has a cycle $C$ with $k$ vertices. Then $C$ has $k$ edges as well. Since $T$ is connected, there is a path from every vertex not on $C$ to some vertex of $C$. The shortest path from each vertex $v$ not on $C$ to a vertex on $C$ has a unique edge incident with $v$, which is not part of $C$. Since there are $p - k$ vertices in $T$ not on $C$, there are $p - k$ such edges. Thus $q \ge (p - k) + k = p$, which contradicts our assumption that $p = q + 1$. Thus, $T$ must be acyclic.
-\end{proof}
-
-In the following theorem, the proof of the direct part is identical to that of Theorem~\ref{thm:Conn;p=q+1}, except for the assertion being about acyclicity rather than connectedness. The proof of the converse part is entirely different.
-\begin{Theorem}\label{thm:Acyc;p=q+1}
-A $(p,q)$-graph $T$ is a tree if and only if it is acyclic and $p = q + 1$.
-\end{Theorem}
-\begin{proof}
-Let $T$ be a tree with $p$ vertices and $q$ edges. Then $T$ is acyclic. We prove that $p = q + 1$ by induction. This is clearly true when $p = 1$. Assume it to be true for all trees of order less than $p$. Now in $T$, we know that every two vertices are joined by a unique path. Thus, if $e$ is any edge of $T$, then the graph $T - \{e\}$ obtained by deleting $e$ has exactly two components, say $T_1$ and $T_2$. Each one is a tree, since it is connected and acyclic. Let $T_i$ have $p_i$ vertices and $q_i$ edges, $i = 1, 2$. Then by the hypothesis, $p_i = q_i + 1$ (since $p_i < p$). But $p = p_1 + p_2$ and $q = q_1 + q_2 + 1$ (since the size of $T - \{e\}$ is one less than that of $T$). Thus, $p = q_1 + q_2 + 2 = q + 1$.
-
-Conversely, suppose that $T$ is an acyclic $(p,q)$-graph with $p = q + 1$. To show that $T$ is connected, we need to prove that it is connected --i.e.\ it has only one component. Let $T$ have $k$ components $T_1, \ldots, T_k$. Each one is acyclic, and being connected, is a tree. Thus from the first part of the theorem, we know that if $p_i$ and $q_i$ are respectively the order and size of the component $T_i$, $p_i = q_i + 1$. Now $p = p_1 + \cdots p_k = (q_1 + 1) + \cdots (q_k + 1) = q + k$. But we know that $p = q + 1$. Therefore, $k = 1$. Thus, $T$ is a tree.
-\end{proof}
-
-\begin{Exercise}
-A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that every non-trivial tree contains at least two pendant vertices.\\
-    \hint{Observe that a non-trivial tree cannot have a vertex of degree zero. Use Handshaking Lemma and assume every degree is at least $2$ to get a contradiction.}
-\end{Exercise}
-
-\begin{Exercise}
-The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity --i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad v$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
-\hint{Observe that deleting all pendant vertices of a tree results in a new tree with the same centre.}
-\end{Exercise}
-
-\begin{Solution*}
-Let $T$ be a tree on $n$ vertices. We prove the result by induction on $n$.
-
-If $n = 1$ or $2$, the result obviously holds. Suppose, for the sake of induction, that the result holds for all trees of order less than $n$.
-
-Consider $T$, of order $n \ge 3$. Then $T$ has at least two pendant vertices. Let $T'$ be the tree (of order less than $n$) obtained by deleting all the pendant vertices of $T$.
-
-Then the vertices of $T'$ have eccentricities exactly one less than their eccentricities in $T$, and therefore, $T$ and $T'$ have the same centre. Hence, the result follows by induction.
-\end{Solution*}
-
-\begin{Exercise}
-If $G$ and $H$ are two trees of orders $n$ and $m$ respectively, what is the size of $G \times H$?
-\end{Exercise}
-
-\section{Blocks}\label{sec:Blocks}
-A \newterm{cutvertex} of a graph is a vertex whose removal increases the number of components,i.e.\ a vertex $v$ of $G$ such that $G - v$ has more components than $G$. If $G$ is connected, we can equivalently say that $v$ is a cutvertex if $G - v$ is disconnected. Similarly, a \newterm{cutedge} or \newterm{bridge} of a graph whose removal increases the number of components. A \newterm{nonseparable} graph is a connected, non-trivial graph with no cutvertices. A maximal nonseparable subgraph of a graph is a \newterm{block} of the graph. A nonseparable graph is itself said to be a block as well.
-
-\begin{Example}\label{ex:Blocks}
-The graph shown below has $6$ blocks and $3$ cutvertices ($v_1$, $v_2$, $v_3$).
-\begin{center}
-\includegraphics{Images/6BlockGraph2.pdf}
-\end{center}
-The $6$ blocks of this graph are shown below.
-\begin{center}
-\includegraphics{Images/6BlockGraph2-Blocks.pdf}
-\end{center}
-\end{Example}
-
-\begin{Theorem}\label{thm:CutverChar}
-If $G$ is a connected graph, and $v$ is any vertex of $G$, then the following are equivalent:
-\begin{enumerate}[label=(\roman*)]
-\item\label{it:CutverChar1} $v$ is a cutvertex of $G$.
-\item\label{it:CutverChar2} There exist vertices $u$ and $w$ of $G$, distinct from $v$, such that every $u$-$w$ path passes through $v$.
-\item\label{it:CutverChar3} There exists a partition of $V(G) - v$ into two non-empty subsets $U$ and $W$ such that for all $u \in U$ and $w \in W$, every $u$-$w$ path passes through $v$.
+If $T$ is a graph of order $p$ and size $q$, the following are equivalent:
+\begin{enumerate}[label =(\roman*)]
+\item $T$ is a tree.
+\item Any two vertices of $T$ are joined by a unique path.
+\item $T$ is connected and $p = q + 1$.
+\item $T$ is acyclic and $p = q + 1$.
+\item $T$ is connected and for any edge $e$ of $T$, $T - e$ is disconnected.
+\item $T$ is acyclic and for any two non-adjacent vertices $u$ and $v$ of $T$, $T + uv$ contains a unique cycle.
 \end{enumerate}
 \end{Theorem}
 
-\begin{proof}
-\cref{it:CutverChar1} $\implies $ \cref{it:CutverChar3}. Since $v$ is a cutvertex, the graph $G - v$ is disconnected,i.e.\ it has two or more components. Let $U$ be the set of all the vertices in any one of the components, and let $W$ be the set of all the remaining vertices of $G - v$. Clearly, $\{U, W\}$ is a partition of $V(G) - v$. Now, if $u \in U$ and $w \in W$, then $u$ and $w$ are in different components of $G - v$, which implies that any path from $u$ to $w$ must pass through $v$.
 
-\noindent \cref{it:CutverChar3} $\implies$ \cref{it:CutverChar2} is obvious as the latter is a special case of the former.
+\begin{Exercise}
+A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that every non-trivial tree contains at least two pendant vertices.\\
+    \hint{If a tree of order $p\ge 2$ had at most one vertex of degree $1$, its degree sum would be at least $1+2(p-1)=2p-1$, contradicting the Handshaking Lemma and the fact that its size is $p-1$.}
+\end{Exercise}
 
-\noindent \cref{it:CutverChar2} $\implies$ \cref{it:CutverChar1}. Consider the graph $G - v$. As every $u$-$w$ path passes through $v$, none of them is present in $G - v$, and therefore $G - v$ is disconnected. Hence, $v$ is a cutvertex of $G$.
-\end{proof}
+\begin{Exercise}
+The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity --i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad G$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
+\hint{Handle trees of orders $1$ and $2$ separately. Deleting all pendant vertices from a tree of order at least $3$ results in a smaller tree with the same centre.}
+\end{Exercise}
 
-\fi
-
-\subsection{Line Graphs}\label{sec:LineGraphs}
+% The following material is retained for Topics 2 and 3, but is not part of
+% Topic 1. Remove the \iffalse and \fi when it is ready to be developed.
+\iffalse
+\subsection{Line Graphs}\label{subsec:LineGraphs}
 
 Let $G$ be a graph with at least one edge. The \newterm{line graph} of $G$ is the graph $L(G)$ whose vertex set is the edge set of $G$, in which two vertices $e$ and $f$ are adjacent if the edges $e$ and $f$ of $G$ are adjacent.
 
 \begin{Example}\label{ex:LineGrpahs}
-\cref{fig:LineGraphs} shows a graph $G$ with eight edges and and its line graph $L(G)$.
+\cref{fig:LineGraphs} shows a graph $G$ with eight edges and its line graph $L(G)$.
 \begin{figure}[!htbp]
 \centering
 \subcaptionbox{$G$}{\includegraphics{Images/GNM(7,8).pdf}} \hspace{5em}
@@ -352,7 +252,9 @@ As the summation is over the edges of $G$, each vertex $v$ of $G$ appears exactl
 \end{equation*}
 \end{proof}
 
-\subsection{Adjacency Matrices}\label{sec:AdjMat}
+\fi
+
+\subsection{Adjacency Matrices}\label{subsec:AdjMat}
 
 The \newterm{adjacency matrix} of a graph $G$ of order $n$, with vertex set $V = \{v_1, \ldots, v_n\}$, is the $n \times n$ matrix $A = A(G)$ whose $(i,j)$-entry is
 \begin{equation*}
@@ -381,7 +283,7 @@ A = \begin{bmatrix}
 \end{equation*}
 \end{Example}
 
-Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself --i.e.\ $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ --i.e.\ $a_{ij} = a_{ji}$. Thus, we have the following observation.
+Observe that, as the graphs we discuss are simple graphs and therefore have no self-loops on vertices, no vertex is adjacent to itself --i.e.\ $a_{ii} = 0$ for all $i = 1, \ldots, n$. Also, since the graphs are undirected, $v_i \sim v_j$ if and only if $v_j \sim v_i$ -- i.e.\ $a_{ij} = a_{ji}$. Thus, we have the following observation.
 
 \begin{Observation}
 The adjacency matrix of a (simple, undirected) graph is a symmetric, zero-diagonal, $(0, 1)$-matrix.
@@ -412,13 +314,11 @@ Let $A$ be the adjacency matrix of a graph $G$ with vertex set $\{v_1, \ldots, v
 \end{Theorem}
 
 \begin{proof}
-We prove the result by induction on $m$. For $m = 1$, the $(i,j)$-entry of $A^1 = A$ is $a_{ij}$, which is $1$ if and only if $v_i$ is adjacent to $v_j$,i.e.\ if and only if there is a walk of length $1$ (namely, an edge) from $v_i$ to $v_j$. Thus, the result holds for $m = 1$.
-
-Now suppose, for the sake of induction, that the result holds for some $m \ge 1$, and consider $A^{m + 1}$. The $(i,j)$-entry of $A^{m + 1}$ is
+The $(i,j)$-entry of $A^m$ is
 \begin{equation*}
-(A^{m + 1})_{ij} = \sum_{k = 1}^{n} (A^m)_{ik} a_{kj}.
+(A^m)_{ij} = \sum_{1 \le k_1, \ldots, k_{m-1} \le n} a_{i k_1} a_{k_1 k_2} \cdots a_{k_{m-1} j}
 \end{equation*}
-First, note that $a_{kj} = 1$ if and only if $v_k \sim v_j$. Therefore, the above sum is equal to the sum of all $(A^m)_{ik}$ where $v_k \sim v_j$. Now, by the induction hypothesis, $(A^m)_{ik}$ is the number of walks of length $m$ from $v_i$ to $v_k$. If $v_k$ is adjacent to $v_j$, then each walk of length $m$ from $v_i$ to $v_k$, together with the edge from $v_k$ to $v_j$, forms a walk of length $m + 1$ from $v_i$ to $v_j$. Thus, for each $k$ such that $v_k \sim v_j$, $(A^m)_{ik} a_{kj} = (A^m)_{ik}$ is the number of walks of length $m + 1$ from $v_i$ to $v_j$ that pass through $k$. Summing over all $k$, this gives the total number of walks of length $m + 1$ from $v_i$ to $v_j$. Hence the result follows by induction.
+Each term in this sum is $1$ if $a_{i k_1} = \cdots = a_{k_{m-1} j} = 1$ -- i.e. if $v_i \sim v_{k_1} \sim \cdots \sim v_{k_{m-1}} \sim v_j$ -- and is $0$ otherwise. Thus, each term counts a walk of length $m$ from $v_i$ to $v_j$.
 \end{proof}
 
 \begin{Theorem}
@@ -439,52 +339,104 @@ We know that $(A^m)_{ij}$ is the number of walks of length $m$ from $v_i$ to $v_
 \end{enumerate}
 \end{proof}
 
-\subsection{Incidence Matrices}\label{sec:IncMat}
+%\subsection{Incidence Matrices}\label{sec:IncMat}
+%
+%Consider an $(n, m)$-graph $G$ having vertex set $\{v_1, \ldots, v_n\}$ and edge set $\{e_1, \ldots, e_m\}$. The \newterm{incidence matrix} of $G$ is the $n \times m$ matrix $B = B(G)$ whose $(i, j)$-entry is $1$ if the vertex $v_i$ is incident with the edge $e_j$, and $0$ otherwise.
+%
+%\begin{Example}\label{ex:GNM(6-8)AdjMat}
+%The incidence matrix of the graph
+%\begin{center}
+%\includegraphics{Images/GNM(6,8).pdf}
+%\end{center}
+%is
+%\begin{equation*}
+%B = \begin{bmatrix}
+%1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+%1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\
+%0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 \\
+%0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+%0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 \\
+%0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 \\
+%\end{bmatrix}.
+%\end{equation*}
+%\end{Example}
+%
+%Each column of the incidence matrix corresponds to an edge of the graph, and the only non-zero entries in the column correspond to the end-vertices of the edge -- thus, each column contains exactly two $1$s. In a simple graph, there is at most one edge between a given pair of vertices, and hence no two columns of the incidence matrix can be equal. We therefore have the following observation.
+%
+%\begin{Observation}
+%The incidence matrix of a (simple, undirected) graph is a  $(0, 1)$-matrix in which every column has exactly two $1$s, and no two columns are equal.
+%\end{Observation}
+%
+%\begin{Theorem}
+%If $B$ is the incidence matrix of a graph $G$, then the adjacency matrix of its line graph $L(G)$ is
+%\begin{equation*}
+%    A\pqty{L(G)} = B^T B - 2I
+%\end{equation*}
+%where $I$ is the identity matrix of order $|E(G)|$.
+%\end{Theorem}
+%
+%\begin{proof}
+%Let $G$ be an $(n, m)$-graph with edge set $E = \{e_1, \ldots, e_m\}$. The incidence matrix $B = B(G)$ is of order $n \times m$, and therefore $B^T B - 2I$ (say) is of order $m \times m$.
+%
+%Observe that the $(i, j)$ entry of $B^T B$ is the dot product of the $i$\nth and $j$\nth columns of $B$. As each column of $B$ has exactly two non-zero entries, both equal to $1$, the $(i, i)$ entry of $B^T B$ is $2$, and therefore the diagonal entries of $B^T B - 2I$ are all zero.
+%
+%For $i \ne j$, the dot product of the $i$\nth and $j$\nth columns of $B$ will be $1$ if the edges $e_i$ and $e_j$ are adjacent (i.e.\ have one vertex in common), and $0$ otherwise -- note that the dot product cannot be $2$, as no two distinct columns of $B$ can be equal. Thus, for $i \ne j$, the $(i, j)$-entry of $B^T B$, which is equal to the $(i, j)$ entry of $B^T B - 2I$, is $1$ if and only if the edges $e_i$ and $e_j$ are adjacent in $G$, or equivalently, the vertices $e_i$ and $e_j$ of $L(G)$ are adjacent. Thus, $B^T B - 2I$ is the adjacency matrix of $L(G)$.
+%\end{proof}
 
-Consider an $(n, m)$-graph $G$ having vertex set $\{v_1, \ldots, v_n\}$ and edge set $\{e_1, \ldots, e_m\}$. The \newterm{incidence matrix} of $G$ is the $n \times m$ matrix $B = B(G)$ whose $(i, j)$-entry is $1$ if the vertex $v_i$ is incident with the edge $e_j$, and $0$ otherwise.
+\subsection{Graph Spectra}\label{subsec:Spectra}
 
-\begin{Example}\label{ex:GNM(6-8)AdjMat}
-The incidence matrix of the graph
-\begin{center}
-\includegraphics{Images/GNM(6,8).pdf}
-\end{center}
-is
+The \newterm{(adjacency) spectrum} of a graph is the spectrum (i.e.\ the multiset of eigenvalues) of its adjacency matrix. If the distinct eigenvalues of $A(G)$ are $\lambda_1, \ldots, \lambda_k$, with respective multiplicities $m_1, \ldots, m_k$, then we write
 \begin{equation*}
-B = \begin{bmatrix}
-1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
-1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 \\
-0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 \\
-0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 \\
-0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 \\
-\end{bmatrix}.
+\spec G = \begin{pmatrix}
+\lambda_1 & \lambda_2 & \cdots & \lambda_k \\
+m_1 & m_2 & \cdots & m_k
+\end{pmatrix}.
 \end{equation*}
-\end{Example}
 
-Each column of the incidence matrix corresponds to an edge of the graph, and the only non-zero entries in the column correspond to the end-vertices of the edge -- thus, each column contains exactly two $1$s. In a simple graph, there is at most one edge between a given pair of vertices, and hence no two columns of the incidence matrix can be equal. We therefore have the following observation.
+\begin{Exercise}
+Show that a graph $G$ of order $n$ is $k$-regular graph if and only if the all-ones vector $\mathbbm 1_n$ is an eigenvector of $A(G)$ corresponding to the eigenvalue $k$.
+\end{Exercise}
 
-\begin{Observation}
-The incidence matrix of a (simple, undirected) graph is a  $(0, 1)$-matrix in which every column has exactly two $1$s, and no two columns are equal.
-\end{Observation}
+\subsubsection*{Spectrum of the Complete Graph}\label{subsubsec:KnSpectrum}
 
-\begin{Theorem}
-If $B$ is the incidence matrix of a graph $G$, then the adjacency matrix of its line graph $L(G)$ is
+The adjacency matrix of $K_n$ is $J_n - I_n$, where $J_n$ is the $n \times n$ all-ones matrix. Since the eigenvalues of $J_n$ are $n$ with multiplicity $1$ and $0$ with multiplicity $n - 1$, the spectrum of $K_n$ is
 \begin{equation*}
-    A\pqty{L(G)} = B^T B - 2I
+\spec K_n = \begin{pmatrix}
+n - 1 & -1 \\
+1 & n - 1
+\end{pmatrix}.
 \end{equation*}
-where $I$ is the identity matrix of order $|E(G)|$.
-\end{Theorem}
 
-\begin{proof}
-Let $G$ be an $(n, m)$-graph with edge set $E = \{e_1, \ldots, e_m\}$. The incidence matrix $B = B(G)$ is of order $n \times m$, and therefore $B^T B - 2I$ (say) is of order $m \times m$.
+\begin{Exercise}
+Verify that $\mathbbm 1_n$ is an eigenvector of $A(K_n)$ corresponding to the eigenvalue $n - 1$, and the column vectors $\begin{bmatrix}1 & 0 & \cdots & -1 & \cdots & 0\end{bmatrix}^T$, where the $-1$ occurs in the $i$\nth position, $i = 2, \ldots, n$, are independent eigenvectors corresponding to the eigenvalue $-1$.
+\end{Exercise}
 
-Observe that the $(i, j)$ entry of $B^T B$ is the dot product of the $i$\nth and $j$\nth columns of $B$. As each column of $B$ has exactly two non-zero entries, both equal to $1$, the $(i, i)$ entry of $B^T B$ is $2$, and therefore the diagonal entries of $B^T B - 2I$ are all zero.
+\subsubsection*{Spectrum of the Complete Bipartite Graph}\label{subsubsec:KmnSpectrum}
 
-For $i \ne j$, the dot product of the $i$\nth and $j$\nth columns of $B$ will be $1$ if the edges $e_i$ and $e_j$ are adjacent (i.e.\ have one vertex in common), and $0$ otherwise -- note that the dot product cannot be $2$, as no two distinct columns of $B$ can be equal. Thus, for $i \ne j$, the $(i, j)$-entry of $B^T B$, which is equal to the $(i, j)$ entry of $B^T B - 2I$, is $1$ if and only if the edges $e_i$ and $e_j$ are adjacent in $G$, or equivalently, the vertices $e_i$ and $e_j$ of $L(G)$ are adjacent. Thus, $B^T B - 2I$ is the adjacency matrix of $L(G)$.
-\end{proof}
+The spectrum of the complete bipartite graph $K_{m,n}$ is
+\begin{equation*}
+\spec K_{m,n} = \begin{pmatrix}
+\sqrt{mn} & 0 & -\sqrt{mn} \\
+1 & m + n - 2 & 1
+\end{pmatrix}.
+\end{equation*}
 
-\subsection{Application: Centrality and Clustering}
-\label{sec:SocialNetworks}
+\subsubsection*{Spectrum of the Cycle}\label{subsubsec:CnSpectrum}
+
+The eigenvalues of the cycle $C_n$, $n \ge 3$, are
+\begin{equation*}
+\lambda_k = 2 \cos \pqty{\dfrac{2k\pi}{n}},~ k = 0, \ldots, n - 1.
+\end{equation*}
+
+\subsubsection*{Spectrum of the Path}\label{subsubsec:PnSpectrum}
+
+The eigenvalues of the path $P_n$ are
+\begin{equation*}
+\lambda_k = 2 \cos \pqty{\dfrac{k\pi}{n + 1}},~ k = 1, \ldots, n.
+\end{equation*}
+
+
+\subsection{Application: Centrality and Clustering}\label{subsec:Centrality}
 
 A social network can be modelled by a graph whose vertices represent people and whose edges represent relationships or interactions. Different numerical measures capture different meanings of ``importance'', so identifying an influencer depends on the purpose of the analysis.
 
@@ -522,7 +474,7 @@ where $A$ is the adjacency matrix and $\lambda$ is its largest eigenvalue. Its e
 No single centrality measure always identifies the ``most influential'' vertex. Degree measures direct popularity, closeness measures rapid access, betweenness measures brokerage, and eigenvector centrality values connections to already important vertices.
 \end{Remark*}
 
-\subsubsection{Clustering}
+\subsubsection{Clustering (Optional)}
 
 For a vertex $v$, let $N(v)$ be its set of neighbours and let $e(N(v))$ be the number of edges having both end-vertices in $N(v)$. The \newterm{local clustering coefficient} of $v$ is
 \begin{equation*}
@@ -546,53 +498,351 @@ For the graph in \cref{ex:GNM(6-11)AdjMat}, compute the degree and closeness cen
 Explain how the entries of $A^2$ and $A^3$ can help detect common neighbours and triangles in a social network.
 \end{Exercise}
 
-% Retained for Topic 2 (Network Reliability and Routing).
-\iffalse
-\section{Prim's Algorithm}\label{sec:Prim}
+\section{Network Reliability and Routing}\label{sec:ReliabilityRouting}
 
-Let $G$ be a weighted, undirected, connected graph with positive edge weights. A \newterm{minimal spanning tree} of $G$ is a spanning tree $T$ of $G$ such that the sum of the weights of its edges is minimum among all the spanning trees of $G$.
+A communication, transport, or supply network may be represented by a graph. Vertices represent terminals, routers, or locations, while edges represent links or routes. Removing a vertex models the failure of a terminal and all its incident links; removing an edge models the failure of one link. This section studies structural points of failure, economical connected backbones, and shortest-path routing.
 
-\begin{algorithm}\caption{Prim's algorithm}\label{alg:Prim}
+\subsection{Cutvertices, Cutedges, and Blocks}\label{subsec:Blocks}
+
+Let $c(G)$ denote the number of components of a graph $G$. For $v \in V(G)$, the graph $G - v$ is obtained by deleting $v$ and every edge incident with it. For $e \in E(G)$, the graph $G - e$ is obtained by deleting only $e$.
+
+A vertex $v$ is a \newterm{cutvertex} if $c(G-v) > c(G)$. An edge $e$ is a \newterm{cutedge}, or a \newterm{bridge}, if $c(G-e) > c(G)$. Thus, if $G$ is connected, a cutvertex or cutedge is one whose deletion disconnects $G$.
+
+\begin{Theorem}\label{thm:CutedgeCycle}
+An edge of a graph is a cutedge if and only if it lies on no cycle.
+\end{Theorem}
+
+\begin{proof}
+Let $e = uv$. If $e$ lies on a cycle, the remaining part of that cycle is a $u$-$v$ path in $G - e$. Any path that uses $e$ can therefore be modified to avoid $e$, so deleting $e$ does not increase the number of components.
+
+Conversely, suppose that $e$ lies on no cycle. If $u$ and $v$ were joined by a path in $G - e$, then that path together with $e$ would form a cycle containing $e$, which is not possible. Hence $u$ and $v$ lie in different components of $G - e$, and thus $e$ is a cutedge.
+\end{proof}
+
+\begin{Theorem}\label{thm:CutverChar}
+If $G$ is connected and $v\in V(G)$, then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item\label{it:CutverChar1} $v$ is a cutvertex of $G$.
+\item\label{it:CutverChar2} There is a partition of $V(G) - \{v\}$ into non-empty sets $U$ and $W$ such that every $u$-$w$ path passes through $v$ whenever $u \in U$ and $w \in W$.
+\item\label{it:CutverChar3} There exist vertices $u,w \in V(G) - \{v\}$ such that every $u$-$w$ path passes through $v$.
+\end{enumerate}
+\end{Theorem}
+
+\begin{proof}
+\cref{it:CutverChar1} $\implies $ \cref{it:CutverChar2}. Since $v$ is a cutvertex, the graph $G - v$ is disconnected, i.e.\ it has two or more components. Let $U$ be the set of all the vertices in any one of the components, and let $W$ be the set of all the remaining vertices of $G - v$. Clearly, $\{U, W\}$ is a partition of $V(G) - \{v\}$. Now, if $u \in U$ and $w \in W$, then $u$ and $w$ are in different components of $G - v$, which implies that any path from $u$ to $w$ must pass through $v$.
+
+\noindent \cref{it:CutverChar2} $\implies$ \cref{it:CutverChar3} is obvious as the latter is a special case of the former.
+
+\noindent \cref{it:CutverChar3} $\implies$ \cref{it:CutverChar1}. Consider the graph $G - v$. As every $u$-$w$ path passes through $v$, none of them is present in $G - v$, and therefore $G - v$ is disconnected. Hence, $v$ is a cutvertex of $G$.
+\end{proof}
+
+The following characterisation of bridges can be proved along similar lines to that of \cref{thm:CutverChar}.
+
+\begin{Theorem}\label{thm:BridgeChar}
+If $G$ is a connected graph, and $e$ is any edge of $G$, then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item\label{it:BridgeChar1} $e$ is a bridge of $G$.
+\item \label{it:BridgeChar2} $e$ is not on any cycle of $G$.
+\item\label{it:BridgeChar3} There exist vertices $u$ and $w$ of $G$ such that every $u$-$w$ path contains $e$.
+\item\label{it:BridgeChar4} There exists a partition of $V(G)$ into two non-empty subsets $U$ and $W$ such that for all $u \in U$ and $w \in W$, every $u$-$w$ path contains $e$. \qed
+\end{enumerate}
+\end{Theorem}
+
+A \newterm{block} of a graph is a maximal connected subgraph that has no cutvertex. With this convention, each cutedge together with its end-vertices is a block isomorphic to $K_2$, and each isolated vertex is a block isomorphic to $K_1$.
+
+\begin{Example}\label{ex:Blocks}
+The graph below has six blocks and three cutvertices, namely $v_1$, $v_2$, and $v_3$.
+\begin{center}
+\includegraphics[width=0.68\textwidth]{Images/6BlockGraph2.pdf}
+\end{center}
+Its six blocks are shown separately below.
+\begin{center}
+\includegraphics[width=0.9\textwidth]{Images/6BlockGraph2-Blocks.pdf}
+\end{center}
+\end{Example}
+
+\begin{Theorem}\label{thm:BlockProperties}
+Let $G$ be a connected graph.
+\begin{enumerate}[label=(\roman*)]
+\item Every edge of $G$ belongs to exactly one block.
+\item Any two distinct blocks have at most one vertex in common.
+\item A vertex belongs to at least two blocks if and only if it is a cutvertex. \qed
+\end{enumerate}
+\end{Theorem}
+
+\begin{Theorem}\label{thm:BlockChar}
+If $G$ is a connected graph of order at least $3$, then the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item\label{it:BlockChar1} $G$ is a block.
+\item \label{it:BlockChar2} Every two vertices of $G$ lie on a common cycle.
+\item\label{it:BlockChar3} Every vertex and edge of $G$ lie on a common cycle.
+\item\label{it:BlockChar4} Every two edges of $G$ lie on a common cycle. \qed
+\end{enumerate}
+\end{Theorem}
+
+The \newterm{block-cutvertex graph} of a connected graph $G$ is the bipartite graph whose vertices are the blocks and cutvertices of $G$, with a block $B$ adjacent to a cutvertex $v$ precisely when $v\in V(B)$.
+
+\begin{Theorem}
+The block-cutvertex graph of a connected graph is a tree. \qed
+\end{Theorem}
+
+\begin{Exercise}
+Prove \cref{thm:BlockProperties}. Also prove that the block-cutvertex graph is a tree.
+\end{Exercise}
+
+\begin{Exercise}
+Show that every edge of a tree is a cutedge, and that the cutvertices of a non-trivial tree are exactly its non-pendant vertices.
+\end{Exercise}
+
+\subsubsection{Application: Network Vulnerability Assessment}\label{subsubsec:Vulnerability}
+
+Cutvertices and cutedges represent \newterm{single points of failure}: the failure of one such component separates terminals that could previously communicate. Blocks describe regions with no single vulnerable vertex, while the block-cutvertex tree records how these regions are joined.
+
+The number of resulting components is only one measure of the severity of a failure. Suppose that $G$ is connected and that the components of $G-v$ have orders $s_1,\ldots,s_k$. The number of unordered pairs of surviving vertices separated by the failure of $v$ is
+\begin{equation*}
+    P(v)=\sum_{1\le i<j\le k}s_i s_j.
+\end{equation*}
+If a cutedge $e$ separates $G$ into components of orders $s$ and $n-s$, then the corresponding number of separated pairs is
+\begin{equation*}
+    P(e)=s(n-s).
+\end{equation*}
+These quantities distinguish, for example, a bridge that isolates one terminal from a bridge that divides the network into two large pieces.
+
+\begin{Remark*}
+This is a structural, deterministic model. A practical reliability assessment may also need failure probabilities, capacities, repair times, and the possibility of several simultaneous failures. Moreover, a vertex with high centrality need not be a cutvertex, and a cutvertex need not have high degree.
+\end{Remark*}
+
+\begin{Exercise}
+For the graph in \cref{ex:Blocks}, determine $P(v)$ for each cutvertex and $P(e)$ for each cutedge. Rank these single points of failure from most to least disruptive.
+\end{Exercise}
+
+\subsection{Connectivity}\label{subsec:Connectivity}
+
+For $S\subseteq V(G)$, the graph $G-S$ is obtained by deleting the vertices of $S$ and all edges incident with them. For $S\subseteq E(G)$, it is obtained by deleting the edges of $S$.
+
+A set $S$ of vertices of a connected graph $G$ is a \newterm{separating set} or \newterm{vertex cut} of $G$ if $G - S$ is disconnected or trivial (i.e.\ a graph of order $1$). The \newterm{vertex connectivity} (or \newterm{connectivity}) of $G$, denoted by $\kappa(G)$ (or $\kappa$), is the cardinality of a minimum separating set of $G$ -- i.e.\ the minimum number of vertices of $G$ whose removal results in a disconnected or trivial graph. Similarly, a \newterm{disconnecting set} of a connected graph $G$ is a set $S$ of edges of $G$ such that $G - S$ is disconnected or trivial. The cardinality of a minimum disconnecting set of $G$ is the \newterm{edge connectivity} of $G$, and is denoted by $\lambda(G)$ (or $\lambda$). The vertex connectivity and edge connectivity of a disconnected graph are defined to be $0$.
+
+\begin{Theorem}\label{thm:ConnectivityBounds}
+For any graph $G$, $\kappa(G) \le \lambda(G) \le \delta(G)$.
+\end{Theorem}
+
+\begin{proof}
+If $\delta(G) = 0$, then clearly, $\lambda(G) = 0$. If $\delta(G) \ge 1$, then disconnecting all the edges incident with a vertex of degree $\delta(G)$ disconnects $G$, and hence $\lambda(G) \le \delta(G)$.
+
+If $G$ is disconnected, then $\kappa(G) = \lambda(G) = 0$. If $\lambda(G) = 1$, then $G$ has a bridge $e=uv$. If $G\cong K_2$, deleting either vertex leaves $K_1$. Otherwise, at least one of $u$ and $v$ is a cutvertex. Hence, in either case, $\kappa(G)=1$.
+
+Next, let $F$ be a minimum disconnecting set of $\lambda\ge2$ edges, and choose $e=uv\in F$. By the minimality of $F$, the graph $H=G-(F-\{e\})$ is connected, while $H-e=G-F$ is disconnected. Hence, $e$ is a bridge of $H$.
+
+For each edge of $F-\{e\}$, choose an end-vertex distinct from $u$ and $v$, and let $X$ be the set of chosen vertices. Then $|X|\le\lambda-1$, and all the edges of $F-\{e\}$ are absent from $G-X$. If $G-X$ is disconnected, then $X$ is a vertex cut. Otherwise, $e$ remains a bridge of $G-X$; deleting a suitable end-vertex of $e$ then leaves a disconnected or trivial graph. In either case, $G$ has a vertex cut of cardinality at most $\lambda$, and hence $\kappa\le\lambda$.
+\end{proof}
+
+\begin{Theorem}
+For all integers $a$, $b$, and $c$ satisfying either $a=b=0\le c$ or $1\le a\le b\le c$, there exists a graph $G$ with $\kappa(G) = a$, $\lambda(G) = b$, and $\delta(G) = c$. \qed
+\end{Theorem}
+
+It is easy to see that $\kappa(K_n) = n -1$ and $\kappa(K_{p,q}) = \min(p, q)$. The $k$-dimensional \newterm{hypercube} $Q_k$ is the Cartesian product of $k$ copies of $K_2$, with $Q_0=K_1$. The following theorem gives its connectivity.
+
+\begin{Theorem}
+For any $k \ge 0$, the connectivity of the hypercube $Q_k$ is $\kappa(Q_k) = k$.
+\end{Theorem}
+
+\begin{proof}
+As $Q_k$ is $k$-regular, $\kappa(Q_k)\le k$. We prove the reverse inequality by induction on $k$. The result is immediate for $k=0$ and $k=1$.
+
+Let $k\ge2$, suppose the result holds for $Q_{k-1}$, and write $Q_k$ as two copies $G_1$ and $G_2$ of $Q_{k-1}$ joined by a perfect matching. Suppose that $S\subseteq V(Q_k)$ and $|S|\le k-1$, and put $S_i=S\cap V(G_i)$ for $i=1,2$. We show that $Q_k-S$ is connected.
+
+If $|S_1|\le k-2$ and $|S_2|\le k-2$, then both $G_1-S_1$ and $G_2-S_2$ are connected by the induction hypothesis. At least one edge of the perfect matching has neither end-vertex in $S$, so these two subgraphs are joined in $Q_k-S$.
+
+Otherwise, say $|S_1|=k-1$. Then $S_2=\varnothing$, so $G_2$ is intact and connected. Every surviving vertex of $G_1$ has its matching neighbour in $G_2$, and hence $Q_k-S$ is connected. Thus, no set of at most $k-1$ vertices is a vertex cut, so $\kappa(Q_k)\ge k$.
+\end{proof}
+
+\begin{Corollary}
+For any $k \ge 0$, the edge connectivity of the hypercube $Q_k$ is $\lambda(Q_k) = k$.
+\end{Corollary}
+
+\begin{proof}
+From \cref{thm:ConnectivityBounds}, $k = \kappa(Q_k) \le \lambda(Q_k) \le \delta(Q_k) = k$.
+\end{proof}
+
+\begin{Theorem}
+If $G$ is $3$-regular, then $\kappa(G) = \lambda(G)$.
+\end{Theorem}
+
+\begin{proof}
+If $G$ is disconnected, then $\kappa(G)=\lambda(G)=0$. If $G\cong K_4$, then $\kappa(G)=\lambda(G)=3$. We may therefore suppose that $G$ is connected and not complete.
+
+Let $S$ be a minimum vertex cut of $G$. We know that $\lambda(G)\ge\kappa(G)=|S|$. The graph $G-S$ has at least two components, and the minimality of $S$ implies that every vertex of $S$ has a neighbour in every component of $G-S$.
+
+If $G-S$ has three components, then every vertex of $S$ has exactly one neighbour in each component. The set of edges joining $S$ to any one component is therefore a disconnecting set of size $|S|$.
+
+Now suppose that $G-S$ has two components, $H_1$ and $H_2$. A vertex of $S$ with a neighbour in $S$ has exactly one neighbour in each $H_i$; delete its edge to $H_1$. A vertex of $S$ with no neighbour in $S$ has one neighbour in one of the $H_i$ and two in the other; delete its edge to the component in which it has only one neighbour. Exactly one edge has now been deleted for each vertex of $S$, and no remaining path joins $H_1$ to $H_2$. Thus, $\lambda(G)\le|S|=\kappa(G)$, and equality follows.
+\end{proof}
+
+\subsection{Minimum Spanning Trees}\label{subsec:MST}
+
+A \newterm{tree} is a connected graph containing no cycles. A \newterm{spanning tree} of a connected graph $G$ is a spanning subgraph of $G$ that is a tree. If every edge $e$ of $G$ has a real weight $w(e)$, the weight of a subgraph $H$ is
+\begin{equation*}
+    w(H)=\sum_{e\in E(H)}w(e).
+\end{equation*}
+A \newterm{minimum spanning tree} of $G$ is a spanning tree having minimum weight among all spanning trees of $G$.
+
+For a non-empty proper subset $S$ of $V(G)$, the edges with one end-vertex in $S$ and the other in $V(G)-S$ form an \newterm{edge cut} of $G$.
+
+\begin{Theorem}[Cut Property]\label{thm:CutProperty}
+Let $e$ be an edge of minimum weight in an edge cut of a connected weighted graph $G$. Then some minimum spanning tree contains $e$. If $e$ is the unique minimum-weight edge in the cut, every minimum spanning tree contains $e$.
+\end{Theorem}
+
+\begin{proof}
+Let the cut be determined by $S\subset V(G)$, and let $T$ be a minimum spanning tree. There is nothing to prove if $e\in E(T)$. Otherwise, adding $e$ to $T$ creates a unique cycle. As $e$ crosses the cut, this cycle contains another edge $f$ that crosses the cut. Since $e$ has minimum weight in the cut, $w(e)\le w(f)$. Replacing $f$ by $e$ therefore gives a spanning tree of weight at most $w(T)$, and hence another minimum spanning tree. If $e$ is the unique minimum-weight edge in the cut, then $w(e)<w(f)$; consequently, a minimum spanning tree omitting $e$ would not be minimum.
+\end{proof}
+
+Prim's algorithm grows a tree from an arbitrary starting vertex. At each step, it chooses a cheapest edge joining a vertex already reached to a vertex not yet reached.
+
+\begin{algorithm}[H]\caption{Prim's algorithm}\label{alg:Prim}
 \begin{algorithmic}[1]
-\Require{Weighted, undirected, connected graph $G$, source vertex $v \in V(G)$}
-	\State $V(T) \gets \{v\}$, $E(T) \gets \varnothing$
-	\While{$V(T) \ne V(G)$}
-        \State $e \gets$ minimum-weight edge with one end-vertex in $V(T)$ and one end-vertex not in $V(T)$
-        \State $E(T) \gets E(T) \cup \{e\}$
-        \State $V(T) \gets V(T) \cup \{x, y\}$ where $e = xy$
-	\EndWhile
+\Require{Connected weighted graph $G$ and starting vertex $r$}
+\State $S\gets\{r\}$, $F\gets\varnothing$
+\While{$S\ne V(G)$}
+    \State Choose a minimum-weight edge $xy$ with $x\in S$ and $y\notin S$
+    \State $F\gets F\cup\{xy\}$
+    \State $S\gets S\cup\{y\}$
+\EndWhile
+\State \Return $T=(V(G),F)$
 \end{algorithmic}
 \end{algorithm}
 
-\begin{Example}
-Apply Prim's algorithm to the graph given below to obtain a minimal spanning tree. Take $v_1$ as the initial vertex.
+\begin{Theorem}
+Prim's algorithm returns a minimum spanning tree.
+\end{Theorem}
+
+\begin{proof}
+We maintain the invariant that some minimum spanning tree contains every edge in $F$. This is true initially. Suppose that a minimum spanning tree $T$ contains $F$, and let $e$ be the next edge chosen across the cut determined by $S$. If $e\in E(T)$, the invariant is preserved. Otherwise, adding $e$ to $T$ creates a unique cycle containing another edge $f$ that crosses the same cut. No edge of $F$ crosses this cut, and hence $f\notin F$. Since $e$ has minimum weight in the cut, $w(e)\le w(f)$, so $T-f+e$ is a minimum spanning tree containing $F\cup\{e\}$. Thus, the invariant is preserved.
+
+Each iteration adds one new vertex and one edge without creating a cycle. On termination, $F$ is itself a spanning tree; since some minimum spanning tree contains all its edges, $F$ is a minimum spanning tree.
+\end{proof}
+
+\begin{Example}\label{ex:Prim}
+Apply Prim's algorithm to the graph below, taking $v_1$ as the starting vertex.
 \begin{center}
-\includegraphics{Images/Prim.pdf}
+\includegraphics[width=0.55\textwidth]{Images/Prim.pdf}
 \end{center}
-\vspace{1em}
-The step-by-step result of the algorithm is tabulated below.
+One possible sequence of choices is shown in the table.
 \begin{center}
-\def\arraystretch{1.3}
-\begin{tabular}{c|>{\centering\arraybackslash}p{0.4\textwidth}|>{\centering\arraybackslash}p{0.2\textwidth}|c}
+\def\arraystretch{1.1}
+\begin{tabular}{c|c|c|c}
 Step & Edge added & Vertex added & Total weight \\
 \hline
 1 & $-$ & $v_1$ & $0$ \\
-2 & $(v_1, v_4)$ & $v_4$ & $2$ \\
-3 & $(v_4, v_3)$ & $v_3$ & $4$ \\
-4 & $(v_1, v_5)$ & $v_5$ & $7$ \\
-5 & $(v_5, v_6)$ & $v_6$ & $9$ \\
-6 & $(v_6, v_2)$ & $v_2$ & $10$ \\
-7 & $(v_2, v_8)$ & $v_8$ & $13$ \\
-8 & $(v_4, v_7)$ & $v_7$ & $20$ \\
+2 & $v_1v_4$ & $v_4$ & $2$ \\
+3 & $v_4v_3$ & $v_3$ & $4$ \\
+4 & $v_1v_5$ & $v_5$ & $7$ \\
+5 & $v_5v_6$ & $v_6$ & $9$ \\
+6 & $v_6v_2$ & $v_2$ & $10$ \\
+7 & $v_2v_8$ & $v_8$ & $13$ \\
+8 & $v_4v_7$ & $v_7$ & $20$
 \end{tabular}
 \end{center}
-\vspace{1em}
-Therefore, the minimal spanning tree is:
+The resulting minimum spanning tree has weight $20$.
 \begin{center}
-\includegraphics[scale=0.8]{Images/MST.pdf}
+\includegraphics[width=0.56\textwidth]{Images/MST.pdf}
 \end{center}
 \end{Example}
-\fi
+
+\begin{Remark*}
+A minimum spanning tree is a cheapest connected backbone, but it has no redundant edge: every edge of a tree is a cutedge. Cost minimisation and resilience are therefore different design objectives.
+\end{Remark*}
+
+\begin{Exercise}
+Explain why Prim's algorithm can produce different minimum spanning trees when edge weights are repeated. Show that if all edge weights are distinct, the minimum spanning tree is unique.
+\end{Exercise}
+
+\subsection{All-Pairs Shortest Paths}\label{subsec:AllPairs}
+
+Let $G$ be a weighted directed graph with vertices $v_1,\ldots,v_n$. Its \newterm{weighted adjacency matrix} is $W=(w_{ij})$, where
+\begin{equation*}
+w_{ij}=
+\begin{cases}
+0, & i=j,\\
+\text{weight of the edge from $v_i$ to $v_j$}, & (v_i,v_j)\in E(G),\\
+\infty, & (v_i,v_j)\notin E(G).
+\end{cases}
+\end{equation*}
+We assume that $G$ has no negative-weight cycle. Edge weights may be negative. In the absence of a negative-weight cycle, a minimum-weight walk can always be reduced to a path. If a negative-weight cycle is reachable from $v_i$ and can reach $v_j$, however, the weights of $v_i$--$v_j$ walks are unbounded below, so there is no finite shortest-path distance from $v_i$ to $v_j$.
+
+For $k=0,1,\ldots,n$, let $d_{ij}^{(k)}$ be the minimum weight of a $v_i$--$v_j$ path whose internal vertices belong to $\{v_1,\ldots,v_k\}$. Initially, $D^{(0)}=W$. For $k\ge1$, a shortest admissible path either avoids $v_k$, or passes through $v_k$. Therefore,
+\begin{equation*}
+    d_{ij}^{(k)}=\min\left\{d_{ij}^{(k-1)},
+    d_{ik}^{(k-1)}+d_{kj}^{(k-1)}\right\}.
+\end{equation*}
+After the final stage, $d_{ij}^{(n)}$ is the distance from $v_i$ to $v_j$.
+
+\begin{algorithm}[H]\caption{Floyd--Warshall algorithm}\label{alg:FloydWarshall}
+\begin{algorithmic}[1]
+\Require{Weighted adjacency matrix $W$ of order $n$}
+\State $D\gets W$
+\For{$k=1,\ldots,n$}
+    \For{$i=1,\ldots,n$}
+        \For{$j=1,\ldots,n$}
+            \State $d_{ij}\gets\min\{d_{ij},d_{ik}+d_{kj}\}$
+        \EndFor
+    \EndFor
+\EndFor
+\State \Return $D$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{Theorem}
+If $G$ has no negative-weight cycle, the matrix returned by the Floyd--Warshall algorithm is its all-pairs distance matrix.
+\end{Theorem}
+
+\begin{proof}
+After iteration $k$, the entry $d_{ij}$ equals $d_{ij}^{(k)}$. This follows by induction on $k$ from the recurrence above. At $k=n$, every vertex may be used internally, so each entry is the weight of a shortest path between the corresponding vertices.
+\end{proof}
+
+The algorithm performs $n^3$ comparisons and uses an $n\times n$ matrix. Hence, its running time is $O(n^3)$ and its storage requirement is $O(n^2)$. If some diagonal entry is negative after the algorithm terminates, the graph contains a negative-weight cycle.
+
+\subsection{Application: Routing Tables}\label{subsec:RoutingTables}
+
+A distance matrix gives route costs but not the routes themselves. To construct routing tables, maintain a \newterm{next-hop matrix} $N$. Initially, set $N_{ij}=j$ when $(v_i,v_j)$ is an edge, and leave $N_{ij}$ undefined when $i\ne j$ and there is no such edge. Whenever the Floyd--Warshall update through $v_k$ strictly improves $d_{ij}$, also set
+\begin{equation*}
+    N_{ij}\gets N_{ik}.
+\end{equation*}
+Then $N_{ij}$ is the first vertex to visit on a shortest route from $v_i$ to $v_j$. Repeatedly consulting the appropriate row reconstructs the complete route.
+
+\begin{Example}
+Consider the weighted adjacency matrix
+\begin{equation*}
+W=\begin{bmatrix}
+0&3&\infty&7\\
+8&0&2&\infty\\
+5&\infty&0&1\\
+2&\infty&\infty&0
+\end{bmatrix}.
+\end{equation*}
+Floyd--Warshall gives the distance and next-hop matrices
+\begin{align*}
+D&=\begin{bmatrix}
+0&3&5&6\\
+5&0&2&3\\
+3&6&0&1\\
+2&5&7&0
+\end{bmatrix},\\
+N&=\begin{bmatrix}
+-&2&2&2\\
+3&-&3&3\\
+4&4&-&4\\
+1&1&1&-
+\end{bmatrix}.
+\end{align*}
+For example, the entry $N_{14}=2$ directs traffic from $v_1$ first to $v_2$. The successive next hops give the shortest route $v_1,v_2,v_3,v_4$, of total weight $6$.
+\end{Example}
+
+\begin{Exercise}
+Apply Floyd--Warshall to the matrix in the preceding example, recording the matrix after each value of $k$. Verify the final distance and next-hop matrices.
+\end{Exercise}
+
+\begin{Exercise}
+Suppose the weight of the edge from $v_3$ to $v_4$ in the preceding example increases from $1$ to $6$. Recompute the routing table and identify every source--destination pair whose shortest route changes.
+\end{Exercise}
 
 %\begin{appendices}
 %
