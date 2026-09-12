@@ -19,23 +19,25 @@
 \nomenclature[08]{$\rad(G)$}{Radius of graph $G$}
 \nomenclature[09]{$\diam(G)$}{Diameter of graph $G$}
 \nomenclature[10]{$A(G)$}{Adjacency matrix of graph $G$}
-\nomenclature[11]{$B(G)$}{Incidence matrix of graph $G$}
+%\nomenclature[11]{$B(G)$}{Incidence matrix of graph $G$}
 
 \nomenclature[12]{$G - v$}{Graph obtained from $G$ by deleting vertex $v$ and all edges incident with $v$}
 \nomenclature[13]{$G - e$}{Graph obtained from $G$ by deleting edge $e$}
+\nomenclature[14]{$G + uv$}{Graph obtained from $G$ by adding an edge between non-adjacent vertices $u$ and $v$}
 
 \nomenclature[20]{$K_n$}{Complete graph of order $n$ (size $\binom{n}{2}$)}
 \nomenclature[21]{$P_n$}{Path graph of order $n$ (size $n - 1$)}
 \nomenclature[22]{$C_n$}{Cycle graph of order $n$ (size $n$)}
+\nomenclature[23]{$Q_k$}{Hypercube graph of order $2^k$}
 
-\nomenclature[30]{$L(G)$}{Line graph of $G$}
+%\nomenclature[30]{$L(G)$}{Line graph of $G$}
 \printnomenclature[10em]
 \clearpage
 
 \section{Algebraic and Structural Properties}\label{sec:AlgebraicStructural}
 
-\subsection{Graphs and Degree}\label{subsec:Intro}
-Throughout these notes, all graphs are finite, simple, and undirected unless stated otherwise.
+\subsection{Graphs -- Review of the Basic Theory}\label{subsec:Intro}
+We first review basic graph theory. Throughout these notes, all graphs are finite, simple, and undirected unless stated otherwise.
 
 A \newterm{graph} is an ordered pair $G = (V, E)$ where $V$ is a non-empty set called the \newterm{vertex set}, whose elements are the \newterm{vertices} of $G$, and $E$ is a set of unordered pairs of distinct vertices of $G$, whose elements are the \newterm{edges} of $G$. The \newterm{order} of $G$ is its number of vertices and the \newterm{size} of $G$ is its number of edges.
 
@@ -191,6 +193,7 @@ If $T$ is a graph of order $p$ and size $q$, the following are equivalent:
 \item $T$ is acyclic and $p = q + 1$.
 \item $T$ is connected and for any edge $e$ of $T$, $T - e$ is disconnected.
 \item $T$ is acyclic and for any two non-adjacent vertices $u$ and $v$ of $T$, $T + uv$ contains a unique cycle.
+\item $T$ is connected and either of order at most $2$, or not complete, and for any two non-adjacent vertices $u$ and $v$ of $T$, $T + uv$ contains a unique cycle. 
 \end{enumerate}
 \end{Theorem}
 
@@ -201,7 +204,7 @@ A \newterm{pendant vertex} of a graph is a vertex of degree $1$. Prove that ever
 \end{Exercise}
 
 \begin{Exercise}
-The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity --i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad G$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
+The \newterm{centre} of a graph $G$ is the set of all vertices of $G$ with minimum eccentricity -- i.e.\ the set of all vertices $v$ of $G$ with $\ecc v = \rad G$. Show that every tree has a centre consisting of either exactly one vertex or exactly two adjacent vertices.\\
 \hint{Handle trees of orders $1$ and $2$ separately. Deleting all pendant vertices from a tree of order at least $3$ results in a smaller tree with the same centre.}
 \end{Exercise}
 
@@ -636,7 +639,7 @@ For each edge of $F-\{e\}$, choose an end-vertex distinct from $u$ and $v$, and 
 \end{proof}
 
 \begin{Theorem}
-For all integers $a$, $b$, and $c$ satisfying either $a=b=0\le c$ or $1\le a\le b\le c$, there exists a graph $G$ with $\kappa(G) = a$, $\lambda(G) = b$, and $\delta(G) = c$. \qed
+For all positive integers $a$, $b$, and $c$ such that $a \le b \le c$, there exists a graph $G$ with $\kappa(G) = a$, $\lambda(G) = b$, and $\delta(G) = c$. \qed
 \end{Theorem}
 
 It is easy to see that $\kappa(K_n) = n -1$ and $\kappa(K_{p,q}) = \min(p, q)$. The $k$-dimensional \newterm{hypercube} $Q_k$ is the Cartesian product of $k$ copies of $K_2$, with $Q_0=K_1$. The following theorem gives its connectivity.
