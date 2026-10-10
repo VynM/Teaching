@@ -847,6 +847,210 @@ Apply Floyd--Warshall to the matrix in the preceding example, recording the matr
 Suppose the weight of the edge from $v_3$ to $v_4$ in the preceding example increases from $1$ to $6$. Recompute the routing table and identify every source--destination pair whose shortest route changes.
 \end{Exercise}
 
+\section{Covering, Independence, and Matching}\label{sec:CoveringIndependence}
+
+\subsection{Coverings and Independence}\label{subsec:CoveringsIndependence}
+
+A vertex $v$ and an edge $e$ of a graph $G$ \newterm{cover} each other if $v$ is incident with $e$. A \newterm{vertex cover} is a set of vertices that covers every edge. An \newterm{edge cover} is a set of edges that covers every vertex. Thus, a graph has an edge cover if and only if it has no isolated vertices.
+
+A vertex (or edge) cover is \newterm{minimal} if no proper subset of itself is a vertex (or edge) cover. It is \newterm{minimum} if it has the least cardinality among all vertex (or edge) covers of the graph. The cardinality of a minimum vertex cover of $G$ is the \newterm{vertex covering number} of $G$, denoted by $\alpha_0(G)$, and the cardinality of a minimum edge cover of $G$ is the \newterm{edge covering number} of $G$, denoted by $\alpha_1(G)$.
+
+A set of vertices or a set of edges of $G$ is \newterm{independent} if no two of its elements are adjacent. An independent set of vertices (or edges) is \newterm{maximal} if it is not properly contained in any larger independent set, and is \newterm{maximum} if it has the largest cardinality among all independent sets of vertices (or edges). The \newterm{vertex independence number} of $G$, denoted by $\beta_0(G)$, is the cardinality of a maximum independent set of vertices of $G$. The \newterm{edge independence number} of $G$, denoted by $\beta_1(G)$, is the cardinality of a maximum independent set of edges of $G$.
+
+\begin{Example}\label{ex:CoveringIndependence}
+The values of the parameters $\alpha_0$, $\beta_0$, $\alpha_1$, and $\beta_1$ for some families of graphs are listed below.
+\def\arraystretch{1.4}
+\begin{equation*}
+\begin{array}{|c|cccc|}
+\hline
+G		&	\alpha_0			&	\beta_0				&	\alpha_1			&	\beta_1 \\
+\hline
+K_n		&	n - 1				&	1					&	\ceil{\frac n 2}	&	\floor{\frac n 2} \\
+K_{p,q}	&	\min(p, q)			&	\max(p, q)			&	\max(p, q)			&	\min(p, q) \\
+C_n		&	\ceil{\frac n 2}	&	\floor{\frac n 2}	&	\ceil{\frac n 2}	&	\floor{\frac n 2} \\
+P_n		&	\floor{\frac n 2}	&	\ceil{\frac n 2}	&	\ceil{\frac n 2}	&	\floor{\frac n 2} \\
+Q_k		&	2^{k-1} = \frac n 2	&	2^{k-1} = \frac n 2	&	2^{k-1} = \frac n 2	&	2^{k-1} = \frac n 2 \\
+\hline
+\end{array}
+\end{equation*}
+Here $n \ge 2$ for $K_n$ and $P_n$, $n \ge 3$ for $C_n$, $p,q \ge 1$, and $k \ge 1$ for $Q_k$.
+\end{Example}
+
+\begin{Exercise}
+Justify the values of the parameters given in \cref{ex:CoveringIndependence}.
+\end{Exercise}
+
+\begin{Exercise}
+Prove that a set $S$ of vertices of $G$ is independent if and only if $V(G) \setminus S$ is a vertex cover of $G$.
+\end{Exercise}
+
+\subsubsection{Gallai's theorem}
+The vertex covering and independence numbers are complementary. The same is true of the edge parameters whenever an edge cover exists.
+
+\begin{Theorem}[Gallai]
+For every graph $G$ of order $n$,
+\begin{equation*}
+\alpha_0(G) + \beta_0(G) = n.
+\end{equation*}
+If $G$ has no isolated vertices, then
+\begin{equation*}
+\alpha_1(G) + \beta_1(G) = n.
+\end{equation*}
+\end{Theorem}
+
+\begin{proof}
+Let $M_0$ be a maximum set of independent vertices of $G$. Then $\beta_0 = |M_0|$, and $V \setminus M_0$ is a vertex cover. Hence, $\alpha_0 \le \vqty{V \setminus M_0} = n - \beta_0$. Let $N_0$ be a minimum cover of $G$. Then $\alpha_0 = |N_0|$, and $V \setminus N_0$ is independent. Hence, $\beta_0 \ge \vqty{V \setminus N_0} = n - \alpha_0$. Thus, $\alpha_0 + \beta_0 = n$.
+
+Suppose now that $G$ has no isolated vertices, and let $M_1$ be a maximum set of independent edges. Since $M_1$ is maximal, no edge joins two vertices unsaturated by $M_1$. For each unsaturated vertex, choose an edge incident with it and add that edge to $M_1$. The chosen edges are distinct, so the resulting edge cover $Y$ has
+\begin{equation*}
+|Y|=|M_1|+(n-2|M_1|)=n-|M_1|=n-\beta_1.
+\end{equation*}
+Consequently, $\alpha_1+\beta_1\le n$.
+
+Next, let $N_1$ be a minimum edge cover, and let $H=(V(G),N_1)$. The graph $H$ is a forest: if it contained a cycle, deleting any edge of that cycle would leave an edge cover. Hence, $H$ has $n-|N_1|$ components. Taking one edge from each component gives an independent set of edges, and therefore
+\begin{equation*}
+\beta_1\ge n-|N_1|=n-\alpha_1.
+\end{equation*}
+Thus, $\alpha_1+\beta_1\ge n$, and equality follows.
+\end{proof}
+
+
+\subsection{Matching}\label{subsec:Matching}
+
+A \newterm{matching} of $G$ is a set of independent edges of $G$. Thus, the edge independence number $\beta_1(G)$ is also called the \newterm{matching number} of $G$. A vertex is \newterm{saturated} by a matching $M$ (it is \newterm{$M$-saturated}) if it is incident with some edge of $M$, and otherwise it is \newterm{unsaturated} by $M$ (it is \newterm{$M$-unsaturated}). A matching is
+\begin{enumerate}[label=(\roman*)]
+\item \newterm{maximal} if it is not properly contained in any other matching.
+\item \newterm{maximum} if it has greatest cardinality among all matchings.
+\item \newterm{perfect} if it saturates all vertices.
+\end{enumerate}
+
+A path of $G$ is \newterm{$M$-alternating} if its edges are alternately from $M$ and $E(G) \setminus M$. An \newterm{$M$-augmenting} path is an $M$-alternating path whose end-vertices are $M$-unsaturated.
+
+\begin{Note*}
+If $P$ is an $M$-augmenting path, we can obtain a matching of cardinality $|M| + 1$ by replacing the edges of $P$ in $M$ by the edges of $P$ not in $M$.
+\end{Note*}
+
+\begin{Example}\label{ex:AugmentingPath}
+Let $G$ be the bipartite graph with partite sets $\{a,b,c\}$ and $\{1,2,3\}$ and edge set
+\begin{equation*}
+\{a1,a2,b1,c3\}.
+\end{equation*}
+For the matching $M=\{a1,c3\}$, the path $b,1,a,2$ is $M$-augmenting. Replacing $a1$ by $b1$ and $a2$ produces the perfect matching $\{b1,a2,c3\}$.
+\end{Example}
+
+Recall that the symmetric difference of two sets $A$ and $B$ is $A \symdiff B = (A \setminus B) \cup (B \setminus A)$. If $M$ and $M'$ are matchings of $G$, let $F$ be the edge-induced subgraph whose edge set is $M \symdiff M'$ and whose vertex set consists of the end-vertices of these edges. We call $F$ the \newterm{symmetric-difference graph} of $M$ and $M'$.
+
+\begin{Lemma}\label{lem:SymmDiffMatchings}
+Every component of the symmetric difference of two matchings is a path or an even cycle.
+\end{Lemma}
+
+\begin{proof}
+Let $F$ be the symmetric-difference graph of $M$ and $M'$. As $M$ and $M'$ are matchings, every vertex has at most one incident edge from each of them. Hence, $\Delta(F) \le 2$. The graph $F$ has no isolated vertices, so every component is a path or a cycle. Its edges alternate between $M \setminus M'$ and $M' \setminus M$, and hence every cycle has even length.
+\end{proof}
+
+\begin{Theorem}[Berge]
+A matching $M$ of $G$ is maximum if and only if $G$ has no $M$-augmenting path.
+\end{Theorem}
+
+\begin{proof}
+If $G$ has an $M$-augmenting path $P$, then the matching obtained from $M$ by removing the edges of $P$ that are in $M$ and adding those edges of $P$ that are not in $M$ has cardinality $|M| + 1$, which implies that $M$ cannot be a maximum matching. Thus, if $M$ is a maximum matching, $G$ has no $M$-augmenting path.
+
+Conversely, suppose that $M$ is not a maximum matching in $G$. Then $G$ has a matching $M'$ with $|M'|>|M|$. Let $F$ be their symmetric-difference graph. By \cref{lem:SymmDiffMatchings}, every component of $F$ is a path or an even cycle. Every cycle contains equally many edges from $M$ and $M'$. Since $|M'|>|M|$, some path component contains more edges from $M'$ than from $M$. Its first and last edges belong to $M'$, so its end-vertices are $M$-unsaturated. It is therefore an $M$-augmenting path.
+\end{proof}
+
+\subsubsection{Hall's matching condition}\label{subsubsec:Hall}
+Let $G$ be a bipartite graph with bipartition $(V_1, V_2)$. If $M$ is a matching of $G$ that saturates $V_1$ (i.e.\ saturates all vertices in $V_1$), then observe that for every subset $S \subseteq V_1$, $|N_G(S)| \ge |S|$, where $N_G(S)$ is the set of all vertices of $G$ that have at least one neighbour in $S$ -- equivalently, it is the union of the neighbourhoods of all the vertices in $S$.
+
+If $G$ is a bipartite graph, then a partite set $X$ of $G$ is said to satisfy \newterm{Hall's condition} if $|N_G(S)| \ge |S|$ for all $S \subseteq X$.
+
+\begin{Theorem}[Hall's Theorem]\label{thm:Hall}
+Let $(V_1,V_2)$ be a bipartition of $G$. Then $G$ has a matching saturating $V_1$ if and only if $V_1$ satisfies Hall's condition.
+\end{Theorem}
+
+\begin{proof}
+If $G$ has a matching that saturates $V_1$, then distinct vertices $u$ and $v$ in $V_1$ have distinct neighbours via the edges of the matching incident with them. Thus, for any $S \subseteq V_1$, $|N_G(S)| \ge |S|$.
+
+For the converse, suppose that $G$ has a maximum matching $M$ that does not saturate $V_1$. We will show that $V_1$ does not satisfy Hall's condition, by constructing a set $S$ for which $|N_G(S)| < |S|$.
+
+Let $u$ be an $M$-unsaturated vertex in $V_1$. Let $S$ be the vertices in $V_1$ reachable by an $M$-alternating path, and let $T$ be the vertices in $V_2$ reachable by an $M$-alternating path. Note that $u \in S$.
+
+\noindent Claim: $M$ matches $T$ with $S \setminus \{u\}$.
+
+First, observe that any $M$-alternating path from $u$ reaches $V_2$ along edges not in $M$ and returns to $V_1$ along edges in $M$. Thus, each vertex of $S \setminus \{u\}$ is reached by an edge in $M$ from a vertex in $T$. Every vertex in $T$ must be $M$-saturated, for otherwise, $G$ would have an $M$-augmenting path, which is not possible as $M$ is a maximum matching. Therefore, any $M$-alternating path from $u$ to a vertex $y \in T$ can be extended to a vertex in $S$ via some edge of $M$. These edges define a bijection between $T$ and $S \setminus \{u\}$.
+
+Thus, $|T| = |S| - 1$, and $T \subseteq N_G(S)$. We show that $T = N_G(S)$. Suppose, to the contrary, that some vertex $y \in V_2 \setminus T$ has a neighbour $x \in S$. The edge $xy$ cannot be in $M$, as $u$ is $M$-unsaturated, and the other vertices in $S$ are matched to $T$ by $M$. Hence, an $M$-alternating path from $u$ to $x$ can be extended to $y$ by the edge $xy$, which contradicts the assumption that $y \notin T$.
+
+Now, as $T = N_G(S)$, $|N_G(S)| = |T| = |S| - 1 < |S|$, and hence $V_1$ does not satisfy Hall's condition.
+\end{proof}
+
+\begin{Corollary}\label{cor:k-regBipartitePM}
+For each positive integer $k$, every $k$-regular bipartite graph has a perfect matching.
+\end{Corollary}
+
+\begin{proof}
+Let $(V_1,V_2)$ be a bipartition of a $k$-regular graph $G$. Double-counting its edges gives
+\begin{equation*}
+k|V_1|=|E(G)|=k|V_2|,
+\end{equation*}
+so $|V_1|=|V_2|$. Consequently, any matching that saturates $V_1$ is perfect. We prove that such a matching exists by verifying Hall's condition.
+
+Consider any $S \subseteq V_1$. Then the induced subgraph $H = \langle S \cup N_G(S) \rangle$ is a bipartite subgraph in which every vertex of $S$ has degree $k$. Hence, $k|S| = \sum_{v \in N_G(S)} \deg_H v \le k|N_G(S)|$, which implies that $|N_G(S)| \ge |S|$. That is, $V_1$ satisfies Hall's condition, as required.
+\end{proof}
+
+\subsubsection{K\"onig's theorem}
+
+For every graph, each vertex cover contains at least one end-vertex of every edge in a matching. Consequently, $\alpha_0(G)\ge\beta_1(G)$. For bipartite graphs, equality always holds.
+
+\begin{Theorem}[K\"onig]\label{thm:Konig}
+If $G$ is bipartite, then
+\begin{equation*}
+\alpha_0(G)=\beta_1(G).
+\end{equation*}
+\end{Theorem}
+
+\begin{proof}
+Let $(V_1,V_2)$ be a bipartition of $G$, let $M$ be a maximum matching, and let $U$ be the set of $M$-unsaturated vertices in $V_1$. Starting at the vertices in $U$, follow $M$-alternating paths whose first edges are not in $M$. Let $Z_1$ and $Z_2$ be the sets of vertices reached in $V_1$ and $V_2$, respectively, and set
+\begin{equation*}
+C=(V_1\setminus Z_1)\cup Z_2.
+\end{equation*}
+The set $C$ is a vertex cover. Indeed, if an edge $xy$, with $x\in V_1$ and $y\in V_2$, had neither end in $C$, then $x\in Z_1$ and $y\notin Z_2$. If $xy\notin M$, the alternating search would reach $y$; if $xy\in M$, the way in which $x$ was reached would imply that $y\in Z_2$. Both cases are contradictions.
+
+Every vertex in $Z_2$ is $M$-saturated, since otherwise the alternating path reaching it would be $M$-augmenting. Every vertex in $V_1\setminus Z_1$ is also $M$-saturated, because all unsaturated vertices of $V_1$ belong to $U\subseteq Z_1$. Moreover, every edge of $M$ has exactly one end in $C$. It follows that $|C|=|M|=\beta_1(G)$. Since every vertex cover has at least $|M|$ vertices, $C$ is a minimum vertex cover, and hence $\alpha_0(G)=\beta_1(G)$.
+\end{proof}
+
+\subsection{Applications: Assignment and Scheduling}\label{subsec:MatchingApplications}
+
+Many assignment problems can be represented by a bipartite graph. One partite set represents applicants, residents, workers, or tasks; the other represents jobs, placements, machines, or time slots. An edge records an allowable assignment. A matching assigns distinct resources, and a matching that saturates the first partite set assigns every applicant or task.
+
+\begin{Example}[Job assignment]\label{ex:JobAssignment}
+Suppose that three applicants $a,b,c$ are eligible for jobs $p,q,r$, with
+\begin{align*}
+N(a)&=\{p,q\}, & N(b)&=\{p\}, & N(c)&=\{q,r\}.
+\end{align*}
+Hall's condition holds, and the matching $\{bp,aq,cr\}$ assigns every applicant to an eligible job. If both $a$ and $b$ were eligible only for $p$, Hall's condition would fail for $\{a,b\}$, correctly identifying the obstruction.
+\end{Example}
+
+\begin{Example}[Task scheduling]\label{ex:TaskScheduling}
+Let one partite set consist of tasks and the other of available time slots. Join a task to the slots in which it may be performed. A matching that saturates all tasks is a feasible schedule in which no two tasks use the same slot. Hall's theorem says that such a schedule exists precisely when every collection of tasks collectively has at least as many available slots as it has tasks.
+\end{Example}
+
+\begin{Exercise}
+Give an example of a maximal matching that is not maximum, and an example of a minimal vertex cover that is not minimum.
+\end{Exercise}
+
+\begin{Exercise}
+For the graph in \cref{ex:AugmentingPath}, list all maximum matchings and all minimum vertex covers, and verify K\"onig's theorem directly.
+\end{Exercise}
+
+\begin{Exercise}
+Four tasks must be assigned to four time slots. Their available slots are
+\begin{align*}
+N(t_1)&=\{s_1,s_2\}, & N(t_2)&=\{s_2\},\\
+N(t_3)&=\{s_2,s_3\}, & N(t_4)&=\{s_3,s_4\}.
+\end{align*}
+Use Hall's theorem to determine whether all four tasks can be scheduled, and find a feasible schedule if one exists.
+\end{Exercise}
+
 %\begin{appendices}
 %
 %\end{appendices}
