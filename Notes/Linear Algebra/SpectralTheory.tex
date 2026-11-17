@@ -8,7 +8,7 @@ A subspace $W\subseteq V$ is \newterm{invariant} under $T\in L(V)$ (or \newterm{
 \end{Definition}
 
 \begin{Example}
-The subspaces $\{0\}$, $V$, $\ker T$ and $\im T$ are always invariant under $T$. So is every subspace contained in $\ker T$ or containing $\im T$. For a scalar operator $T=\alpha\id_V$, every subspace is invariant.
+The subspaces $\{0\}$, $V$, $\ker T$ and $\im T$ are always invariant under $T$. So is every subspace contained in $\ker T$ or containing $\im T$. For a scalar operator $T=\alpha I$, every subspace is invariant.
 
 For $T(x,y)=(x+y,x-y)$ on $\mathbb R^2$, the $x$-axis is not invariant, since $T(1,0)=(1,1)$. However, the lines spanned by $\begin{bmatrix}1\\\sqrt2-1\end{bmatrix}$ and $\begin{bmatrix}1\\-\sqrt2-1\end{bmatrix}$ are invariant: $T$ acts on them by multiplication by $\sqrt2$ and $-\sqrt2$ respectively.
 \end{Example}
@@ -32,7 +32,7 @@ The columns corresponding to basis vectors of $W$ have zero coordinates outside 
 \begin{Definition}
 A scalar $\lambda\in F$ is an \newterm{eigenvalue} of $T\in L(V)$ if there is a non-zero vector $v\in V$ with $T(v)=\lambda v$. Such a vector is an \newterm{eigenvector}, and $(\lambda,v)$ is an \newterm{eigenpair}. The \newterm{eigenspace} corresponding to $\lambda$ is
 \begin{equation*}
-E(\lambda,T)=\ker(T-\lambda\id_V).
+E(\lambda,T)=\ker(T-\lambda I).
 \end{equation*}
 The same terminology applies to a square matrix $A$ when $Av=\lambda v$ with $v\ne0$.
 \end{Definition}
@@ -55,7 +55,7 @@ For $T(x,y)=(x+y,x)$ on $\mathbb R^2$, the eigenvalue equation yields $\lambda^2
 Eigenvectors corresponding to distinct eigenvalues are linearly independent. More generally, the sum of the eigenspaces for distinct eigenvalues is direct.
 \end{Theorem}
 \begin{proof}
-Suppose $v_1,\ldots,v_k$ is a dependent list of eigenvectors for distinct eigenvalues, with $k$ as small as possible. In a non-trivial relation $\sum_{i=1}^k\alpha_iv_i=0$, all coefficients are non-zero. Apply $T-\lambda_k\id_V$ to obtain
+Suppose $v_1,\ldots,v_k$ is a dependent list of eigenvectors for distinct eigenvalues, with $k$ as small as possible. In a non-trivial relation $\sum_{i=1}^k\alpha_iv_i=0$, all coefficients are non-zero. Apply $T-\lambda_k I$ to obtain
 \begin{equation*}
 \sum_{i=1}^{k-1}\alpha_i(\lambda_i-\lambda_k)v_i=0.
 \end{equation*}
@@ -76,9 +76,9 @@ Square matrices $A,B\in F^{n\times n}$ are \newterm{similar} if $B=PAP^{-1}$ for
 Similar matrices have the same characteristic polynomial. Thus $\chi_T=\chi_{[T]_{\mathcal B}}$ is independent of the basis $\mathcal B$. For $\lambda\in F$, the following are equivalent:
 \begin{enumerate}[label=(\roman*)]
 \item $\lambda$ is an eigenvalue of $T$;
-\item $T-\lambda\id_V$ is not injective;
-\item $T-\lambda\id_V$ is not surjective;
-\item $T-\lambda\id_V$ is not invertible;
+\item $T-\lambda I$ is not injective;
+\item $T-\lambda I$ is not surjective;
+\item $T-\lambda I$ is not invertible;
 \item $\chi_T(\lambda)=0$.
 \end{enumerate}
 \end{Theorem}
@@ -117,7 +117,7 @@ where $c_k$ is the sum of the principal minors of order $k$. A principal minor i
 
 For $p(x)=a_0+a_1x+\cdots+a_dx^d$ and $T\in L(V)$, define
 \begin{equation*}
-p(T)=a_0\id_V+a_1T+\cdots+a_dT^d.
+p(T)=a_0I+a_1T+\cdots+a_dT^d.
 \end{equation*}
 The evaluation map $F[x]\to L(V)$, $p\mapsto p(T)$, preserves addition, multiplication, scalar multiplication and identity. In particular, polynomials in $T$ commute with each other and with $T$.
 
@@ -136,7 +136,7 @@ A polynomial $p\in F[x]$ \newterm{annihilates} $T$ if $p(T)=0$. For a finite dim
 The minimal polynomial exists and is unique. A polynomial annihilates $T$ if and only if it is divisible by $m_T$.
 \end{Theorem}
 \begin{proof}
-If $n=\dim V>0$, the $n^2+1$ operators $\id_V,T,\ldots,T^{n^2}$ are linearly dependent in the $n^2$-dimensional space $L(V)$. A non-zero annihilating polynomial therefore exists; divide by its leading coefficient and choose one of least degree. If two monic polynomials of this degree annihilate $T$, their difference has smaller degree and also annihilates $T$, so the difference must be zero.
+If $n=\dim V>0$, the $n^2+1$ operators $I,T,\ldots,T^{n^2}$ are linearly dependent in the $n^2$-dimensional space $L(V)$. A non-zero annihilating polynomial therefore exists; divide by its leading coefficient and choose one of least degree. If two monic polynomials of this degree annihilate $T$, their difference has smaller degree and also annihilates $T$, so the difference must be zero.
 
 For any annihilating polynomial $p$, polynomial division gives $p=qm_T+r$, where $r=0$ or $\deg r<\deg m_T$. Evaluating at $T$ gives $r(T)=0$, so minimality forces $r=0$. Conversely, every multiple of $m_T$ annihilates $T$. If $V=\{0\}$, take $m_T=1$; the assertions still hold.
 \end{proof}
@@ -147,7 +147,7 @@ Equivalently, the kernel of the evaluation map is the principal ideal $(m_T)$ in
 The eigenvalues of $T$ in $F$ are exactly the roots of $m_T$ in $F$.
 \end{Theorem}
 \begin{proof}
-If $T(v)=\lambda v$ with $v\ne0$, then $0=m_T(T)v=m_T(\lambda)v$, so $m_T(\lambda)=0$. Conversely, if $m_T(x)=(x-\lambda)q(x)$, minimality ensures $q(T)\ne0$. Choose $u$ with $v=q(T)u\ne0$. Then $(T-\lambda\id_V)v=m_T(T)u=0$, so $\lambda$ is an eigenvalue.
+If $T(v)=\lambda v$ with $v\ne0$, then $0=m_T(T)v=m_T(\lambda)v$, so $m_T(\lambda)=0$. Conversely, if $m_T(x)=(x-\lambda)q(x)$, minimality ensures $q(T)\ne0$. Choose $u$ with $v=q(T)u\ne0$. Then $(T-\lambda I)v=m_T(T)u=0$, so $\lambda$ is an eigenvalue.
 \end{proof}
 
 \subsection{Cyclic Subspaces}
@@ -273,7 +273,7 @@ For an operator $T$ on a finite dimensional vector space over $F$, the following
 \begin{proof}
 A basis of eigenvectors, grouped according to eigenvalue, gives (ii), and conversely concatenating bases of the eigenspaces gives such a basis. In a diagonal matrix, the number of occurrences of $\lambda$ on the diagonal is both its geometric and algebraic multiplicity, giving (i)$\Rightarrow$(iii). If (iii) holds, the sum of the eigenspace dimensions is $\deg\chi_T=\dim V$, and the sum is direct by \cref{thm:DistinctEigenvalues}; hence (ii) holds.
 
-If $T$ is diagonal in an eigenbasis and its distinct eigenvalues are $\lambda_1,\ldots,\lambda_s$, then $\prod_i(T-\lambda_i\id_V)=0$. Every annihilating polynomial must vanish at every $\lambda_i$, so $m_T(x)=\prod_i(x-\lambda_i)$, proving (iv).
+If $T$ is diagonal in an eigenbasis and its distinct eigenvalues are $\lambda_1,\ldots,\lambda_s$, then $\prod_i(T-\lambda_i I)=0$. Every annihilating polynomial must vanish at every $\lambda_i$, so $m_T(x)=\prod_i(x-\lambda_i)$, proving (iv).
 
 Conversely, suppose $m_T(x)=\prod_{i=1}^s(x-\lambda_i)$ with distinct $\lambda_i\in F$. Define
 \begin{equation*}
