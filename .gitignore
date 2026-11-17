@@ -1,5 +1,10 @@
 tmp/
 output/
+Notes/Linear Algebra/$build/
+Notes/Linear Algebra/build-temp/
+Notes/Linear Algebra/miktex-temp/
+Notes/Linear Algebra/render-final/
+Notes/Linear Algebra/render-temp/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
