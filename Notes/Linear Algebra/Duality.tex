@@ -1,0 +1,140 @@
+% !TeX root = Linear Algebra.tex
+% Handwritten pages 27--31. Page 28 is blank; prerequisites on annihilators are supplied.
+
+\section{Linear Functionals and Dual Spaces}\label{sec:Duality}
+
+\begin{Definition}
+A \newterm{linear functional} on a vector space $V$ over $F$ is a linear map $V\to F$. The \newterm{algebraic dual} (or \newterm{dual space}) of $V$ is $V^*=L(V,F)$.
+\end{Definition}
+
+\begin{Example}
+The map $f(x,y,z)=3x-y+2z$ is a linear functional on $\mathbb R^3$, whereas $g(x,y,z)=xyz$ is not. For $a\in F$, evaluation $\varepsilon_a\colon F[x]\to F$, $\varepsilon_a(p)=p(a)$, is linear. On $F^{n\times n}$, the trace $\operatorname{tr}(A)=\sum_i a_{ii}$ is linear. The determinant is not linear for $n\ge2$: for example, $\det E_{11}=\det(I_n-E_{11})=0$ but $\det I_n=1$. For $n=1$, the determinant is linear.
+\end{Example}
+
+\subsection{Dual Bases}
+
+\begin{Theorem}\label{thm:DualBasis}
+Let $\mathcal B=(v_1,\ldots,v_n)$ be an ordered basis of $V$. There are unique functionals $v_i^*$ satisfying $v_i^*(v_j)=\delta_{ij}$. They form a basis $\mathcal B^*=(v_1^*,\ldots,v_n^*)$ of $V^*$, called the \newterm{dual basis}, and
+\begin{equation*}
+f=\sum_{i=1}^n f(v_i)v_i^*\qquad(f\in V^*).
+\end{equation*}
+In particular, $\dim V^*=\dim V$.
+\end{Theorem}
+\begin{proof}
+Define $v_i^*(\sum_j\alpha_jv_j)=\alpha_i$. This is linear and has the required values; uniqueness follows from \cref{thm:SpecifyBasis}. The expansion for $f$ holds by evaluating both sides on each $v_j$. If $\sum_i c_iv_i^*=0$, evaluation on $v_j$ gives $c_j=0$, proving independence.
+\end{proof}
+
+In coordinates, if $f(v_i)=c_i$, then
+\begin{equation*}
+f(v)=\begin{bmatrix}c_1&\cdots&c_n\end{bmatrix}[v]_{\mathcal B}.
+\end{equation*}
+The map $v_i\mapsto v_i^*$ extends to an isomorphism $V\to V^*$, but this isomorphism depends on the chosen basis.
+
+\subsection{Dual Transformations}
+
+\begin{Definition}
+For a linear map $T\colon V\to W$, its \newterm{dual transformation} is
+\begin{equation*}
+T^*\colon W^*\to V^*,\qquad T^*(f)=f\circ T.
+\end{equation*}
+\end{Definition}
+
+The composition $f\circ T$ is linear, and $T^*(\alpha f+g)=\alpha T^*(f)+T^*(g)$, so $T^*$ is linear. Notice that its direction is reversed.
+
+\begin{Theorem}\label{thm:DualTranspose}
+In finite dimensions, if $A=[T]_{\mathcal C}^{\mathcal B}$, then
+\begin{equation*}
+[T^*]_{\mathcal B^*}^{\mathcal C^*}=A^{\mathsf T}.
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+Write $T(v_j)=\sum_i a_{ij}w_i$. Then $(T^*w_i^*)(v_j)=w_i^*(T(v_j))=a_{ij}$, so $T^*w_i^*=\sum_j a_{ij}v_j^*$. These are exactly the columns of $A^{\mathsf T}$.
+\end{proof}
+
+\begin{Example}
+Let $T\colon\mathbb R^3\to\mathbb R^2$ be $T(x,y,z)=(y-2z,x+3y-z)$. If $f(s,t)=c_1s+c_2t$, then
+\begin{equation*}
+T^*f(x,y,z)=c_2x+(c_1+3c_2)y+(-2c_1-c_2)z.
+\end{equation*}
+Thus the standard matrices are
+\begin{equation*}
+[T]=\begin{bmatrix}0&1&-2\\1&3&-1\end{bmatrix},\qquad [T^*]=\begin{bmatrix}0&1\\1&3\\-2&-1\end{bmatrix}.
+\end{equation*}
+\end{Example}
+
+\subsection{Annihilators and Hyperplanes}
+
+\begin{Definition}
+For $S\subseteq V$, its \newterm{annihilator} is the subspace
+\begin{equation*}
+S^\circ=\qty{\, f\in V^* \mid f(s)=0\text{ for every }s\in S \,}.
+\end{equation*}
+\end{Definition}
+
+Linearity gives $S^\circ=(\operatorname{span}S)^\circ$. In particular, $\{0\}^\circ=V^*$ and $V^\circ=\{0\}$.
+
+\begin{Theorem}\label{thm:AnnihilatorDimension}
+If $\dim V=n$ and $W\subseteq V$ has dimension $k$, then $\dim W^\circ=n-k$.
+\end{Theorem}
+\begin{proof}
+Extend a basis $v_1,\ldots,v_k$ of $W$ to a basis $v_1,\ldots,v_n$ of $V$. The expansion in \cref{thm:DualBasis} shows that a functional vanishes on $W$ precisely when its first $k$ dual-basis coefficients vanish. Therefore $(v_{k+1}^*,\ldots,v_n^*)$ is a basis of $W^\circ$.
+\end{proof}
+
+\begin{Definition}
+A \newterm{hyperplane} (also called a \newterm{hyperspace}) of an $n$-dimensional vector space is a subspace of dimension $n-1$.
+\end{Definition}
+
+\begin{Theorem}
+The hyperplanes of a finite dimensional vector space are exactly the kernels of its non-zero linear functionals. Every $k$-dimensional subspace of an $n$-dimensional space is an intersection of $n-k$ hyperplanes.
+\end{Theorem}
+\begin{proof}
+A non-zero functional has image $F$ and hence rank $1$, so its kernel has dimension $n-1$. Conversely, for a hyperplane $W$, extend its basis by one vector and take the last dual-basis functional: its kernel is $W$. More generally, with the basis in \cref{thm:AnnihilatorDimension},
+\begin{equation*}
+W=\bigcap_{i=k+1}^n\ker v_i^*=\bigcap_{f\in W^\circ}\ker f.
+\end{equation*}
+When $W=V$, the empty intersection is understood as $V$.
+\end{proof}
+
+\begin{Theorem}
+If $T\colon V\to W$ is linear, then $\ker T^*=(\im T)^\circ$. If $W$ is finite dimensional, then $\rank T^*=\rank T$.
+\end{Theorem}
+\begin{proof}
+For $f\in W^*$, $T^*f=0$ if and only if $f(T(v))=0$ for every $v\in V$, which is equivalent to $f\in(\im T)^\circ$. If $\dim W=m<\infty$, rank--nullity and the annihilator dimension formula give
+\begin{equation*}
+\rank T^*=m-\dim(\im T)^\circ=m-(m-\dim\im T)=\rank T.
+\end{equation*}
+\end{proof}
+
+\begin{Remark*}
+Together with \cref{thm:DualTranspose}, this gives a second proof of equality of row and column rank. Unlike orthogonality arguments involving $A^{\mathsf T}A$, both proofs work over an arbitrary field.
+\end{Remark*}
+
+\begin{Theorem}
+For subspaces $U,W$ of a finite dimensional space $V$,
+\begin{align*}
+U\subseteq W&\iff W^\circ\subseteq U^\circ,\\
+(U+W)^\circ&=U^\circ\cap W^\circ,\\
+(U\cap W)^\circ&=U^\circ+W^\circ.
+\end{align*}
+\end{Theorem}
+\begin{proof}
+The forward inclusion in the first assertion follows from the definition, and the reverse follows from the description of a subspace as the intersection of the kernels of its annihilator. A functional vanishes on $U+W$ exactly when it vanishes on both $U$ and $W$, proving the second assertion. For the third, $U^\circ+W^\circ\subseteq(U\cap W)^\circ$ is immediate. Using the second assertion, \cref{thm:DimensionSum,thm:AnnihilatorDimension} give
+\begin{align*}
+\dim(U^\circ+W^\circ)&=(n-\dim U)+(n-\dim W)-\bigl(n-\dim(U+W)\bigr)\\
+&=n-\dim(U\cap W)=\dim(U\cap W)^\circ.
+\end{align*}
+The inclusion is therefore equality.
+\end{proof}
+
+\subsection{The Double Dual}
+
+\begin{Definition}
+The \newterm{double dual} of $V$ is $V^{**}=(V^*)^*$. For each $v\in V$, define $\varepsilon_v\in V^{**}$ by $\varepsilon_v(f)=f(v)$.
+\end{Definition}
+
+\begin{Theorem}
+If $V$ is finite dimensional, the evaluation map $J\colon V\to V^{**}$, $J(v)=\varepsilon_v$, is an isomorphism which does not depend on a choice of basis.
+\end{Theorem}
+\begin{proof}
+For $f,g\in V^*$, $\varepsilon_v(\alpha f+g)=\alpha f(v)+g(v)$, so $\varepsilon_v$ is a functional. For $u,v\in V$, evaluation on any $f$ gives $J(\alpha u+v)(f)=\alpha f(u)+f(v)$, proving linearity of $J$. If $v\ne0$, extend $v$ to a basis and take the first dual-basis functional $f$; then $J(v)(f)=1$. Thus $J$ is injective. Since $\dim V^{**}=\dim V$, it is also surjective.
+\end{proof}

@@ -1,0 +1,307 @@
+% !TeX root = Linear Algebra.tex
+% Handwritten pages 31--41.
+
+\section{Invariant Subspaces and Eigenvalues}\label{sec:Eigenvalues}
+
+\begin{Definition}
+A subspace $W\subseteq V$ is \newterm{invariant} under $T\in L(V)$ (or \newterm{$T$-invariant}) if $T(W)\subseteq W$. The restriction $T|_W$ is then an operator on $W$.
+\end{Definition}
+
+\begin{Example}
+The subspaces $\{0\}$, $V$, $\ker T$ and $\im T$ are always invariant under $T$. So is every subspace contained in $\ker T$ or containing $\im T$. For a scalar operator $T=\alpha\id_V$, every subspace is invariant.
+
+For $T(x,y)=(x+y,x-y)$ on $\mathbb R^2$, the $x$-axis is not invariant, since $T(1,0)=(1,1)$. However, the lines spanned by $\begin{bmatrix}1\\\sqrt2-1\end{bmatrix}$ and $\begin{bmatrix}1\\-\sqrt2-1\end{bmatrix}$ are invariant: $T$ acts on them by multiplication by $\sqrt2$ and $-\sqrt2$ respectively.
+\end{Example}
+
+\begin{Theorem}\label{thm:InvariantBlocks}
+Let $W$ be a subspace of a finite dimensional $V$, and extend an ordered basis of $W$ to an ordered basis $\mathcal B$ of $V$. Then $W$ is invariant under $T$ if and only if
+\begin{equation*}
+[T]_{\mathcal B}=\begin{bmatrix}A&B\\0&C\end{bmatrix},
+\end{equation*}
+where $A$ represents $T|_W$. If $V=W_1\oplus W_2$ and the basis is the concatenation of bases of $W_1,W_2$, both summands are invariant if and only if the matrix is block diagonal:
+\begin{equation*}
+[T]_{\mathcal B}=\begin{bmatrix}[T|_{W_1}]_{\mathcal B_1}&0\\0&[T|_{W_2}]_{\mathcal B_2}\end{bmatrix}.
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+The columns corresponding to basis vectors of $W$ have zero coordinates outside $W$ exactly when their images lie in $W$. This is the first block condition. Applying the same observation to the columns for each summand gives the second.
+\end{proof}
+
+\subsection{Eigenvalues and Eigenvectors}
+
+\begin{Definition}
+A scalar $\lambda\in F$ is an \newterm{eigenvalue} of $T\in L(V)$ if there is a non-zero vector $v\in V$ with $T(v)=\lambda v$. Such a vector is an \newterm{eigenvector}, and $(\lambda,v)$ is an \newterm{eigenpair}. The \newterm{eigenspace} corresponding to $\lambda$ is
+\begin{equation*}
+E(\lambda,T)=\ker(T-\lambda\id_V).
+\end{equation*}
+The same terminology applies to a square matrix $A$ when $Av=\lambda v$ with $v\ne0$.
+\end{Definition}
+
+A non-zero vector $v$ is an eigenvector exactly when $\operatorname{span}\{v\}$ is invariant. Every non-zero scalar multiple of an eigenvector is an eigenvector for the same eigenvalue. The eigenspace contains the zero vector, although the zero vector is never an eigenvector.
+
+\begin{Example}
+The real operator $T(x,y)=(-y,x)$ has no eigenvalues over $\mathbb R$: the equations $-y=\lambda x$ and $x=\lambda y$ force $\lambda^2+1=0$ for a non-zero solution. Over $\mathbb C$, its eigenpairs include
+\begin{equation*}
+\pqty{i,\begin{bmatrix}1\\-i\end{bmatrix}},\qquad \pqty{-i,\begin{bmatrix}1\\i\end{bmatrix}}.
+\end{equation*}
+Thus eigenvalues depend on the scalar field.
+\end{Example}
+
+\begin{Example}
+For $T(x,y)=(x+y,x)$ on $\mathbb R^2$, the eigenvalue equation yields $\lambda^2-\lambda-1=0$. The eigenvalues are $\lambda_\pm=(1\pm\sqrt5)/2$, with eigenvectors $\begin{bmatrix}1\\\lambda_\pm-1\end{bmatrix}$. For $S(x,y)=(x+y,y)$, the only eigenvalue is $1$, and $E(1,S)=\operatorname{span}\qty{\begin{bmatrix}1\\0\end{bmatrix}}$. Hence $S$ has no basis of eigenvectors.
+\end{Example}
+
+\begin{Theorem}\label{thm:DistinctEigenvalues}
+Eigenvectors corresponding to distinct eigenvalues are linearly independent. More generally, the sum of the eigenspaces for distinct eigenvalues is direct.
+\end{Theorem}
+\begin{proof}
+Suppose $v_1,\ldots,v_k$ is a dependent list of eigenvectors for distinct eigenvalues, with $k$ as small as possible. In a non-trivial relation $\sum_{i=1}^k\alpha_iv_i=0$, all coefficients are non-zero. Apply $T-\lambda_k\id_V$ to obtain
+\begin{equation*}
+\sum_{i=1}^{k-1}\alpha_i(\lambda_i-\lambda_k)v_i=0.
+\end{equation*}
+All displayed coefficients are non-zero, contradicting minimality. For the statement about eigenspaces, a non-zero relation among vectors from distinct eigenspaces would give exactly such a dependence after omitting zero terms.
+\end{proof}
+
+\begin{Corollary}
+An operator on an $n$-dimensional space has at most $n$ distinct eigenvalues.
+\end{Corollary}
+
+\subsection{Characteristic Polynomials}
+
+\begin{Definition}
+Square matrices $A,B\in F^{n\times n}$ are \newterm{similar} if $B=PAP^{-1}$ for some invertible $P$. The \newterm{characteristic polynomial} of $A$ is $\chi_A(x)=\det(xI_n-A)$. The equation $\chi_A(x)=0$ is its \newterm{characteristic equation}, and its roots are its \newterm{characteristic roots}.
+\end{Definition}
+
+\begin{Theorem}
+Similar matrices have the same characteristic polynomial. Thus $\chi_T=\chi_{[T]_{\mathcal B}}$ is independent of the basis $\mathcal B$. For $\lambda\in F$, the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $\lambda$ is an eigenvalue of $T$;
+\item $T-\lambda\id_V$ is not injective;
+\item $T-\lambda\id_V$ is not surjective;
+\item $T-\lambda\id_V$ is not invertible;
+\item $\chi_T(\lambda)=0$.
+\end{enumerate}
+\end{Theorem}
+\begin{proof}
+For $B=PAP^{-1}$, $xI-B=P(xI-A)P^{-1}$, whose determinant is $\det(xI-A)$. The first two conditions express the existence of a non-zero vector in the kernel. The next two are equivalent by \cref{thm:IsomorphismCriteria}; the last uses the determinant criterion for invertibility of a square matrix.
+\end{proof}
+
+By the factor theorem, $p(\lambda)=0$ if and only if $(x-\lambda)$ divides $p(x)$. A non-zero polynomial of degree $n$ over any field has at most $n$ distinct roots. The fundamental theorem of algebra states that every non-constant complex polynomial has a complex root, and consequently splits completely into linear factors over $\mathbb C$.
+
+\begin{Example}\label{ex:ThreeByThreeEigenvalues}
+For
+\begin{equation*}
+A=\begin{bmatrix}1&-1&-1\\-1&1&-1\\-1&-1&1\end{bmatrix},
+\end{equation*}
+expanding $\det(xI-A)$ gives
+\begin{equation*}
+\chi_A(x)=x^3-3x^2+4=(x+1)(x-2)^2.
+\end{equation*}
+Over $\mathbb R$,
+\begin{equation*}
+E(-1,A)=\operatorname{span}\qty{\begin{bmatrix}1\\1\\1\end{bmatrix}},\qquad E(2,A)=\qty{\, \begin{bmatrix}x\\y\\z\end{bmatrix} \mid x+y+z=0 \,}.
+\end{equation*}
+\end{Example}
+
+\begin{Remark*}
+For an $n\times n$ matrix,
+\begin{equation*}
+\chi_A(x)=x^n-c_1x^{n-1}+c_2x^{n-2}-\cdots+(-1)^nc_n,
+\end{equation*}
+where $c_k$ is the sum of the principal minors of order $k$. A principal minor is obtained by choosing the same set of row and column indices. In particular, $c_1=\operatorname{tr}A$ and $c_n=\det A$. This formula follows from the determinant expansion: to contribute a term of degree $n-k$, choose the $x$ term at $n-k$ diagonal positions and the entries of $-A$ on the remaining principal submatrix.
+\end{Remark*}
+
+\section{Polynomials of Linear Operators}\label{sec:OperatorPolynomials}
+
+\subsection{Polynomial Evaluation and the Minimal Polynomial}
+
+For $p(x)=a_0+a_1x+\cdots+a_dx^d$ and $T\in L(V)$, define
+\begin{equation*}
+p(T)=a_0\id_V+a_1T+\cdots+a_dT^d.
+\end{equation*}
+The evaluation map $F[x]\to L(V)$, $p\mapsto p(T)$, preserves addition, multiplication, scalar multiplication and identity. In particular, polynomials in $T$ commute with each other and with $T$.
+
+\begin{Theorem}\label{thm:PolynomialEigenvector}
+If $T(v)=\lambda v$ with $v\ne0$, then $p(T)v=p(\lambda)v$. Thus $(p(\lambda),v)$ is an eigenpair of $p(T)$. If $T$ is invertible, then $\lambda\ne0$ and $T^{-1}v=\lambda^{-1}v$.
+\end{Theorem}
+\begin{proof}
+Induction gives $T^jv=\lambda^jv$, and the polynomial identity follows by taking the indicated linear combination. If $T$ is invertible, an eigenvalue cannot be zero; apply $T^{-1}$ to $T(v)=\lambda v$.
+\end{proof}
+
+\begin{Definition}
+A polynomial $p\in F[x]$ \newterm{annihilates} $T$ if $p(T)=0$. For a finite dimensional space, the \newterm{minimal polynomial} $m_T$ is the unique monic polynomial of least degree which annihilates $T$.
+\end{Definition}
+
+\begin{Theorem}\label{thm:MinimalPolynomial}
+The minimal polynomial exists and is unique. A polynomial annihilates $T$ if and only if it is divisible by $m_T$.
+\end{Theorem}
+\begin{proof}
+If $n=\dim V>0$, the $n^2+1$ operators $\id_V,T,\ldots,T^{n^2}$ are linearly dependent in the $n^2$-dimensional space $L(V)$. A non-zero annihilating polynomial therefore exists; divide by its leading coefficient and choose one of least degree. If two monic polynomials of this degree annihilate $T$, their difference has smaller degree and also annihilates $T$, so the difference must be zero.
+
+For any annihilating polynomial $p$, polynomial division gives $p=qm_T+r$, where $r=0$ or $\deg r<\deg m_T$. Evaluating at $T$ gives $r(T)=0$, so minimality forces $r=0$. Conversely, every multiple of $m_T$ annihilates $T$. If $V=\{0\}$, take $m_T=1$; the assertions still hold.
+\end{proof}
+
+Equivalently, the kernel of the evaluation map is the principal ideal $(m_T)$ in $F[x]$.
+
+\begin{Theorem}
+The eigenvalues of $T$ in $F$ are exactly the roots of $m_T$ in $F$.
+\end{Theorem}
+\begin{proof}
+If $T(v)=\lambda v$ with $v\ne0$, then $0=m_T(T)v=m_T(\lambda)v$, so $m_T(\lambda)=0$. Conversely, if $m_T(x)=(x-\lambda)q(x)$, minimality ensures $q(T)\ne0$. Choose $u$ with $v=q(T)u\ne0$. Then $(T-\lambda\id_V)v=m_T(T)u=0$, so $\lambda$ is an eigenvalue.
+\end{proof}
+
+\subsection{Cyclic Subspaces}
+
+\begin{Definition}
+For $v\in V$, the \newterm{$T$-cyclic subspace} generated by $v$ is
+\begin{equation*}
+Z(v,T)=\operatorname{span}\{v,Tv,T^2v,\ldots\}=\qty{\, p(T)v \mid p\in F[x] \,}.
+\end{equation*}
+\end{Definition}
+
+This is the smallest $T$-invariant subspace containing $v$: it is invariant by construction, and every invariant subspace containing $v$ contains all its iterates.
+
+\begin{Theorem}\label{thm:CyclicBasis}
+In finite dimensions, there is a unique monic polynomial $m_v$ of least degree such that $m_v(T)v=0$. If $v\ne0$ and $\deg m_v=k$, then $(v,Tv,\ldots,T^{k-1}v)$ is a basis of $Z(v,T)$. In particular, $\dim Z(v,T)=\deg m_v$. For $v=0$, take $m_v=1$.
+\end{Theorem}
+\begin{proof}
+The iterates eventually become dependent. Let $k$ be the first index for which the list
+\begin{equation*}
+v,Tv,\ldots,T^kv
+\end{equation*}
+is dependent. The first $k$ vectors are independent and
+\begin{equation*}
+T^kv=-a_0v-a_1Tv-\cdots-a_{k-1}T^{k-1}v.
+\end{equation*}
+Their span is invariant under $T$, so it contains every later iterate and is exactly $Z(v,T)$. The polynomial $x^k+a_{k-1}x^{k-1}+\cdots+a_0$ has the required minimal degree, and uniqueness follows by subtracting two monic candidates. The same polynomial-division argument as before shows that $m_v$ divides every $p$ with $p(T)v=0$.
+\end{proof}
+
+\begin{Example}
+Let $A=\begin{bmatrix}1&0&-1\\0&2&1\\0&0&2\end{bmatrix}$ on $\mathbb R^3$, and let $v=\begin{bmatrix}1\\1\\1\end{bmatrix}$. Then
+\begin{equation*}
+Av=\begin{bmatrix}0\\3\\2\end{bmatrix},\qquad A^2v=\begin{bmatrix}-2\\8\\4\end{bmatrix},\qquad \det\begin{bmatrix}v&Av&A^2v\end{bmatrix}=-6.
+\end{equation*}
+Thus $Z(v,A)=\mathbb R^3$. In contrast, for $w=\begin{bmatrix}0\\1\\0\end{bmatrix}$, $Aw=2w$, so $Z(w,A)=\operatorname{span}\{w\}$ and $m_w(x)=x-2$.
+\end{Example}
+
+\begin{Theorem}\label{thm:MinimalDegreeBound}
+If $\dim V=n$, then $\deg m_T\le n$.
+\end{Theorem}
+\begin{proof}
+Induct on $n$, the case $n=0$ being immediate. Choose $v\ne0$ and set $k=\dim Z(v,T)=\deg m_v$. Let $U=\im m_v(T)$. Since $T$ commutes with $m_v(T)$, $U$ is invariant. Moreover, $Z(v,T)\subseteq\ker m_v(T)$, so rank--nullity gives $\dim U\le n-k<n$. By induction the minimal polynomial $q$ of $T|_U$ has degree at most $n-k$. For every $w\in V$, $m_v(T)w\in U$, so $q(T)m_v(T)w=0$. Consequently $qm_v$ annihilates $T$ and
+\begin{equation*}
+\deg m_T\le\deg q+\deg m_v\le(n-k)+k=n.
+\end{equation*}
+\end{proof}
+
+\subsection{Companion Matrices and Cayley--Hamilton}
+
+\begin{Definition}
+For a monic polynomial $p(x)=x^k+a_{k-1}x^{k-1}+\cdots+a_1x+a_0$ of positive degree, its \newterm{companion matrix} is
+\begin{equation*}
+C(p)=\begin{bmatrix}
+0&0&\cdots&0&-a_0\\
+1&0&\cdots&0&-a_1\\
+0&1&\cdots&0&-a_2\\
+\vdots&\vdots&\ddots&\vdots&\vdots\\
+0&0&\cdots&1&-a_{k-1}
+\end{bmatrix}.
+\end{equation*}
+For $k=1$, this means $C(p)=\begin{bmatrix}-a_0\end{bmatrix}$.
+\end{Definition}
+
+\begin{Theorem}\label{thm:Companion}
+Both the minimal and characteristic polynomials of $C(p)$ are $p$.
+\end{Theorem}
+\begin{proof}
+Write $C=C(p)$. Since $e_1,Ce_1,\ldots,C^{k-1}e_1$ are $e_1,\ldots,e_k$, no polynomial of degree less than $k$ annihilates $e_1$. The last column gives $p(C)e_1=0$. As $p(C)$ commutes with $C$, it also kills $C^je_1=e_{j+1}$ for $0\le j<k$, and hence $p(C)=0$. Thus $m_C=p$.
+
+For the characteristic polynomial, expand $\det(xI-C)$ along the last column. For a row $i<k$, the entry $a_{i-1}$ has cofactor $x^{i-1}$: the minor has determinant $x^{i-1}(-1)^{k-i}$ and the cofactor sign cancels this sign. The last entry $x+a_{k-1}$ has cofactor $x^{k-1}$. Therefore
+\begin{equation*}
+\det(xI-C)=a_0+a_1x+\cdots+a_{k-2}x^{k-2}+(x+a_{k-1})x^{k-1}=p(x).
+\end{equation*}
+The case $k=1$ is immediate.
+\end{proof}
+
+\begin{Theorem}[Cayley--Hamilton Theorem]\label{thm:CayleyHamilton}
+Every operator on a finite dimensional vector space is annihilated by its characteristic polynomial:
+\begin{equation*}
+\chi_T(T)=0.
+\end{equation*}
+Consequently $m_T$ divides $\chi_T$.
+\end{Theorem}
+\begin{proof}
+Fix $v\ne0$ and let $W=Z(v,T)$. In the cyclic basis from \cref{thm:CyclicBasis}, the matrix of $T|_W$ is $C(m_v)$. Extend this basis to one of $V$. By invariance,
+\begin{equation*}
+[T]=\begin{bmatrix}C(m_v)&B\\0&M\end{bmatrix},\qquad \chi_T(x)=\det(xI-C(m_v))\det(xI-M)=m_v(x)q(x).
+\end{equation*}
+Here we used \cref{thm:Companion} and the determinant of a block upper triangular matrix. Hence $\chi_T(T)v=q(T)m_v(T)v=0$. This holds for every non-zero $v$, and trivially for $v=0$, proving the operator identity. Divisibility follows from \cref{thm:MinimalPolynomial}.
+\end{proof}
+
+\section{Diagonalisation}\label{sec:Diagonalisation}
+
+\begin{Definition}
+An operator $T$ on a finite dimensional space is \newterm{diagonalisable} over $F$ if some ordered basis gives a diagonal matrix $[T]_{\mathcal B}$. A square matrix is diagonalisable if it is similar over $F$ to a diagonal matrix.
+\end{Definition}
+
+The columns of a diagonal matrix show that $T$ is diagonalisable exactly when $V$ has a basis of eigenvectors. Equivalently, $V$ is a direct sum of one-dimensional invariant subspaces.
+
+\begin{Definition}
+The \newterm{geometric multiplicity} of an eigenvalue $\lambda$ is $\dim E(\lambda,T)$. Its \newterm{algebraic multiplicity} is its multiplicity as a root of $\chi_T$, namely the largest $a$ such that $(x-\lambda)^a$ divides $\chi_T(x)$.
+\end{Definition}
+
+\begin{Theorem}\label{thm:MultiplicityBound}
+For every eigenvalue, geometric multiplicity is at least $1$ and at most algebraic multiplicity.
+\end{Theorem}
+\begin{proof}
+Let $k=\dim E(\lambda,T)\ge1$. Extend a basis of the eigenspace to one of $V$. Its invariance gives
+\begin{equation*}
+[T]=\begin{bmatrix}\lambda I_k&B\\0&M\end{bmatrix},\qquad \chi_T(x)=(x-\lambda)^k\det(xI-M).
+\end{equation*}
+Thus the algebraic multiplicity is at least $k$.
+\end{proof}
+
+\begin{Theorem}\label{thm:DiagonalisationCriteria}
+For an operator $T$ on a finite dimensional vector space over $F$, the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is diagonalisable over $F$;
+\item $V$ is the direct sum of its eigenspaces;
+\item $\chi_T$ splits into linear factors over $F$, and the geometric and algebraic multiplicities agree for each eigenvalue;
+\item $m_T$ splits into distinct linear factors over $F$.
+\end{enumerate}
+\end{Theorem}
+\begin{proof}
+A basis of eigenvectors, grouped according to eigenvalue, gives (ii), and conversely concatenating bases of the eigenspaces gives such a basis. In a diagonal matrix, the number of occurrences of $\lambda$ on the diagonal is both its geometric and algebraic multiplicity, giving (i)$\Rightarrow$(iii). If (iii) holds, the sum of the eigenspace dimensions is $\deg\chi_T=\dim V$, and the sum is direct by \cref{thm:DistinctEigenvalues}; hence (ii) holds.
+
+If $T$ is diagonal in an eigenbasis and its distinct eigenvalues are $\lambda_1,\ldots,\lambda_s$, then $\prod_i(T-\lambda_i\id_V)=0$. Every annihilating polynomial must vanish at every $\lambda_i$, so $m_T(x)=\prod_i(x-\lambda_i)$, proving (iv).
+
+Conversely, suppose $m_T(x)=\prod_{i=1}^s(x-\lambda_i)$ with distinct $\lambda_i\in F$. Define
+\begin{equation*}
+q_i(x)=\prod_{j\ne i}\frac{x-\lambda_j}{\lambda_i-\lambda_j}.
+\end{equation*}
+The polynomial $\sum_iq_i-1$ has degree less than $s$ and vanishes at every $\lambda_i$, so it is zero. Also, $(x-\lambda_i)q_i(x)$ is a scalar multiple of $m_T(x)$, so $q_i(T)v\in E(\lambda_i,T)$. Thus $v=\sum_iq_i(T)v$ lies in the sum of the eigenspaces, which is direct by \cref{thm:DistinctEigenvalues}. This proves (ii). For the zero space, use $m_T=\chi_T=1$ and the empty direct sum.
+\end{proof}
+
+\begin{Corollary}
+An operator on an $n$-dimensional space with $n$ distinct eigenvalues in $F$ is diagonalisable over $F$.
+\end{Corollary}
+
+\begin{Example}
+The matrix in \cref{ex:ThreeByThreeEigenvalues} is diagonalisable over $\mathbb R$: the eigenbasis
+\begin{equation*}
+\pqty{\begin{bmatrix}1\\1\\1\end{bmatrix},\begin{bmatrix}1\\-1\\0\end{bmatrix},\begin{bmatrix}1\\0\\-1\end{bmatrix}}
+\end{equation*}
+gives $\operatorname{diag}(-1,2,2)$. Its minimal polynomial is $(x+1)(x-2)$. In contrast,
+\begin{equation*}
+\begin{bmatrix}1&1\\0&1\end{bmatrix}
+\end{equation*}
+has characteristic and minimal polynomial $(x-1)^2$ and is not diagonalisable. The real rotation
+\begin{equation*}
+\begin{bmatrix}0&-1\\1&0\end{bmatrix}
+\end{equation*}
+is diagonalisable over $\mathbb C$ but not over $\mathbb R$.
+\end{Example}
+
+\begin{Remark*}
+Over $\mathbb C$, the splitting condition in (iii) is automatic by the fundamental theorem of algebra. Over a general field it must be stated explicitly. Having equal multiplicities for all eigenvalues that happen to lie in $F$ is not enough if the characteristic polynomial does not split over $F$.
+\end{Remark*}

@@ -1,0 +1,70 @@
+% !TeX root = Linear Algebra.tex
+
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{xspace}
+
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+\usepackage{scrlayer-scrpage}
+\ohead{\color{blue!35!black} \scshape VM}
+\cfoot*{\pagemark}
+\setlength{\headheight}{15pt}
+
+\usepackage{tocloft}
+\renewcommand{\cftdot}{}
+
+\usepackage{xcolor}
+\usepackage{hyperref}
+\definecolor{linkcolor}{RGB}{32, 96, 192}
+\hypersetup{colorlinks, linkcolor = linkcolor, urlcolor = linkcolor,
+  citecolor = red, linktocpage = true}
+\usepackage{bookmark}
+\bookmarksetup{color = [RGB]{32, 96, 192}}
+
+\usepackage[capitalise]{cleveref}
+\crefname{Theorem}{theorem}{theorems}
+\crefname{Lemma}{lemma}{lemmas}
+\crefname{Corollary}{corollary}{corollaries}
+\crefname{Definition}{definition}{definitions}
+\crefname{Example}{example}{examples}
+\crefname{Exercise}{exercise}{exercises}
+\usepackage[toc, page]{appendix}
+
+\usepackage{newpxmath}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem*{Definition*}{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem*{Example*}{Example}
+\newtheorem{Exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{Remark*}{Remark}
+\newtheorem*{Solution*}{Solution}
+\newtheorem*{Note*}{Note}
+
+\definecolor{alertcolor}{rgb}{0.8, 0.5, 0}
+\newcommand{\newterm}[1]{{\color{alertcolor} #1}}
+\definecolor{notecolor}{rgb}{0, 0.5, 0.1}
+\newcommand{\note}[1]{{\noindent\footnotesize\color{notecolor}\textbf{Note.} #1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\nullity}{nullity}
+\let\Re\relax
+\DeclareMathOperator{\Re}{Re}
+\let\Im\relax
+\DeclareMathOperator{\Im}{Im}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\nth}{\textsuperscript{th}\xspace}

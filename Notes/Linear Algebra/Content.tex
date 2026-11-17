@@ -1,0 +1,584 @@
+% !TeX root = Linear Algebra.tex
+
+\title{\textbf{Linear Algebra}}
+\author{}
+\date{}
+\maketitle
+
+\begingroup
+\let\clearpage\relax
+\tableofcontents
+\endgroup
+
+\clearpage
+
+\section{Vector Spaces}\label{sec:VectorSpaces}
+
+Linear algebra is built around linear combinations. We begin with the algebraic structures needed to define vector spaces abstractly.
+
+\subsection{Groups and Fields}
+
+\begin{Definition}
+An \newterm{Abelian group} is an ordered pair $(G,*)$, where $G$ is a set and $*\colon G\times G\to G$ is a binary operation satisfying:
+\begin{enumerate}
+\item $a*(b*c)=(a*b)*c$ for all $a,b,c\in G$;
+\item there exists $e\in G$ such that $a*e=e*a=a$ for all $a\in G$;
+\item for every $a\in G$ there exists $b\in G$ such that $a*b=b*a=e$;
+\item $a*b=b*a$ for all $a,b\in G$.
+\end{enumerate}
+The first three conditions define a group; the fourth is commutativity.
+\end{Definition}
+
+\begin{Example}
+The sets $\mathbb R$, $\mathbb Z$, and $\mathbb Q$ form Abelian groups under addition. The sets $\mathbb Q\setminus\{0\}$ and $\mathbb R\setminus\{0\}$ form Abelian groups under multiplication. The non-zero integers do not form a group under multiplication.
+
+For $n\in\mathbb N$, let
+\begin{equation*}
+\mathbb Z_n=\{0,1,\ldots,n-1\},
+\end{equation*}
+with addition modulo $n$. Then $(\mathbb Z_n,+_n)$ is an Abelian group. Equivalently, if $\omega=e^{2\pi i/n}$, then
+\begin{equation*}
+\bigl(\{1,\omega,\ldots,\omega^{n-1}\},\times\bigr)
+\cong (\mathbb Z_n,+_n).
+\end{equation*}
+\end{Example}
+
+\begin{Definition}
+A \newterm{field} is a triple $(F,+,\cdot)$ such that:
+\begin{enumerate}
+\item $(F,+)$ is an Abelian group with identity $0$;
+\item $(F\setminus\{0\},\cdot)$ is an Abelian group with identity $1$;
+\item multiplication distributes over addition:
+\begin{equation*}
+a\cdot(b+c)=a\cdot b+a\cdot c
+\end{equation*}
+for all $a,b,c\in F$.
+\end{enumerate}
+\end{Definition}
+
+The familiar sets $\mathbb Q$, $\mathbb R$, and $\mathbb C$ are fields. If $p$ is prime, then $(\mathbb Z_p,+_p,\times_p)$ is also a field. The integers with their usual addition and multiplication are a ring, but not a field.
+
+\subsection{Definition and Basic Properties}
+
+\begin{Definition}\label{def:VectorSpace}
+Let $F$ be a field. A \newterm{vector space over $F$} is a triple $(V,+,\cdot)$, where $+\colon V\times V\to V$ is vector addition and $\cdot\colon F\times V\to V$ is scalar multiplication, satisfying:
+\begin{enumerate}
+\item $(V,+)$ is an Abelian group, with identity denoted by $0_V$;
+\item for all $\alpha,\beta\in F$ and $u,v\in V$,
+\begin{align*}
+\alpha(\beta v)&=(\alpha\beta)v,\\
+\alpha(u+v)&=\alpha u+\alpha v,\\
+(\alpha+\beta)v&=\alpha v+\beta v;
+\end{align*}
+\item $1_Fv=v$ for every $v\in V$.
+\end{enumerate}
+The elements of $V$ are called \newterm{vectors}, and the elements of $F$ are called \newterm{scalars}.
+\end{Definition}
+
+\begin{Theorem}\label{thm:ZeroScalar}
+Let $V$ be a vector space over $F$. Then, for every $v\in V$ and $\alpha\in F$,
+\begin{equation*}
+0_Fv=0_V,\qquad (-1_F)v=-v,\qquad \alpha 0_V=0_V.
+\end{equation*}
+Moreover, if $\alpha v=0_V$ and $\alpha\ne0_F$, then $v=0_V$.
+\end{Theorem}
+\begin{proof}
+Using distributivity and the identity law in $(V,+)$,
+\begin{align*}
+0_Fv+0_Fv&=(0_F+0_F)v=0_Fv,\\
+v+(-1_F)v&=(1_F-1_F)v=0_Fv=0_V.
+\end{align*}
+Cancellation gives $0_Fv=0_V$ and $(-1_F)v=-v$. Similarly,
+\begin{equation*}
+\alpha0_V=\alpha(0_V+0_V)=\alpha0_V+\alpha0_V,
+\end{equation*}
+so $\alpha0_V=0_V$. Finally, if $\alpha\ne0_F$ and $\alpha v=0_V$, then
+\begin{equation*}
+v=1_Fv=\alpha^{-1}(\alpha v)=\alpha^{-1}0_V=0_V.
+\end{equation*}
+\end{proof}
+
+\begin{Corollary}
+For $\alpha,\beta\in F$ and $v\in V$,
+\begin{equation*}
+(\alpha-\beta)v=\alpha v-\beta v.
+\end{equation*}
+\end{Corollary}
+
+\begin{Example}\label{ex:TupleSpace}
+For a field $F$ and $n\in\mathbb N$, define
+\begin{equation*}
+F^n=\qty{\, (x_1,\ldots,x_n) \mid x_i\in F\text{ for }i=1,\ldots,n \,}.
+\end{equation*}
+For $x=(x_1,\ldots,x_n)$ and $y=(y_1,\ldots,y_n)$, define
+\begin{align*}
+x+y&=(x_1+y_1,\ldots,x_n+y_n),\\
+\alpha x&=(\alpha x_1,\ldots,\alpha x_n).
+\end{align*}
+Then $F^n$ is a vector space over $F$. Its zero vector is $(0,\ldots,0)$.
+\end{Example}
+
+\begin{Example}
+Taking $F=\mathbb Z_2=\{0,1\}$, the vector space $F^3$ has eight elements:
+\begin{equation*}
+F^3=\{(0,0,0),(0,0,1),\ldots,(1,1,1)\}.
+\end{equation*}
+It may be visualised as the vertices of a cube, with vector addition performed coordinatewise modulo $2$.
+\end{Example}
+
+\begin{Example}
+The following are vector spaces with their indicated scalar fields:
+\begin{enumerate}
+\item $\mathbb C^n$ over $\mathbb C$;
+\item $\mathbb C^n$ over $\mathbb R$, using the usual real scalar multiplication;
+\item $\mathbb R^n$ over $\mathbb R$.
+\end{enumerate}
+With the usual scalar multiplication, $\mathbb R^n$ is not a vector space over $\mathbb C$. However, $\mathbb R^2$ can be made into a vector space over $\mathbb C$ by defining, for $z=u+iv\in\mathbb C$,
+\begin{equation*}
+z(x_1,x_2)=(ux_1-vx_2,\;vx_1+ux_2).
+\end{equation*}
+This is the usual identification of $\mathbb R^2$ with $\mathbb C$.
+\end{Example}
+
+\begin{Example}\label{ex:MatrixSpace}
+Let $\mathbb F^{m\times n}$ be the set of all $m\times n$ matrices over $\mathbb F$. For $A=[a_{ij}]$ and $B=[b_{ij}]$, define
+\begin{equation*}
+A+B=[a_{ij}+b_{ij}],\qquad \alpha A=[\alpha a_{ij}].
+\end{equation*}
+Then $\mathbb F^{m\times n}$ is a vector space over $\mathbb F$.
+\end{Example}
+
+\begin{Example}\label{ex:FunctionSpace}
+Let $S$ be a non-empty set and $F$ a field. The set
+\begin{equation*}
+F^S=\qty{\, f \mid f\colon S\to F \,}
+\end{equation*}
+is a vector space over $F$ under pointwise operations:
+\begin{align*}
+(f+g)(x)&=f(x)+g(x),\\
+(\alpha f)(x)&=\alpha f(x),
+\end{align*}
+for every $x\in S$. When $S=\{1,\ldots,n\}$, this is essentially the same vector space as $F^n$.
+\end{Example}
+
+\begin{Example}
+The set of continuous functions $\mathbb R\to\mathbb R$, and the set of differentiable functions $\mathbb R\to\mathbb R$, are vector spaces over $\mathbb R$. More generally, the solution set of a homogeneous linear differential equation
+\begin{equation*}
+\frac{d^ny}{dx^n}+a_1\frac{d^{n-1}y}{dx^{n-1}}+\cdots+a_ny=0,
+\qquad a_1,\ldots,a_n\in\mathbb R,
+\end{equation*}
+is a vector space over $\mathbb R$.
+\end{Example}
+
+\subsection{Linear Combinations}
+
+\begin{Definition}
+Let $V$ be a vector space over $F$ and let $v_1,\ldots,v_k\in V$. A vector
+\begin{equation*}
+\alpha_1v_1+\cdots+\alpha_kv_k,
+\qquad \alpha_1,\ldots,\alpha_k\in F,
+\end{equation*}
+is a \newterm{linear combination} of $v_1,\ldots,v_k$.
+\end{Definition}
+
+\section{Subspaces}\label{sec:Subspaces}
+
+\begin{Definition}
+Let $V$ be a vector space over $F$. A subset $W\subseteq V$ is a \newterm{subspace} of $V$ if $W$ is itself a vector space over $F$ under the operations inherited from $V$.
+\end{Definition}
+
+\begin{Example}
+In $\mathbb R^2$, the sets
+\begin{equation*}
+X=\qty{\, \begin{bmatrix}x\\0\end{bmatrix} \mid x\in\mathbb R \,},\qquad
+Y=\qty{\, \begin{bmatrix}0\\y\end{bmatrix} \mid y\in\mathbb R \,},\qquad
+W=\qty{\, \begin{bmatrix}x\\mx\end{bmatrix} \mid x\in\mathbb R \,}
+\end{equation*}
+are subspaces for every $m\in\mathbb R$. For example,
+\begin{align*}
+(x_1,mx_1)+(x_2,mx_2)&=(x_1+x_2,m(x_1+x_2)),\\
+\alpha(x,mx)&=(\alpha x,m(\alpha x)).
+\end{align*}
+\end{Example}
+
+The set $\{0\}$ is the \newterm{zero subspace} (or trivial subspace) of any vector space. The whole vector space $V$ is also a subspace. In contrast,
+\begin{equation*}
+S=\qty{\, \begin{bmatrix}x\\1\end{bmatrix} \mid x\in\mathbb R \,}\subseteq\mathbb R^2
+\end{equation*}
+is not a subspace, since it does not contain the zero vector.
+
+\begin{Theorem}\label{thm:SubspaceCriterion}
+A subset $W$ of a vector space $V$ over $F$ is a subspace if and only if
+\begin{equation*}
+W\ne\varnothing\quad\text{and}\quad
+\alpha u+v\in W\quad\text{for all }\alpha\in F,\ u,v\in W.
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+If $W$ is a subspace, the condition is immediate. Conversely, suppose that $W\ne\varnothing$ and that the displayed closure condition holds. Choose $w\in W$. Then $(-1)w+w=0_V\in W$. Hence, for $u,v\in W$, we have $u+v=1u+v\in W$; for $\alpha\in F$ and $u\in W$, we have $\alpha u+0_V\in W$; and $-u=(-1)u\in W$. Thus $W$ is closed under the inherited operations and contains the additive identity and inverses. All remaining vector-space axioms are inherited from $V$.
+\end{proof}
+
+\begin{Theorem}\label{thm:Intersection}
+Let $\{W_i\}_{i\in I}$ be a collection of subspaces of $V$. Then
+\begin{equation*}
+\bigcap_{i\in I}W_i
+\end{equation*}
+is also a subspace of $V$.
+\end{Theorem}
+\begin{proof}
+The zero vector belongs to every $W_i$, so the intersection is non-empty. If $u,v$ belong to the intersection and $\alpha\in F$, then $u,v\in W_i$ for every $i\in I$. By the subspace criterion, $\alpha u+v\in W_i$ for every $i\in I$, and hence $\alpha u+v$ belongs to the intersection.
+\end{proof}
+
+\begin{Theorem}
+If $W_1$ and $W_2$ are subspaces of $V$, then $W_1\cup W_2$ is a subspace if and only if $W_1\subseteq W_2$ or $W_2\subseteq W_1$.
+\end{Theorem}
+\begin{proof}
+If one subspace contains the other, the union is the larger subspace. Conversely, assume neither contains the other. Choose $w_1\in W_1\setminus W_2$ and $w_2\in W_2\setminus W_1$. If $w_1+w_2\in W_1$, then $w_2=(w_1+w_2)-w_1\in W_1$, a contradiction. Similarly, $w_1+w_2\notin W_2$. Thus the union is not closed under addition.
+\end{proof}
+
+\begin{Definition}\label{def:Span}
+Let $S=\{v_i\}_{i\in I}\subseteq V$. The \newterm{span} of $S$ is the set of all finite linear combinations of elements of $S$:
+\begin{align*}
+\operatorname{span}S
+&=\qty{\, \sum_{i\in I}\alpha_iv_i \mid
+\alpha_i\in F\text{ and all but finitely many }\alpha_i=0 \,}.
+\end{align*}
+Equivalently,
+\begin{equation*}
+\operatorname{span}S
+=\bigcap\qty{\, W\subseteq V \mid S\subseteq W\text{ and }W\text{ is a subspace of }V \,}.
+\end{equation*}
+Thus $\operatorname{span}S$ is the smallest subspace of $V$ containing $S$. The set $S$ is a \newterm{spanning set} of $V$ if $\operatorname{span}S=V$.
+\end{Definition}
+
+\begin{Example}
+Let $V=\mathbb R^3$ and consider
+\begin{align*}
+S_1&=\left\{\begin{bmatrix}1\\-1\\0\end{bmatrix},
+\begin{bmatrix}3\\-3\\0\end{bmatrix},
+\begin{bmatrix}-1\\1\\0\end{bmatrix}\right\},\\
+S_2&=\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},
+\begin{bmatrix}0\\1\\0\end{bmatrix},
+\begin{bmatrix}0\\0\\1\end{bmatrix}\right\},\\
+S_3&=\left\{\begin{bmatrix}1\\1\\1\end{bmatrix},
+\begin{bmatrix}1\\-1\\2\end{bmatrix},
+\begin{bmatrix}1\\3\\0\end{bmatrix}\right\}.
+\end{align*}
+Then
+\begin{align*}
+\operatorname{span}S_1
+ &=\qty{\, \begin{bmatrix}x\\-x\\0\end{bmatrix} \mid x\in\mathbb R\,},\\
+\operatorname{span}S_2&=\mathbb R^3,\\
+\operatorname{span}S_3
+ &=\qty{\, \begin{bmatrix}x+y\\x-y\\x+2y\end{bmatrix}
+      \mid x,y\in\mathbb R\,}\ne\mathbb R^3.
+\end{align*}
+Indeed, $\begin{bmatrix}1\\3\\0\end{bmatrix}= 2\begin{bmatrix}1\\1\\1\end{bmatrix}-\begin{bmatrix}1\\-1\\2\end{bmatrix}$.
+\end{Example}
+
+\begin{Example}
+Let $V$ be the vector space of all real polynomials and let
+\begin{equation*}
+S=\{1,x,x^2,\ldots\}.
+\end{equation*}
+Then $\operatorname{span}S=\mathbb R[x]$, the vector space of polynomials. This is not the vector space of all real-valued functions of $x$.
+\end{Example}
+
+\section{Linear Independence and Bases}\label{sec:Bases}
+
+\begin{Definition}
+Let $S=\{v_i\}_{i\in I}\subseteq V$. The set $S$ is \newterm{linearly independent} if, for every finite selection $v_{i_1},\ldots,v_{i_k}$ of distinct elements of $S$,
+\begin{equation*}
+\alpha_1v_{i_1}+\cdots+\alpha_kv_{i_k}=0_V
+\quad\Longrightarrow\quad
+\alpha_1=\cdots=\alpha_k=0_F.
+\end{equation*}
+If $S$ is not linearly independent, it is \newterm{linearly dependent}.
+\end{Definition}
+
+\begin{Definition}
+A \newterm{basis} of a vector space $V$ is a linearly independent spanning set of $V$.
+\end{Definition}
+
+\begin{Example}
+The standard basis of $\mathbb R^3$ is
+\begin{equation*}
+\mathcal E=\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},
+\begin{bmatrix}0\\1\\0\end{bmatrix},
+\begin{bmatrix}0\\0\\1\end{bmatrix}\right\}.
+\end{equation*}
+The set of the first two vectors is linearly independent but does not span $\mathbb R^3$. A set of four vectors in $\mathbb R^3$ cannot be linearly independent. The set
+\begin{equation*}
+\left\{\begin{bmatrix}1\\1\end{bmatrix},
+\begin{bmatrix}1\\-1\end{bmatrix}\right\}
+\end{equation*}
+is a basis of $\mathbb R^2$, and $\{1,x,x^2,\ldots\}$ is a basis of $\mathbb R[x]$.
+\end{Example}
+
+\begin{Example}
+In $\mathbb R^3$, let $v_1,v_2,v_3$ be the standard basis vectors and put
+\begin{equation*}
+v_4=\begin{bmatrix}1\\0\\2\end{bmatrix},\qquad
+S_1=\{v_1,v_2,v_3,v_4\}.
+\end{equation*}
+Since $v_1+2v_3-v_4=0$, the set $S_1$ is dependent. Now let
+\begin{equation*}
+S_2=\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},
+\begin{bmatrix}0\\1\\0\end{bmatrix}\right\}.
+\end{equation*}
+This set is independent but does not span $\mathbb R^3$. However, $S_2\cup\{(0,0,1)\}$ is a basis of $\mathbb R^3$.
+\end{Example}
+
+\begin{Theorem}\label{thm:DependentVector}
+Let $S=\{v_1,\ldots,v_n\}\subseteq V$. Then $S$ is linearly dependent if and only if some vector of $S$ can be written as a linear combination of the other vectors.
+\end{Theorem}
+\begin{proof}
+If, say, $v_n=\alpha_1v_1+\cdots+\alpha_{n-1}v_{n-1}$, then
+\begin{equation*}
+\alpha_1v_1+\cdots+\alpha_{n-1}v_{n-1}-v_n=0_V
+\end{equation*}
+is a non-trivial linear relation. Thus $S$ is dependent.
+
+Conversely, suppose that $S$ is dependent. Then there are scalars $\alpha_1,\ldots,\alpha_n$, not all zero, such that
+\begin{equation*}
+\alpha_1v_1+\cdots+\alpha_nv_n=0_V.
+\end{equation*}
+Choose $i$ with $\alpha_i\ne0_F$. Rearranging and dividing by $\alpha_i$ gives
+\begin{equation*}
+v_i=-\frac{\alpha_1}{\alpha_i}v_1-\cdots-
+\frac{\alpha_{i-1}}{\alpha_i}v_{i-1}
+-\frac{\alpha_{i+1}}{\alpha_i}v_{i+1}-\cdots-
+\frac{\alpha_n}{\alpha_i}v_n.
+\end{equation*}
+\end{proof}
+
+\subsection{Finite Dimensional Vector Spaces}
+
+\begin{Definition}
+A vector space $V$ is \newterm{finite dimensional} if it has a finite basis. If it has no finite basis, it is \newterm{infinite dimensional}.
+\end{Definition}
+
+\begin{Example}
+The vector space $F^n$ has the standard basis
+\begin{equation*}
+e_i=(0,\ldots,0,1,0,\ldots,0),
+\end{equation*}
+where the $1$ is in the $i$\nth component. Hence $F^n$ is finite dimensional.
+
+The polynomial space $F[x]$ is infinite dimensional. If $p_1,\ldots,p_n\in F[x]$ and $k$ is the largest of their degrees, then every linear combination of these polynomials has degree at most $k$, whereas $x^{k+1}$ does not. Therefore $\{1,x,x^2,\ldots\}$ has no finite spanning subset.
+\end{Example}
+
+\begin{Theorem}\label{thm:FiniteSpanningBasis}
+If $V$ is spanned by a finite set $S$, then $V$ has a basis contained in $S$.
+\end{Theorem}
+\begin{proof}
+If $S$ is independent, it is already a basis. Otherwise, by \cref{thm:DependentVector}, one element of $S$ is a linear combination of the others. Remove that element. The remaining set still spans $V$. Repeating this process must terminate because $S$ is finite, and it terminates at a linearly independent spanning set.
+\end{proof}
+
+\begin{Theorem}\label{thm:BasisCardinality}
+Any two bases of a finite dimensional vector space have the same number of elements.
+\end{Theorem}
+\begin{proof}
+We first prove the replacement principle: if $u_1,\ldots,u_r$ are linearly independent and $v_1,\ldots,v_n$ span $V$, then $r\le n$. Express $u_1$ in terms of the spanning vectors. Some coefficient is non-zero, so we can solve for the corresponding $v_j$ and replace it by $u_1$ without changing the span. After $k$ replacements we have a spanning list consisting of $u_1,\ldots,u_k$ and $n-k$ of the original vectors. In an expression for $u_{k+1}$ using this list, some coefficient of an original vector must be non-zero; otherwise $u_{k+1}$ belongs to $\operatorname{span}\{u_1,\ldots,u_k\}$, contrary to independence. Thus another replacement is possible. There cannot be more than $n$ replacements, giving $r\le n$.
+
+If $V$ has a basis of size $n$, no independent set can have more than $n$ elements, since any $n+1$ of them would contradict the replacement principle. In particular every basis is finite. Applying the principle in both directions to bases of sizes $m$ and $n$ gives $m\le n$ and $n\le m$, so $m=n$.
+\end{proof}
+
+\begin{Theorem}\label{thm:BasisExtension}
+Every linearly independent subset of a finite dimensional vector space can be extended to a basis.
+\end{Theorem}
+\begin{proof}
+Let $S$ be independent, and let $v_1,\ldots,v_n$ be a finite spanning list. Consider these vectors in turn, adjoining $v_j$ to $S$ precisely when it is not in the span of the vectors already selected. Independence is preserved at every step. The resulting set spans every $v_j$, hence spans $V$, and is therefore a basis.
+\end{proof}
+
+\subsection{Dimension and Coordinates}
+
+\begin{Definition}
+If $V$ is finite dimensional, its \newterm{dimension}, denoted by $\dim V$, is the number of vectors in any basis of $V$.
+\end{Definition}
+
+\begin{Example}
+\begin{enumerate}
+\item $\dim F^n=n$.
+\item If $W=\qty{\, \begin{bmatrix}x\\0\\0\end{bmatrix} \mid x\in\mathbb R \,}\subseteq\mathbb R^3$, then $\dim W=1$.
+\item If $U=\qty{\, \begin{bmatrix}x\\y\\0\end{bmatrix} \mid x,y\in\mathbb R \,}\subseteq\mathbb R^3$, then $\dim U=2$.
+\item $\dim\{0_V\}=0$.
+\item Every field $F$ is a one-dimensional vector space over itself, with basis $\{1_F\}$.
+\end{enumerate}
+\end{Example}
+
+\begin{Theorem}\label{thm:Coordinates}
+Let $\mathcal B=\{v_i\}_{i\in I}$ be a basis of $V$. Every vector of $V$ can be written as a linear combination of elements of $\mathcal B$ in exactly one way.
+\end{Theorem}
+\begin{proof}
+Existence follows from the fact that $\mathcal B$ spans $V$. Suppose
+\begin{equation*}
+v=\sum_{k=1}^n\alpha_kv_{i_k}
+ =\sum_{\ell=1}^m\beta_\ell v_{j_\ell}
+\end{equation*}
+are two representations. Moving all terms to one side and collecting equal basis vectors gives a finite linear combination of elements of $\mathcal B$ equal to $0_V$. Linear independence implies that every coefficient is zero, so the representations are identical.
+\end{proof}
+
+If $\mathcal B=(v_1,\ldots,v_n)$ is an ordered basis and $v=\alpha_1v_1+\cdots+\alpha_nv_n$, then
+\begin{equation*}
+[v]_{\mathcal B}=\begin{bmatrix}\alpha_1\\\vdots\\\alpha_n\end{bmatrix}
+\end{equation*}
+is the \newterm{coordinate representation} of $v$ with respect to $\mathcal B$.
+
+\begin{Example}
+Let $V=\mathbb R^3$ and take
+\begin{align*}
+\mathcal B_1&=\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},
+\begin{bmatrix}0\\1\\0\end{bmatrix},
+\begin{bmatrix}0\\0\\1\end{bmatrix}\right\},\\
+\mathcal B_2&=\left\{\begin{bmatrix}1\\1\\0\end{bmatrix},
+\begin{bmatrix}0\\1\\0\end{bmatrix},
+\begin{bmatrix}0\\0\\1\end{bmatrix}\right\}.
+\end{align*}
+For $a=(x,y,z)$,
+\begin{equation*}
+[a]_{\mathcal B_1}=(x,y,z),\qquad
+[a]_{\mathcal B_2}=(x,y-x,z).
+\end{equation*}
+\end{Example}
+
+\begin{Example}
+For $V=F[x]$ with ordered basis $\mathcal B=(1,x,x^2,\ldots)$, if
+\begin{equation*}
+p(x)=a_0+a_1x+\cdots+a_nx^n,
+\end{equation*}
+then
+\begin{equation*}
+[p]_{\mathcal B}=(a_0,a_1,\ldots,a_n,0,0,\ldots).
+\end{equation*}
+\end{Example}
+
+\input{FurtherBases}
+
+\section{Linear Transformations}\label{sec:LinearTransformations}
+
+\begin{Definition}
+Let $V$ and $W$ be vector spaces over the same field $F$. A function $T\colon V\to W$ is a \newterm{linear transformation} if
+\begin{equation*}
+T(\alpha u+v)=\alpha T(u)+T(v)
+\end{equation*}
+for all $\alpha\in F$ and $u,v\in V$.
+\end{Definition}
+
+By induction, a linear transformation preserves all finite linear combinations:
+\begin{equation*}
+T(\alpha_1v_1+\cdots+\alpha_nv_n)
+=\alpha_1T(v_1)+\cdots+\alpha_nT(v_n).
+\end{equation*}
+It also satisfies $T(0_V)=0_W$, and is a homomorphism from $(V,+)$ to $(W,+)$.
+
+The \newterm{image} (or range) of $T$ is
+\begin{equation*}
+\im T=T(V)=\qty{\, T(v) \mid v\in V \,}\subseteq W,
+\end{equation*}
+and the \newterm{kernel} (or null space) of $T$ is
+\begin{equation*}
+\ker T=\qty{\, v\in V \mid T(v)=0_W \,}\subseteq V.
+\end{equation*}
+
+\begin{Theorem}\label{thm:ImageKernel}
+If $T\colon V\to W$ is linear, then $\im T$ is a subspace of $W$ and $\ker T$ is a subspace of $V$.
+\end{Theorem}
+\begin{proof}
+Since $T(0_V)=0_W$, the image is non-empty. If $x=T(u)$ and $y=T(v)$ belong to $\im T$, then
+\begin{equation*}
+\alpha x+y=\alpha T(u)+T(v)=T(\alpha u+v)\in\im T.
+\end{equation*}
+Thus $\im T$ is a subspace by the subspace criterion.
+
+Also $0_V\in\ker T$. If $u,v\in\ker T$, then
+\begin{equation*}
+T(\alpha u+v)=\alpha T(u)+T(v)=0_W,
+\end{equation*}
+so $\alpha u+v\in\ker T$. Hence $\ker T$ is a subspace.
+\end{proof}
+
+\begin{Example}
+Define $T\colon\mathbb R^3\to\mathbb R^2$ by
+\begin{equation*}
+T(x,y,z)=(z,x+y).
+\end{equation*}
+Then
+\begin{align*}
+\ker T
+ &=\qty{\, (x,y,z)\in\mathbb R^3 \mid (z,x+y)=(0,0) \,}\\
+ &=\qty{\, \begin{bmatrix}x\\-x\\0\end{bmatrix} \mid x\in\mathbb R \,},\\
+\im T
+ &=\qty{\, (z,x+y) \mid x,y,z\in\mathbb R\,}=\mathbb R^2.
+\end{align*}
+Therefore $\dim\ker T=1$, $\dim\im T=2$, and $\dim\mathbb R^3=3$.
+\end{Example}
+
+\begin{Example}
+Define $T\colon\mathbb R^3\to\mathbb R^2$ by
+\begin{equation*}
+T(x,y,z)=(y,-y).
+\end{equation*}
+Then
+\begin{align*}
+\ker T&=\qty{\, \begin{bmatrix}x\\0\\z\end{bmatrix} \mid x,z\in\mathbb R \,},\\
+\im T&=\qty{\, \begin{bmatrix}a\\-a\end{bmatrix} \mid a\in\mathbb R \,}.
+\end{align*}
+Thus $\dim\ker T=2$, $\dim\im T=1$, and $\dim\mathbb R^3=3$.
+\end{Example}
+
+\begin{Example}
+Define $T\colon\mathbb R^2\to\mathbb R^3$ by
+\begin{equation*}
+T(x,y)=(x+y,x,y+x).
+\end{equation*}
+Then
+\begin{align*}
+\ker T&=\qty{\begin{bmatrix}0\\0\end{bmatrix}},\\
+\im T&=\qty{\, \begin{bmatrix}x+y\\x\\x+y\end{bmatrix} \mid x,y\in\mathbb R \,}\\
+ &=\qty{\, \begin{bmatrix}a\\b\\a\end{bmatrix} \mid a,b\in\mathbb R \,}\\
+ &=\operatorname{span}\qty{\begin{bmatrix}1\\0\\1\end{bmatrix},\begin{bmatrix}0\\1\\0\end{bmatrix}}.
+\end{align*}
+Hence $\dim\ker T=0$, $\dim\im T=2$, and $\dim\mathbb R^2=2$.
+\end{Example}
+
+\begin{Example}
+Let $V$ be the vector space of all infinitely differentiable functions $\mathbb R\to\mathbb R$. Define the differentiation operator
+\begin{equation*}
+D\colon V\to V,\qquad Df=f'.
+\end{equation*}
+For $\alpha\in\mathbb R$ and $f,g\in V$,
+\begin{equation*}
+D(\alpha f+g)=(\alpha f+g)'=\alpha f'+g'=\alpha Df+Dg,
+\end{equation*}
+so $D$ is linear. Its kernel is the space of constant functions:
+\begin{equation*}
+\ker D=\qty{\, f\in V \mid f'=0 \,}=\qty{\, x\mapsto c \mid c\in\mathbb R\,}.
+\end{equation*}
+\end{Example}
+
+\begin{Example}
+Let $V=\mathbb R[x]$ and let $D\colon V\to V$ again be differentiation. If
+\begin{equation*}
+p(x)=a_0+a_1x+\cdots+a_nx^n,
+\end{equation*}
+then
+\begin{equation*}
+Dp(x)=a_1+2a_2x+3a_3x^2+\cdots+na_nx^{n-1}.
+\end{equation*}
+Therefore
+\begin{equation*}
+\ker D=\qty{\, c \mid c\in\mathbb R\,},\qquad \im D=\mathbb R[x]=V,
+\end{equation*}
+since every polynomial has a polynomial antiderivative.
+\end{Example}
+
+\input{Transformations}
+
+\input{DirectSums}
+
+\input{Duality}
+
+\input{SpectralTheory}
+
+\input{InnerProducts}

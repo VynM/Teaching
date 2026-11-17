@@ -1,0 +1,109 @@
+% !TeX root = Linear Algebra.tex
+% Handwritten pages 11 and 21--23.
+
+\section{Direct Sums and Projections}\label{sec:DirectSums}
+
+\begin{Definition}
+For subspaces $U,W\subseteq V$, their \newterm{sum} is
+\begin{equation*}
+U+W=\qty{\, u+w \mid u\in U,\ w\in W \,}.
+\end{equation*}
+The sum is \newterm{direct} if $U\cap W=\{0\}$; we then write $U\oplus W$. If $V=U\oplus W$, then $U$ is a \newterm{direct complement} of $W$ in $V$.
+\end{Definition}
+
+The sum is a subspace containing $U\cup W$, since $\alpha(u_1+w_1)+(u_2+w_2)=(\alpha u_1+u_2)+(\alpha w_1+w_2)$. Indeed, $U+W=\operatorname{span}(U\cup W)$.
+
+\begin{Theorem}\label{thm:DirectUnique}
+The equality $V=U\oplus W$ holds if and only if each $v\in V$ has exactly one expression $v=u+w$ with $u\in U$ and $w\in W$.
+\end{Theorem}
+\begin{proof}
+If the sum is direct and $u+w=u'+w'$, then $u-u'=w'-w\in U\cap W$, so $u=u'$ and $w=w'$. Conversely, existence of the expressions gives $V=U+W$. For $z\in U\cap W$, the two expressions $z=z+0=0+z$ and uniqueness give $z=0$.
+\end{proof}
+
+\begin{Theorem}[Dimension Formula]\label{thm:DimensionSum}
+For finite dimensional subspaces $U,W$,
+\begin{equation*}
+\dim(U+W)=\dim U+\dim W-\dim(U\cap W).
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+Choose a basis $z_1,\ldots,z_k$ of $U\cap W$ and extend it to bases $(z_1,\ldots,z_k,u_1,\ldots,u_r)$ of $U$ and $(z_1,\ldots,z_k,w_1,\ldots,w_s)$ of $W$. The combined list $z_1,\ldots,z_k,u_1,\ldots,u_r,w_1,\ldots,w_s$ spans $U+W$. In any relation among these vectors, the sum of the $w_j$ terms lies in $U\cap W$, so independence of the basis of $W$ forces all their coefficients to vanish. Independence of the basis of $U$ then makes the remaining coefficients zero. Hence the combined list is a basis, and its length is $k+r+s=(k+r)+(k+s)-k$.
+\end{proof}
+
+\begin{Corollary}
+Every subspace of a finite dimensional vector space has a direct complement.
+\end{Corollary}
+\begin{proof}
+Extend a basis of $W$ to a basis of $V$ and let $U$ be the span of the added vectors. Uniqueness of basis coordinates gives $V=U\oplus W$.
+\end{proof}
+
+\begin{Remark*}
+Complements need not be unique. In $\mathbb R^2$, the $x$-axis has both the $y$-axis and the line $y=x$ as direct complements.
+\end{Remark*}
+
+\subsection{Direct Products and Several Summands}
+
+\begin{Definition}
+For vector spaces $V,W$ over the same field, their \newterm{direct product} is
+\begin{equation*}
+V\times W=\qty{\, (v,w) \mid v\in V,\ w\in W \,},
+\end{equation*}
+with componentwise operations. For two factors this is also called the \newterm{external direct sum}.
+\end{Definition}
+
+The inclusions $i_V(v)=(v,0)$ and $i_W(w)=(0,w)$ and the projections $\pi_V(v,w)=v$, $\pi_W(v,w)=w$ are linear. They satisfy
+\begin{equation*}
+\pi_Vi_V=\id_V,\quad \pi_Wi_W=\id_W,\quad \pi_Vi_W=0,\quad \pi_Wi_V=0,\quad i_V\pi_V+i_W\pi_W=\id_{V\times W}.
+\end{equation*}
+In particular, $i_V\pi_V$ is a projection onto $V\times\{0\}$; it is not the identity on the entire product unless $W=\{0\}$. We have
+\begin{equation*}
+V\times W=(V\times\{0\})\oplus(\{0\}\times W),\qquad \dim(V\times W)=\dim V+\dim W
+\end{equation*}
+in finite dimensions, by taking the embedded bases of the factors. If $V=U\oplus W$ internally, the addition map $U\times W\to V$, $(u,w)\mapsto u+w$, is an isomorphism.
+
+\begin{Exercise}
+Given linear maps $T_V\colon Z\to V$ and $T_W\colon Z\to W$, show that there is exactly one linear map $T\colon Z\to V\times W$ satisfying $\pi_VT=T_V$ and $\pi_WT=T_W$. Explicitly, $T(z)=(T_V(z),T_W(z))$.
+\end{Exercise}
+
+\begin{Definition}
+For finitely many subspaces $W_1,\ldots,W_k$, write $V=W_1\oplus\cdots\oplus W_k$ if every $v\in V$ has a unique decomposition $v=w_1+\cdots+w_k$ with $w_i\in W_i$.
+\end{Definition}
+
+Equivalently, the subspaces span $V$ and $W_i\cap\sum_{j\ne i}W_j=\{0\}$ for each $i$. Pairwise trivial intersections alone are not sufficient when there are three or more summands. Concatenating bases of the summands gives a basis of $V$, and conversely such a concatenated list is a basis precisely when the sum is direct and spans $V$. In particular, non-zero vectors $v_1,\ldots,v_n$ form a basis exactly when $V=\bigoplus_{i=1}^n\operatorname{span}\{v_i\}$.
+
+\subsection{Idempotent Operators}
+
+\begin{Definition}
+An operator $P\in L(V)$ is \newterm{idempotent} if $P^2=P$. Such an operator is also called a \newterm{projection}.
+\end{Definition}
+
+\begin{Theorem}\label{thm:ProjectionSplit}
+If $P^2=P$, then $V=\im P\oplus\ker P$. Conversely, a decomposition $V=U\oplus W$ defines a projection $P(u+w)=u$ with image $U$ and kernel $W$.
+\end{Theorem}
+\begin{proof}
+For every $v$, write $v=P(v)+(v-P(v))$. The first term is in the image, and $P(v-P(v))=P(v)-P^2(v)=0$, so the second is in the kernel. If $z=P(u)\in\ker P$, then $z=P^2(u)=P(z)=0$. The sum is therefore direct. Conversely, uniqueness of the direct-sum decomposition makes $P$ well defined and linear, and applying it twice gives $P^2=P$. Its image and kernel are as claimed.
+\end{proof}
+
+\begin{Example}
+On $\mathbb R^3$, the operators
+\begin{equation*}
+P(x,y,z)=(x,0,z),\qquad Q(x,y,z)=\pqty{\frac{x+y}{2},\frac{x+y}{2},0}
+\end{equation*}
+are idempotent. Here $\im P$ is the $xz$-plane and $\ker P$ the $y$-axis, while
+\begin{equation*}
+\im Q=\operatorname{span}\qty{\begin{bmatrix}1\\1\\0\end{bmatrix}},\qquad \ker Q=\qty{\, \begin{bmatrix}x\\-x\\z\end{bmatrix} \mid x,z\in\mathbb R \,}.
+\end{equation*}
+The zero and identity operators are also projections.
+\end{Example}
+
+\begin{Remark*}
+For any operator $T$, $\im T\subseteq\ker T$ if and only if $T^2=0$. In contrast, $\im T\cap\ker T=\{0\}$ does not imply $T^2=T$. For example, $T=2\id_{\mathbb R}$ has trivial kernel but is not idempotent. A projection is distinguished by acting as the identity on its image.
+\end{Remark*}
+
+\begin{Exercise}
+Assume that $\operatorname{char}F\ne2$. On $F^{n\times n}$ define $P(A)=\frac12(A+A^{\mathsf T})$. Show that $P$ is a projection, that its image is the space of symmetric matrices, and that its kernel is the space of skew-symmetric matrices. Deduce
+\begin{equation*}
+F^{n\times n}=\qty{\, A \mid A^{\mathsf T}=A \,}\oplus\qty{\, A \mid A^{\mathsf T}=-A \,}.
+\end{equation*}
+Explain why the hypothesis on the characteristic is necessary for this formula.
+\end{Exercise}

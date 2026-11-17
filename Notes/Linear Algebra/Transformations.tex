@@ -1,0 +1,290 @@
+% !TeX root = Linear Algebra.tex
+% Handwritten pages 8--20, with repeated examples consolidated.
+
+\subsection{Examples and Rank--Nullity}
+
+\begin{Example}
+The identity $\id_V(v)=v$, the zero transformation $0(v)=0_W$, and scalar multiplication $v\mapsto\alpha v$ are linear. Over $\mathbb R$, the maps $\mathbb C\to\mathbb R^2$, $x+iy\mapsto(x,y)$, and $\mathbb R^2\to\mathbb C$, $(x,y)\mapsto x+iy$, are inverse linear transformations.
+
+A map $\mathbb R^2\to\mathbb R^3$ of the form $(x,y)\mapsto(a_1x+b_1y,a_2x+b_2y,a_3x+b_3y)$ is linear. The map $(x,y)\mapsto(x^2,0,0)$ is not linear, since it does not preserve scalar multiplication. The map $(x,y)\mapsto(x+1,y+1,x+y)$ is not linear, since it does not take $0$ to $0$.
+\end{Example}
+
+\begin{Definition}
+The \newterm{rank} and \newterm{nullity} of a linear transformation $T$ are
+\begin{equation*}
+\rank T=\dim\im T,\qquad \nullity T=\dim\ker T.
+\end{equation*}
+\end{Definition}
+
+\begin{Theorem}[Rank--Nullity Theorem]\label{thm:RankNullity}
+If $T\colon V\to W$ is linear and $V$ is finite dimensional, then
+\begin{equation*}
+\rank T+\nullity T=\dim V.
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+Choose a basis $v_1,\ldots,v_k$ of $\ker T$ and extend it to a basis $v_1,\ldots,v_n$ of $V$. We claim that $T(v_{k+1}),\ldots,T(v_n)$ is a basis of $\im T$. For $v=\sum_{i=1}^n\alpha_iv_i$, linearity gives
+\begin{equation*}
+T(v)=\sum_{i=k+1}^n\alpha_iT(v_i),
+\end{equation*}
+so these vectors span the image. If $\sum_{i=k+1}^n\beta_iT(v_i)=0$, then $\sum_{i=k+1}^n\beta_iv_i\in\ker T$. Expressing this vector using $v_1,\ldots,v_k$ gives a linear relation among the basis vectors of $V$. All coefficients are zero, proving independence. Consequently $\rank T=n-k$ and $\nullity T=k$.
+\end{proof}
+
+\begin{Example}
+For $T\colon\mathbb R^2\to\mathbb R^2$ given by $T(x,y)=(x-y,y-x)$,
+\begin{equation*}
+\ker T=\operatorname{span}\qty{\begin{bmatrix}1\\1\end{bmatrix}},\qquad \im T=\operatorname{span}\qty{\begin{bmatrix}1\\-1\end{bmatrix}}.
+\end{equation*}
+For the following maps, the kernels and images can similarly be read off from the formulas:
+\begin{align*}
+T_1(x,y)&=(x,y,x-y,x+y),& \ker T_1&=\{0\},\\
+\im T_1&=\operatorname{span}\qty{\begin{bmatrix}1\\0\\1\\1\end{bmatrix},\begin{bmatrix}0\\1\\-1\\1\end{bmatrix}};\\
+T_2(x,y)&=(x-y,0,y-x,2x-2y),& \ker T_2&=\operatorname{span}\qty{\begin{bmatrix}1\\1\end{bmatrix}},\\
+\im T_2&=\operatorname{span}\qty{\begin{bmatrix}1\\0\\-1\\2\end{bmatrix}};\\
+T_3(x,y,z)&=(x+y,x-y,0,x),& \ker T_3&=\operatorname{span}\qty{\begin{bmatrix}0\\0\\1\end{bmatrix}},\\
+\im T_3&=\operatorname{span}\qty{\begin{bmatrix}1\\1\\0\\1\end{bmatrix},\begin{bmatrix}1\\-1\\0\\0\end{bmatrix}}.
+\end{align*}
+The respective rank--nullity pairs are $(2,0)$, $(1,1)$ and $(2,1)$.
+\end{Example}
+
+\begin{Theorem}\label{thm:InjectiveKernel}
+A linear transformation $T\colon V\to W$ is injective if and only if $\ker T=\{0_V\}$.
+\end{Theorem}
+\begin{proof}
+If $T$ is injective, $T(v)=0_W=T(0_V)$ implies $v=0_V$. Conversely, if the kernel is trivial and $T(u)=T(v)$, then $T(u-v)=0_W$, so $u=v$.
+\end{proof}
+
+\begin{Exercise}
+Prove that an injective linear transformation takes every linearly independent set to a linearly independent set, and a surjective linear transformation takes every spanning set to a spanning set. Deduce, in finite dimensions, that injectivity implies $\dim V\le\dim W$, while surjectivity implies $\dim V\ge\dim W$.
+\end{Exercise}
+
+\subsection{Specifying a Transformation on a Basis}
+
+\begin{Theorem}\label{thm:SpecifyBasis}
+Let $\mathcal B=(v_1,\ldots,v_n)$ be a basis of $V$, and choose arbitrary vectors $w_1,\ldots,w_n\in W$. There is exactly one linear transformation $T\colon V\to W$ such that $T(v_i)=w_i$ for every $i$.
+\end{Theorem}
+\begin{proof}
+The unique basis expansion of each vector makes the formula
+\begin{equation*}
+T\pqty{\sum_{i=1}^n\alpha_iv_i}=\sum_{i=1}^n\alpha_iw_i
+\end{equation*}
+well defined. If $u=\sum_i\alpha_iv_i$ and $v=\sum_i\beta_iv_i$, then
+\begin{equation*}
+T(\gamma u+v)=\sum_i(\gamma\alpha_i+\beta_i)w_i=\gamma T(u)+T(v).
+\end{equation*}
+Thus $T$ is linear and has the required values. Every linear transformation with these values must satisfy the displayed defining formula, proving uniqueness.
+\end{proof}
+
+\begin{Example}
+If $T\colon\mathbb R^2\to\mathbb R^2$ satisfies $T(1,0)=(-1,2)$ and $T(0,1)=(1,3)$, then $T(x,y)=(y-x,2x+3y)$. If instead $T\colon\mathbb R^2\to\mathbb R^3$ is specified by $T(1,1)=(1,0,1)$ and $T(1,-1)=(0,2,-1)$, then
+\begin{equation*}
+T(x,y)=\frac{x+y}{2}\begin{bmatrix}1\\0\\1\end{bmatrix}+\frac{x-y}{2}\begin{bmatrix}0\\2\\-1\end{bmatrix}=\begin{bmatrix}(x+y)/2\\x-y\\y\end{bmatrix}.
+\end{equation*}
+Prescribing images of a dependent set requires consistency. There is no linear map with $T(1,0)=(1,1)$, $T(0,1)=(0,1)$ and $T(1,-1)=(2,2)$, since the first two conditions force $T(1,-1)=(1,0)$.
+\end{Example}
+
+\section{Matrices and Linear Transformations}\label{sec:Matrices}
+
+\subsection{Column Space, Row Space and Null Space}
+
+\begin{Definition}
+For $A\in F^{m\times n}$, define $T_A\colon F^{n\times1}\to F^{m\times1}$ by $T_A(x)=Ax$. Its \newterm{column space} $\mathcal C(A)$ is the span of the columns of $A$, its \newterm{row space} $\mathcal R(A)$ is the span of its rows, and its \newterm{null space} is
+\begin{equation*}
+\mathcal N(A)=\qty{\, x\in F^{n\times1} \mid Ax=0 \,}.
+\end{equation*}
+The \newterm{column rank} and \newterm{row rank} are $\dim\mathcal C(A)$ and $\dim\mathcal R(A)$ respectively. The \newterm{nullity} of $A$ is $\dim\mathcal N(A)$.
+\end{Definition}
+
+Writing the columns as $a_1,\ldots,a_n$, we have
+\begin{equation*}
+Ax=\begin{bmatrix}a_1&\cdots&a_n\end{bmatrix}\begin{bmatrix}x_1\\\vdots\\x_n\end{bmatrix}=\sum_{j=1}^n x_ja_j.
+\end{equation*}
+Thus $\mathcal C(A)=\im T_A$ and $\mathcal N(A)=\ker T_A$. The row space is naturally identified, by transposition, with $\mathcal C(A^{\mathsf T})$. Also, if $B$ has columns $b_1,\ldots,b_p$, then $AB=\begin{bmatrix}Ab_1&\cdots&Ab_p\end{bmatrix}$.
+
+\begin{Theorem}\label{thm:RowColumnRank}
+The row rank and column rank of any matrix over any field are equal. Their common value is the \newterm{rank} of the matrix.
+\end{Theorem}
+\begin{proof}
+If the column rank is $0$, the matrix is zero and so is its row rank. Otherwise, select $r$ columns forming a basis of $\mathcal C(A)$ and place them in a matrix $C\in F^{m\times r}$. Expressing every column of $A$ in this basis gives $A=CB$ for some $B\in F^{r\times n}$. Every row of $A$ is a linear combination of the $r$ rows of $B$. Hence the row rank of $A$ is at most its column rank. Applying the same argument to $A^{\mathsf T}$ gives the reverse inequality.
+\end{proof}
+
+\begin{Corollary}
+For $A\in F^{m\times n}$,
+\begin{equation*}
+\rank A+\nullity A=n.
+\end{equation*}
+\end{Corollary}
+
+\begin{Example}
+For $A=\begin{bmatrix}1&2&0\\0&1&-1\end{bmatrix}$, the equations $Ax=0$ give $x_1=-2x_2$ and $x_3=x_2$. Therefore
+\begin{equation*}
+\mathcal N(A)=\operatorname{span}\qty{\begin{bmatrix}-2\\1\\1\end{bmatrix}},\qquad \rank A=2.
+\end{equation*}
+The matrices $\begin{bmatrix}1&2\\0&1\end{bmatrix}$ and $\begin{bmatrix}1&-1\\0&1\\1&1\end{bmatrix}$ both have rank $2$ and nullity $0$.
+\end{Example}
+
+\begin{Theorem}
+If $A\in F^{m\times n}$ and $B\in F^{n\times p}$, then
+\begin{equation*}
+\rank(AB)\le\min\{\rank A,\rank B\},\qquad \nullity(AB)\ge\nullity B.
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+We have $\mathcal C(AB)\subseteq\mathcal C(A)$ and $\mathcal N(B)\subseteq\mathcal N(AB)$, proving the first rank bound and the nullity bound. Moreover, $T_A$ maps $\mathcal C(B)$ onto $\mathcal C(AB)$, so rank--nullity applied to this restriction gives $\rank(AB)\le\rank B$.
+\end{proof}
+
+\subsection{Matrix Representation}
+
+\begin{Definition}
+Let $\mathcal B=(v_1,\ldots,v_n)$ and $\mathcal C=(w_1,\ldots,w_m)$ be ordered bases of $V$ and $W$. The \newterm{matrix representation} of $T\colon V\to W$ in these bases is
+\begin{equation*}
+[T]_{\mathcal C}^{\mathcal B}=\begin{bmatrix}[T(v_1)]_{\mathcal C}&\cdots&[T(v_n)]_{\mathcal C}\end{bmatrix}.
+\end{equation*}
+When $V=W$ and the same basis is used on both sides, write $[T]_{\mathcal B}$.
+\end{Definition}
+
+\begin{Theorem}\label{thm:MatrixCoordinates}
+For every $v\in V$,
+\begin{equation*}
+[T(v)]_{\mathcal C}=[T]_{\mathcal C}^{\mathcal B}[v]_{\mathcal B}.
+\end{equation*}
+Conversely, every $m\times n$ matrix determines exactly one linear transformation in these bases.
+\end{Theorem}
+\begin{proof}
+If $T(v_j)=\sum_i a_{ij}w_i$ and $v=\sum_j\alpha_jv_j$, then
+\begin{equation*}
+T(v)=\sum_i\pqty{\sum_j a_{ij}\alpha_j}w_i.
+\end{equation*}
+This is precisely the stated matrix equation. Conversely, the columns of any matrix prescribe the coordinates of $T(v_j)$; apply \cref{thm:SpecifyBasis}. In particular, every linear map between column-vector spaces is $T_A$ for a unique matrix $A$.
+\end{proof}
+
+\begin{Example}
+For differentiation on $P_3(\mathbb R)$ with basis $(1,x,x^2,x^3)$,
+\begin{equation*}
+[D]=\begin{bmatrix}0&1&0&0\\0&0&2&0\\0&0&0&3\\0&0&0&0\end{bmatrix}.
+\end{equation*}
+For $D\colon P_4(\mathbb R)\to P_3(\mathbb R)$ and $J\colon P_3(\mathbb R)\to P_4(\mathbb R)$, where $Jp(x)=\int_0^x p(t)\,dt$, the standard matrices are
+\begin{equation*}
+A_D=\begin{bmatrix}0&1&0&0&0\\0&0&2&0&0\\0&0&0&3&0\\0&0&0&0&4\end{bmatrix},\qquad
+A_J=\begin{bmatrix}0&0&0&0\\1&0&0&0\\0&1/2&0&0\\0&0&1/3&0\\0&0&0&1/4\end{bmatrix}.
+\end{equation*}
+Thus $A_DA_J=I_4$, whereas $A_JA_D=\operatorname{diag}(0,1,1,1,1)$. Indeed, $DJp=p$ but $JDp=p-p(0)$.
+\end{Example}
+
+\begin{Exercise}
+On $P_3(\mathbb R)$, define $T(p)(x)=p(1-x)$. Find $[T]_{\mathcal B}$ for $\mathcal B=(1,x,x^2,x^3)$ by computing the coordinate columns of $T(1)$, $T(x)$, $T(x^2)$ and $T(x^3)$. Verify from the matrix that $T^2=\id$.
+\end{Exercise}
+
+\begin{Example}
+Let $T(x,y)=(x-y,3y,2x+y)$, use the standard basis $\mathcal B$ of $\mathbb R^2$, and let
+\begin{equation*}
+\mathcal C=\pqty{\begin{bmatrix}1\\0\\1\end{bmatrix},\begin{bmatrix}1\\0\\-1\end{bmatrix},\begin{bmatrix}0\\1\\0\end{bmatrix}}.
+\end{equation*}
+Since
+\begin{align*}
+T(1,0)&=\tfrac32\begin{bmatrix}1\\0\\1\end{bmatrix}-\tfrac12\begin{bmatrix}1\\0\\-1\end{bmatrix},\\
+T(0,1)&=-\begin{bmatrix}1\\0\\-1\end{bmatrix}+3\begin{bmatrix}0\\1\\0\end{bmatrix},
+\end{align*}
+we obtain
+\begin{equation*}
+[T]_{\mathcal C}^{\mathcal B}=\begin{bmatrix}3/2&0\\-1/2&-1\\0&3\end{bmatrix}.
+\end{equation*}
+\end{Example}
+
+\subsection{Change of Basis}
+
+\begin{Definition}
+For ordered bases $\mathcal B$ and $\widetilde{\mathcal B}$ of $V$, the \newterm{change-of-basis matrix} from $\mathcal B$-coordinates to $\widetilde{\mathcal B}$-coordinates is
+\begin{equation*}
+P=[\id_V]_{\widetilde{\mathcal B}}^{\mathcal B},\qquad [v]_{\widetilde{\mathcal B}}=P[v]_{\mathcal B}.
+\end{equation*}
+It is invertible, with inverse $[\id_V]_{\mathcal B}^{\widetilde{\mathcal B}}$.
+\end{Definition}
+
+\begin{Theorem}\label{thm:ChangeBasis}
+Suppose $A=[T]_{\mathcal C}^{\mathcal B}$ and $\widetilde A=[T]_{\widetilde{\mathcal C}}^{\widetilde{\mathcal B}}$. If $P$ changes domain coordinates from $\mathcal B$ to $\widetilde{\mathcal B}$ and $Q$ changes codomain coordinates from $\mathcal C$ to $\widetilde{\mathcal C}$, then
+\begin{equation*}
+\widetilde A=QAP^{-1}.
+\end{equation*}
+In particular, for an operator with the same basis change in domain and codomain, $[T]_{\widetilde{\mathcal B}}=P[T]_{\mathcal B}P^{-1}$.
+\end{Theorem}
+\begin{proof}
+For all $v\in V$, $\widetilde A P[v]_{\mathcal B}=\widetilde A[v]_{\widetilde{\mathcal B}}=[T(v)]_{\widetilde{\mathcal C}}=QA[v]_{\mathcal B}$. Since coordinate vectors range over all of $F^n$, $\widetilde A P=QA$.
+\end{proof}
+
+\begin{Example}
+For $T(x,y)=(y,x-y)$, the matrix in standard bases is $A=\begin{bmatrix}0&1\\1&-1\end{bmatrix}$. Use the domain and codomain bases
+\begin{equation*}
+\widetilde{\mathcal B}=\pqty{\begin{bmatrix}0\\1\end{bmatrix},\begin{bmatrix}1\\1\end{bmatrix}},\qquad \widetilde{\mathcal C}=\pqty{\begin{bmatrix}1\\-1\end{bmatrix},\begin{bmatrix}-1\\0\end{bmatrix}}.
+\end{equation*}
+Since $T(0,1)=(1,-1)$ and $T(1,1)=(1,0)$,
+\begin{equation*}
+\widetilde A=\begin{bmatrix}1&0\\0&-1\end{bmatrix}.
+\end{equation*}
+This uses different domain and codomain bases; it is not a diagonalisation of $T$.
+\end{Example}
+
+\section{Algebra of Linear Transformations}\label{sec:AlgebraTransformations}
+
+\begin{Definition}
+Write $L(V,W)$ for the set of all linear transformations from $V$ to $W$. Define addition and scalar multiplication pointwise:
+\begin{equation*}
+(S+T)(v)=S(v)+T(v),\qquad (\alpha T)(v)=\alpha T(v).
+\end{equation*}
+A linear transformation $V\to V$ is a \newterm{linear operator}; write $L(V)=L(V,V)$.
+\end{Definition}
+
+\begin{Theorem}
+The set $L(V,W)$ is a vector space. If $\dim V=n$ and $\dim W=m$, then $\dim L(V,W)=mn$.
+\end{Theorem}
+\begin{proof}
+Sums and scalar multiples of linear transformations remain linear, and the vector-space axioms hold pointwise. The zero transformation is the additive identity and $(-T)(v)=-T(v)$. In fixed bases, the correspondence $T\mapsto[T]_{\mathcal C}^{\mathcal B}$ is a linear bijection onto $F^{m\times n}$. More explicitly, the maps $E_{ij}$ specified by $E_{ij}(v_k)=\delta_{jk}w_i$ form a basis of $L(V,W)$, since any $T$ with matrix $[a_{ij}]$ has the unique expansion $T=\sum_{i,j}a_{ij}E_{ij}$.
+\end{proof}
+
+Composition of linear transformations is linear, associative and distributive over addition. For $T\colon U\to V$ and $S\colon V\to W$,
+\begin{equation*}
+[S\circ T]_{\mathcal D}^{\mathcal B}=[S]_{\mathcal D}^{\mathcal C}[T]_{\mathcal C}^{\mathcal B}.
+\end{equation*}
+Thus $L(V)$ is an associative algebra with identity $\id_V$, and in particular a ring under addition and composition. Set $T^0=\id_V$ and $T^{k+1}=T\circ T^k$.
+
+\subsection{Isomorphisms}
+
+\begin{Definition}
+A linear transformation is \newterm{non-singular} if its kernel is $\{0\}$. It is an \newterm{isomorphism} if it has a linear inverse. In this case it is \newterm{invertible}, and the inverse is denoted by $T^{-1}$. Vector spaces are \newterm{isomorphic}, written $V\cong W$, if an isomorphism exists between them.
+\end{Definition}
+
+\begin{Theorem}
+A linear transformation is an isomorphism if and only if it is bijective.
+\end{Theorem}
+\begin{proof}
+An inverse implies bijectivity. Conversely, suppose $T$ is bijective. Write $w_1=T(v_1)$ and $w_2=T(v_2)$. Then
+\begin{equation*}
+T^{-1}(\alpha w_1+w_2)=T^{-1}T(\alpha v_1+v_2)=\alpha v_1+v_2=\alpha T^{-1}(w_1)+T^{-1}(w_2),
+\end{equation*}
+so the inverse function is linear.
+\end{proof}
+
+\begin{Theorem}\label{thm:IsomorphismCriteria}
+If $\dim V=\dim W=n<\infty$, the following conditions on a linear map $T\colon V\to W$ are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $T$ is an isomorphism;
+\item $T$ is injective;
+\item $T$ is surjective;
+\item $T$ takes every basis of $V$ to a basis of $W$;
+\item $T$ takes some basis of $V$ to a basis of $W$.
+\end{enumerate}
+\end{Theorem}
+\begin{proof}
+Rank--nullity gives $\nullity T=0$ if and only if $\rank T=n$, proving the equivalence of the first three conditions. An isomorphism preserves independence and spanning, so (i) implies (iv), and (iv) implies (v). If (v) holds, the image contains a basis of $W$, making $T$ surjective.
+\end{proof}
+
+\begin{Theorem}
+Every $n$-dimensional vector space over $F$ is isomorphic to $F^n$. Consequently two finite dimensional vector spaces over the same field are isomorphic if and only if they have the same dimension.
+\end{Theorem}
+\begin{proof}
+For an ordered basis $\mathcal B$, the coordinate map $v\mapsto[v]_{\mathcal B}$ is linear. Uniqueness of coordinates makes it injective, and every column of scalars is the coordinate vector of the corresponding linear combination, making it surjective. Conversely, an isomorphism takes a basis to a basis and therefore preserves dimension.
+\end{proof}
+
+\begin{Remark*}
+Finite dimensionality is essential in \cref{thm:IsomorphismCriteria}. On $\mathbb R[x]$, differentiation is surjective but not injective, while multiplication by $x$ is injective but not surjective. Also, if $A\in F^{m\times n}$ and $B\in F^{n\times m}$ satisfy $AB=I_m$ and $BA=I_n$, the associated linear maps are inverses, so $m=n$.
+\end{Remark*}

@@ -1,0 +1,251 @@
+% !TeX root = Linear Algebra.tex
+% Handwritten pages 41--46.
+
+\section{Inner Product Spaces}\label{sec:InnerProducts}
+
+Throughout this section, $F$ is either $\mathbb R$ or $\mathbb C$.
+
+\begin{Definition}
+An \newterm{inner product} on a vector space $V$ over $F$ is a function $\langle\cdot,\cdot\rangle\colon V\times V\to F$ such that, for all $u,v,w\in V$ and $\alpha\in F$,
+\begin{align*}
+\langle u+v,w\rangle&=\langle u,w\rangle+\langle v,w\rangle,\\
+\langle\alpha u,v\rangle&=\alpha\langle u,v\rangle,\\
+\langle u,v\rangle&=\overline{\langle v,u\rangle},\\
+\langle v,v\rangle&\ge0,
+\end{align*}
+and $\langle v,v\rangle=0$ if and only if $v=0$. A vector space equipped with an inner product is an \newterm{inner product space}.
+\end{Definition}
+
+Thus the first argument is linear, while the second is conjugate linear:
+\begin{equation*}
+\langle u,\alpha v+w\rangle=\overline\alpha\langle u,v\rangle+\langle u,w\rangle.
+\end{equation*}
+Over $\mathbb R$, conjugation has no effect and the inner product is bilinear and symmetric.
+
+\begin{Example}
+The \newterm{standard inner product} on $F^{n\times1}$ is
+\begin{equation*}
+\langle u,v\rangle=v^*u=\sum_{i=1}^n u_i\overline{v_i},
+\end{equation*}
+where $v^*=\overline v^{\mathsf T}$. Over $\mathbb R$, this is the usual dot product $v^{\mathsf T}u$. On $F^{m\times n}$, the Frobenius inner product is
+\begin{equation*}
+\langle A,B\rangle=\operatorname{tr}(B^*A)=\sum_{i,j}a_{ij}\overline{b_{ij}}.
+\end{equation*}
+\end{Example}
+
+\begin{Definition}
+The \newterm{norm induced by an inner product} is
+\begin{equation*}
+\norm{v}=\sqrt{\langle v,v\rangle}.
+\end{equation*}
+Two vectors are \newterm{orthogonal}, written $u\perp v$, if $\langle u,v\rangle=0$.
+\end{Definition}
+
+The induced norm satisfies $\norm{v}\ge0$, with equality precisely for $v=0$, and
+\begin{equation*}
+\norm{\alpha v}=\abs{\alpha}\norm{v}.
+\end{equation*}
+The triangle inequality will follow from Cauchy--Schwarz.
+
+\begin{Theorem}[Pythagoras]\label{thm:Pythagoras}
+If $u\perp v$, then
+\begin{equation*}
+\norm{u+v}^2=\norm{u}^2+\norm{v}^2.
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+Expand the left-hand side:
+\begin{equation*}
+\langle u+v,u+v\rangle=\norm{u}^2+\langle u,v\rangle+\overline{\langle u,v\rangle}+\norm{v}^2.
+\end{equation*}
+The middle terms vanish.
+\end{proof}
+
+\begin{Theorem}[Cauchy--Schwarz Inequality]\label{thm:CauchySchwarz}
+For all $u,v\in V$,
+\begin{equation*}
+\abs{\langle u,v\rangle}\le\norm{u}\norm{v}.
+\end{equation*}
+Equality holds if and only if $u$ and $v$ are linearly dependent.
+\end{Theorem}
+\begin{proof}
+If $v=0$, the assertion is immediate. Otherwise set
+\begin{equation*}
+\alpha=\frac{\langle u,v\rangle}{\norm{v}^2}.
+\end{equation*}
+Then $u-\alpha v\perp v$, and Pythagoras applied to $u=(u-\alpha v)+\alpha v$ gives
+\begin{equation*}
+\norm{u}^2=\norm{u-\alpha v}^2+\frac{\abs{\langle u,v\rangle}^2}{\norm{v}^2}\ge\frac{\abs{\langle u,v\rangle}^2}{\norm{v}^2}.
+\end{equation*}
+Taking square roots proves the inequality. Equality holds precisely when $u-\alpha v=0$, which means that $u$ and $v$ are dependent. The case $v=0$ also satisfies this characterisation.
+\end{proof}
+
+\begin{Corollary}[Triangle Inequality]
+For all $u,v\in V$,
+\begin{equation*}
+\norm{u+v}\le\norm{u}+\norm{v}.
+\end{equation*}
+\end{Corollary}
+\begin{proof}
+By Cauchy--Schwarz,
+\begin{align*}
+\norm{u+v}^2&=\norm{u}^2+2\Re\langle u,v\rangle+\norm{v}^2\\
+&\le\norm{u}^2+2\norm{u}\norm{v}+\norm{v}^2=(\norm{u}+\norm{v})^2.
+\end{align*}
+\end{proof}
+
+\subsection{Orthogonal and Orthonormal Sets}
+
+\begin{Definition}
+A set $S\subseteq V$ is \newterm{orthogonal} if distinct vectors in $S$ are orthogonal. It is \newterm{orthonormal} if it is orthogonal and every vector in it has norm $1$. An \newterm{orthonormal basis} is a basis which is orthonormal.
+\end{Definition}
+
+Every orthogonal set of non-zero vectors is linearly independent. Indeed, if $\sum_i\alpha_iv_i=0$, taking the inner product with $v_j$ gives $\alpha_j\norm{v_j}^2=0$. In particular, every orthonormal set is independent.
+
+\begin{Example}
+In $\mathbb R^3$, the vectors $\begin{bmatrix}1\\0\\1\end{bmatrix}$ and $\begin{bmatrix}1\\0\\-1\end{bmatrix}$ are orthogonal but not orthonormal. Dividing both by $\sqrt2$ gives an orthonormal set. In $\mathbb C^2$, the vectors $\begin{bmatrix}1\\i\end{bmatrix}$ and $\begin{bmatrix}1\\-i\end{bmatrix}$ are orthogonal because
+\begin{equation*}
+\left\langle\begin{bmatrix}1\\i\end{bmatrix},\begin{bmatrix}1\\-i\end{bmatrix}\right\rangle=1+i\overline{-i}=0.
+\end{equation*}
+\end{Example}
+
+\begin{Theorem}\label{thm:ONCoordinates}
+If $\mathcal B=(u_1,\ldots,u_n)$ is an orthonormal basis of $V$, then
+\begin{equation*}
+v=\sum_{i=1}^n\langle v,u_i\rangle u_i,
+\qquad
+[v]_{\mathcal B}=\begin{bmatrix}\langle v,u_1\rangle\\\vdots\\\langle v,u_n\rangle\end{bmatrix},
+\qquad
+\norm{v}^2=\sum_{i=1}^n\abs{\langle v,u_i\rangle}^2.
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+Write $v=\sum_i\alpha_iu_i$. Taking the inner product with $u_j$ gives $\alpha_j=\langle v,u_j\rangle$. Orthogonality and Pythagoras then give the norm identity.
+\end{proof}
+
+\begin{Definition}
+For $S\subseteq V$, its \newterm{orthogonal complement} is
+\begin{equation*}
+S^\perp=\qty{\, v\in V \mid \langle v,s\rangle=0\text{ for every }s\in S \,}.
+\end{equation*}
+\end{Definition}
+
+The set $S^\perp$ is a subspace and equals $(\operatorname{span}S)^\perp$. In a finite dimensional inner product space, the Gram--Schmidt process below gives
+\begin{equation*}
+V=W\oplus W^\perp,
+\qquad
+\dim W+\dim W^\perp=\dim V,
+\qquad
+(W^\perp)^\perp=W
+\end{equation*}
+for every subspace $W$.
+
+\subsection{Gram--Schmidt Orthogonalisation}
+
+\begin{Theorem}[Gram--Schmidt]\label{thm:GramSchmidt}
+Let $(v_1,\ldots,v_k)$ be a linearly independent list in an inner product space. Define recursively
+\begin{align*}
+w_1&=v_1,& u_1&=\frac{w_1}{\norm{w_1}},\\
+w_j&=v_j-\sum_{i=1}^{j-1}\langle v_j,u_i\rangle u_i,& u_j&=\frac{w_j}{\norm{w_j}}\qquad(2\le j\le k).
+\end{align*}
+Then $(u_1,\ldots,u_k)$ is orthonormal and
+\begin{equation*}
+\operatorname{span}\{u_1,\ldots,u_j\}=\operatorname{span}\{v_1,\ldots,v_j\}
+\end{equation*}
+for every $j$. Consequently every finite dimensional inner product space has an orthonormal basis.
+\end{Theorem}
+\begin{proof}
+Suppose $u_1,\ldots,u_{j-1}$ are orthonormal and span the first $j-1$ vectors. For $r<j$,
+\begin{equation*}
+\langle w_j,u_r\rangle=\langle v_j,u_r\rangle-\sum_{i=1}^{j-1}\langle v_j,u_i\rangle\langle u_i,u_r\rangle=0.
+\end{equation*}
+Moreover, $w_j\ne0$, since otherwise $v_j$ would lie in the span of its predecessors. Hence $u_j$ is defined, has norm $1$, and is orthogonal to the preceding vectors. Since $v_j=w_j+\sum_{i<j}\langle v_j,u_i\rangle u_i$, adjoining $v_j$, $w_j$, or $u_j$ produces the same span. Induction proves the assertions. Apply the construction to any basis of a finite dimensional space.
+\end{proof}
+
+\begin{Example}
+Apply Gram--Schmidt in $\mathbb R^3$ to
+\begin{equation*}
+v_1=\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad v_2=\begin{bmatrix}1\\0\\1\end{bmatrix},\qquad v_3=\begin{bmatrix}0\\1\\1\end{bmatrix}.
+\end{equation*}
+The first two steps give
+\begin{equation*}
+u_1=\frac1{\sqrt2}\begin{bmatrix}1\\1\\0\end{bmatrix},\qquad
+u_2=\frac1{\sqrt6}\begin{bmatrix}1\\-1\\2\end{bmatrix}.
+\end{equation*}
+The third gives $w_3=\frac23\begin{bmatrix}-1\\1\\1\end{bmatrix}$ and hence
+\begin{equation*}
+u_3=\frac1{\sqrt3}\begin{bmatrix}-1\\1\\1\end{bmatrix}.
+\end{equation*}
+Thus $(u_1,u_2,u_3)$ is an orthonormal basis with the same successive spans as $(v_1,v_2,v_3)$.
+\end{Example}
+
+\subsection{Orthogonal Projections and Unitary Matrices}
+
+\begin{Theorem}\label{thm:OrthogonalProjection}
+Let $(u_1,\ldots,u_k)$ be an orthonormal basis of a subspace $W$. The map
+\begin{equation*}
+P_W(v)=\sum_{i=1}^k\langle v,u_i\rangle u_i
+\end{equation*}
+is the projection onto $W$ along $W^\perp$. Thus $P_W^2=P_W$, $\im P_W=W$, $\ker P_W=W^\perp$, and $v-P_W(v)\perp W$.
+\end{Theorem}
+\begin{proof}
+The displayed map is linear and takes values in $W$. For every $j$,
+\begin{equation*}
+\langle v-P_W(v),u_j\rangle=\langle v,u_j\rangle-\sum_i\langle v,u_i\rangle\langle u_i,u_j\rangle=0.
+\end{equation*}
+Hence $v=P_W(v)+(v-P_W(v))$ is the decomposition in $W\oplus W^\perp$, from which the remaining assertions follow.
+\end{proof}
+
+For a non-zero $v$, the projection of $u$ onto $\operatorname{span}\{v\}$ is
+\begin{equation*}
+\frac{\langle u,v\rangle}{\norm{v}^2}v,
+\end{equation*}
+and $u$ minus this projection is orthogonal to $v$.
+
+\begin{Definition}
+A square complex matrix $Q$ is \newterm{unitary} if $Q^*Q=I$, equivalently $Q^{-1}=Q^*$. A real unitary matrix is called \newterm{orthogonal}, so $Q^{-1}=Q^{\mathsf T}$.
+\end{Definition}
+
+\begin{Theorem}
+For a square matrix $Q$, the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $Q$ is unitary;
+\item the columns of $Q$ form an orthonormal basis;
+\item the rows of $Q$ form an orthonormal basis;
+\item $\langle Qu,Qv\rangle=\langle u,v\rangle$ for all $u,v$;
+\item $\norm{Qv}=\norm{v}$ for all $v$.
+\end{enumerate}
+\end{Theorem}
+\begin{proof}
+The entries of $Q^*Q$ are the inner products of columns, so (i) and (ii) are equivalent. Since a left inverse of a square matrix is also its inverse, $Q^*Q=I$ is equivalent to $QQ^*=I$, whose entries are the inner products of rows; this gives (iii). Moreover,
+\begin{equation*}
+\langle Qu,Qv\rangle=(Qv)^*Qu=v^*Q^*Qu,
+\end{equation*}
+proving the equivalence of (i) and (iv), and (iv) implies (v). Finally, (v) gives $v^*(Q^*Q-I)v=0$ for all $v$. The matrix $H=Q^*Q-I$ is Hermitian. Taking $v=e_i$, $e_i+e_j$, and $e_i+ie_j$ shows successively that every diagonal entry, every real part of an off-diagonal entry, and every imaginary part is zero. Thus $H=0$, proving (i).
+\end{proof}
+
+\subsection{Functionals on Inner Product Spaces}
+
+For each $w\in V$, the map $f_w(v)=\langle v,w\rangle$ is a linear functional. In finite dimensions every functional arises uniquely this way.
+
+\begin{Theorem}[Finite-Dimensional Riesz Representation]\label{thm:RieszFinite}
+Let $V$ be a finite dimensional inner product space. For every $f\in V^*$, there is a unique $w\in V$ such that
+\begin{equation*}
+f(v)=\langle v,w\rangle\qquad(v\in V).
+\end{equation*}
+\end{Theorem}
+\begin{proof}
+Choose an orthonormal basis $(u_1,\ldots,u_n)$ and put
+\begin{equation*}
+w=\sum_{i=1}^n\overline{f(u_i)}u_i.
+\end{equation*}
+If $v=\sum_i\langle v,u_i\rangle u_i$, then
+\begin{equation*}
+\langle v,w\rangle=\sum_i\langle v,u_i\rangle f(u_i)=f(v).
+\end{equation*}
+If both $w$ and $w'$ represent $f$, then $\langle v,w-w'\rangle=0$ for every $v$. Taking $v=w-w'$ gives $w=w'$.
+\end{proof}
+
+\begin{Remark*}
+The Riesz map $w\mapsto f_w$ is conjugate linear over $\mathbb C$, because $f_{\alpha w}=\overline\alpha f_w$ under our convention that the first argument is linear. This is different from the basis-dependent linear isomorphism $V\cong V^*$ in \cref{thm:DualBasis}.
+\end{Remark*}

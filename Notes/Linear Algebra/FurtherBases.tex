@@ -1,0 +1,71 @@
+% !TeX root = Linear Algebra.tex
+% Supplementary material from handwritten pages 1--8.
+
+\begin{Corollary}\label{cor:DimensionTests}
+Let $\dim V=n<\infty$ and let $W\subseteq V$ be a subspace. Then $W$ is finite dimensional, $\dim W\le n$, and equality holds if and only if $W=V$. A set of more than $n$ vectors is dependent, and a set of fewer than $n$ vectors cannot span $V$. For a set of exactly $n$ vectors, being a basis, being linearly independent, and spanning $V$ are equivalent.
+\end{Corollary}
+\begin{proof}
+Choose vectors of $W$ successively outside the span of those already selected. The replacement principle ensures that this process stops after at most $n$ steps, producing a basis of $W$. Extend it to a basis of $V$ using \cref{thm:BasisExtension}. The assertions follow from basis extension, extraction of a basis from a finite spanning set, and \cref{thm:BasisCardinality}.
+\end{proof}
+
+\begin{Example}
+Write $P_n(F)$ for the space of polynomials over $F$ of degree at most $n$, including the zero polynomial. Its standard basis is $(1,x,\ldots,x^n)$, so $\dim P_n(F)=n+1$. The matrices $E_{ij}$, with a $1$ in position $(i,j)$ and zeros elsewhere, form the standard basis of $F^{m\times n}$, since
+\begin{equation*}
+A=\sum_{i=1}^m\sum_{j=1}^n a_{ij}E_{ij}
+\end{equation*}
+uniquely. Thus $\dim F^{m\times n}=mn$. Also, $\{1,i\}$ is a basis of $\mathbb C$ over $\mathbb R$, whereas $\{1\}$ is a basis over $\mathbb C$. Dimension therefore depends on the scalar field.
+\end{Example}
+
+\begin{Definition}
+An \newterm{ordered basis} is a basis with a specified order. If $\mathcal B=(v_1,\ldots,v_n)$ and $v=\sum_{i=1}^n\alpha_iv_i$, then $\alpha_i$ is the $i$\nth \newterm{coordinate} (or \newterm{component}) of $v$ relative to $\mathcal B$.
+\end{Definition}
+
+\begin{Example}
+For $v=\begin{bmatrix}2\\-3\end{bmatrix}$ in $\mathbb R^2$, the coordinates in the standard basis are $[v]_{\mathcal E}=\begin{bmatrix}2\\-3\end{bmatrix}$. In the ordered basis $\mathcal B=\bigl(\begin{bmatrix}1\\1\end{bmatrix},\begin{bmatrix}1\\-1\end{bmatrix}\bigr)$, they are
+\begin{equation*}
+[v]_{\mathcal B}=\begin{bmatrix}-1/2\\5/2\end{bmatrix}.
+\end{equation*}
+For the solution space of $y''-y=0$, two ordered bases are $\mathcal B_1=(e^x,e^{-x})$ and $\mathcal B_2=(\cosh x,\sinh x)$. Since $3e^x-5e^{-x}=-2\cosh x+8\sinh x$, its coordinate vectors are $\begin{bmatrix}3\\-5\end{bmatrix}$ and $\begin{bmatrix}-2\\8\end{bmatrix}$ respectively.
+\end{Example}
+
+\subsection{Further Examples and Exercises}
+
+\begin{Exercise}
+With usual addition, show that neither of the following defines a real vector space: $\mathbb R^n$ for $n\ge2$ with $\alpha\cdot(x_1,\ldots,x_n)=(\alpha x_1,\alpha^2x_2,\ldots,\alpha^nx_n)$; and $\mathbb R^2$ with $\alpha\cdot(x,y)=(\alpha x,0)$. Identify an axiom that fails in each case.
+\end{Exercise}
+
+\begin{Exercise}
+Show that $\qty{\, A=[a_{ij}]\in F^{m\times n} \mid a_{pq}=0 \,}$ is a subspace for any fixed position $(p,q)$. Explain why $\mathbb R^2$ is a real subspace of $\mathbb C^2$, but not a complex subspace. Find all subspaces of $\mathbb R^2$.
+\end{Exercise}
+
+\begin{Exercise}
+Prove directly that $\operatorname{span}S$ is a subspace and is contained in every subspace containing $S$. Use the convention that the empty linear combination is $0$ to show $\operatorname{span}\varnothing=\{0\}$. Prove that $S_1\subseteq S_2$ implies $\operatorname{span}S_1\subseteq\operatorname{span}S_2$.
+\end{Exercise}
+
+\begin{Example}
+In $\mathbb R^2$, each of the sets
+\begin{align*}
+S_1&=\qty{\begin{bmatrix}1\\0\end{bmatrix},\begin{bmatrix}0\\1\end{bmatrix}},&
+S_2&=\qty{\begin{bmatrix}1\\0\end{bmatrix},\begin{bmatrix}0\\-1\end{bmatrix}},\\
+S_3&=\qty{\begin{bmatrix}1\\1\end{bmatrix},\begin{bmatrix}1\\-1\end{bmatrix}},&
+S_4&=\qty{\begin{bmatrix}1\\0\end{bmatrix},\begin{bmatrix}0\\1\end{bmatrix},\begin{bmatrix}1\\1\end{bmatrix}}
+\end{align*}
+spans $\mathbb R^2$, but $S_4$ is dependent. In contrast,
+\begin{align*}
+\operatorname{span}\qty{\begin{bmatrix}1\\0\end{bmatrix},\begin{bmatrix}-1\\0\end{bmatrix}}&=\qty{\, \begin{bmatrix}x\\0\end{bmatrix} \mid x\in\mathbb R \,},\\
+\operatorname{span}\qty{\begin{bmatrix}2\\4\end{bmatrix},\begin{bmatrix}3\\6\end{bmatrix}}&=\qty{\, \begin{bmatrix}x\\2x\end{bmatrix} \mid x\in\mathbb R \,}.
+\end{align*}
+The empty set is a basis of $\{0\}$. A set containing $0$ is always linearly dependent.
+\end{Example}
+
+\begin{Exercise}
+Prove the converse of \cref{thm:Coordinates}: if every vector has a unique expression as a finite linear combination of elements of $\mathcal B$, then $\mathcal B$ is a basis. Here uniqueness concerns the coefficients of each basis vector; adding terms with coefficient zero does not give a different expression.
+\end{Exercise}
+
+\begin{Exercise}
+Let $V$ be the space of functions $f\colon\mathbb R\to\mathbb R$ which vanish at all but finitely many points. For each $a\in\mathbb R$, define
+\begin{equation*}
+\delta_a(x)=\begin{cases}1,&x=a,\\0,&x\ne a.\end{cases}
+\end{equation*}
+Show that $V$ is a vector space under pointwise operations and that $\qty{\, \delta_a \mid a\in\mathbb R \,}$ is a basis. Notice that every individual function has finite support even though the basis is uncountable.
+\end{Exercise}
